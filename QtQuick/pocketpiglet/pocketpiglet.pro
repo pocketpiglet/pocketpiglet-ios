@@ -1,5 +1,5 @@
 TARGET = PocketPiglet
-VERSION = 1.2.1
+VERSION = 1.2.2
 
 TEMPLATE = app
 QT += core gui declarative opengl

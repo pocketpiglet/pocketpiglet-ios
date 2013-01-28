@@ -11,6 +11,7 @@ Video {
     signal playerStopped()
 
     function playVideo(src) {
+        source = "";
         source = "../../../video/" + src;
 
         play();
