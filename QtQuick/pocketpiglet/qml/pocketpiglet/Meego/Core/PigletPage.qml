@@ -34,9 +34,7 @@ Page {
 
             accelerometer.stop();
 
-            if (pigletAnimationVideoActive) {
-                pigletAnimationVideoPlayerLoader.stopVideo(true);
-            }
+            pigletAnimationVideoPlayerLoader.unloadVideoPlayer();
         }
     }
 
@@ -53,9 +51,7 @@ Page {
 
             accelerometer.stop();
 
-            if (pigletAnimationVideoActive) {
-                pigletAnimationVideoPlayerLoader.stopVideo(true);
-            }
+            pigletAnimationVideoPlayerLoader.unloadVideoPlayer();
         }
     }
 
@@ -89,7 +85,7 @@ Page {
 
     function restartAnimation() {
         if (pigletAnimationVideoActive) {
-            pigletAnimationVideoPlayerLoader.stopVideo(false);
+            pigletAnimationVideoPlayerLoader.stopVideo();
         }
 
         pigletAnimationTimer.restart();
@@ -160,6 +156,7 @@ Page {
 
                 property bool   playerLoaded: false
                 property bool   unloadPlayer: false
+                property bool   replacePage:  false
                 property string videoSource:  ""
 
                 function playVideo(src) {
@@ -176,12 +173,35 @@ Page {
                     item.playVideo(src);
                 }
 
-                function stopVideo(unload) {
-                    if (unload) {
-                        unloadPlayer = true;
-                    }
-
+                function stopVideo() {
                     item.stopVideo();
+                }
+
+                function unloadVideoPlayer() {
+                    if (pigletPage.pigletAnimationVideoActive) {
+                        unloadPlayer = true;
+
+                        item.stopVideo();
+                    } else {
+                        pigletAnimationVideoPlayerLoader.source = "";
+
+                        pigletAnimationVideoPlayerLoader.playerLoaded = false;
+                    }
+                }
+
+                function unloadVideoPlayerAndReplacePage() {
+                    if (pigletPage.pigletAnimationVideoActive) {
+                        unloadPlayer = true;
+                        replacePage  = true;
+
+                        item.stopVideo();
+                    } else {
+                        pigletAnimationVideoPlayerLoader.source = "";
+
+                        pigletAnimationVideoPlayerLoader.playerLoaded = false;
+
+                        pageReplaceTimer.start();
+                    }
                 }
 
                 Connections {
@@ -212,6 +232,11 @@ Page {
                             pigletAnimationVideoPlayerLoader.playerLoaded = false;
                             pigletAnimationVideoPlayerLoader.unloadPlayer = false;
                         }
+                        if (pigletAnimationVideoPlayerLoader.replacePage) {
+                            pageReplaceTimer.start();
+
+                            pigletAnimationVideoPlayerLoader.replacePage = false;
+                        }
                     }
                 }
             }
@@ -241,11 +266,7 @@ Page {
                         pigletPage.pigletAnimationEnabled = false;
                         pigletPage.nextPage               = pigletFeedPage;
 
-                        if (pigletPage.pigletAnimationVideoActive) {
-                            pigletAnimationVideoPlayerLoader.stopVideo(true);
-                        }
-
-                        pageReplaceTimer.start();
+                        pigletAnimationVideoPlayerLoader.unloadVideoPlayerAndReplacePage();
                     }
                 }
 
@@ -262,11 +283,7 @@ Page {
                         pigletPage.pigletAnimationEnabled = false;
                         pigletPage.nextPage               = pigletWashPage;
 
-                        if (pigletPage.pigletAnimationVideoActive) {
-                            pigletAnimationVideoPlayerLoader.stopVideo(true);
-                        }
-
-                        pageReplaceTimer.start();
+                        pigletAnimationVideoPlayerLoader.unloadVideoPlayerAndReplacePage();
                     }
                 }
 
@@ -283,11 +300,7 @@ Page {
                         pigletPage.pigletAnimationEnabled = false;
                         pigletPage.nextPage               = pigletPuzzlePage;
 
-                        if (pigletPage.pigletAnimationVideoActive) {
-                            pigletAnimationVideoPlayerLoader.stopVideo(true);
-                        }
-
-                        pageReplaceTimer.start();
+                        pigletAnimationVideoPlayerLoader.unloadVideoPlayerAndReplacePage();
                     }
                 }
             }
@@ -359,11 +372,7 @@ Page {
                     pigletPage.pigletAnimationEnabled = false;
                     pigletPage.nextPage               = helpPage;
 
-                    if (pigletPage.pigletAnimationVideoActive) {
-                        pigletAnimationVideoPlayerLoader.stopVideo(true);
-                    }
-
-                    pageReplaceTimer.start();
+                    pigletAnimationVideoPlayerLoader.unloadVideoPlayerAndReplacePage();
                 }
             }
         }
