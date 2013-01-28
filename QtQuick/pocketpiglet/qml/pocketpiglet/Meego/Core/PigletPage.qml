@@ -183,9 +183,14 @@ Page {
 
                         item.stopVideo();
                     } else {
-                        pigletAnimationVideoPlayerLoader.source = "";
+                        // Unload VideoPlayer on Symbian because of crash while
+                        // navigating between pages with loaded player, but not
+                        // on Meego - to avoid problems with sound on other pages
+                        if (mainWindow.targetPlatform === "symbian") {
+                            source = "";
 
-                        pigletAnimationVideoPlayerLoader.playerLoaded = false;
+                            playerLoaded = false;
+                        }
                     }
                 }
 
@@ -196,9 +201,14 @@ Page {
 
                         item.stopVideo();
                     } else {
-                        pigletAnimationVideoPlayerLoader.source = "";
+                        // Unload VideoPlayer on Symbian because of crash while
+                        // navigating between pages with loaded player, but not
+                        // on Meego - to avoid problems with sound on other pages
+                        if (mainWindow.targetPlatform === "symbian") {
+                            source = "";
 
-                        pigletAnimationVideoPlayerLoader.playerLoaded = false;
+                            playerLoaded = false;
+                        }
 
                         pageReplaceTimer.start();
                     }
@@ -227,9 +237,15 @@ Page {
                         pigletAnimationVideoShowTimer.stop();
 
                         if (pigletAnimationVideoPlayerLoader.unloadPlayer) {
-                            pigletAnimationVideoPlayerLoader.source = "";
+                            // Unload VideoPlayer on Symbian because of crash while
+                            // navigating between pages with loaded player, but not
+                            // on Meego - to avoid problems with sound on other pages
+                            if (mainWindow.targetPlatform === "symbian") {
+                                pigletAnimationVideoPlayerLoader.source = "";
 
-                            pigletAnimationVideoPlayerLoader.playerLoaded = false;
+                                pigletAnimationVideoPlayerLoader.playerLoaded = false;
+                            }
+
                             pigletAnimationVideoPlayerLoader.unloadPlayer = false;
                         }
                         if (pigletAnimationVideoPlayerLoader.replacePage) {
