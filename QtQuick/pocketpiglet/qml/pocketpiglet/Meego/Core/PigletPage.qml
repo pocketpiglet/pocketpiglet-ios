@@ -534,16 +534,4 @@ Page {
             mainPageStack.replace(pigletPage.nextPage);
         }
     }
-
-    Connections {
-        target: CSApplication
-
-        onAppInBackground: {
-            pigletPage.appInForeground = false;
-        }
-
-        onAppInForeground: {
-            pigletPage.appInForeground = true;
-        }
-    }
 }
