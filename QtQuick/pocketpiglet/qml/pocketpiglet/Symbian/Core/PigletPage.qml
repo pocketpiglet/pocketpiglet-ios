@@ -29,6 +29,8 @@ Page {
 
             pigletAnimationTimer.restart();
             pigletRandomAnimationTimer.restart();
+
+            pigletAnimationVideoPlayerLoader.loadVideoPlayer();
         } else {
             pigletAnimationEnabled = false;
 
@@ -46,6 +48,8 @@ Page {
 
             pigletAnimationTimer.restart();
             pigletRandomAnimationTimer.restart();
+
+            pigletAnimationVideoPlayerLoader.loadVideoPlayer();
         } else {
             pigletAnimationEnabled = false;
 
@@ -154,19 +158,12 @@ Page {
                 anchors.fill: parent
                 z:            pigletIdleImage.z - 1
 
-                property bool   playerLoaded: false
                 property bool   unloadPlayer: false
                 property bool   replacePage:  false
                 property string videoSource:  ""
 
                 function playVideo(src) {
                     pigletPage.pigletAnimationVideoActive = false;
-
-                    if (!playerLoaded) {
-                        source = "Piglet/VideoPlayer.qml";
-
-                        playerLoaded = true;
-                    }
 
                     videoSource = src;
 
@@ -175,6 +172,10 @@ Page {
 
                 function stopVideo() {
                     item.stopVideo();
+                }
+
+                function loadVideoPlayer() {
+                    source = "Piglet/VideoPlayer.qml";
                 }
 
                 function unloadVideoPlayer() {
@@ -188,8 +189,6 @@ Page {
                         // on Meego - to avoid problems with sound on other pages
                         if (mainWindow.targetPlatform === "symbian") {
                             source = "";
-
-                            playerLoaded = false;
                         }
                     }
                 }
@@ -206,8 +205,6 @@ Page {
                         // on Meego - to avoid problems with sound on other pages
                         if (mainWindow.targetPlatform === "symbian") {
                             source = "";
-
-                            playerLoaded = false;
                         }
 
                         pageReplaceTimer.start();
@@ -242,8 +239,6 @@ Page {
                             // on Meego - to avoid problems with sound on other pages
                             if (mainWindow.targetPlatform === "symbian") {
                                 pigletAnimationVideoPlayerLoader.source = "";
-
-                                pigletAnimationVideoPlayerLoader.playerLoaded = false;
                             }
 
                             pigletAnimationVideoPlayerLoader.unloadPlayer = false;
