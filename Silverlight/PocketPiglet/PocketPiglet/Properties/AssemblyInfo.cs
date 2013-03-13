@@ -7,9 +7,9 @@ using System.Resources;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("PocketPiglet")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("PocketPiglet is a cute 3D animated piglet who lives inside your phone.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Natalia Derevenets")]
 [assembly: AssemblyProduct("PocketPiglet")]
 [assembly: AssemblyCopyright("Copyright ©  2013")]
 [assembly: AssemblyTrademark("")]
