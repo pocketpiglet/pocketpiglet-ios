@@ -1,0 +1,27 @@
+﻿<phone:PhoneApplicationPage 
+    x:Class="PocketPiglet.FeedGamePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Landscape" Orientation="Landscape"
+    mc:Ignorable="d" d:DesignHeight="480" d:DesignWidth="728"
+    shell:SystemTray.IsVisible="True"
+    LayoutUpdated="FeedGamePage_LayoutUpdated">
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid x:Name="GameGrid" Background="Transparent"  LayoutUpdated="GameGrid_LayoutUpdated">
+            <Image Height="480" HorizontalAlignment="Left" Margin="0,0,0,0" Name="ImageBackgroundLevel" Stretch="Fill" VerticalAlignment="Top" Width="728" Source="/Images/background.png" Visibility="Collapsed" Canvas.ZIndex="10" />
+            <Image Height="480" HorizontalAlignment="Left" Margin="0,0,0,0" Name="ImageBackground" Stretch="Fill" VerticalAlignment="Top" Width="728" Source="/Images/piglet_feed/background.png" Canvas.ZIndex="5" />
+            <Image Height="360" HorizontalAlignment="Left" Margin="30,0,0,0" Name="ImageRefrigerator" VerticalAlignment="Center" Width="307" Canvas.ZIndex="5" />
+            <Grid Height="360" HorizontalAlignment= "Left" Margin="30,0,0,0" Name="GridPuzzle" VerticalAlignment="Center" Width="307" Canvas.ZIndex="5" />
+            <TextBlock Height="163" HorizontalAlignment="Center" Margin="0,0,0,0" Name="textBlockLevel" Text="" VerticalAlignment="Center" Width="584" Foreground="White" FontSize="26" FontWeight="Bold" Canvas.ZIndex="10" Visibility="Collapsed" TextWrapping="Wrap" TextAlignment="Center" />
+        </Grid>
+    </Grid>
+</phone:PhoneApplicationPage>
