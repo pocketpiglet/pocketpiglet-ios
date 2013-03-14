@@ -225,7 +225,7 @@ namespace PocketPiglet
         private void foodImage_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (!this.isFoodImageActive) return;
-            Image item = sender as Image;
+            Image item = sender as Image;            
             if (Convert.ToString(item.Tag) == Convert.ToString(this.listItemGame[this.currentItemDrop].index))
             {
                 this.sandwichImage = new Image();
@@ -253,6 +253,7 @@ namespace PocketPiglet
                 sbSandwichItem.Children.Add(animationSandwichItem);
                 sbSandwichItem.Begin();
                 this.currentItemDrop++;
+                if (this.listItemGame.Count == this.currentItemDrop) this.isFoodImageActive = false;
             }
             else
             {
