@@ -78,7 +78,7 @@ namespace PocketPiglet
             this.marketplaceDetailTask                   = new MarketplaceDetailTask();
 #if DEBUG_TRIAL
             this.marketplaceDetailTask.ContentType       = MarketplaceContentType.Applications;
-            this.marketplaceDetailTask.ContentIdentifier = "00218d49-fea8-4268-8412-0e73389f1a8b";
+            this.marketplaceDetailTask.ContentIdentifier = "a5cf363a-044a-46f0-a414-9235cc31f997";
 #endif
         }
 
