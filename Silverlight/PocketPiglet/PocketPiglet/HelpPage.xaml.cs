@@ -19,7 +19,8 @@ namespace PhotoCam3D
 {
     public partial class HelpPage : PhoneApplicationPage
     {
-        private static string[] HELP_FILES = {"Help/help.html"};
+        private static string[] HELP_FILES = {"Help/help.html",
+                                              "Help/help.ru-RU.html"};
 
         public HelpPage()
         {
