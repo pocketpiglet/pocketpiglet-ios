@@ -569,31 +569,31 @@
     <Content Include="Images\piglet_wash\missed_bubble_red.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Media\piglet_eats_cake.mp4">
+    <Content Include="Video\piglet_eats_cake.mp4">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Media\piglet_eats_candy.mp4">
+    <Content Include="Video\piglet_eats_candy.mp4">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Media\piglet_eyes_blink.mp4">
+    <Content Include="Video\piglet_eyes_blink.mp4">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Media\piglet_falls.mp4">
+    <Content Include="Video\piglet_falls.mp4">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Media\piglet_feed_game_finished.mp4">
+    <Content Include="Video\piglet_feed_game_finished.mp4">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Media\piglet_in_sorrow.mp4">
+    <Content Include="Video\piglet_in_sorrow.mp4">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Media\piglet_laughs.mp4">
+    <Content Include="Video\piglet_laughs.mp4">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Media\piglet_look_around.mp4">
+    <Content Include="Video\piglet_look_around.mp4">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Media\piglet_wash_game_finished.mp4">
+    <Content Include="Video\piglet_wash_game_finished.mp4">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Sound\piglet_feed\game_complete.wav">

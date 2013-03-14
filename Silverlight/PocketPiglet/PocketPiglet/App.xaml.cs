@@ -21,7 +21,8 @@ namespace PocketPiglet
 {
     public partial class App : Application
     {
-        private bool trialMode = true;
+        private bool trialMode     = true,
+                     bgAudioActive = true;
 
         public bool TrialMode { get { return this.trialMode; } }
 
@@ -80,6 +81,13 @@ namespace PocketPiglet
 #else
             this.trialMode = (new LicenseInformation()).IsTrial();
 #endif
+
+            this.bgAudioActive = !Microsoft.Xna.Framework.Media.MediaPlayer.GameHasControl;
+
+            if (this.bgAudioActive)
+            {
+                Microsoft.Xna.Framework.Media.MediaPlayer.Pause();
+            }
         }
 
         // Code to execute when the application is activated (brought to foreground)
@@ -91,18 +99,33 @@ namespace PocketPiglet
 #else
             this.trialMode = (new LicenseInformation()).IsTrial();
 #endif
+
+            this.bgAudioActive = !Microsoft.Xna.Framework.Media.MediaPlayer.GameHasControl;
+
+            if (this.bgAudioActive)
+            {
+                Microsoft.Xna.Framework.Media.MediaPlayer.Pause();
+            }
         }
 
         // Code to execute when the application is deactivated (sent to background)
         // This code will not execute when the application is closing
         private void Application_Deactivated(object sender, DeactivatedEventArgs e)
         {
+            if (this.bgAudioActive)
+            {
+                Microsoft.Xna.Framework.Media.MediaPlayer.Resume();
+            }
         }
 
         // Code to execute when the application is closing (eg, user hit Back)
         // This code will not execute when the application is deactivated
         private void Application_Closing(object sender, ClosingEventArgs e)
         {
+            if (this.bgAudioActive)
+            {
+                Microsoft.Xna.Framework.Media.MediaPlayer.Resume();
+            }
         }
 
         // Code to execute if a navigation fails

@@ -121,18 +121,18 @@ namespace PocketPiglet
                     this.typeAnimation = MODE_ANIMATION_DEFAULT;
                     if (this.isPigletInSorrow)
                     {
-                        this.MediaPigletVideo.Source = new Uri("/Media/piglet_in_sorrow.mp4", UriKind.Relative);
+                        this.MediaPigletVideo.Source = new Uri("/Video/piglet_in_sorrow.mp4", UriKind.Relative);
                     }
                     else
                     {
-                        this.MediaPigletVideo.Source = new Uri("/Media/piglet_look_around.mp4", UriKind.Relative);
+                        this.MediaPigletVideo.Source = new Uri("/Video/piglet_look_around.mp4", UriKind.Relative);
                     }
                     this.MediaPigletVideo.Play();
                 }
                 else
                 {
                     this.typeAnimation = MODE_ANIMATION_DEFAULT;
-                    this.MediaPigletVideo.Source = new Uri("/Media/piglet_eyes_blink.mp4", UriKind.Relative);
+                    this.MediaPigletVideo.Source = new Uri("/Video/piglet_eyes_blink.mp4", UriKind.Relative);
                     this.MediaPigletVideo.Play();
                     this.countDefaultAnimation++;
                 }
@@ -164,7 +164,7 @@ namespace PocketPiglet
             this.ImagePigletIdle.Visibility = Visibility.Visible;
             this.MediaPigletVideo.Stop();
             this.typeAnimation = MODE_ANIMATION_GAME;
-            this.MediaPigletVideo.Source = new Uri("/Media/piglet_eats_candy.mp4", UriKind.Relative);
+            this.MediaPigletVideo.Source = new Uri("/Video/piglet_eats_candy.mp4", UriKind.Relative);
             this.MediaPigletVideo.Play();
 
         }
@@ -174,7 +174,7 @@ namespace PocketPiglet
             this.ImagePigletIdle.Visibility = Visibility.Visible;
             this.MediaPigletVideo.Stop();
             this.typeAnimation = MODE_ANIMATION_GAME;
-            this.MediaPigletVideo.Source = new Uri("/Media/piglet_eats_cake.mp4", UriKind.Relative);
+            this.MediaPigletVideo.Source = new Uri("/Video/piglet_eats_cake.mp4", UriKind.Relative);
             this.MediaPigletVideo.Play();
         }
 
@@ -183,7 +183,7 @@ namespace PocketPiglet
             this.ImagePigletIdle.Visibility = Visibility.Visible;
             this.MediaPigletVideo.Stop();
             this.typeAnimation = MODE_ANIMATION_GAME;
-            this.MediaPigletVideo.Source = new Uri("/Media/piglet_falls.mp4", UriKind.Relative);
+            this.MediaPigletVideo.Source = new Uri("/Video/piglet_falls.mp4", UriKind.Relative);
             this.MediaPigletVideo.Play();
         }
 
@@ -192,7 +192,7 @@ namespace PocketPiglet
             this.ImagePigletIdle.Visibility = Visibility.Visible;
             this.MediaPigletVideo.Stop();
             this.typeAnimation = MODE_ANIMATION_GAME;
-            this.MediaPigletVideo.Source = new Uri("/Media/piglet_laughs.mp4", UriKind.Relative);
+            this.MediaPigletVideo.Source = new Uri("/Video/piglet_laughs.mp4", UriKind.Relative);
             this.MediaPigletVideo.Play();
         }
 
@@ -201,7 +201,7 @@ namespace PocketPiglet
             this.ImagePigletIdle.Visibility = Visibility.Visible;
             this.MediaPigletVideo.Stop();
             this.typeAnimation = MODE_ANIMATION_GAME;
-            this.MediaPigletVideo.Source = new Uri("/Media/piglet_in_sorrow.mp4", UriKind.Relative);
+            this.MediaPigletVideo.Source = new Uri("/Video/piglet_in_sorrow.mp4", UriKind.Relative);
             this.MediaPigletVideo.Play();
         }
 
@@ -290,11 +290,11 @@ namespace PocketPiglet
                 this.timerAnimationPigletDefault.Stop();
                 if ("WashPigletAnimation" == this.animationPigletPlay)
                 {
-                    this.MediaPigletVideo.Source = new Uri("/Media/piglet_wash_game_finished.mp4", UriKind.Relative);
+                    this.MediaPigletVideo.Source = new Uri("/Video/piglet_wash_game_finished.mp4", UriKind.Relative);
                 }
                 if ("FeedPigletAnimation" == this.animationPigletPlay)
                 {
-                    this.MediaPigletVideo.Source = new Uri("/Media/piglet_feed_game_finished.mp4", UriKind.Relative);
+                    this.MediaPigletVideo.Source = new Uri("/Video/piglet_feed_game_finished.mp4", UriKind.Relative);
                 }
                 this.ImagePigletIdle.Visibility = Visibility.Visible;
                 this.MediaPigletVideo.Stop();
