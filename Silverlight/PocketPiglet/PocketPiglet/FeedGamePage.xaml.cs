@@ -49,6 +49,7 @@ namespace PocketPiglet
         private int countItemOpacity;
         private int currentCountItemOpacity;
         private string lastGamePiglet;
+        private bool isPlayAnimationDropBread;
 
 
         public struct Food
@@ -75,7 +76,7 @@ namespace PocketPiglet
             this.timerStartLevel.Tick += new EventHandler(timerStartLevel_Tick);
             this.timerStartLevel.Interval = new TimeSpan(0, 0, 0, 3, 0);
 
-
+            this.isPlayAnimationDropBread = false;
             this.loadOnLayoutUpdate = true;
             IsolatedStorageSettings.ApplicationSettings.TryGetValue<string>("AnimationPigletPlay", out this.animationPigletPlay);
             IsolatedStorageSettings.ApplicationSettings.TryGetValue<string>("LastGamePiglet", out this.lastGamePiglet);
@@ -277,8 +278,9 @@ namespace PocketPiglet
 
         private void storyCompletedImageDrop(object sender, EventArgs e)
         {
-            if (this.listItemGame.Count == this.currentItemDrop)
+            if (this.listItemGame.Count == this.currentItemDrop && this.isPlayAnimationDropBread)
             {
+                this.isPlayAnimationDropBread = false;
                 this.sandwichImage = new Image();
                 this.sandwichImage.Width = 80;
                 this.sandwichImage.Height = 36;
@@ -455,6 +457,7 @@ namespace PocketPiglet
                 }
             }
             this.currentItemDrop = 0;
+            this.isPlayAnimationDropBread = true;
         }
 
         private void storyCompletedItemOpacity(object sender, EventArgs e)
