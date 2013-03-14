@@ -301,6 +301,9 @@ namespace PocketPiglet
                 this.typeAnimation = MODE_ANIMATION_GAME;
                 this.MediaPigletVideo.Play();
             }
+            else {
+                this.timerAnimationPigletDefault.Start();
+            }
             IsolatedStorageSettings.ApplicationSettings["AnimationPigletPlay"] = "";
             IsolatedStorageSettings.ApplicationSettings.Save();
             IsolatedStorageSettings.ApplicationSettings.TryGetValue<bool>("FeedGameState", out this.feedGameState);
@@ -379,6 +382,9 @@ namespace PocketPiglet
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
             this.timerAnimationPigletInSorrow.Stop();
+            this.timerAnimationPigletDefault.Stop();
+            this.ImagePigletIdle.Visibility = Visibility.Visible;
+            this.MediaPigletVideo.Stop();
         }
 
         private void LayoutRoot_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
