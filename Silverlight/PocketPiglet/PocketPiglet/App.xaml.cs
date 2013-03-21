@@ -21,10 +21,34 @@ namespace PocketPiglet
 {
     public partial class App : Application
     {
-        private bool trialMode     = true,
-                     bgAudioActive = true;
+        private bool trialMode            = true,
+                     hasMusicControl      = true,
+                     musicControlTakeover = false;
 
-        public bool TrialMode { get { return this.trialMode; } }
+        public bool TrialMode            { get { return this.trialMode; } }
+        public bool HasMusicControl      { get { return this.hasMusicControl; } }
+        public bool MusicControlTakeover {
+            get
+            {
+                return this.musicControlTakeover;
+            }
+            set
+            {
+                this.musicControlTakeover = value;
+
+                if (!this.hasMusicControl)
+                {
+                    if (this.musicControlTakeover)
+                    {
+                        Microsoft.Xna.Framework.Media.MediaPlayer.Pause();
+                    }
+                    else
+                    {
+                        Microsoft.Xna.Framework.Media.MediaPlayer.Resume();
+                    }
+                }
+            }
+        }
 
         /// <summary>
         /// Provides easy access to the root frame of the Phone Application.
@@ -82,12 +106,7 @@ namespace PocketPiglet
             this.trialMode = (new LicenseInformation()).IsTrial();
 #endif
 
-            this.bgAudioActive = !Microsoft.Xna.Framework.Media.MediaPlayer.GameHasControl;
-
-            if (this.bgAudioActive)
-            {
-                Microsoft.Xna.Framework.Media.MediaPlayer.Pause();
-            }
+            this.hasMusicControl = Microsoft.Xna.Framework.Media.MediaPlayer.GameHasControl;
         }
 
         // Code to execute when the application is activated (brought to foreground)
@@ -100,32 +119,31 @@ namespace PocketPiglet
             this.trialMode = (new LicenseInformation()).IsTrial();
 #endif
 
-            this.bgAudioActive = !Microsoft.Xna.Framework.Media.MediaPlayer.GameHasControl;
-
-            if (this.bgAudioActive)
-            {
-                Microsoft.Xna.Framework.Media.MediaPlayer.Pause();
-            }
+            this.hasMusicControl = Microsoft.Xna.Framework.Media.MediaPlayer.GameHasControl;
         }
 
         // Code to execute when the application is deactivated (sent to background)
         // This code will not execute when the application is closing
         private void Application_Deactivated(object sender, DeactivatedEventArgs e)
         {
-            if (this.bgAudioActive)
+            if (!this.hasMusicControl && this.musicControlTakeover)
             {
                 Microsoft.Xna.Framework.Media.MediaPlayer.Resume();
             }
+
+            this.musicControlTakeover = false;
         }
 
         // Code to execute when the application is closing (eg, user hit Back)
         // This code will not execute when the application is deactivated
         private void Application_Closing(object sender, ClosingEventArgs e)
         {
-            if (this.bgAudioActive)
+            if (!this.hasMusicControl && this.musicControlTakeover)
             {
                 Microsoft.Xna.Framework.Media.MediaPlayer.Resume();
             }
+
+            this.musicControlTakeover = false;
         }
 
         // Code to execute if a navigation fails

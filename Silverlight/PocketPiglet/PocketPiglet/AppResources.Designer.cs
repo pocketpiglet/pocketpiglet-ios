@@ -97,6 +97,15 @@ namespace PocketPiglet {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Warning.
+        /// </summary>
+        public static string MessageBoxHeaderWarning {
+            get {
+                return ResourceManager.GetString("MessageBoxHeaderWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Game over. Do you want to play again?.
         /// </summary>
         public static string MessageBoxMessageGameOverQuestion {
@@ -120,6 +129,15 @@ namespace PocketPiglet {
         public static string MessageBoxMessageMarketplaceOpenError {
             get {
                 return ResourceManager.GetString("MessageBoxMessageMarketplaceOpenError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are currently playing music on your phone. Pet animations will not work while music is playing. Do you want to pause music until application exit?.
+        /// </summary>
+        public static string MessageBoxMessageMusicPauseQuestion {
+            get {
+                return ResourceManager.GetString("MessageBoxMessageMusicPauseQuestion", resourceCulture);
             }
         }
         

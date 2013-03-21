@@ -115,6 +115,7 @@ namespace PocketPiglet
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+
             if (NavigationContext.QueryString.ContainsKey("typeLevel"))
             {
                 this.typeLevel = NavigationContext.QueryString["typeLevel"].ToString();
@@ -125,6 +126,7 @@ namespace PocketPiglet
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
             base.OnNavigatingFrom(e);
+
             IsolatedStorageSettings.ApplicationSettings["AnimationPigletPlay"] = "FeedPigletAnimation";
             IsolatedStorageSettings.ApplicationSettings.Save();
         }
@@ -258,9 +260,9 @@ namespace PocketPiglet
             }
             else
             {
-                var laserStream = Application.GetResourceStream(new Uri("Sound/piglet_feed/game_over.wav", UriKind.RelativeOrAbsolute));
-                var effect = SoundEffect.FromStream(laserStream.Stream);
-                effect.Play();
+                SoundEffectInstance instance = SoundEffect.FromStream(Application.GetResourceStream(new Uri("Sound/piglet_feed/game_over.wav", UriKind.Relative)).Stream).CreateInstance();
+                instance.Play();
+
                 MessageBoxResult result = MessageBox.Show(AppResources.MessageBoxMessageGameOverQuestion, AppResources.MessageBoxHeaderInfo, MessageBoxButton.OKCancel);
                 if (result == MessageBoxResult.OK)
                 {
@@ -313,9 +315,9 @@ namespace PocketPiglet
             this.countTickPigletEat = 0;
             this.currentBackground = 1;
             this.timerPigletEat.Start();
-            var laserStream = Application.GetResourceStream(new Uri("Sound/piglet_feed/sandwich_eat.wav", UriKind.RelativeOrAbsolute));
-            var effect = SoundEffect.FromStream(laserStream.Stream);
-            effect.Play();
+
+            SoundEffectInstance instance = SoundEffect.FromStream(Application.GetResourceStream(new Uri("Sound/piglet_feed/sandwich_eat.wav", UriKind.Relative)).Stream).CreateInstance();
+            instance.Play();
         }
 
         private void timerPigletEat_Tick(object sender, EventArgs e)
@@ -337,9 +339,9 @@ namespace PocketPiglet
             {
                 if (this.currentLevel == this.maxLevel)
                 {
-                    var laserStream = Application.GetResourceStream(new Uri("Sound/piglet_feed/game_complete.wav", UriKind.RelativeOrAbsolute));
-                    var effect = SoundEffect.FromStream(laserStream.Stream);
-                    effect.Play();
+                    SoundEffectInstance instance = SoundEffect.FromStream(Application.GetResourceStream(new Uri("Sound/piglet_feed/game_complete.wav", UriKind.Relative)).Stream).CreateInstance();
+                    instance.Play();
+
                     MessageBoxResult result = MessageBox.Show(AppResources.MessageBoxMessageGameWonQuestion, AppResources.MessageBoxHeaderInfo, MessageBoxButton.OKCancel);
                     if (result == MessageBoxResult.OK)
                     {
@@ -504,9 +506,10 @@ namespace PocketPiglet
             this.textBlockLevel.Text = String.Format(AppResources.FeedGamePageTextBlockLevelTextLevelNum, this.currentLevel, this.maxLevel) + Environment.NewLine + AppResources.FeedGamePageTextBlockLevelTextHint;
             this.ImageBackgroundLevel.Visibility = Visibility.Visible;
             this.textBlockLevel.Visibility = Visibility.Visible;
-            var laserStream = Application.GetResourceStream(new Uri("Sound/piglet_feed/new_level.wav", UriKind.RelativeOrAbsolute));
-            var effect = SoundEffect.FromStream(laserStream.Stream);
-            effect.Play();
+
+            SoundEffectInstance instance = SoundEffect.FromStream(Application.GetResourceStream(new Uri("Sound/piglet_feed/new_level.wav", UriKind.Relative)).Stream).CreateInstance();
+            instance.Play();
+
             this.timerStartLevel.Start();
         }
 

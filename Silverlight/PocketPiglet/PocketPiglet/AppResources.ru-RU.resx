@@ -129,6 +129,9 @@
   <data name="MessageBoxHeaderInfo" xml:space="preserve">
     <value>Информация</value>
   </data>
+  <data name="MessageBoxHeaderWarning" xml:space="preserve">
+    <value>Внимание</value>
+  </data>
   <data name="MessageBoxMessageGameOverQuestion" xml:space="preserve">
     <value>Игра окончена. Хотите попробовать еще раз?</value>
   </data>
@@ -137,6 +140,9 @@
   </data>
   <data name="MessageBoxMessageMarketplaceOpenError" xml:space="preserve">
     <value>Невозможно открыть Marketplace:</value>
+  </data>
+  <data name="MessageBoxMessageMusicPauseQuestion" xml:space="preserve">
+    <value>В данный момент вы слушаете музыку на телефоне. Пока играет музыка, ваш питомец не сможет двигаться. Хотите ли вы поставить музыку на паузу до выхода из приложения?</value>
   </data>
   <data name="MessageBoxMessageNewHighscoreQuestion" xml:space="preserve">
     <value>Поздравляю, вы только что побили рекорд! Хотите попробовать еще раз?</value>

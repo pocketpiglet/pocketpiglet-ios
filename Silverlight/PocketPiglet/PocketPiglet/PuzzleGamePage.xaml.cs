@@ -54,10 +54,11 @@ namespace PocketPiglet
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            var laserStream = Application.GetResourceStream(new Uri("Sound/piglet_puzzle/game_start.wav", UriKind.RelativeOrAbsolute));
-            var effect = SoundEffect.FromStream(laserStream.Stream);
-            effect.Play();
             base.OnNavigatedTo(e);
+
+            SoundEffectInstance instance = SoundEffect.FromStream(Application.GetResourceStream(new Uri("Sound/piglet_puzzle/game_start.wav", UriKind.Relative)).Stream).CreateInstance();
+            instance.Play();
+
             if (NavigationContext.QueryString.ContainsKey("typeLevel"))
             {
                 this.typeLevel = NavigationContext.QueryString["typeLevel"].ToString();
@@ -427,9 +428,8 @@ namespace PocketPiglet
 
             if (this.puzzleImage_isValidPuzzle())
             {
-                var laserStream = Application.GetResourceStream(new Uri("Sound/piglet_puzzle/game_complete.wav", UriKind.RelativeOrAbsolute));
-                var effect = SoundEffect.FromStream(laserStream.Stream);
-                effect.Play();
+                SoundEffectInstance instance = SoundEffect.FromStream(Application.GetResourceStream(new Uri("Sound/piglet_puzzle/game_complete.wav", UriKind.Relative)).Stream).CreateInstance();
+                instance.Play();
 
                 this.ImageOriginal.Visibility = Visibility.Visible;
 
@@ -462,6 +462,7 @@ namespace PocketPiglet
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
             base.OnNavigatingFrom(e);
+
             IsolatedStorageSettings.ApplicationSettings["AnimationPigletPlay"] = "";
             IsolatedStorageSettings.ApplicationSettings.Save();
         }

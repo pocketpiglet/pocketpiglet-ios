@@ -4,6 +4,7 @@ using System.IO;
 using System.IO.IsolatedStorage;
 using System.Linq;
 using System.Net;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -42,6 +43,8 @@ namespace PocketPiglet
         private string lastGamePiglet;
         private MarketplaceDetailTask marketplaceDetailTask;
 
+        private bool startAnimationsOnLayoutUpdate = false;
+        private bool pageNavigationComplete = false;
         private bool feedGameState = true;
         private bool washGameState = true;
         private bool puzzleGameState = true;
@@ -66,14 +69,12 @@ namespace PocketPiglet
             this.timerAnimationPigletInSorrow = new System.Windows.Threading.DispatcherTimer();
             this.timerAnimationPigletInSorrow.Tick += new EventHandler(timerAnimationPigletInSorrow_Tick);
             this.timerAnimationPigletInSorrow.Interval = new TimeSpan(0, 0, 0, 60, 0);
-            this.timerAnimationPigletInSorrow.Start();
 
             this.rnd = new Random();
             int timeRandomDefaultAnimation = this.rnd.Next(1, 3);
             this.timerAnimationPigletDefault = new System.Windows.Threading.DispatcherTimer();
             this.timerAnimationPigletDefault.Tick += new EventHandler(timerRandomDefaultAnimation_Tick);
             this.timerAnimationPigletDefault.Interval = new TimeSpan(0, 0, 0, timeRandomDefaultAnimation, 0);
-            this.timerAnimationPigletDefault.Start();
 
             this.marketplaceDetailTask                   = new MarketplaceDetailTask();
 #if DEBUG_TRIAL
@@ -96,7 +97,7 @@ namespace PocketPiglet
                     {
                         _lastReading = null;
                         _sensor.Stop();
-                        this.ImagePigletCake_PlayVideoFalls();
+                        this.PlayVideoFalls();
                         return;
                     }
                 }
@@ -161,48 +162,62 @@ namespace PocketPiglet
 
         private void PigletCandy_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            this.ImagePigletIdle.Visibility = Visibility.Visible;
-            this.MediaPigletVideo.Stop();
-            this.typeAnimation = MODE_ANIMATION_GAME;
-            this.MediaPigletVideo.Source = new Uri("/Video/piglet_eats_candy.mp4", UriKind.Relative);
-            this.MediaPigletVideo.Play();
-
+            if ((Application.Current as App).HasMusicControl || (Application.Current as App).MusicControlTakeover)
+            {
+                this.ImagePigletIdle.Visibility = Visibility.Visible;
+                this.MediaPigletVideo.Stop();
+                this.typeAnimation = MODE_ANIMATION_GAME;
+                this.MediaPigletVideo.Source = new Uri("/Video/piglet_eats_candy.mp4", UriKind.Relative);
+                this.MediaPigletVideo.Play();
+            }
         }
 
         private void ImagePigletCake_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            this.ImagePigletIdle.Visibility = Visibility.Visible;
-            this.MediaPigletVideo.Stop();
-            this.typeAnimation = MODE_ANIMATION_GAME;
-            this.MediaPigletVideo.Source = new Uri("/Video/piglet_eats_cake.mp4", UriKind.Relative);
-            this.MediaPigletVideo.Play();
+            if ((Application.Current as App).HasMusicControl || (Application.Current as App).MusicControlTakeover)
+            {
+                this.ImagePigletIdle.Visibility = Visibility.Visible;
+                this.MediaPigletVideo.Stop();
+                this.typeAnimation = MODE_ANIMATION_GAME;
+                this.MediaPigletVideo.Source = new Uri("/Video/piglet_eats_cake.mp4", UriKind.Relative);
+                this.MediaPigletVideo.Play();
+            }
         }
 
-        private void ImagePigletCake_PlayVideoFalls()
+        private void PlayVideoFalls()
         {
-            this.ImagePigletIdle.Visibility = Visibility.Visible;
-            this.MediaPigletVideo.Stop();
-            this.typeAnimation = MODE_ANIMATION_GAME;
-            this.MediaPigletVideo.Source = new Uri("/Video/piglet_falls.mp4", UriKind.Relative);
-            this.MediaPigletVideo.Play();
+            if ((Application.Current as App).HasMusicControl || (Application.Current as App).MusicControlTakeover)
+            {
+                this.ImagePigletIdle.Visibility = Visibility.Visible;
+                this.MediaPigletVideo.Stop();
+                this.typeAnimation = MODE_ANIMATION_GAME;
+                this.MediaPigletVideo.Source = new Uri("/Video/piglet_falls.mp4", UriKind.Relative);
+                this.MediaPigletVideo.Play();
+            }
         }
 
-        private void ImagePigletCake_PlayVideoLaughs()
+        private void PlayVideoLaughs()
         {
-            this.ImagePigletIdle.Visibility = Visibility.Visible;
-            this.MediaPigletVideo.Stop();
-            this.typeAnimation = MODE_ANIMATION_GAME;
-            this.MediaPigletVideo.Source = new Uri("/Video/piglet_laughs.mp4", UriKind.Relative);
-            this.MediaPigletVideo.Play();
+            if ((Application.Current as App).HasMusicControl || (Application.Current as App).MusicControlTakeover)
+            {
+                this.ImagePigletIdle.Visibility = Visibility.Visible;
+                this.MediaPigletVideo.Stop();
+                this.typeAnimation = MODE_ANIMATION_GAME;
+                this.MediaPigletVideo.Source = new Uri("/Video/piglet_laughs.mp4", UriKind.Relative);
+                this.MediaPigletVideo.Play();
+            }
         }
 
-        private void ImagePigletCake_PlayVideoInSorrow()
+        private void PlayVideoInSorrow()
         {
-            this.ImagePigletIdle.Visibility = Visibility.Visible;
-            this.MediaPigletVideo.Stop();
-            this.typeAnimation = MODE_ANIMATION_GAME;
-            this.MediaPigletVideo.Source = new Uri("/Video/piglet_in_sorrow.mp4", UriKind.Relative);
-            this.MediaPigletVideo.Play();
+            if ((Application.Current as App).HasMusicControl || (Application.Current as App).MusicControlTakeover)
+            {
+                this.ImagePigletIdle.Visibility = Visibility.Visible;
+                this.MediaPigletVideo.Stop();
+                this.typeAnimation = MODE_ANIMATION_GAME;
+                this.MediaPigletVideo.Source = new Uri("/Video/piglet_in_sorrow.mp4", UriKind.Relative);
+                this.MediaPigletVideo.Play();
+            }
         }
 
         private void MediaPigletVideo_CurrentStateChanged(object sender, RoutedEventArgs e)
@@ -282,28 +297,13 @@ namespace PocketPiglet
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-
             base.OnNavigatedTo(e);
+
+            this.pageNavigationComplete = true;
+            this.startAnimationsOnLayoutUpdate = true;
+
             IsolatedStorageSettings.ApplicationSettings.TryGetValue<string>("AnimationPigletPlay", out this.animationPigletPlay);
-            if (this.animationPigletPlay != null && this.animationPigletPlay != "")
-            {
-                this.timerAnimationPigletDefault.Stop();
-                if ("WashPigletAnimation" == this.animationPigletPlay)
-                {
-                    this.MediaPigletVideo.Source = new Uri("/Video/piglet_wash_game_finished.mp4", UriKind.Relative);
-                }
-                if ("FeedPigletAnimation" == this.animationPigletPlay)
-                {
-                    this.MediaPigletVideo.Source = new Uri("/Video/piglet_feed_game_finished.mp4", UriKind.Relative);
-                }
-                this.ImagePigletIdle.Visibility = Visibility.Visible;
-                this.MediaPigletVideo.Stop();
-                this.typeAnimation = MODE_ANIMATION_GAME;
-                this.MediaPigletVideo.Play();
-            }
-            else {
-                this.timerAnimationPigletDefault.Start();
-            }
+
             IsolatedStorageSettings.ApplicationSettings["AnimationPigletPlay"] = "";
             IsolatedStorageSettings.ApplicationSettings.Save();
             IsolatedStorageSettings.ApplicationSettings.TryGetValue<bool>("FeedGameState", out this.feedGameState);
@@ -342,7 +342,60 @@ namespace PocketPiglet
             {
                 this.ImagePigletPuzzle.Source = new BitmapImage(new Uri("/Images/game_piglet_puzzle.png", UriKind.Relative));
             }
-            this.timerAnimationPigletInSorrow.Start();
+        }
+
+        private void MainPage_LayoutUpdated(object sender, EventArgs e)
+        {
+            if (this.startAnimationsOnLayoutUpdate && this.pageNavigationComplete)
+            {
+                ThreadPool.QueueUserWorkItem((stateInfo) =>
+                {
+                    Deployment.Current.Dispatcher.BeginInvoke(delegate()
+                    {
+                        if (!(Application.Current as App).HasMusicControl && !(Application.Current as App).MusicControlTakeover)
+                        {
+                            MessageBoxResult result = MessageBox.Show(AppResources.MessageBoxMessageMusicPauseQuestion, AppResources.MessageBoxHeaderWarning, MessageBoxButton.OKCancel);
+
+                            if (result == MessageBoxResult.OK)
+                            {
+                                (Application.Current as App).MusicControlTakeover = true;
+                            }
+                            else
+                            {
+                                (Application.Current as App).MusicControlTakeover = false;
+                            }
+                        }
+
+                        if ((Application.Current as App).HasMusicControl || (Application.Current as App).MusicControlTakeover)
+                        {
+                            if (this.animationPigletPlay != null && this.animationPigletPlay != "")
+                            {
+                                this.timerAnimationPigletDefault.Stop();
+                                if ("WashPigletAnimation" == this.animationPigletPlay)
+                                {
+                                    this.MediaPigletVideo.Source = new Uri("/Video/piglet_wash_game_finished.mp4", UriKind.Relative);
+                                }
+                                if ("FeedPigletAnimation" == this.animationPigletPlay)
+                                {
+                                    this.MediaPigletVideo.Source = new Uri("/Video/piglet_feed_game_finished.mp4", UriKind.Relative);
+                                }
+                                this.ImagePigletIdle.Visibility = Visibility.Visible;
+                                this.MediaPigletVideo.Stop();
+                                this.typeAnimation = MODE_ANIMATION_GAME;
+                                this.MediaPigletVideo.Play();
+                            }
+                            else
+                            {
+                                this.timerAnimationPigletDefault.Start();
+                            }
+
+                            this.timerAnimationPigletInSorrow.Start();
+                        }
+                    });
+                });
+
+                this.startAnimationsOnLayoutUpdate = false;
+            }
         }
 
         private void timerAnimationPigletInSorrow_Tick(object sender, EventArgs e)
@@ -381,8 +434,15 @@ namespace PocketPiglet
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
-            this.timerAnimationPigletInSorrow.Stop();
+            base.OnNavigatingFrom(e);
+
+            this.pageNavigationComplete = false;
+
+            this.timerAnimationPigletStart.Stop();
+            this.timerAnimationPigletStop.Stop();
             this.timerAnimationPigletDefault.Stop();
+            this.timerAnimationPigletInSorrow.Stop();
+
             this.ImagePigletIdle.Visibility = Visibility.Visible;
             this.MediaPigletVideo.Stop();
         }
@@ -405,11 +465,11 @@ namespace PocketPiglet
                     {
                         if (this.isPigletInSorrow)
                         {
-                            this.ImagePigletCake_PlayVideoInSorrow();
+                            this.PlayVideoInSorrow();
                         }
                         else
                         {
-                            this.ImagePigletCake_PlayVideoLaughs();
+                            this.PlayVideoLaughs();
                         }
                         this.isPlayVideoLaughs = true;
                     }

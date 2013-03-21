@@ -35,6 +35,7 @@ namespace PocketPiglet
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
             base.OnNavigatingFrom(e);
+
             IsolatedStorageSettings.ApplicationSettings["AnimationPigletPlay"] = "";
             IsolatedStorageSettings.ApplicationSettings.Save();
         }

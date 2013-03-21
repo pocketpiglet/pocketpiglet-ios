@@ -41,6 +41,7 @@ namespace PocketPiglet
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
             base.OnNavigatingFrom(e);
+
             IsolatedStorageSettings.ApplicationSettings["AnimationPigletPlay"] = "";
             IsolatedStorageSettings.ApplicationSettings.Save();
         }
@@ -48,11 +49,11 @@ namespace PocketPiglet
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+
             if (NavigationContext.QueryString.ContainsKey("typeLevel"))
             {
                 this.typeLevel = NavigationContext.QueryString["typeLevel"].ToString();
             }
-
         }
     }
 }

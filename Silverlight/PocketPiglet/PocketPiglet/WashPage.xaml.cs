@@ -113,9 +113,9 @@ namespace PocketPiglet
 
         private void bubbleImage_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            var laserStream = Application.GetResourceStream(new Uri("Sound/piglet_wash/bubble_burst.wav", UriKind.RelativeOrAbsolute));
-            var effect = SoundEffect.FromStream(laserStream.Stream);
-            effect.Play();
+            SoundEffectInstance instance = SoundEffect.FromStream(Application.GetResourceStream(new Uri("Sound/piglet_wash/bubble_burst.wav", UriKind.Relative)).Stream).CreateInstance();
+            instance.Play();
+
             this.countBursted++;
             this.textBlockScore.Text = String.Format("{0:D5}", this.countBursted);
             Image item = sender as Image;
@@ -209,9 +209,9 @@ namespace PocketPiglet
                         IsolatedStorageSettings.ApplicationSettings.Save();
                         this.WashPage_ShowMaxScore();
 
-                        var laserStream = Application.GetResourceStream(new Uri("Sound/piglet_wash/high_score.wav", UriKind.RelativeOrAbsolute));
-                        var effect = SoundEffect.FromStream(laserStream.Stream);
-                        effect.Play();
+                        SoundEffectInstance instance = SoundEffect.FromStream(Application.GetResourceStream(new Uri("Sound/piglet_wash/high_score.wav", UriKind.Relative)).Stream).CreateInstance();
+                        instance.Play();
+
                         MessageBoxResult result = MessageBox.Show(AppResources.MessageBoxMessageNewHighscoreQuestion, AppResources.MessageBoxHeaderInfo, MessageBoxButton.OKCancel);
                         if (result == MessageBoxResult.OK)
                         {
@@ -227,9 +227,8 @@ namespace PocketPiglet
                     }
                     else
                     {
-                        var laserStream = Application.GetResourceStream(new Uri("Sound/piglet_wash/game_over.wav", UriKind.RelativeOrAbsolute));
-                        var effect = SoundEffect.FromStream(laserStream.Stream);
-                        effect.Play();
+                        SoundEffectInstance instance = SoundEffect.FromStream(Application.GetResourceStream(new Uri("Sound/piglet_wash/game_over.wav", UriKind.Relative)).Stream).CreateInstance();
+                        instance.Play();
 
                         MessageBoxResult result = MessageBox.Show(AppResources.MessageBoxMessageGameOverQuestion, AppResources.MessageBoxHeaderInfo, MessageBoxButton.OKCancel);
                         if (result == MessageBoxResult.OK)
@@ -250,10 +249,9 @@ namespace PocketPiglet
         private void WashPage_StartGame()
         {
             this.timerRandomNewBubble.Start();
-            var laserStream = Application.GetResourceStream(new Uri("Sound/piglet_wash/game_start.wav", UriKind.RelativeOrAbsolute));
-            var effect = SoundEffect.FromStream(laserStream.Stream);
-            effect.Play();
 
+            SoundEffectInstance instance = SoundEffect.FromStream(Application.GetResourceStream(new Uri("Sound/piglet_wash/game_start.wav", UriKind.Relative)).Stream).CreateInstance();
+            instance.Play();
         }
 
         private void WashPage_StopGame()
@@ -307,6 +305,7 @@ namespace PocketPiglet
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
             base.OnNavigatingFrom(e);
+
             this.timerRandomNewBubble.Stop();
             this.isGameFinished = true;
             this.WashPage_StopGame();
@@ -316,6 +315,8 @@ namespace PocketPiglet
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            base.OnNavigatedTo(e);
+
             IsolatedStorageSettings.ApplicationSettings.TryGetValue<string>("MaxScoreWashGame", out this.maxScoreWashGame);
 
             if (this.maxScoreWashGame == "" || this.maxScoreWashGame == null)

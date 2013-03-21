@@ -129,6 +129,9 @@
   <data name="MessageBoxHeaderInfo" xml:space="preserve">
     <value>Info</value>
   </data>
+  <data name="MessageBoxHeaderWarning" xml:space="preserve">
+    <value>Warning</value>
+  </data>
   <data name="MessageBoxMessageGameOverQuestion" xml:space="preserve">
     <value>Game over. Do you want to play again?</value>
   </data>
@@ -137,6 +140,9 @@
   </data>
   <data name="MessageBoxMessageMarketplaceOpenError" xml:space="preserve">
     <value>Could not open Marketplace:</value>
+  </data>
+  <data name="MessageBoxMessageMusicPauseQuestion" xml:space="preserve">
+    <value>You are currently playing music on your phone. Pet animations will not work while music is playing. Do you want to pause music until application exit?</value>
   </data>
   <data name="MessageBoxMessageNewHighscoreQuestion" xml:space="preserve">
     <value>Congratulations, you have a new highscore! Do you want to play again?</value>
