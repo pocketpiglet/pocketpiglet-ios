@@ -145,12 +145,12 @@
     <value>Could not open Marketplace:</value>
   </data>
   <data name="MessageBoxMessageMusicPauseQuestion" xml:space="preserve">
-    <value>You are currently playing music on your phone. Pet animations will not work while music is playing. Do you want to pause music until application exit?</value>
+    <value>You are currently playing music on your phone. Pet will not be able to move or talk while music is playing. Do you want to pause music until application exit?</value>
   </data>
   <data name="MessageBoxMessageNewHighscoreQuestion" xml:space="preserve">
     <value>Congratulations, you have a new highscore! Do you want to play again?</value>
   </data>
   <data name="MessageBoxMessageTalkTrialVersionQuestion" xml:space="preserve">
-    <value>The talk function is available just for a limited time in trial version. Pet will not talk until application restart. Do you want to purchase full version now?</value>
+    <value>Pet talk is available just for a limited time in trial version. Pet will not talk until application restart. Do you want to purchase full version now?</value>
   </data>
 </root>

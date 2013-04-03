@@ -142,7 +142,7 @@ namespace PocketPiglet {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You are currently playing music on your phone. Pet animations will not work while music is playing. Do you want to pause music until application exit?.
+        ///   Looks up a localized string similar to You are currently playing music on your phone. Pet will not be able to move or talk while music is playing. Do you want to pause music until application exit?.
         /// </summary>
         public static string MessageBoxMessageMusicPauseQuestion {
             get {
@@ -160,7 +160,7 @@ namespace PocketPiglet {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The talk function is available just for a limited time in trial version. Pet will not talk until application restart. Do you want to purchase full version now?.
+        ///   Looks up a localized string similar to Pet talk is available just for a limited time in trial version. Pet will not talk until application restart. Do you want to purchase full version now?.
         /// </summary>
         public static string MessageBoxMessageTalkTrialVersionQuestion {
             get {
