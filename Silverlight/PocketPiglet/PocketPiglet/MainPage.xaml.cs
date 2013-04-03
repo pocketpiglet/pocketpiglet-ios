@@ -57,7 +57,7 @@ namespace PocketPiglet
                   STATE_RECORDING = 2,
                   STATE_PLAYING = 3;
         private const int MAX_SAMPLE_RATE = 48000;
-        private const double VAD_THRESHOLD = 0.05F;
+        private const double VAD_THRESHOLD = 0.1F;
 
         private int vadState;
         private byte[] buffer;
