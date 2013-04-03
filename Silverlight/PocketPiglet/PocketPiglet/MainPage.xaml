@@ -17,6 +17,7 @@
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent" MouseLeftButtonUp="LayoutRoot_MouseLeftButtonUp" MouseLeftButtonDown="LayoutRoot_MouseLeftButtonDown" MouseMove="LayoutRoot_MouseMove">
         <Image Name="ImagePigletIdle" Canvas.ZIndex="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Stretch="Fill" Source="/Images/piglet_idle.png" />
+        <Image Name="ImagePigletTalk" Canvas.ZIndex="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Stretch="Fill" Visibility="Collapsed"/>
         <MediaElement Name="MediaPigletVideo" Canvas.ZIndex="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Stretch="Fill" AutoPlay="True" Volume="1" CurrentStateChanged="MediaPigletVideo_CurrentStateChanged" />
         <Image Name="ImagePigletCandy" Width="64" Height="64" Canvas.ZIndex="5" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,66,0,0" Source="/Images/action_candy.png" MouseLeftButtonUp="PigletCandy_MouseLeftButtonUp" />
         <Image Name="ImagePigletCake" Width="64" Height="64" Canvas.ZIndex="5" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,150,0,0" Source="/Images/action_cake.png" MouseLeftButtonUp="ImagePigletCake_MouseLeftButtonUp" />

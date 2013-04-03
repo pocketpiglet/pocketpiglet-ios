@@ -18,6 +18,8 @@ using System.Windows.Threading;
 using Microsoft.Devices.Sensors;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Tasks;
+using Microsoft.Xna.Framework.Audio;
+
 
 namespace PocketPiglet
 {
@@ -29,7 +31,7 @@ namespace PocketPiglet
         private DispatcherTimer timerAnimationPigletInSorrow;
         private Random rnd;
         private int countDefaultAnimation;
-        private int deltaTimeDefaultAnimation = 250;
+        private int deltaTimeDefaultAnimation = 350;
         private int deltaTimeGameAnimation = 100;
         private const int MODE_ANIMATION_DEFAULT = 1,
                           MODE_ANIMATION_GAME = 2;
@@ -40,6 +42,8 @@ namespace PocketPiglet
         private Point pointMovePiglet;
         private bool isPlayVideoLaughs;
         private bool isPigletInSorrow;
+        private bool isPigletTalk;
+        private bool isPigletTalkAvailable;
         private string lastGamePiglet;
         private MarketplaceDetailTask marketplaceDetailTask;
 
@@ -48,6 +52,21 @@ namespace PocketPiglet
         private bool feedGameState = true;
         private bool washGameState = true;
         private bool puzzleGameState = true;
+
+        private const int STATE_LISTENING = 1,
+                  STATE_RECORDING = 2,
+                  STATE_PLAYING = 3;
+        private const int MAX_SAMPLE_RATE = 48000;
+        private const double VAD_THRESHOLD = 0.05F;
+
+        private int vadState;
+        private byte[] buffer;
+        private MemoryStream stream;
+        private DispatcherTimer timerPigletTalk;
+        private DispatcherTimer timerPigletListening;
+        private Microphone microphone;
+        private int durationTalkPiglet;
+
 
         private readonly Accelerometer _sensor = new Accelerometer();
 
@@ -76,7 +95,24 @@ namespace PocketPiglet
             this.timerAnimationPigletDefault.Tick += new EventHandler(timerRandomDefaultAnimation_Tick);
             this.timerAnimationPigletDefault.Interval = new TimeSpan(0, 0, 0, timeRandomDefaultAnimation, 0);
 
+            this.timerPigletListening = new System.Windows.Threading.DispatcherTimer();
+            this.timerPigletListening.Tick += new EventHandler(timerPigletListening_Tick);
+
             this.marketplaceDetailTask                   = new MarketplaceDetailTask();
+
+            this.vadState = STATE_LISTENING;
+            this.stream = new MemoryStream();
+
+            this.timerPigletTalk = new DispatcherTimer();
+            this.timerPigletTalk.Tick += new EventHandler(timerPigletTalk_Tick);
+
+            this.microphone = Microphone.Default;
+            this.microphone.BufferDuration = TimeSpan.FromMilliseconds(1000);
+            this.microphone.BufferReady += new EventHandler<EventArgs>(microphone_BufferReady);
+            this.microphone.Start();
+
+            this.buffer = new byte[microphone.GetSampleSizeInBytes(microphone.BufferDuration)];
+
 #if DEBUG_TRIAL
             this.marketplaceDetailTask.ContentType       = MarketplaceContentType.Applications;
             this.marketplaceDetailTask.ContentIdentifier = "a5cf363a-044a-46f0-a414-9235cc31f997";
@@ -105,6 +141,102 @@ namespace PocketPiglet
             });
         }
 
+        private void microphone_BufferReady(object sender, EventArgs e)
+        {
+            this.microphone.GetData(buffer);
+            if (!this.isPigletTalkAvailable) return;
+            if (this.vadState == STATE_LISTENING || this.vadState == STATE_RECORDING)
+            {
+                bool voice_found = false;
+
+                for (int i = 0; i < this.buffer.Length; i = i + 2)
+                {
+                    double normalized = Math.Abs(BitConverter.ToInt16(this.buffer, i) / 32768.0F);
+
+                    if (normalized > VAD_THRESHOLD)
+                    {
+                        voice_found = true;
+                        this.isPigletTalk = true;
+                        break;
+                    }
+                }
+
+                if (voice_found)
+                {
+                    this.vadState = STATE_RECORDING;
+
+                    setPigletListen();
+
+                    this.stream.Write(buffer, 0, buffer.Length);
+                }
+                else if (this.stream.Length > 0)
+                {
+                    this.vadState = STATE_PLAYING;
+
+                    playAudio();
+
+                    this.stream.SetLength(0);                    
+                }
+            }
+        }
+
+        private void setPigletListen()
+        {
+            this.ImagePigletTalk.Source = new BitmapImage(new Uri("/Images/fonem/listen.png", UriKind.Relative));
+            this.ImagePigletTalk.Visibility = Visibility.Visible;
+            this.ImagePigletIdle.Visibility = Visibility.Collapsed;
+            this.MediaPigletVideo.Stop();
+            this.timerAnimationPigletStart.Stop();
+            this.timerAnimationPigletStop.Stop();
+            this.timerAnimationPigletDefault.Stop();
+        }
+
+        private void playAudio()
+        {
+            byte[] original_sound = this.stream.ToArray();
+            byte[] accelerated_sound = new byte[original_sound.Length / 2];            
+            for (int i = 0; i < original_sound.Length; i = i + 4)
+            {
+                int first_lvl = BitConverter.ToInt16(original_sound, i);
+                int second_lvl = BitConverter.ToInt16(original_sound, i);
+
+                byte[] average = BitConverter.GetBytes((short)((first_lvl + second_lvl) / 2));
+
+                average.CopyTo(accelerated_sound, i / 2);
+            }            
+            SoundEffect sound = new SoundEffect(accelerated_sound, microphone.SampleRate, AudioChannels.Mono);
+            sound.Play();
+            this.timerPigletListening.Interval = SoundEffect.GetSampleDuration(accelerated_sound.Length, microphone.SampleRate, AudioChannels.Mono).Add(TimeSpan.FromMilliseconds(1000));
+            this.durationTalkPiglet = (int)SoundEffect.GetSampleDuration(accelerated_sound.Length, microphone.SampleRate, AudioChannels.Mono).TotalMilliseconds;
+            this.timerPigletTalk.Interval = new TimeSpan(0, 0, 0, 0, 100);            
+            this.timerPigletTalk.Start();
+            this.timerPigletListening.Start();
+            this.ImagePigletTalk.Source = new BitmapImage(new Uri("/Images/fonem/fonem_" + Convert.ToString(this.rnd.Next(1, 6)) + ".png", UriKind.Relative));
+        }
+
+        private void timerPigletListening_Tick(object sender, EventArgs e)
+        {
+            this.vadState = STATE_LISTENING;
+            this.timerPigletTalk.Stop();
+            this.timerAnimationPigletDefault.Start();
+            this.isPigletTalk = false;
+            this.timerPigletListening.Stop();
+        }
+
+        private void timerPigletTalk_Tick(object sender, EventArgs e)
+        {
+            if (this.durationTalkPiglet > 0)
+            {
+                this.durationTalkPiglet -= 100;
+                this.ImagePigletTalk.Source = new BitmapImage(new Uri("/Images/fonem/fonem_" + Convert.ToString(this.rnd.Next(1, 6)) + ".png", UriKind.Relative));
+            }
+            else {
+                this.timerPigletTalk.Stop();
+                this.ImagePigletIdle.Visibility = Visibility.Visible;
+                this.ImagePigletTalk.Visibility = Visibility.Collapsed;
+            }
+        }
+
         private void timerRandomDefaultAnimation_Tick(object sender, EventArgs e)
         {
             this.timerAnimationPigletDefault.Stop();
@@ -116,6 +248,7 @@ namespace PocketPiglet
             }
             else
             {
+                if (!this.isPigletTalkAvailable) this.isPigletTalkAvailable = true;
                 if (this.countDefaultAnimation >= 2)
                 {
                     this.countDefaultAnimation = 0;
@@ -152,18 +285,16 @@ namespace PocketPiglet
             this.ImagePigletIdle.Visibility = Visibility.Visible;
             this.MediaPigletVideo.Stop();
             this.timerAnimationPigletStop.Stop();
-
-            int timeRandomDefaultAnimation = this.rnd.Next(1, 3);
-            this.timerAnimationPigletDefault.Interval = new TimeSpan(0, 0, 0, timeRandomDefaultAnimation, 0);
+            this.timerAnimationPigletDefault.Interval = new TimeSpan(0, 0, 0, 1, 0);
             this.timerAnimationPigletDefault.Start();
-            this._sensor.Start();
-
+            this._sensor.Start();           
         }
 
         private void PigletCandy_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            if ((Application.Current as App).HasMusicControl || (Application.Current as App).MusicControlTakeover)
+            if (!this.isPigletTalk && ((Application.Current as App).HasMusicControl || (Application.Current as App).MusicControlTakeover))
             {
+                this.isPigletTalkAvailable = false;
                 this.ImagePigletIdle.Visibility = Visibility.Visible;
                 this.MediaPigletVideo.Stop();
                 this.typeAnimation = MODE_ANIMATION_GAME;
@@ -174,8 +305,9 @@ namespace PocketPiglet
 
         private void ImagePigletCake_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            if ((Application.Current as App).HasMusicControl || (Application.Current as App).MusicControlTakeover)
+            if (!this.isPigletTalk && ((Application.Current as App).HasMusicControl || (Application.Current as App).MusicControlTakeover))
             {
+                this.isPigletTalkAvailable = false;
                 this.ImagePigletIdle.Visibility = Visibility.Visible;
                 this.MediaPigletVideo.Stop();
                 this.typeAnimation = MODE_ANIMATION_GAME;
@@ -186,8 +318,9 @@ namespace PocketPiglet
 
         private void PlayVideoFalls()
         {
-            if ((Application.Current as App).HasMusicControl || (Application.Current as App).MusicControlTakeover)
+            if (!this.isPigletTalk && ((Application.Current as App).HasMusicControl || (Application.Current as App).MusicControlTakeover))
             {
+                this.isPigletTalkAvailable = false;
                 this.ImagePigletIdle.Visibility = Visibility.Visible;
                 this.MediaPigletVideo.Stop();
                 this.typeAnimation = MODE_ANIMATION_GAME;
@@ -198,8 +331,9 @@ namespace PocketPiglet
 
         private void PlayVideoLaughs()
         {
-            if ((Application.Current as App).HasMusicControl || (Application.Current as App).MusicControlTakeover)
+            if (!this.isPigletTalk && ((Application.Current as App).HasMusicControl || (Application.Current as App).MusicControlTakeover))
             {
+                this.isPigletTalkAvailable = false;
                 this.ImagePigletIdle.Visibility = Visibility.Visible;
                 this.MediaPigletVideo.Stop();
                 this.typeAnimation = MODE_ANIMATION_GAME;
@@ -214,7 +348,7 @@ namespace PocketPiglet
             {
                 this.ImagePigletIdle.Visibility = Visibility.Visible;
                 this.MediaPigletVideo.Stop();
-                this.typeAnimation = MODE_ANIMATION_GAME;
+                this.typeAnimation = MODE_ANIMATION_DEFAULT;
                 this.MediaPigletVideo.Source = new Uri("/Video/piglet_in_sorrow.mp4", UriKind.Relative);
                 this.MediaPigletVideo.Play();
             }
@@ -223,7 +357,7 @@ namespace PocketPiglet
         private void MediaPigletVideo_CurrentStateChanged(object sender, RoutedEventArgs e)
         {
             if (this.MediaPigletVideo.CurrentState == MediaElementState.Playing)
-            {
+            {                                
                 this.timerAnimationPigletStart.Start();
                 Duration durationAnimation = this.MediaPigletVideo.NaturalDuration;
                 TimeSpan timeSpan = durationAnimation.TimeSpan;
@@ -235,6 +369,8 @@ namespace PocketPiglet
                 if (this.typeAnimation == MODE_ANIMATION_GAME)
                 {
                     delta = this.deltaTimeGameAnimation;
+                    this.isPigletTalkAvailable = false;
+                    this.ImagePigletTalk.Visibility = Visibility.Collapsed;
                 }
                 timeSpan = timeSpan.Subtract(new TimeSpan(0, 0, 0, 0, delta));
                 this.timerAnimationPigletStop.Interval = timeSpan;
@@ -244,54 +380,60 @@ namespace PocketPiglet
 
         private void ImagePigletFeed_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            NavigationService.Navigate(new Uri("/FeedSelectionComplexityPage.xaml", UriKind.Relative));
+            if (!this.isPigletTalk) NavigationService.Navigate(new Uri("/FeedSelectionComplexityPage.xaml", UriKind.Relative));
         }
 
         private void ImagePigletWash_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            if ((Application.Current as App).TrialMode)
+            if (!this.isPigletTalk)
             {
-                MessageBoxResult result = MessageBox.Show(AppResources.MessageBoxMessageTrialVersionQuestion, AppResources.MessageBoxHeaderInfo, MessageBoxButton.OKCancel);
-
-                if (result == MessageBoxResult.OK)
+                if ((Application.Current as App).TrialMode)
                 {
-                    try
+                    MessageBoxResult result = MessageBox.Show(AppResources.MessageBoxMessageTrialVersionQuestion, AppResources.MessageBoxHeaderInfo, MessageBoxButton.OKCancel);
+
+                    if (result == MessageBoxResult.OK)
                     {
-                        this.marketplaceDetailTask.Show();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(AppResources.MessageBoxMessageMarketplaceOpenError + " " + ex.Message.ToString(), AppResources.MessageBoxHeaderError, MessageBoxButton.OK);
+                        try
+                        {
+                            this.marketplaceDetailTask.Show();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(AppResources.MessageBoxMessageMarketplaceOpenError + " " + ex.Message.ToString(), AppResources.MessageBoxHeaderError, MessageBoxButton.OK);
+                        }
                     }
                 }
-            }
-            else
-            {
-                NavigationService.Navigate(new Uri("/WashPage.xaml", UriKind.Relative));
+                else
+                {
+                    if (!this.isPigletTalk) NavigationService.Navigate(new Uri("/WashPage.xaml", UriKind.Relative));
+                }
             }
         }
 
         private void ImagePigletPuzzle_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            if ((Application.Current as App).TrialMode)
+            if (!this.isPigletTalk)
             {
-                MessageBoxResult result = MessageBox.Show(AppResources.MessageBoxMessageTrialVersionQuestion, AppResources.MessageBoxHeaderInfo, MessageBoxButton.OKCancel);
-
-                if (result == MessageBoxResult.OK)
+                if ((Application.Current as App).TrialMode)
                 {
-                    try
+                    MessageBoxResult result = MessageBox.Show(AppResources.MessageBoxMessageTrialVersionQuestion, AppResources.MessageBoxHeaderInfo, MessageBoxButton.OKCancel);
+
+                    if (result == MessageBoxResult.OK)
                     {
-                        this.marketplaceDetailTask.Show();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(AppResources.MessageBoxMessageMarketplaceOpenError + " " + ex.Message.ToString(), AppResources.MessageBoxHeaderError, MessageBoxButton.OK);
+                        try
+                        {
+                            this.marketplaceDetailTask.Show();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(AppResources.MessageBoxMessageMarketplaceOpenError + " " + ex.Message.ToString(), AppResources.MessageBoxHeaderError, MessageBoxButton.OK);
+                        }
                     }
                 }
-            }
-            else
-            {
-                NavigationService.Navigate(new Uri("/PuzzlePage.xaml", UriKind.Relative));
+                else
+                {
+                    NavigationService.Navigate(new Uri("/PuzzlePage.xaml", UriKind.Relative));
+                }
             }
         }
 
@@ -301,6 +443,7 @@ namespace PocketPiglet
 
             this.pageNavigationComplete = true;
             this.startAnimationsOnLayoutUpdate = true;
+            this.isPigletTalk = false;
 
             IsolatedStorageSettings.ApplicationSettings.TryGetValue<string>("AnimationPigletPlay", out this.animationPigletPlay);
 
@@ -365,11 +508,11 @@ namespace PocketPiglet
                                 (Application.Current as App).MusicControlTakeover = false;
                             }
                         }
-
                         if ((Application.Current as App).HasMusicControl || (Application.Current as App).MusicControlTakeover)
-                        {
+                        {                            
                             if (this.animationPigletPlay != null && this.animationPigletPlay != "")
                             {
+                                this.isPigletTalkAvailable = false;
                                 this.timerAnimationPigletDefault.Stop();
                                 if ("WashPigletAnimation" == this.animationPigletPlay)
                                 {
@@ -379,6 +522,7 @@ namespace PocketPiglet
                                 {
                                     this.MediaPigletVideo.Source = new Uri("/Video/piglet_feed_game_finished.mp4", UriKind.Relative);
                                 }
+                                this.ImagePigletTalk.Visibility = Visibility.Collapsed;
                                 this.ImagePigletIdle.Visibility = Visibility.Visible;
                                 this.MediaPigletVideo.Stop();
                                 this.typeAnimation = MODE_ANIMATION_GAME;
@@ -386,10 +530,21 @@ namespace PocketPiglet
                             }
                             else
                             {
+                                if (this.typeAnimation == MODE_ANIMATION_DEFAULT)
+                                {
+                                    this.isPigletTalkAvailable = true;
+                                }
+                                else {
+                                    this.isPigletTalkAvailable = false;
+                                }
                                 this.timerAnimationPigletDefault.Start();
                             }
 
                             this.timerAnimationPigletInSorrow.Start();
+                        }
+                        else
+                        {
+                            this.isPigletTalkAvailable = false;
                         }
                     });
                 });
@@ -435,7 +590,7 @@ namespace PocketPiglet
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
             base.OnNavigatingFrom(e);
-
+            this.isPigletTalkAvailable = false;
             this.pageNavigationComplete = false;
 
             this.timerAnimationPigletStart.Stop();
