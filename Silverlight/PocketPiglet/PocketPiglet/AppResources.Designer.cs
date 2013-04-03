@@ -115,6 +115,15 @@ namespace PocketPiglet {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This game is available in the full version only. Do you want to purchase full version now?.
+        /// </summary>
+        public static string MessageBoxMessageGameTrialVersionQuestion {
+            get {
+                return ResourceManager.GetString("MessageBoxMessageGameTrialVersionQuestion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Congratulations, you have just won the game! Do you want to play again?.
         /// </summary>
         public static string MessageBoxMessageGameWonQuestion {
@@ -151,11 +160,11 @@ namespace PocketPiglet {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This game is available in the full version only. Do you want to purchase full version now?.
+        ///   Looks up a localized string similar to The talk function is available just for a limited time in trial version. Pet will not talk until application restart. Do you want to purchase full version now?.
         /// </summary>
-        public static string MessageBoxMessageTrialVersionQuestion {
+        public static string MessageBoxMessageTalkTrialVersionQuestion {
             get {
-                return ResourceManager.GetString("MessageBoxMessageTrialVersionQuestion", resourceCulture);
+                return ResourceManager.GetString("MessageBoxMessageTalkTrialVersionQuestion", resourceCulture);
             }
         }
     }

@@ -135,6 +135,9 @@
   <data name="MessageBoxMessageGameOverQuestion" xml:space="preserve">
     <value>Игра окончена. Хотите попробовать еще раз?</value>
   </data>
+  <data name="MessageBoxMessageGameTrialVersionQuestion" xml:space="preserve">
+    <value>Эта игра доступна только в полной версии. Хотите купить полную версию?</value>
+  </data>
   <data name="MessageBoxMessageGameWonQuestion" xml:space="preserve">
     <value>Поздравляю, вы только что выиграли! Хотите попробовать еще раз?</value>
   </data>
@@ -147,7 +150,7 @@
   <data name="MessageBoxMessageNewHighscoreQuestion" xml:space="preserve">
     <value>Поздравляю, вы только что побили рекорд! Хотите попробовать еще раз?</value>
   </data>
-  <data name="MessageBoxMessageTrialVersionQuestion" xml:space="preserve">
-    <value>Эта игра доступна только в полной версии. Хотите купить полную версию?</value>
+  <data name="MessageBoxMessageTalkTrialVersionQuestion" xml:space="preserve">
+    <value>Функция разговора в пробной версии доступна только в течение ограниченного времени. Ваш питомец не сможет разговаривать до перезапуска приложения. Хотите купить полную версию?</value>
   </data>
 </root>

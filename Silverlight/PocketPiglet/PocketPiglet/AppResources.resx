@@ -135,6 +135,9 @@
   <data name="MessageBoxMessageGameOverQuestion" xml:space="preserve">
     <value>Game over. Do you want to play again?</value>
   </data>
+  <data name="MessageBoxMessageGameTrialVersionQuestion" xml:space="preserve">
+    <value>This game is available in the full version only. Do you want to purchase full version now?</value>
+  </data>
   <data name="MessageBoxMessageGameWonQuestion" xml:space="preserve">
     <value>Congratulations, you have just won the game! Do you want to play again?</value>
   </data>
@@ -147,7 +150,7 @@
   <data name="MessageBoxMessageNewHighscoreQuestion" xml:space="preserve">
     <value>Congratulations, you have a new highscore! Do you want to play again?</value>
   </data>
-  <data name="MessageBoxMessageTrialVersionQuestion" xml:space="preserve">
-    <value>This game is available in the full version only. Do you want to purchase full version now?</value>
+  <data name="MessageBoxMessageTalkTrialVersionQuestion" xml:space="preserve">
+    <value>The talk function is available just for a limited time in trial version. Pet will not talk until application restart. Do you want to purchase full version now?</value>
   </data>
 </root>

@@ -20,7 +20,6 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Tasks;
 using Microsoft.Xna.Framework.Audio;
 
-
 namespace PocketPiglet
 {
     public partial class MainPage : PhoneApplicationPage
@@ -29,12 +28,13 @@ namespace PocketPiglet
         private DispatcherTimer timerAnimationPigletStop;
         private DispatcherTimer timerAnimationPigletDefault;
         private DispatcherTimer timerAnimationPigletInSorrow;
+        private DispatcherTimer timerTrialTalk;
         private Random rnd;
         private int countDefaultAnimation;
         private int deltaTimeDefaultAnimation = 350;
         private int deltaTimeGameAnimation = 100;
         private const int MODE_ANIMATION_DEFAULT = 1,
-                          MODE_ANIMATION_GAME = 2;
+                          MODE_ANIMATION_GAME    = 2;
 
         private int typeAnimation;
         private string animationPigletPlay;
@@ -52,11 +52,14 @@ namespace PocketPiglet
         private bool feedGameState = true;
         private bool washGameState = true;
         private bool puzzleGameState = true;
+        private bool isPigletTalkDisabledByTrial = false;
 
         private const int STATE_LISTENING = 1,
-                  STATE_RECORDING = 2,
-                  STATE_PLAYING = 3;
+                          STATE_RECORDING = 2,
+                          STATE_PLAYING   = 3;
         private const int MAX_SAMPLE_RATE = 48000;
+        private const int MAX_STREAM_DURATION = 60;
+        private const int MAX_TRIAL_TALK_DURATION = 60;
         private const double VAD_THRESHOLD = 0.1F;
 
         private int vadState;
@@ -67,17 +70,20 @@ namespace PocketPiglet
         private Microphone microphone;
         private int durationTalkPiglet;
 
-
         private readonly Accelerometer _sensor = new Accelerometer();
 
         public MainPage()
         {
             InitializeComponent();
+
             this.isPlayVideoLaughs = false;
             this.isPigletInSorrow = false;
+
             _sensor.CurrentValueChanged += new EventHandler<SensorReadingEventArgs<AccelerometerReading>>(sensor_CurrentValueChanged);
             _sensor.Start();
+
             this.countDefaultAnimation = 0;
+
             this.timerAnimationPigletStart = new System.Windows.Threading.DispatcherTimer();
             this.timerAnimationPigletStart.Tick += new EventHandler(timerAnimationPigletStart_Tick);
             this.timerAnimationPigletStart.Interval = new TimeSpan(0, 0, 0, 0, 300);
@@ -91,14 +97,13 @@ namespace PocketPiglet
 
             this.rnd = new Random();
             int timeRandomDefaultAnimation = this.rnd.Next(1, 3);
+
             this.timerAnimationPigletDefault = new System.Windows.Threading.DispatcherTimer();
             this.timerAnimationPigletDefault.Tick += new EventHandler(timerRandomDefaultAnimation_Tick);
             this.timerAnimationPigletDefault.Interval = new TimeSpan(0, 0, 0, timeRandomDefaultAnimation, 0);
 
             this.timerPigletListening = new System.Windows.Threading.DispatcherTimer();
             this.timerPigletListening.Tick += new EventHandler(timerPigletListening_Tick);
-
-            this.marketplaceDetailTask                   = new MarketplaceDetailTask();
 
             this.vadState = STATE_LISTENING;
             this.stream = new MemoryStream();
@@ -107,12 +112,18 @@ namespace PocketPiglet
             this.timerPigletTalk.Tick += new EventHandler(timerPigletTalk_Tick);
 
             this.microphone = Microphone.Default;
-            this.microphone.BufferDuration = TimeSpan.FromMilliseconds(1000);
+            this.microphone.BufferDuration = TimeSpan.FromMilliseconds(500);
             this.microphone.BufferReady += new EventHandler<EventArgs>(microphone_BufferReady);
             this.microphone.Start();
 
             this.buffer = new byte[microphone.GetSampleSizeInBytes(microphone.BufferDuration)];
 
+            this.timerTrialTalk = new System.Windows.Threading.DispatcherTimer();
+            this.timerTrialTalk.Tick +=new EventHandler(timerTrialTalk_Tick);
+            this.timerTrialTalk.Interval = TimeSpan.FromSeconds(MAX_TRIAL_TALK_DURATION);
+            this.timerTrialTalk.Start();
+
+            this.marketplaceDetailTask                   = new MarketplaceDetailTask();
 #if DEBUG_TRIAL
             this.marketplaceDetailTask.ContentType       = MarketplaceContentType.Applications;
             this.marketplaceDetailTask.ContentIdentifier = "a5cf363a-044a-46f0-a414-9235cc31f997";
@@ -144,44 +155,47 @@ namespace PocketPiglet
         private void microphone_BufferReady(object sender, EventArgs e)
         {
             this.microphone.GetData(buffer);
-            if (!this.isPigletTalkAvailable) return;
-            if (this.vadState == STATE_LISTENING || this.vadState == STATE_RECORDING)
+
+            if (this.isPigletTalkAvailable)
             {
-                bool voice_found = false;
-
-                for (int i = 0; i < this.buffer.Length; i = i + 2)
+                if (this.vadState == STATE_LISTENING || this.vadState == STATE_RECORDING)
                 {
-                    double normalized = Math.Abs(BitConverter.ToInt16(this.buffer, i) / 32768.0F);
+                    bool voice_found = false;
 
-                    if (normalized > VAD_THRESHOLD)
+                    for (int i = 0; i < this.buffer.Length; i = i + 2)
                     {
-                        voice_found = true;
-                        this.isPigletTalk = true;
-                        break;
+                        double normalized = Math.Abs(BitConverter.ToInt16(this.buffer, i) / 32768.0F);
+
+                        if (normalized > VAD_THRESHOLD)
+                        {
+                            voice_found = true;
+                            break;
+                        }
                     }
-                }
 
-                if (voice_found)
-                {
-                    this.vadState = STATE_RECORDING;
+                    if (voice_found && !this.isPigletTalkDisabledByTrial && this.stream.Length < microphone.GetSampleSizeInBytes(TimeSpan.FromSeconds(MAX_STREAM_DURATION)))
+                    {
+                        this.vadState = STATE_RECORDING;
 
-                    setPigletListen();
+                        setPigletListen();
 
-                    this.stream.Write(buffer, 0, buffer.Length);
-                }
-                else if (this.stream.Length > 0)
-                {
-                    this.vadState = STATE_PLAYING;
+                        this.stream.Write(buffer, 0, buffer.Length);
+                    }
+                    else if (this.stream.Length > 0)
+                    {
+                        this.vadState = STATE_PLAYING;
 
-                    playAudio();
+                        playAudio();
 
-                    this.stream.SetLength(0);                    
+                        this.stream.SetLength(0);
+                    }
                 }
             }
         }
 
         private void setPigletListen()
         {
+            this.isPigletTalk = true;
             this.ImagePigletTalk.Source = new BitmapImage(new Uri("/Images/fonem/listen.png", UriKind.Relative));
             this.ImagePigletTalk.Visibility = Visibility.Visible;
             this.ImagePigletIdle.Visibility = Visibility.Collapsed;
@@ -194,7 +208,8 @@ namespace PocketPiglet
         private void playAudio()
         {
             byte[] original_sound = this.stream.ToArray();
-            byte[] accelerated_sound = new byte[original_sound.Length / 2];            
+            byte[] accelerated_sound = new byte[original_sound.Length / 2];
+
             for (int i = 0; i < original_sound.Length; i = i + 4)
             {
                 int first_lvl = BitConverter.ToInt16(original_sound, i);
@@ -203,14 +218,19 @@ namespace PocketPiglet
                 byte[] average = BitConverter.GetBytes((short)((first_lvl + second_lvl) / 2));
 
                 average.CopyTo(accelerated_sound, i / 2);
-            }            
+            }
+
             SoundEffect sound = new SoundEffect(accelerated_sound, microphone.SampleRate, AudioChannels.Mono);
             sound.Play();
-            this.timerPigletListening.Interval = SoundEffect.GetSampleDuration(accelerated_sound.Length, microphone.SampleRate, AudioChannels.Mono).Add(TimeSpan.FromMilliseconds(1000));
+
             this.durationTalkPiglet = (int)SoundEffect.GetSampleDuration(accelerated_sound.Length, microphone.SampleRate, AudioChannels.Mono).TotalMilliseconds;
+
             this.timerPigletTalk.Interval = new TimeSpan(0, 0, 0, 0, 100);            
             this.timerPigletTalk.Start();
+
+            this.timerPigletListening.Interval = SoundEffect.GetSampleDuration(accelerated_sound.Length, microphone.SampleRate, AudioChannels.Mono).Add(TimeSpan.FromMilliseconds(1000));
             this.timerPigletListening.Start();
+
             this.ImagePigletTalk.Source = new BitmapImage(new Uri("/Images/fonem/fonem_" + Convert.ToString(this.rnd.Next(1, 6)) + ".png", UriKind.Relative));
         }
 
@@ -248,7 +268,10 @@ namespace PocketPiglet
             }
             else
             {
-                if (!this.isPigletTalkAvailable) this.isPigletTalkAvailable = true;
+                if (!this.isPigletTalkAvailable)
+                {
+                    this.isPigletTalkAvailable = true;
+                }
                 if (this.countDefaultAnimation >= 2)
                 {
                     this.countDefaultAnimation = 0;
@@ -277,6 +300,7 @@ namespace PocketPiglet
         {
             if (this.typeAnimation == MODE_ANIMATION_GAME) this._sensor.Stop();
             this.ImagePigletIdle.Visibility = Visibility.Collapsed;
+            this.ImagePigletTalk.Visibility = Visibility.Collapsed;
             this.timerAnimationPigletStart.Stop();
         }
 
@@ -288,6 +312,32 @@ namespace PocketPiglet
             this.timerAnimationPigletDefault.Interval = new TimeSpan(0, 0, 0, 1, 0);
             this.timerAnimationPigletDefault.Start();
             this._sensor.Start();           
+        }
+
+        private void timerTrialTalk_Tick(object sender, EventArgs e)
+        {
+            if ((Application.Current as App).TrialMode)
+            {
+                MessageBoxResult result = MessageBox.Show(AppResources.MessageBoxMessageTalkTrialVersionQuestion, AppResources.MessageBoxHeaderInfo, MessageBoxButton.OKCancel);
+
+                if (result == MessageBoxResult.OK)
+                {
+                    try
+                    {
+                        this.marketplaceDetailTask.Show();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(AppResources.MessageBoxMessageMarketplaceOpenError + " " + ex.Message.ToString(), AppResources.MessageBoxHeaderError, MessageBoxButton.OK);
+                    }
+                }
+
+                this.isPigletTalkDisabledByTrial = true;
+            }
+
+            this.timerTrialTalk.Stop();
+
+            this.timerAnimationPigletDefault.Start();
         }
 
         private void PigletCandy_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -380,7 +430,10 @@ namespace PocketPiglet
 
         private void ImagePigletFeed_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            if (!this.isPigletTalk) NavigationService.Navigate(new Uri("/FeedSelectionComplexityPage.xaml", UriKind.Relative));
+            if (!this.isPigletTalk)
+            {
+                NavigationService.Navigate(new Uri("/FeedSelectionComplexityPage.xaml", UriKind.Relative));
+            }
         }
 
         private void ImagePigletWash_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -389,7 +442,7 @@ namespace PocketPiglet
             {
                 if ((Application.Current as App).TrialMode)
                 {
-                    MessageBoxResult result = MessageBox.Show(AppResources.MessageBoxMessageTrialVersionQuestion, AppResources.MessageBoxHeaderInfo, MessageBoxButton.OKCancel);
+                    MessageBoxResult result = MessageBox.Show(AppResources.MessageBoxMessageGameTrialVersionQuestion, AppResources.MessageBoxHeaderInfo, MessageBoxButton.OKCancel);
 
                     if (result == MessageBoxResult.OK)
                     {
@@ -405,7 +458,7 @@ namespace PocketPiglet
                 }
                 else
                 {
-                    if (!this.isPigletTalk) NavigationService.Navigate(new Uri("/WashPage.xaml", UriKind.Relative));
+                    NavigationService.Navigate(new Uri("/WashPage.xaml", UriKind.Relative));
                 }
             }
         }
@@ -416,7 +469,7 @@ namespace PocketPiglet
             {
                 if ((Application.Current as App).TrialMode)
                 {
-                    MessageBoxResult result = MessageBox.Show(AppResources.MessageBoxMessageTrialVersionQuestion, AppResources.MessageBoxHeaderInfo, MessageBoxButton.OKCancel);
+                    MessageBoxResult result = MessageBox.Show(AppResources.MessageBoxMessageGameTrialVersionQuestion, AppResources.MessageBoxHeaderInfo, MessageBoxButton.OKCancel);
 
                     if (result == MessageBoxResult.OK)
                     {
@@ -485,6 +538,11 @@ namespace PocketPiglet
             {
                 this.ImagePigletPuzzle.Source = new BitmapImage(new Uri("/Images/game_piglet_puzzle.png", UriKind.Relative));
             }
+
+            if (!(Application.Current as App).TrialMode)
+            {
+                this.isPigletTalkDisabledByTrial = false;
+            }
         }
 
         private void MainPage_LayoutUpdated(object sender, EventArgs e)
@@ -513,7 +571,9 @@ namespace PocketPiglet
                             if (this.animationPigletPlay != null && this.animationPigletPlay != "")
                             {
                                 this.isPigletTalkAvailable = false;
+
                                 this.timerAnimationPigletDefault.Stop();
+
                                 if ("WashPigletAnimation" == this.animationPigletPlay)
                                 {
                                     this.MediaPigletVideo.Source = new Uri("/Video/piglet_wash_game_finished.mp4", UriKind.Relative);
@@ -537,6 +597,7 @@ namespace PocketPiglet
                                 else {
                                     this.isPigletTalkAvailable = false;
                                 }
+
                                 this.timerAnimationPigletDefault.Start();
                             }
 
