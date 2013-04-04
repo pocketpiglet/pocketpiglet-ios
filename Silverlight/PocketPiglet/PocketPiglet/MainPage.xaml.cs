@@ -314,6 +314,40 @@ namespace PocketPiglet
             this._sensor.Start();           
         }
 
+        private void timerAnimationPigletInSorrow_Tick(object sender, EventArgs e)
+        {
+            IsolatedStorageSettings.ApplicationSettings.TryGetValue<bool>("FeedGameState", out this.feedGameState);
+            IsolatedStorageSettings.ApplicationSettings.TryGetValue<bool>("WashGameState", out this.washGameState);
+            IsolatedStorageSettings.ApplicationSettings.TryGetValue<bool>("PuzzleGameState", out this.puzzleGameState);
+            IsolatedStorageSettings.ApplicationSettings.TryGetValue<string>("LastGamePiglet", out this.lastGamePiglet);
+            List<string> listGame = new List<string>();
+            if (this.feedGameState && this.lastGamePiglet != "feed") listGame.Add("feed");
+            if (this.washGameState && this.lastGamePiglet != "wash") listGame.Add("wash");
+            if (this.puzzleGameState && this.lastGamePiglet != "puzzle") listGame.Add("puzzle");
+            if (this.feedGameState && this.washGameState && this.puzzleGameState && listGame.Count != 0)
+            {
+                this.isPigletInSorrow = true;
+                string typeGame = listGame[this.rnd.Next(0, listGame.Count)];
+                if (typeGame == "feed")
+                {
+                    IsolatedStorageSettings.ApplicationSettings["FeedGameState"] = false;
+                    this.ImagePigletFeed.Source = new BitmapImage(new Uri("/Images/game_piglet_feed_highlighted.png", UriKind.Relative));
+                }
+                if (typeGame == "wash")
+                {
+                    IsolatedStorageSettings.ApplicationSettings["WashGameState"] = false;
+                    this.ImagePigletWash.Source = new BitmapImage(new Uri("/Images/game_piglet_wash_highlighted.png", UriKind.Relative));
+                }
+                if (typeGame == "puzzle")
+                {
+                    IsolatedStorageSettings.ApplicationSettings["PuzzleGameState"] = false;
+                    this.ImagePigletPuzzle.Source = new BitmapImage(new Uri("/Images/game_piglet_puzzle_highlighted.png", UriKind.Relative));
+                }
+            }
+            IsolatedStorageSettings.ApplicationSettings["LastGamePiglet"] = "";
+            IsolatedStorageSettings.ApplicationSettings.Save();
+        }
+
         private void timerTrialTalk_Tick(object sender, EventArgs e)
         {
             if ((Application.Current as App).TrialMode)
@@ -337,7 +371,10 @@ namespace PocketPiglet
 
             this.timerTrialTalk.Stop();
 
-            this.timerAnimationPigletDefault.Start();
+            if ((Application.Current as App).HasMusicControl || (Application.Current as App).MusicControlTakeover)
+            {
+                this.timerAnimationPigletDefault.Start();
+            }
         }
 
         private void PigletCandy_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -614,43 +651,10 @@ namespace PocketPiglet
             }
         }
 
-        private void timerAnimationPigletInSorrow_Tick(object sender, EventArgs e)
-        {
-            IsolatedStorageSettings.ApplicationSettings.TryGetValue<bool>("FeedGameState", out this.feedGameState);
-            IsolatedStorageSettings.ApplicationSettings.TryGetValue<bool>("WashGameState", out this.washGameState);
-            IsolatedStorageSettings.ApplicationSettings.TryGetValue<bool>("PuzzleGameState", out this.puzzleGameState);
-            IsolatedStorageSettings.ApplicationSettings.TryGetValue<string>("LastGamePiglet", out this.lastGamePiglet);
-            List<string> listGame = new List<string>();
-            if (this.feedGameState && this.lastGamePiglet != "feed") listGame.Add("feed");
-            if (this.washGameState && this.lastGamePiglet != "wash") listGame.Add("wash");
-            if (this.puzzleGameState && this.lastGamePiglet != "puzzle") listGame.Add("puzzle");
-            if (this.feedGameState && this.washGameState && this.puzzleGameState && listGame.Count != 0)
-            {
-                this.isPigletInSorrow = true;
-                string typeGame = listGame[this.rnd.Next(0, listGame.Count)];
-                if (typeGame == "feed")
-                {
-                    IsolatedStorageSettings.ApplicationSettings["FeedGameState"] = false;
-                    this.ImagePigletFeed.Source = new BitmapImage(new Uri("/Images/game_piglet_feed_highlighted.png", UriKind.Relative));
-                }
-                if (typeGame == "wash")
-                {
-                    IsolatedStorageSettings.ApplicationSettings["WashGameState"] = false;
-                    this.ImagePigletWash.Source = new BitmapImage(new Uri("/Images/game_piglet_wash_highlighted.png", UriKind.Relative));
-                }
-                if (typeGame == "puzzle")
-                {
-                    IsolatedStorageSettings.ApplicationSettings["PuzzleGameState"] = false;
-                    this.ImagePigletPuzzle.Source = new BitmapImage(new Uri("/Images/game_piglet_puzzle_highlighted.png", UriKind.Relative));
-                }
-            }
-            IsolatedStorageSettings.ApplicationSettings["LastGamePiglet"] = "";
-            IsolatedStorageSettings.ApplicationSettings.Save();
-        }
-
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
             base.OnNavigatingFrom(e);
+
             this.isPigletTalkAvailable = false;
             this.pageNavigationComplete = false;
 
