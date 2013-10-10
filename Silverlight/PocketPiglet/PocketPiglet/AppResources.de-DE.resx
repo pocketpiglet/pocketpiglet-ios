@@ -118,10 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="FeedGamePageTextBlockLevelTextHint" xml:space="preserve">
-    <value>Prägen Sie sich dieses Rezept ein...</value>
+    <value>Merken Sie sich ein Rezept...</value>
   </data>
   <data name="FeedGamePageTextBlockLevelTextLevelNum" xml:space="preserve">
-    <value>Level {0:D} aus {1:D}.</value>
+    <value>Niveau {0:D} von {1:D}.</value>
   </data>
   <data name="MessageBoxHeaderError" xml:space="preserve">
     <value>Fehler</value>
@@ -133,24 +133,24 @@
     <value>Achtung</value>
   </data>
   <data name="MessageBoxMessageGameOverQuestion" xml:space="preserve">
-    <value>Das Spiel ist beendet. Möchten Sie noch mal versuchen?</value>
+    <value>Das Spiel ist aus. Möchten Sie nochmals probieren?</value>
   </data>
   <data name="MessageBoxMessageGameTrialVersionQuestion" xml:space="preserve">
-    <value>Dieses Spiel ist nur in der Vollversion zugänglich. Möchten Sie die Vollversion kaufen?</value>
+    <value>Dieses Spiel ist nur in der Vollversion verfügbar. Möchten Sie die Vollversion kaufen?</value>
   </data>
   <data name="MessageBoxMessageGameWonQuestion" xml:space="preserve">
-    <value>Sie haben gewonnen! Möchten Sie noch mal versuchen?</value>
+    <value>Ich gratuliere, Sie haben eben gewonnen! Möchten Sie nochmals probieren?</value>
   </data>
   <data name="MessageBoxMessageMarketplaceOpenError" xml:space="preserve">
     <value>Marketplace kann nicht geöffnet werden:</value>
   </data>
   <data name="MessageBoxMessageMusicPauseQuestion" xml:space="preserve">
-    <value>Jetzt hören Sie die Musik am Telefon. Solange die Musik spielt, kann Ihr Pflegling nicht sprechen oder sich bewegen. Möchten Sie die Musik für eine Weile ausmachen, bis Sie die Applikation nicht schließen?</value>
+    <value>Zur Zeit hören Sie Musik am Telefon. Solange Musik spielt, kann Ihr sich Pflegling weder bewegen noch sprechen. Möchten Sie die Musik vor dem Verlassen der Anwendung auf Pause schalten?</value>
   </data>
   <data name="MessageBoxMessageNewHighscoreQuestion" xml:space="preserve">
-    <value>Sie haben eben einen Rekord gebrochen! Möchten Sie noch mal versuchen?</value>
+    <value>Ich gratuliere, Sie haben eben den Rekord geschlagen! Möchten Sie nochmals probieren?</value>
   </data>
   <data name="MessageBoxMessageTalkTrialVersionQuestion" xml:space="preserve">
-    <value>Das Gespräch mit dem Pflegling ist in der Demo-Version nur während begrenzter Zeit zugänglich. Ihr Pflegling kann nicht sprechen, bis Sie die Applikation nicht aufs Neue starten. Möchten Sie die Vollversion kaufen?</value>
+    <value>Gespräch mit dem Pflegling in der Probeversion ist nur im Laufe eines begrenzten Zeitraums verfügbar. Ihr Pflegling wird bis zum Restarten der Anwendung nicht sprechen können. Möchten Sie die Vollversion kaufen?</value>
   </data>
 </root>
