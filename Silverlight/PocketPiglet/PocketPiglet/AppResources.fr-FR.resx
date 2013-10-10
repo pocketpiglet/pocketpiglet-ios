@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="FeedGamePageTextBlockLevelTextHint" xml:space="preserve">
-    <value>Retenez la recette..</value>
+    <value>Préparez-vous à mémoriser la recette...</value>
   </data>
   <data name="FeedGamePageTextBlockLevelTextLevelNum" xml:space="preserve">
     <value>Niveau {0:D} de {1:D}.</value>
@@ -127,30 +127,30 @@
     <value>Erreur</value>
   </data>
   <data name="MessageBoxHeaderInfo" xml:space="preserve">
-    <value>Information</value>
+    <value>Info</value>
   </data>
   <data name="MessageBoxHeaderWarning" xml:space="preserve">
     <value>Attention</value>
   </data>
   <data name="MessageBoxMessageGameOverQuestion" xml:space="preserve">
-    <value>Le jeu est fini. Voulez-vous essayer encore une fois ?</value>
+    <value>Le jeu est terminé. Voulez-vous essayer encore une fois?</value>
   </data>
   <data name="MessageBoxMessageGameTrialVersionQuestion" xml:space="preserve">
-    <value>Ce jeu est accessible seulement dans la version complète. Voulez-vous acheter la version complète ?</value>
+    <value>Ce jeu n'est disponible que dans la version complète. Voulez-vous acheter la version complète?</value>
   </data>
   <data name="MessageBoxMessageGameWonQuestion" xml:space="preserve">
-    <value>Félicitations! Vous avez gagné ! Voulez-vous essayer encore une fois ?</value>
+    <value>Félicitations, vous venez de gagner! Voulez-vous essayer encore une fois?</value>
   </data>
   <data name="MessageBoxMessageMarketplaceOpenError" xml:space="preserve">
-    <value>Marketplace ne peut pas être ouvert:</value>
+    <value>Impossible d'ouvrir le Marketplace:</value>
   </data>
   <data name="MessageBoxMessageMusicPauseQuestion" xml:space="preserve">
-    <value>Au moment vous écoutez la musique au téléphone. Pendant la musique joue, le porcelet ne peut pas se mouvoir ou parler. Voulez-vous arrêter la musique pour quelque temps jusqu'à la fermeture de l’application ?</value>
+    <value>Vous êtes en train d'écouter la musique sur votre téléphone. Pendant que la musique joue, votre animal ne pourra se déplacer et parler. Voulez-vous mettre la musique sur pause jusqu'à ce que vous quittiez l'application?</value>
   </data>
   <data name="MessageBoxMessageNewHighscoreQuestion" xml:space="preserve">
-    <value>Félicitations ! Vous avez battu un record ! Voulez-vous essayer encore une fois ?</value>
+    <value>Félicitations, vous venez de battre le record! Voulez-vous essayer encore une fois?</value>
   </data>
   <data name="MessageBoxMessageTalkTrialVersionQuestion" xml:space="preserve">
-    <value>La conversation avec le porcelet est accessible dans la version démo pour le temps limité. Votre pupille ne peut pas parler jusqu’au reprise de l’application. Voulez-vous acheter la version complète ?</value>
+    <value>Dans la version d'essai, vous ne pouvez parler à votre animal que pour un temps limité. Votre animal ne sera pas en mesure de parler avant le redémarrage de l'application. Voulez-vous acheter la version complète?</value>
   </data>
 </root>

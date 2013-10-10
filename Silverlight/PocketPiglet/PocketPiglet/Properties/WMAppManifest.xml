@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2009/deployment" AppPlatformVersion="7.1">
-  <App xmlns="" ProductID="{8fe8d34a-3baa-48c0-ba3e-c00653153232}" Title="PocketPiglet" RuntimeType="Silverlight" Version="1.1.0.0" Genre="apps.normal"  Author="Natalia Derevenets" Description="PocketPiglet is a cute 3D animated piglet who lives inside your phone." Publisher="PocketPiglet">
+  <App xmlns="" ProductID="{8fe8d34a-3baa-48c0-ba3e-c00653153232}" Title="PocketPiglet" RuntimeType="Silverlight" Version="1.2.0.0" Genre="apps.normal"  Author="Natalia Derevenets" Description="PocketPiglet is a cute 3D animated piglet who lives inside your phone." Publisher="PocketPiglet">
     <IconPath IsRelative="true" IsResource="false">ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_GAMERSERVICES"/>
