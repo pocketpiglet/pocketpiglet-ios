@@ -221,14 +221,14 @@ Rectangle {
             }
         },
         FoodItem {
-            id:            cucumberFoodItemHard
+            id:            fishFoodItemHard
             parent:        refrigerator
             x:             pigletFeedPage.screenDeltaX + 156 * pigletFeedPage.screenFactorX
             y:             pigletFeedPage.screenDeltaY + 20  * pigletFeedPage.screenFactorY
             z:             refrigerator.z + 1
             visible:       refrigerator.refrigeratorType === "hard"
             itemClickable: refrigerator.foodItemsClickable
-            itemType:      "cucumber"
+            itemType:      "fish"
 
             onItemClicked: {
                 refrigerator.validateSelectedFoodItem(itemType);
@@ -239,14 +239,14 @@ Rectangle {
             }
         },
         FoodItem {
-            id:            fishFoodItemHard
+            id:            cucumberFoodItemHard
             parent:        refrigerator
             x:             pigletFeedPage.screenDeltaX + 20  * pigletFeedPage.screenFactorX
             y:             pigletFeedPage.screenDeltaY + 100 * pigletFeedPage.screenFactorY
             z:             refrigerator.z + 1
             visible:       refrigerator.refrigeratorType === "hard"
             itemClickable: refrigerator.foodItemsClickable
-            itemType:      "fish"
+            itemType:      "cucumber"
 
             onItemClicked: {
                 refrigerator.validateSelectedFoodItem(itemType);
