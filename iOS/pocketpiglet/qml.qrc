@@ -1,0 +1,22 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qml/pocketpiglet/main.qml</file>
+        <file>qml/pocketpiglet/Core/HelpPage.qml</file>
+        <file>qml/pocketpiglet/Core/PigletFeedPage.qml</file>
+        <file>qml/pocketpiglet/Core/PigletPage.qml</file>
+        <file>qml/pocketpiglet/Core/PigletPuzzlePage.js</file>
+        <file>qml/pocketpiglet/Core/PigletPuzzlePage.qml</file>
+        <file>qml/pocketpiglet/Core/PigletWashPage.js</file>
+        <file>qml/pocketpiglet/Core/PigletWashPage.qml</file>
+        <file>qml/pocketpiglet/Core/Dialog/NotificationDialog.qml</file>
+        <file>qml/pocketpiglet/Core/Dialog/QueryDialog.qml</file>
+        <file>qml/pocketpiglet/Core/Piglet/ActionButton.qml</file>
+        <file>qml/pocketpiglet/Core/Piglet/GameButton.qml</file>
+        <file>qml/pocketpiglet/Core/PigletFeed/FoodItem.qml</file>
+        <file>qml/pocketpiglet/Core/PigletFeed/Refrigerator.js</file>
+        <file>qml/pocketpiglet/Core/PigletFeed/Refrigerator.qml</file>
+        <file>qml/pocketpiglet/Core/PigletFeed/Sandwich.qml</file>
+        <file>qml/pocketpiglet/Core/PigletFeed/SandwichItem.qml</file>
+        <file>qml/pocketpiglet/Core/PigletWash/Bubble.qml</file>
+    </qresource>
+</RCC>
