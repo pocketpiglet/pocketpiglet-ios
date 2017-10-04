@@ -853,12 +853,13 @@ Item {
                 sourceHighlighted: "qrc:/resources/images/piglet/game_piglet_puzzle_highlighted.png"
 
                 onStartGame: {
-                    waitRectangle.visible = true;
+                    var component = Qt.createComponent("PigletPuzzlePage.qml");
 
-                    pigletPage.animationEnabled = false;
-                    pigletPage.nextPage         = pigletPuzzlePage;
-
-                    pigletAnimationVideoPlayerLoader.unloadVideoPlayerAndReplacePage();
+                    if (component.status === Component.Ready) {
+                        mainStackView.push(component);
+                    } else {
+                        console.log(component.errorString());
+                    }
                 }
             }
         }

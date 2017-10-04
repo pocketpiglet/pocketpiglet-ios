@@ -330,6 +330,8 @@ Item {
                         anchors.fill: parent
 
                         onClicked: {
+                            pigletPage.gameFinished("piglet_feed");
+
                             mainStackView.pop();
                         }
                     }

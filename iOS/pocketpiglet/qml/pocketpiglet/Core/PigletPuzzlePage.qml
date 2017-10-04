@@ -1,17 +1,17 @@
-import QtQuick 1.1
-import QtMultimediaKit 1.1
-import com.nokia.meego 1.0
+import QtQuick 2.9
+import QtMultimedia 5.9
 
 import "PigletPuzzlePage.js" as PigletPuzzlePageScript
 
-Page {
-    id:              pigletPuzzlePage
-    anchors.fill:    parent
-    orientationLock: PageOrientation.LockLandscape
+Item {
+    id: pigletPuzzlePage
 
     property bool appInForeground:    Qt.application.active
-    property bool audioActive:        false
+    property bool pageActive:         false
+    property bool pageInitialized:    false
     property bool puzzleSolved:       false
+
+    property int screenRotation:      90
 
     property real screenFactorX:      backgroundImage.paintedWidth / backgroundImage.sourceSize.width
     property real screenFactorY:      backgroundImage.paintedHeight / backgroundImage.sourceSize.height
@@ -19,23 +19,33 @@ Page {
     property string puzzleType:       "watering_flowers"
     property string puzzleComplexity: ""
 
-    onStatusChanged: {
-        if (status === PageStatus.Active) {
-            waitRectangle.visible = true;
+    onAppInForegroundChanged: {
+        if (appInForeground && pageActive) {
+            if (!pageInitialized) {
+                pageInitialized = true;
 
-            gameBeginTimer.start();
-        } else {
-            if (audioActive) {
-                audio.stop();
+                gameBeginTimer.start();
             }
         }
     }
 
-    onAppInForegroundChanged: {
-        if (appInForeground) {
-            pauseRectangle.visible = false;
-        } else {
-            pauseRectangle.visible = true;
+    onPageActiveChanged: {
+        if (appInForeground && pageActive) {
+            if (!pageInitialized) {
+                pageInitialized = true;
+
+                gameBeginTimer.start();
+            }
+        }
+    }
+
+    function screenOrientationUpdated(orientation) {
+        if (typeof(pigletPuzzlePage) !== "undefined") {
+            if (orientation === Qt.LandscapeOrientation) {
+                screenRotation = 90;
+            } else if (orientation === Qt.InvertedLandscapeOrientation) {
+                screenRotation = 270;
+            }
         }
     }
 
@@ -44,7 +54,7 @@ Page {
 
         PigletPuzzlePageScript.createMap(pigletPuzzlePage.puzzleComplexity);
 
-        pigletPuzzlePage.playAudio("../../sound/piglet_puzzle/game_start.wav");
+        audio.playAudio("qrc:/resources/sound/piglet_puzzle/game_start.wav");
     }
 
     function elementClicked(element) {
@@ -53,45 +63,39 @@ Page {
 
             originalImage.blink();
 
-            pigletPuzzlePage.playAudio("../../sound/piglet_puzzle/game_complete.wav");
+            audio.playAudio("qrc:/resources/sound/piglet_puzzle/game_complete.wav");
         }
-    }
-
-    function playAudio(src) {
-        if (audioActive) {
-            audio.stop();
-        }
-
-        audio.source   = src;
-        audio.position = 0;
-
-        audio.play();
     }
 
     Audio {
         id:     audio
         volume: 1.0
-        muted:  pigletPuzzlePage.appInForeground ? false : true
+        muted:  !pigletPuzzlePage.appInForeground || !pigletPuzzlePage.pageActive
 
-        onStarted: {
-            pigletPuzzlePage.audioActive = true;
+        onError: {
+            console.log(errorString);
         }
 
-        onStopped: {
-            pigletPuzzlePage.audioActive = false;
+        function playAudio(src) {
+            source = src;
+            seek(0);
+            play();
         }
     }
 
     Rectangle {
-        id:           backgroundRectangle
-        anchors.fill: parent
-        color:        "black"
+        id:               backgroundRectangle
+        anchors.centerIn: parent
+        width:            parent.height
+        height:           parent.width
+        rotation:         pigletPuzzlePage.screenRotation
+        color:            "black"
 
         Image {
             id:           backgroundImage
             anchors.fill: parent
             source:       "qrc:/resources/images/background.png"
-            fillMode:     Image.PreserveAspectFit
+            fillMode:     Image.Stretch
             smooth:       true
         }
 
@@ -102,7 +106,7 @@ Page {
             width:        120 * pigletPuzzlePage.screenFactorX
             height:       120 * pigletPuzzlePage.screenFactorY
             z:            2
-            source:       "../../images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/original_thumbnail.png"
+            source:       "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/original_thumbnail.png"
             fillMode:     Image.PreserveAspectFit
             smooth:       true
 
@@ -132,8 +136,8 @@ Page {
                     x:        0   * pigletPuzzlePage.screenFactorX
                     y:        0   * pigletPuzzlePage.screenFactorY
                     visible:  pigletPuzzlePage.puzzleComplexity === "medium"
-                    source:   pigletPuzzlePage.puzzleSolved ? "../../images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/medium/9.png"
-                                                            : "../../images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/medium/0.png"
+                    source:   pigletPuzzlePage.puzzleSolved ? "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/medium/9.png"
+                                                            : "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/medium/0.png"
                     fillMode: Image.PreserveAspectFit
                     smooth:   true
 
@@ -149,7 +153,7 @@ Page {
                     x:        120 * pigletPuzzlePage.screenFactorX
                     y:        0   * pigletPuzzlePage.screenFactorY
                     visible:  pigletPuzzlePage.puzzleComplexity === "medium"
-                    source:   "../../images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/medium/1.png"
+                    source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/medium/1.png"
                     fillMode: Image.PreserveAspectFit
                     smooth:   true
 
@@ -169,7 +173,7 @@ Page {
                     x:        240 * pigletPuzzlePage.screenFactorX
                     y:        0   * pigletPuzzlePage.screenFactorY
                     visible:  pigletPuzzlePage.puzzleComplexity === "medium"
-                    source:   "../../images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/medium/2.png"
+                    source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/medium/2.png"
                     fillMode: Image.PreserveAspectFit
                     smooth:   true
 
@@ -189,7 +193,7 @@ Page {
                     x:        0   * pigletPuzzlePage.screenFactorX
                     y:        120 * pigletPuzzlePage.screenFactorY
                     visible:  pigletPuzzlePage.puzzleComplexity === "medium"
-                    source:   "../../images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/medium/3.png"
+                    source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/medium/3.png"
                     fillMode: Image.PreserveAspectFit
                     smooth:   true
 
@@ -209,7 +213,7 @@ Page {
                     x:        120 * pigletPuzzlePage.screenFactorX
                     y:        120 * pigletPuzzlePage.screenFactorY
                     visible:  pigletPuzzlePage.puzzleComplexity === "medium"
-                    source:   "../../images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/medium/4.png"
+                    source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/medium/4.png"
                     fillMode: Image.PreserveAspectFit
                     smooth:   true
 
@@ -229,7 +233,7 @@ Page {
                     x:        240 * pigletPuzzlePage.screenFactorX
                     y:        120 * pigletPuzzlePage.screenFactorY
                     visible:  pigletPuzzlePage.puzzleComplexity === "medium"
-                    source:   "../../images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/medium/5.png"
+                    source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/medium/5.png"
                     fillMode: Image.PreserveAspectFit
                     smooth:   true
 
@@ -249,7 +253,7 @@ Page {
                     x:        0   * pigletPuzzlePage.screenFactorX
                     y:        240 * pigletPuzzlePage.screenFactorY
                     visible:  pigletPuzzlePage.puzzleComplexity === "medium"
-                    source:   "../../images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/medium/6.png"
+                    source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/medium/6.png"
                     fillMode: Image.PreserveAspectFit
                     smooth:   true
 
@@ -269,7 +273,7 @@ Page {
                     x:        120 * pigletPuzzlePage.screenFactorX
                     y:        240 * pigletPuzzlePage.screenFactorY
                     visible:  pigletPuzzlePage.puzzleComplexity === "medium"
-                    source:   "../../images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/medium/7.png"
+                    source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/medium/7.png"
                     fillMode: Image.PreserveAspectFit
                     smooth:   true
 
@@ -289,7 +293,7 @@ Page {
                     x:        240 * pigletPuzzlePage.screenFactorX
                     y:        240 * pigletPuzzlePage.screenFactorY
                     visible:  pigletPuzzlePage.puzzleComplexity === "medium"
-                    source:   "../../images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/medium/8.png"
+                    source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/medium/8.png"
                     fillMode: Image.PreserveAspectFit
                     smooth:   true
 
@@ -312,8 +316,8 @@ Page {
                     x:        0  * pigletPuzzlePage.screenFactorX
                     y:        0  * pigletPuzzlePage.screenFactorY
                     visible:  pigletPuzzlePage.puzzleComplexity === "hard"
-                    source:   pigletPuzzlePage.puzzleSolved ? "../../images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/16.png"
-                                                            : "../../images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/0.png"
+                    source:   pigletPuzzlePage.puzzleSolved ? "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/16.png"
+                                                            : "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/0.png"
                     fillMode: Image.PreserveAspectFit
                     smooth:   true
 
@@ -329,7 +333,7 @@ Page {
                     x:        90 * pigletPuzzlePage.screenFactorX
                     y:        0  * pigletPuzzlePage.screenFactorY
                     visible:  pigletPuzzlePage.puzzleComplexity === "hard"
-                    source:   "../../images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/1.png"
+                    source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/1.png"
                     fillMode: Image.PreserveAspectFit
                     smooth:   true
 
@@ -349,7 +353,7 @@ Page {
                     x:        180 * pigletPuzzlePage.screenFactorX
                     y:        0   * pigletPuzzlePage.screenFactorY
                     visible:  pigletPuzzlePage.puzzleComplexity === "hard"
-                    source:   "../../images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/2.png"
+                    source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/2.png"
                     fillMode: Image.PreserveAspectFit
                     smooth:   true
 
@@ -369,7 +373,7 @@ Page {
                     x:        270 * pigletPuzzlePage.screenFactorX
                     y:        0   * pigletPuzzlePage.screenFactorY
                     visible:  pigletPuzzlePage.puzzleComplexity === "hard"
-                    source:   "../../images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/3.png"
+                    source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/3.png"
                     fillMode: Image.PreserveAspectFit
                     smooth:   true
 
@@ -389,7 +393,7 @@ Page {
                     x:        0  * pigletPuzzlePage.screenFactorX
                     y:        90 * pigletPuzzlePage.screenFactorY
                     visible:  pigletPuzzlePage.puzzleComplexity === "hard"
-                    source:   "../../images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/4.png"
+                    source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/4.png"
                     fillMode: Image.PreserveAspectFit
                     smooth:   true
 
@@ -409,7 +413,7 @@ Page {
                     x:        90 * pigletPuzzlePage.screenFactorX
                     y:        90 * pigletPuzzlePage.screenFactorY
                     visible:  pigletPuzzlePage.puzzleComplexity === "hard"
-                    source:   "../../images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/5.png"
+                    source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/5.png"
                     fillMode: Image.PreserveAspectFit
                     smooth:   true
 
@@ -429,7 +433,7 @@ Page {
                     x:        180 * pigletPuzzlePage.screenFactorX
                     y:        90  * pigletPuzzlePage.screenFactorY
                     visible:  pigletPuzzlePage.puzzleComplexity === "hard"
-                    source:   "../../images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/6.png"
+                    source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/6.png"
                     fillMode: Image.PreserveAspectFit
                     smooth:   true
 
@@ -449,7 +453,7 @@ Page {
                     x:        270 * pigletPuzzlePage.screenFactorX
                     y:        90  * pigletPuzzlePage.screenFactorY
                     visible:  pigletPuzzlePage.puzzleComplexity === "hard"
-                    source:   "../../images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/7.png"
+                    source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/7.png"
                     fillMode: Image.PreserveAspectFit
                     smooth:   true
 
@@ -469,7 +473,7 @@ Page {
                     x:        0   * pigletPuzzlePage.screenFactorX
                     y:        180 * pigletPuzzlePage.screenFactorY
                     visible:  pigletPuzzlePage.puzzleComplexity === "hard"
-                    source:   "../../images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/8.png"
+                    source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/8.png"
                     fillMode: Image.PreserveAspectFit
                     smooth:   true
 
@@ -489,7 +493,7 @@ Page {
                     x:        90  * pigletPuzzlePage.screenFactorX
                     y:        180 * pigletPuzzlePage.screenFactorY
                     visible:  pigletPuzzlePage.puzzleComplexity === "hard"
-                    source:   "../../images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/9.png"
+                    source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/9.png"
                     fillMode: Image.PreserveAspectFit
                     smooth:   true
 
@@ -509,7 +513,7 @@ Page {
                     x:        180 * pigletPuzzlePage.screenFactorX
                     y:        180 * pigletPuzzlePage.screenFactorY
                     visible:  pigletPuzzlePage.puzzleComplexity === "hard"
-                    source:   "../../images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/10.png"
+                    source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/10.png"
                     fillMode: Image.PreserveAspectFit
                     smooth:   true
 
@@ -529,7 +533,7 @@ Page {
                     x:        270 * pigletPuzzlePage.screenFactorX
                     y:        180 * pigletPuzzlePage.screenFactorY
                     visible:  pigletPuzzlePage.puzzleComplexity === "hard"
-                    source:   "../../images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/11.png"
+                    source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/11.png"
                     fillMode: Image.PreserveAspectFit
                     smooth:   true
 
@@ -549,7 +553,7 @@ Page {
                     x:        0   * pigletPuzzlePage.screenFactorX
                     y:        270 * pigletPuzzlePage.screenFactorY
                     visible:  pigletPuzzlePage.puzzleComplexity === "hard"
-                    source:   "../../images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/12.png"
+                    source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/12.png"
                     fillMode: Image.PreserveAspectFit
                     smooth:   true
 
@@ -569,7 +573,7 @@ Page {
                     x:        90  * pigletPuzzlePage.screenFactorX
                     y:        270 * pigletPuzzlePage.screenFactorY
                     visible:  pigletPuzzlePage.puzzleComplexity === "hard"
-                    source:   "../../images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/13.png"
+                    source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/13.png"
                     fillMode: Image.PreserveAspectFit
                     smooth:   true
 
@@ -589,7 +593,7 @@ Page {
                     x:        180 * pigletPuzzlePage.screenFactorX
                     y:        270 * pigletPuzzlePage.screenFactorY
                     visible:  pigletPuzzlePage.puzzleComplexity === "hard"
-                    source:   "../../images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/14.png"
+                    source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/14.png"
                     fillMode: Image.PreserveAspectFit
                     smooth:   true
 
@@ -609,7 +613,7 @@ Page {
                     x:        270 * pigletPuzzlePage.screenFactorX
                     y:        270 * pigletPuzzlePage.screenFactorY
                     visible:  pigletPuzzlePage.puzzleComplexity === "hard"
-                    source:   "../../images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/15.png"
+                    source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/15.png"
                     fillMode: Image.PreserveAspectFit
                     smooth:   true
 
@@ -629,7 +633,7 @@ Page {
                 anchors.fill: parent
                 z:            3
                 visible:      false
-                source:       "../../images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/original.png"
+                source:       "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/original.png"
                 fillMode:     Image.PreserveAspectFit
                 smooth:       true
                 opacity:      0.0
@@ -693,8 +697,6 @@ Page {
                 anchors.fill: parent
 
                 onClicked: {
-                    waitRectangle.visible = true;
-
                     gameBeginTimer.start();
                 }
             }
@@ -716,25 +718,28 @@ Page {
                 onClicked: {
                     pigletPage.gameFinished("piglet_puzzle");
 
-                    mainPageStack.replace(pigletPage);
+                    mainStackView.pop();
                 }
             }
         }
     }
 
     Rectangle {
-        id:           originalSampleImageRectangle
-        anchors.fill: parent
-        z:            40
-        color:        "transparent"
-        visible:      false
+        id:               originalSampleImageRectangle
+        anchors.centerIn: parent
+        width:            parent.height
+        height:           parent.width
+        rotation:         pigletPuzzlePage.screenRotation
+        z:                40
+        color:            "transparent"
+        visible:          false
 
         Image {
             id:               originalSampleImage
             anchors.centerIn: parent
             width:            360 * pigletPuzzlePage.screenFactorX
             height:           360 * pigletPuzzlePage.screenFactorY
-            source:           "../../images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/original.png"
+            source:           "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/original.png"
             fillMode:         Image.PreserveAspectFit
             smooth:           true
         }
@@ -750,38 +755,14 @@ Page {
     }
 
     Rectangle {
-        id:           waitRectangle
-        anchors.fill: parent
-        z:            50
-        color:        "black"
-        visible:      false
-
-        MouseArea {
-            id:           waitRectangleMouseArea
-            anchors.fill: parent
-
-            Image {
-                id:                       waitBusyIndicatorImage
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.verticalCenter:   parent.verticalCenter
-                source:                   "qrc:/resources/images/busy_indicator.png"
-
-                NumberAnimation on rotation {
-                    running: waitRectangle.visible
-                    from:    0
-                    to:      360
-                    loops:   Animation.Infinite
-                }
-            }
-        }
-    }
-
-    Rectangle {
-        id:           complexitySelectionRectangle
-        anchors.fill: parent
-        z:            60
-        color:        "black"
-        visible:      false
+        id:               complexitySelectionRectangle
+        anchors.centerIn: parent
+        width:            parent.height
+        height:           parent.width
+        rotation:         pigletPuzzlePage.screenRotation
+        z:                50
+        color:            "black"
+        visible:          false
 
         MouseArea {
             id:           complexitySelectionRectangleMouseArea
@@ -791,7 +772,7 @@ Page {
                 id:           complexitySelectionBackgroundImage
                 anchors.fill: parent
                 source:       "qrc:/resources/images/background.png"
-                fillMode:     Image.PreserveAspectFit
+                fillMode:     Image.Stretch
                 smooth:       true
 
                 Image {
@@ -850,7 +831,7 @@ Page {
                     anchors.left:   parent.left
                     width:          48
                     height:         48
-                    z:              61
+                    z:              51
                     source:         "qrc:/resources/images/help.png"
 
                     MouseArea {
@@ -858,7 +839,6 @@ Page {
                         anchors.fill: parent
 
                         onClicked: {
-                            helpQueryDialog.open();
                         }
                     }
                 }
@@ -869,7 +849,7 @@ Page {
                     anchors.right:  parent.right
                     width:          48
                     height:         48
-                    z:              61
+                    z:              51
                     source:         "qrc:/resources/images/exit.png"
 
                     MouseArea {
@@ -879,7 +859,7 @@ Page {
                         onClicked: {
                             pigletPage.gameFinished("piglet_puzzle");
 
-                            mainPageStack.replace(pigletPage);
+                            mainStackView.pop();
                         }
                     }
                 }
@@ -888,11 +868,14 @@ Page {
     }
 
     Rectangle {
-        id:           puzzleSelectionRectangle
-        anchors.fill: parent
-        z:            60
-        color:        "black"
-        visible:      false
+        id:               puzzleSelectionRectangle
+        anchors.centerIn: parent
+        width:            parent.height
+        height:           parent.width
+        rotation:         pigletPuzzlePage.screenRotation
+        z:                50
+        color:            "black"
+        visible:          false
 
         MouseArea {
             id:           puzzleSelectionRectangleMouseArea
@@ -902,7 +885,7 @@ Page {
                 id:           puzzleSelectionBackgroundImage
                 anchors.fill: parent
                 source:       "qrc:/resources/images/background.png"
-                fillMode:     Image.PreserveAspectFit
+                fillMode:     Image.Stretch
                 smooth:       true
 
                 Image {
@@ -921,7 +904,7 @@ Page {
                             id:     heartBalloonPuzzleButtonImage
                             width:  120
                             height: 120
-                            source: "../../images/piglet_puzzle/heart_balloon/original_thumbnail.png"
+                            source: "qrc:/resources/images/piglet_puzzle/heart_balloon/original_thumbnail.png"
 
                             MouseArea {
                                 id:           heartBalloonImageButtonMouseArea
@@ -940,7 +923,7 @@ Page {
                             id:     pigletOnPottyPuzzleButtonImage
                             width:  120
                             height: 120
-                            source: "../../images/piglet_puzzle/piglet_on_potty/original_thumbnail.png"
+                            source: "qrc:/resources/images/piglet_puzzle/piglet_on_potty/original_thumbnail.png"
 
                             MouseArea {
                                 id:           pigletOnPottyPuzzleButtonMouseArea
@@ -959,7 +942,7 @@ Page {
                             id:     wateringFlowersPuzzleButtonImage
                             width:  120
                             height: 120
-                            source: "../../images/piglet_puzzle/watering_flowers/original_thumbnail.png"
+                            source: "qrc:/resources/images/piglet_puzzle/watering_flowers/original_thumbnail.png"
 
                             MouseArea {
                                 id:           wateringFlowersPuzzleButtonMouseArea
@@ -982,7 +965,7 @@ Page {
                     anchors.left:   parent.left
                     width:          48
                     height:         48
-                    z:              61
+                    z:              51
                     source:         "qrc:/resources/images/help.png"
 
                     MouseArea {
@@ -990,7 +973,7 @@ Page {
                         anchors.fill: parent
 
                         onClicked: {
-                            helpQueryDialog.open();
+                            // helpQueryDialog.open();
                         }
                     }
                 }
@@ -1001,7 +984,7 @@ Page {
                     anchors.right:  parent.right
                     width:          48
                     height:         48
-                    z:              61
+                    z:              51
                     source:         "qrc:/resources/images/exit.png"
 
                     MouseArea {
@@ -1011,7 +994,7 @@ Page {
                         onClicked: {
                             pigletPage.gameFinished("piglet_puzzle");
 
-                            mainPageStack.replace(pigletPage);
+                            mainStackView.pop();
                         }
                     }
                 }
@@ -1019,39 +1002,11 @@ Page {
         }
     }
 
-    Rectangle {
-        id:           pauseRectangle
-        anchors.fill: parent
-        z:            70
-        color:        "black"
-        visible:      false
-
-        MouseArea {
-            id:           pauseRectangleMouseArea
-            anchors.fill: parent
-
-            Image {
-                id:               pauseRectangleImage
-                anchors.centerIn: parent
-                source:           "qrc:/resources/images/game_pause.png"
-            }
-        }
-    }
-
-    QueryDialog {
-        id:               helpQueryDialog
-        titleText:        "Piglet Puzzle"
-        icon:             "qrc:/resources/images/dialog_info.png"
-        message:          "Your piglet is trying to solve a puzzle! Help him to solve a sliding puzzle as fast as you can."
-        acceptButtonText: "OK"
-    }
-
     Timer {
         id:       gameBeginTimer
         interval: 100
 
         onTriggered: {
-            waitRectangle.visible                = false;
             puzzleSelectionRectangle.visible     = false;
             complexitySelectionRectangle.visible = true;
         }
