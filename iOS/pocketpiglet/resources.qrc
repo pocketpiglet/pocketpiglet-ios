@@ -149,13 +149,8 @@
         <file>resources/images/piglet_wash/missed_bubble_grayed.png</file>
         <file>resources/images/piglet_wash/missed_bubbles_background.png</file>
         <file>resources/images/background.png</file>
-        <file>resources/images/busy_indicator.png</file>
-        <file>resources/images/dialog_info.png</file>
-        <file>resources/images/dialog_question.png</file>
         <file>resources/images/exit.png</file>
-        <file>resources/images/game_pause.png</file>
         <file>resources/images/help.png</file>
-        <file>resources/images/ok.png</file>
         <file>resources/images/refresh.png</file>
         <file>resources/sound/piglet/piglet_laughs.mp3</file>
         <file>resources/sound/piglet_feed/game_complete.wav</file>

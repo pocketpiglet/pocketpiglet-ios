@@ -1,7 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>qml/pocketpiglet/main.qml</file>
-        <file>qml/pocketpiglet/Core/HelpPage.qml</file>
         <file>qml/pocketpiglet/Core/PigletFeedPage.qml</file>
         <file>qml/pocketpiglet/Core/PigletPage.qml</file>
         <file>qml/pocketpiglet/Core/PigletPuzzlePage.js</file>
