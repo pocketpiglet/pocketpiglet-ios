@@ -66,10 +66,10 @@ Item {
 
     function screenOrientationUpdated(orientation) {
         if (typeof(pigletFeedPage) !== "undefined") {
-            if (orientation === Qt.InvertedLandscapeOrientation) {
-                screenRotation = 270;
-            } else {
+            if (orientation === Qt.LandscapeOrientation) {
                 screenRotation = 90;
+            } else if (orientation === Qt.InvertedLandscapeOrientation) {
+                screenRotation = 270;
             }
         }
     }
