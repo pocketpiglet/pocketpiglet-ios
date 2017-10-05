@@ -6,10 +6,13 @@
         <file>resources/animations/piglet/piglet_eats_cake.jpg</file>
         <file>resources/animations/piglet/piglet_eats_candy.jpg</file>
         <file>resources/animations/piglet/piglet_eyes_blink.jpg</file>
+        <file>resources/animations/piglet/piglet_feed_game_finished.jpg</file>
         <file>resources/animations/piglet/piglet_falls.jpg</file>
         <file>resources/animations/piglet/piglet_in_sorrow.jpg</file>
         <file>resources/animations/piglet/piglet_laughs.jpg</file>
+        <file>resources/animations/piglet/piglet_listen.jpg</file>
         <file>resources/animations/piglet/piglet_look_around.jpg</file>
+        <file>resources/animations/piglet/piglet_wash_game_finished.jpg</file>
         <file>resources/images/piglet/action_cake.png</file>
         <file>resources/images/piglet/action_candy.png</file>
         <file>resources/images/piglet/piglet_idle.jpg</file>
@@ -153,6 +156,7 @@
         <file>resources/images/help.png</file>
         <file>resources/images/refresh.png</file>
         <file>resources/sound/piglet/piglet_laughs.mp3</file>
+        <file>resources/sound/piglet/piglet_laughs.wav</file>
         <file>resources/sound/piglet_feed/game_complete.wav</file>
         <file>resources/sound/piglet_feed/game_over.wav</file>
         <file>resources/sound/piglet_feed/new_level.wav</file>
