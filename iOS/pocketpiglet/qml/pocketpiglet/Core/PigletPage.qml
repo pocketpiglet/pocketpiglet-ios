@@ -77,19 +77,19 @@ Item {
                                                   "", nextAnimation, 105);
         } else if (nextAnimation === "piglet_eats_candy") {
             animationSpriteSequence.playAnimation("qrc:/resources/animations/piglet/piglet_eats_candy.jpg",
-                                                  "", nextAnimation, 80);
+                                                  "qrc:/resources/sound/piglet/piglet_eats_candy.wav", nextAnimation, 80);
         } else if (nextAnimation === "piglet_eats_cake") {
             animationSpriteSequence.playAnimation("qrc:/resources/animations/piglet/piglet_eats_cake.jpg",
-                                                  "", nextAnimation, 115);
+                                                  "qrc:/resources/sound/piglet/piglet_eats_cake.wav", nextAnimation, 115);
         } else if (nextAnimation === "piglet_falls") {
             animationSpriteSequence.playAnimation("qrc:/resources/animations/piglet/piglet_falls.jpg",
-                                                  "", nextAnimation, 80);
+                                                  "qrc:/resources/sound/piglet/piglet_falls.wav", nextAnimation, 80);
         } else if (nextAnimation === "piglet_feed_game_finished") {
             animationSpriteSequence.playAnimation("qrc:/resources/animations/piglet/piglet_feed_game_finished.jpg",
-                                                  "", nextAnimation, 66);
+                                                  "qrc:/resources/sound/piglet/piglet_feed_game_finished.wav", nextAnimation, 66);
         } else if (nextAnimation === "piglet_wash_game_finished") {
             animationSpriteSequence.playAnimation("qrc:/resources/animations/piglet/piglet_wash_game_finished.jpg",
-                                                  "", nextAnimation, 56);
+                                                  "qrc:/resources/sound/piglet/piglet_wash_game_finished.wav", nextAnimation, 56);
         } else if (nextAnimation === "piglet_listen") {
             animationSpriteSequence.playAnimation("qrc:/resources/animations/piglet/piglet_listen.jpg",
                                                   "", nextAnimation, 5);

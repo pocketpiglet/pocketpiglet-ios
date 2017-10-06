@@ -152,8 +152,12 @@
         <file>resources/images/exit.png</file>
         <file>resources/images/help.png</file>
         <file>resources/images/refresh.png</file>
-        <file>resources/sound/piglet/piglet_laughs.mp3</file>
+        <file>resources/sound/piglet/piglet_eats_cake.wav</file>
+        <file>resources/sound/piglet/piglet_eats_candy.wav</file>
+        <file>resources/sound/piglet/piglet_falls.wav</file>
+        <file>resources/sound/piglet/piglet_feed_game_finished.wav</file>
         <file>resources/sound/piglet/piglet_laughs.wav</file>
+        <file>resources/sound/piglet/piglet_wash_game_finished.wav</file>
         <file>resources/sound/piglet_feed/game_complete.wav</file>
         <file>resources/sound/piglet_feed/game_over.wav</file>
         <file>resources/sound/piglet_feed/new_level.wav</file>
