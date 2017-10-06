@@ -480,7 +480,7 @@ Item {
                         pigletPage.nextAnimation = "piglet_falls";
 
                         pigletPage.restartAnimation();
-                    }                    
+                    }
                 }
             }
 
