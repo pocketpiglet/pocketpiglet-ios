@@ -1,8 +1,5 @@
 <RCC>
     <qresource prefix="/">
-        <file>doc/help.html</file>
-        <file>doc/piglet.png</file>
-        <file>doc/shake_phone.png</file>
         <file>resources/animations/piglet/piglet_eats_cake.jpg</file>
         <file>resources/animations/piglet/piglet_eats_candy.jpg</file>
         <file>resources/animations/piglet/piglet_eyes_blink.jpg</file>
