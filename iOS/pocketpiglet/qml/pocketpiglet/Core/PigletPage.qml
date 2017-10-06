@@ -108,7 +108,7 @@ Item {
     }
 
     function isAnimationActive(src) {
-        if (animationSpriteSequence.animationName === src) {
+        if (animationSpriteSequence.running && animationSpriteSequence.animationName === src) {
             return true;
         } else {
             return false;
@@ -167,7 +167,7 @@ Item {
                     pressY    = mouse.y;
 
                     if (totalPath > 500) {
-                        if (!pigletPage.isAnimationActive("piglet_laughs")) {
+                        if (!pigletPage.isAnimationActive("piglet_laughs") && pigletPage.nextAnimation !== "piglet_laughs") {
                             pigletPage.nextAnimation = "piglet_laughs";
 
                             pigletPage.restartAnimation();
@@ -476,7 +476,7 @@ Item {
                     Math.abs(reading.y - lastReadingY) > pigletPage.accelShakeThreshold ||
                     Math.abs(reading.z - lastReadingZ) > pigletPage.accelShakeThreshold) {
 
-                    if (!pigletPage.isAnimationActive("piglet_falls")) {
+                    if (!pigletPage.isAnimationActive("piglet_falls") && pigletPage.nextAnimation !== "piglet_falls") {
                         pigletPage.nextAnimation = "piglet_falls";
 
                         pigletPage.restartAnimation();
