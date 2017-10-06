@@ -216,14 +216,14 @@ Item {
                         if (audioSource === audio.audioSource) {
                             audio.stop();
                         }
-
-                        pigletAnimationTimer.start();
                     }
                 }
 
                 onCurrentSpriteChanged: {
                     if (running && currentSprite === "animationFinishSprite") {
                         running = false;
+
+                        pigletAnimationTimer.start();
                     }
                 }
 
@@ -297,6 +297,8 @@ Item {
                     sprite.to          = { "animation0Sprite" : 1 };
 
                     sprites_list.push(sprite);
+
+                    running = false;
 
                     for (var j = 0; j < sprites.length; j++) {
                         if (sprites[j].name !== "dummySprite") {
