@@ -421,11 +421,11 @@ Item {
             if (seconds < 25) {
                 count = Math.floor(seconds / 5) + 1;
             } else {
-                count = 5 + Math.floor((seconds - 25) / 30);
+                count = 5 + Math.floor((seconds - 25) / 10);
             }
 
-            if (count > 10) {
-                count = 10;
+            if (count > 50) {
+                count = 50;
             }
 
             PigletWashPageScript.createBubbles(count - pigletWashPage.visibleBubblesCount);
