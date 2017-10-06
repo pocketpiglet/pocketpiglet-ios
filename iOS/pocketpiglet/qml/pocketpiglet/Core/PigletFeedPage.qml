@@ -91,6 +91,7 @@ Item {
 
         function playAudio(src) {
             source = src;
+
             seek(0);
             play();
         }
@@ -131,7 +132,7 @@ Item {
             z:  2
 
             onValidFoodItemSelected: {
-                sandwich.addItem(itemType);
+                sandwich.addItem(item_type);
             }
 
             onInvalidFoodItemSelected: {

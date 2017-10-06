@@ -290,7 +290,7 @@ Rectangle {
         }
     }
 
-    function newSandwich(sandwichThickness) {
+    function newSandwich(sandwich_thickness) {
         for (var i = 0; i < visibleItemsCount; i++) {
             sandwichItems[i].clearItem();
         }
@@ -299,8 +299,8 @@ Rectangle {
         itemsInPlaceCount = 0;
         eatenItemsCount   = 0;
 
-        if (sandwichThickness + 2 <= sandwichItems.length) {
-            maxItemsCount = sandwichThickness + 2;
+        if (sandwich_thickness + 2 <= sandwichItems.length) {
+            maxItemsCount = sandwich_thickness + 2;
         } else {
             maxItemsCount = 0;
         }
@@ -308,9 +308,9 @@ Rectangle {
         addItem("bread_bottom");
     }
 
-    function addItem(itemType) {
+    function addItem(item_type) {
         if (visibleItemsCount < maxItemsCount) {
-            sandwichItems[visibleItemsCount].itemType = itemType;
+            sandwichItems[visibleItemsCount].itemType = item_type;
             sandwichItems[visibleItemsCount].initialY = 0;
             sandwichItems[visibleItemsCount].finalY   = height - sandwichItems[visibleItemsCount].height - itemShiftPixels * visibleItemsCount;
 

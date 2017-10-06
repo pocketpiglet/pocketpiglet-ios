@@ -11,16 +11,11 @@ Item {
     property bool pageActive:                 false
     property bool animationEnabled:           false
 
-    property int  animationsCount:            0
-    property int  initializedAnimationsCount: 0
-
     property real lastGameTime:               (new Date()).getTime()
     property real accelShakeThreshold:        20.0
 
     property string nextAnimation:            ""
     property string wantedGame:               ""
-
-    property SpriteSequence currentAnimation: null
 
     onAppInForegroundChanged: {
         if (appInForeground && pageActive) {
@@ -70,84 +65,50 @@ Item {
         }
     }
 
-    function animationInitialized() {
-        if (animationsCount === 0) {
-            for (var i = 0; i < pigletMouseArea.children.length; i++) {
-                if (pigletMouseArea.children[i].hasOwnProperty("animationName")) {
-                    animationsCount++;
-                }
-            }
-        }
-
-        if (initializedAnimationsCount < animationsCount) {
-            initializedAnimationsCount++;
-        } else if (initializedAnimationsCount === animationsCount) {
-            initializedAnimationsCount++;
-
-            console.debug("ANIMATIONS INITIALIZED");
-        }
-    }
-
     function performAnimation() {
         if (nextAnimation === "piglet_look_around") {
-            spriteSequencePigletLookAround.running = true;
-
-            currentAnimation = spriteSequencePigletLookAround;
+            animationSpriteSequence.playAnimation("qrc:/resources/animations/piglet/piglet_look_around.jpg",
+                                                  "", nextAnimation, 55);
         } else if (nextAnimation === "piglet_laughs") {
-            audio.playAudio("qrc:/resources/sound/piglet/piglet_laughs.wav");
-
-            spriteSequencePigletLaughs.running = true;
-
-            currentAnimation = spriteSequencePigletLaughs;
+            animationSpriteSequence.playAnimation("qrc:/resources/animations/piglet/piglet_laughs.jpg",
+                                                  "qrc:/resources/sound/piglet/piglet_laughs.wav", nextAnimation, 55);
         } else if (nextAnimation === "piglet_in_sorrow"){
-            spriteSequencePigletInSorrow.running = true;
-
-            currentAnimation = spriteSequencePigletInSorrow;
+            animationSpriteSequence.playAnimation("qrc:/resources/animations/piglet/piglet_in_sorrow.jpg",
+                                                  "", nextAnimation, 105);
         } else if (nextAnimation === "piglet_eats_candy") {
-            spriteSequencePigletEatsCandy.running = true;
-
-            currentAnimation = spriteSequencePigletEatsCandy;
+            animationSpriteSequence.playAnimation("qrc:/resources/animations/piglet/piglet_eats_candy.jpg",
+                                                  "", nextAnimation, 80);
         } else if (nextAnimation === "piglet_eats_cake") {
-            spriteSequencePigletEatsCake.running = true;
-
-            currentAnimation = spriteSequencePigletEatsCake;
+            animationSpriteSequence.playAnimation("qrc:/resources/animations/piglet/piglet_eats_cake.jpg",
+                                                  "", nextAnimation, 115);
         } else if (nextAnimation === "piglet_falls") {
-            spriteSequencePigletFalls.running = true;
-
-            currentAnimation = spriteSequencePigletFalls;
+            animationSpriteSequence.playAnimation("qrc:/resources/animations/piglet/piglet_falls.jpg",
+                                                  "", nextAnimation, 80);
         } else if (nextAnimation === "piglet_feed_game_finished") {
-            spriteSequencePigletFeedGameFinished.running = true;
-
-            currentAnimation = spriteSequencePigletFeedGameFinished;
+            animationSpriteSequence.playAnimation("qrc:/resources/animations/piglet/piglet_feed_game_finished.jpg",
+                                                  "", nextAnimation, 66);
         } else if (nextAnimation === "piglet_wash_game_finished") {
-            spriteSequencePigletWashGameFinished.running = true;
-
-            currentAnimation = spriteSequencePigletWashGameFinished;
+            animationSpriteSequence.playAnimation("qrc:/resources/animations/piglet/piglet_wash_game_finished.jpg",
+                                                  "", nextAnimation, 56);
         } else if (nextAnimation === "piglet_listen") {
-            spriteSequencePigletListen.running = true;
-
-            currentAnimation = spriteSequencePigletListen;
+            animationSpriteSequence.playAnimation("qrc:/resources/animations/piglet/piglet_listen.jpg",
+                                                  "", nextAnimation, 5);
         } else {
-            spriteSequencePigletEyesBlink.running = true;
-
-            currentAnimation = spriteSequencePigletEyesBlink;
+            animationSpriteSequence.playAnimation("qrc:/resources/animations/piglet/piglet_eyes_blink.jpg",
+                                                  "", "piglet_eyes_blink", 40);
         }
 
         nextAnimation = "";
     }
 
     function restartAnimation() {
-        audio.stop();
-
-        if (currentAnimation !== null) {
-            currentAnimation.running = false;
-        }
+        animationSpriteSequence.running = false;
 
         pigletAnimationTimer.restart();
     }
 
     function isAnimationActive(src) {
-        if (currentAnimation !== null && currentAnimation.animationName === src) {
+        if (animationSpriteSequence.animationName === src) {
             return true;
         } else {
             return false;
@@ -165,12 +126,16 @@ Item {
         volume: 1.0
         muted:  !pigletPage.appInForeground || !pigletPage.pageActive
 
+        property string audioSource: ""
+
         onError: {
             console.log(errorString);
         }
 
         function playAudio(src) {
-            source = src;
+            audioSource = src;
+            source      = src;
+
             seek(0);
             play();
         }
@@ -225,799 +190,128 @@ Item {
             }
 
             SpriteSequence {
-                id:           spriteSequencePigletEyesBlink
+                id:           animationSpriteSequence
                 anchors.fill: parent
                 z:            pigletIdleImage.z - 1
                 running:      false
 
-                property string animationName: "piglet_eyes_blink"
+                property int animationFrameWidth:          360
+                property int animationFrameHeight:         640
+                property int animationFrameRate:           15
+                property int animationSpriteMaxFrameCount: 20
+
+                property string animationName:             ""
+                property string audioSource:               ""
 
                 onRunningChanged: {
                     if (running) {
                         z = pigletIdleImage.z + 1;
+
+                        if (audioSource !== "") {
+                            audio.playAudio(audioSource);
+                        }
                     } else {
                         z = pigletIdleImage.z - 1;
 
-                        jumpTo("pigletEyesBlinkStart");
+                        if (audioSource === audio.audioSource) {
+                            audio.stop();
+                        }
 
                         pigletAnimationTimer.start();
                     }
                 }
 
                 onCurrentSpriteChanged: {
-                    pigletPage.animationInitialized();
-
-                    if (running && currentSprite === "pigletEyesBlinkStart") {
+                    if (running && currentSprite === "animationFinishSprite") {
                         running = false;
                     }
                 }
 
-                Sprite {
-                    name:        "pigletEyesBlinkStart"
-                    source:      "qrc:/resources/animations/piglet/piglet_eyes_blink.jpg"
-                    frameCount:  1
-                    frameWidth:  360
-                    frameHeight: 640
-                    frameX:      0
-                    frameRate:   1
-                    to:          { "pigletEyesBlinkOne" : 1 }
-                }
+                function playAnimation(src, audio_src, name, frames_count) {
+                    var sprite_code  = "import QtQuick 2.9; Sprite {}";
+                    var sprites_list = [];
+                    var sprite       = null;
 
-                Sprite {
-                    name:        "pigletEyesBlinkOne"
-                    source:      "qrc:/resources/animations/piglet/piglet_eyes_blink.jpg"
-                    frameCount:  20
-                    frameWidth:  360
-                    frameHeight: 640
-                    frameX:      0
-                    frameRate:   15
-                    to:          { "pigletEyesBlinkTwo" : 1 }
-                }
+                    var sprites_count = frames_count / animationSpriteMaxFrameCount;
 
-                Sprite {
-                    name:        "pigletEyesBlinkTwo"
-                    source:      "qrc:/resources/animations/piglet/piglet_eyes_blink.jpg"
-                    frameCount:  20
-                    frameWidth:  360
-                    frameHeight: 640
-                    frameX:      7200
-                    frameRate:   15
-                    to:          { "pigletEyesBlinkStart" : 1 }
-                }
-            }
-
-            SpriteSequence {
-                id:           spriteSequencePigletLookAround
-                anchors.fill: parent
-                z:            pigletIdleImage.z - 1
-                running:      false
-
-                property string animationName: "piglet_look_around"
-
-                onRunningChanged: {
-                    if (running) {
-                        z = pigletIdleImage.z + 1;
-                    } else {
-                        z = pigletIdleImage.z - 1;
-
-                        jumpTo("pigletLookAroundStart");
-
-                        pigletAnimationTimer.start();
+                    if (frames_count % animationSpriteMaxFrameCount > 0) {
+                        sprites_count++;
                     }
-                }
 
-                onCurrentSpriteChanged: {
-                    pigletPage.animationInitialized();
+                    for (var i = 0; i < sprites_count; i++) {
+                        sprite = Qt.createQmlObject(sprite_code, animationSpriteSequence, "animation%1Sprite".arg(i));
 
-                    if (running && currentSprite === "pigletLookAroundStart") {
-                        running = false;
+                        sprite.name   = "animation%1Sprite".arg(i);
+                        sprite.source = src;
+
+                        if (frames_count - animationSpriteMaxFrameCount * i >= animationSpriteMaxFrameCount) {
+                            sprite.frameCount = animationSpriteMaxFrameCount;
+                        } else {
+                            sprite.frameCount = frames_count - animationSpriteMaxFrameCount * i;
+                        }
+
+                        sprite.frameWidth  = animationFrameWidth;
+                        sprite.frameHeight = animationFrameHeight;
+                        sprite.frameX      = animationSpriteMaxFrameCount * i * animationFrameWidth;
+                        sprite.frameRate   = animationFrameRate;
+
+                        if (i < sprites_count - 1) {
+                            switch (i) {
+                            case 0:
+                                sprite.to = { "animation1Sprite" : 1 }; break;
+                            case 1:
+                                sprite.to = { "animation2Sprite" : 1 }; break;
+                            case 2:
+                                sprite.to = { "animation3Sprite" : 1 }; break;
+                            case 3:
+                                sprite.to = { "animation4Sprite" : 1 }; break;
+                            case 4:
+                                sprite.to = { "animation5Sprite" : 1 }; break;
+                            case 5:
+                                sprite.to = { "animation6Sprite" : 1 }; break;
+                            case 6:
+                                sprite.to = { "animation7Sprite" : 1 }; break;
+                            case 7:
+                                sprite.to = { "animation8Sprite" : 1 }; break;
+                            case 8:
+                                sprite.to = { "animation9Sprite" : 1 }; break;
+                            default:
+                                sprite.to = { "animationFinishSprite" : 1 }; break;
+                            }
+                        } else {
+                            sprite.to = { "animationFinishSprite" : 1 };
+                        }
+
+                        sprites_list.push(sprite);
                     }
-                }
 
-                Sprite {
-                    name:        "pigletLookAroundStart"
-                    source:      "qrc:/resources/animations/piglet/piglet_look_around.jpg"
-                    frameCount:  1
-                    frameWidth:  360
-                    frameHeight: 640
-                    frameX:      0
-                    frameRate:   1
-                    to:          { "pigletLookAroundOne" : 1 }
-                }
+                    sprite = Qt.createQmlObject(sprite_code, animationSpriteSequence, "animationFinishSprite");
 
-                Sprite {
-                    name:        "pigletLookAroundOne"
-                    source:      "qrc:/resources/animations/piglet/piglet_look_around.jpg"
-                    frameCount:  20
-                    frameWidth:  360
-                    frameHeight: 640
-                    frameX:      0
-                    frameRate:   15
-                    to:          { "pigletLookAroundTwo" : 1 }
-                }
+                    sprite.name        = "animationFinishSprite";
+                    sprite.source      = src;
+                    sprite.frameCount  = 1;
+                    sprite.frameWidth  = animationFrameWidth;
+                    sprite.frameHeight = animationFrameHeight;
+                    sprite.frameX      = 0;
+                    sprite.frameRate   = 1;
+                    sprite.to          = { "animation0Sprite" : 1 };
 
-                Sprite {
-                    name:        "pigletLookAroundTwo"
-                    source:      "qrc:/resources/animations/piglet/piglet_look_around.jpg"
-                    frameCount:  20
-                    frameWidth:  360
-                    frameHeight: 640
-                    frameX:      7200
-                    frameRate:   15
-                    to:          { "pigletLookAroundThree" : 1 }
-                }
+                    sprites_list.push(sprite);
 
-                Sprite {
-                    name:        "pigletLookAroundThree"
-                    source:      "qrc:/resources/animations/piglet/piglet_look_around.jpg"
-                    frameCount:  15
-                    frameWidth:  360
-                    frameHeight: 640
-                    frameX:      14400
-                    frameRate:   15
-                    to:          { "pigletLookAroundStart" : 1 }
-                }
-            }
-
-            SpriteSequence {
-                id:           spriteSequencePigletLaughs
-                anchors.fill: parent
-                z:            pigletIdleImage.z - 1
-                running:      false
-
-                property string animationName: "piglet_laughs"
-
-                onRunningChanged: {
-                    if (running) {
-                        z = pigletIdleImage.z + 1;
-                    } else {
-                        z = pigletIdleImage.z - 1;
-
-                        jumpTo("pigletLaughsStart");
-
-                        pigletAnimationTimer.start();
+                    for (var j = 0; j < sprites.length; j++) {
+                        if (sprites[j].name !== "dummySprite") {
+                            sprites[j].destroy();
+                        }
                     }
-                }
 
-                onCurrentSpriteChanged: {
-                    pigletPage.animationInitialized();
-
-                    if (running && currentSprite === "pigletLaughsStart") {
-                        running = false;
-                    }
+                    animationName = name;
+                    audioSource   = audio_src;
+                    sprites       = sprites_list;
+                    running       = true;
                 }
 
                 Sprite {
-                    name:        "pigletLaughsStart"
-                    source:      "qrc:/resources/animations/piglet/piglet_laughs.jpg"
-                    frameCount:  1
-                    frameWidth:  360
-                    frameHeight: 640
-                    frameX:      0
-                    frameRate:   1
-                    to:          { "pigletLaughsOne" : 1 }
-                }
-
-                Sprite {
-                    name:        "pigletLaughsOne"
-                    source:      "qrc:/resources/animations/piglet/piglet_laughs.jpg"
-                    frameCount:  20
-                    frameWidth:  360
-                    frameHeight: 640
-                    frameX:      0
-                    frameRate:   15
-                    to:          { "pigletLaughsTwo" : 1 }
-                }
-
-                Sprite {
-                    name:        "pigletLaughsTwo"
-                    source:      "qrc:/resources/animations/piglet/piglet_laughs.jpg"
-                    frameCount:  20
-                    frameWidth:  360
-                    frameHeight: 640
-                    frameX:      7200
-                    frameRate:   15
-                    to:          { "pigletLaughsThree" : 1 }
-                }
-
-                Sprite {
-                    name:        "pigletLaughsThree"
-                    source:      "qrc:/resources/animations/piglet/piglet_laughs.jpg"
-                    frameCount:  15
-                    frameWidth:  360
-                    frameHeight: 640
-                    frameX:      14400
-                    frameRate:   15
-                    to:          { "pigletLaughsStart" : 1 }
-                }
-            }
-
-            SpriteSequence {
-                id:           spriteSequencePigletInSorrow
-                anchors.fill: parent
-                z:            pigletIdleImage.z - 1
-                running:      false
-
-                property string animationName: "piglet_in_sorrow"
-
-                onRunningChanged: {
-                    if (running) {
-                        z = pigletIdleImage.z + 1;
-                    } else {
-                        z = pigletIdleImage.z - 1;
-
-                        jumpTo("pigletInSorrowStart");
-
-                        pigletAnimationTimer.start();
-                    }
-                }
-
-                onCurrentSpriteChanged: {
-                    pigletPage.animationInitialized();
-
-                    if (running && currentSprite === "pigletInSorrowStart") {
-                        running = false;
-                    }
-                }
-
-                Sprite {
-                    name:        "pigletInSorrowStart"
-                    source:      "qrc:/resources/animations/piglet/piglet_in_sorrow.jpg"
-                    frameCount:  1
-                    frameWidth:  360
-                    frameHeight: 640
-                    frameX:      0
-                    frameRate:   1
-                    to:          { "pigletInSorrowOne" : 1 }
-                }
-
-                Sprite {
-                    name:        "pigletInSorrowOne"
-                    source:      "qrc:/resources/animations/piglet/piglet_in_sorrow.jpg"
-                    frameCount:  20
-                    frameWidth:  360
-                    frameHeight: 640
-                    frameX:      0
-                    frameRate:   15
-                    to:          { "pigletInSorrowTwo" : 1 }
-                }
-
-                Sprite {
-                    name:        "pigletInSorrowTwo"
-                    source:      "qrc:/resources/animations/piglet/piglet_in_sorrow.jpg"
-                    frameCount:  20
-                    frameWidth:  360
-                    frameHeight: 640
-                    frameX:      7200
-                    frameRate:   15
-                    to:          { "pigletInSorrowThree" : 1 }
-                }
-
-                Sprite {
-                    name:        "pigletInSorrowThree"
-                    source:      "qrc:/resources/animations/piglet/piglet_in_sorrow.jpg"
-                    frameCount:  20
-                    frameWidth:  360
-                    frameHeight: 640
-                    frameX:      14400
-                    frameRate:   15
-                    to:          { "pigletInSorrowFour" : 1 }
-                }
-
-                Sprite {
-                    name:        "pigletInSorrowFour"
-                    source:      "qrc:/resources/animations/piglet/piglet_in_sorrow.jpg"
-                    frameCount:  20
-                    frameWidth:  360
-                    frameHeight: 640
-                    frameX:      21600
-                    frameRate:   15
-                    to:          { "pigletInSorrowFive" : 1 }
-                }
-
-                Sprite {
-                    name:        "pigletInSorrowFive"
-                    source:      "qrc:/resources/animations/piglet/piglet_in_sorrow.jpg"
-                    frameCount:  20
-                    frameWidth:  360
-                    frameHeight: 640
-                    frameX:      28800
-                    frameRate:   15
-                    to:          { "pigletInSorrowSix" : 1 }
-                }
-
-                Sprite {
-                    name:        "pigletInSorrowSix"
-                    source:      "qrc:/resources/animations/piglet/piglet_in_sorrow.jpg"
-                    frameCount:  5
-                    frameWidth:  360
-                    frameHeight: 640
-                    frameX:      36000
-                    frameRate:   15
-                    to:          { "pigletInSorrowStart" : 1 }
-                }
-            }
-
-            SpriteSequence {
-                id:           spriteSequencePigletEatsCandy
-                anchors.fill: parent
-                z:            pigletIdleImage.z - 1
-                running:      false
-
-                property string animationName: "piglet_eats_candy"
-
-                onRunningChanged: {
-                    if (running) {
-                        z = pigletIdleImage.z + 1;
-                    } else {
-                        z = pigletIdleImage.z - 1;
-
-                        jumpTo("pigletEatsCandyStart");
-
-                        pigletAnimationTimer.start();
-                    }
-                }
-
-                onCurrentSpriteChanged: {
-                    pigletPage.animationInitialized();
-
-                    if (running && currentSprite === "pigletEatsCandyStart") {
-                        running = false;
-                    }
-                }
-
-                Sprite {
-                    name:        "pigletEatsCandyStart"
-                    source:      "qrc:/resources/animations/piglet/piglet_eats_candy.jpg"
-                    frameCount:  1
-                    frameWidth:  360
-                    frameHeight: 640
-                    frameX:      0
-                    frameRate:   1
-                    to:          { "pigletEatsCandyOne" : 1 }
-                }
-
-                Sprite {
-                    name:        "pigletEatsCandyOne"
-                    source:      "qrc:/resources/animations/piglet/piglet_eats_candy.jpg"
-                    frameCount:  20
-                    frameWidth:  360
-                    frameHeight: 640
-                    frameX:      0
-                    frameRate:   15
-                    to:          { "pigletEatsCandyTwo" : 1 }
-                }
-
-                Sprite {
-                    name:        "pigletEatsCandyTwo"
-                    source:      "qrc:/resources/animations/piglet/piglet_eats_candy.jpg"
-                    frameCount:  20
-                    frameWidth:  360
-                    frameHeight: 640
-                    frameX:      7200
-                    frameRate:   15
-                    to:          { "pigletEatsCandyThree" : 1 }
-                }
-
-                Sprite {
-                    name:        "pigletEatsCandyThree"
-                    source:      "qrc:/resources/animations/piglet/piglet_eats_candy.jpg"
-                    frameCount:  20
-                    frameWidth:  360
-                    frameHeight: 640
-                    frameX:      14400
-                    frameRate:   15
-                    to:          { "pigletEatsCandyFour" : 1 }
-                }
-
-                Sprite {
-                    name:        "pigletEatsCandyFour"
-                    source:      "qrc:/resources/animations/piglet/piglet_eats_candy.jpg"
-                    frameCount:  20
-                    frameWidth:  360
-                    frameHeight: 640
-                    frameX:      21600
-                    frameRate:   15
-                    to:          { "pigletEatsCandyStart" : 1 }
-                }
-            }
-
-            SpriteSequence {
-                id:           spriteSequencePigletEatsCake
-                anchors.fill: parent
-                z:            pigletIdleImage.z - 1
-                running:      false
-
-                property string animationName: "piglet_eats_cake"
-
-                onRunningChanged: {
-                    if (running) {
-                        z = pigletIdleImage.z + 1;
-                    } else {
-                        z = pigletIdleImage.z - 1;
-
-                        jumpTo("pigletEatsCakeStart");
-
-                        pigletAnimationTimer.start();
-                    }
-                }
-
-                onCurrentSpriteChanged: {
-                    pigletPage.animationInitialized();
-
-                    if (running && currentSprite === "pigletEatsCakeStart") {
-                        running = false;
-                    }
-                }
-
-                Sprite {
-                    name:        "pigletEatsCakeStart"
-                    source:      "qrc:/resources/animations/piglet/piglet_eats_cake.jpg"
-                    frameCount:  1
-                    frameWidth:  360
-                    frameHeight: 640
-                    frameX:      0
-                    frameRate:   1
-                    to:          { "pigletEatsCakeOne" : 1 }
-                }
-
-                Sprite {
-                    name:        "pigletEatsCakeOne"
-                    source:      "qrc:/resources/animations/piglet/piglet_eats_cake.jpg"
-                    frameCount:  20
-                    frameWidth:  360
-                    frameHeight: 640
-                    frameX:      0
-                    frameRate:   15
-                    to:          { "pigletEatsCakeTwo" : 1 }
-                }
-
-                Sprite {
-                    name:        "pigletEatsCakeTwo"
-                    source:      "qrc:/resources/animations/piglet/piglet_eats_cake.jpg"
-                    frameCount:  20
-                    frameWidth:  360
-                    frameHeight: 640
-                    frameX:      7200
-                    frameRate:   15
-                    to:          { "pigletEatsCakeThree" : 1 }
-                }
-
-                Sprite {
-                    name:        "pigletEatsCakeThree"
-                    source:      "qrc:/resources/animations/piglet/piglet_eats_cake.jpg"
-                    frameCount:  20
-                    frameWidth:  360
-                    frameHeight: 640
-                    frameX:      14400
-                    frameRate:   15
-                    to:          { "pigletEatsCakeFour" : 1 }
-                }
-
-                Sprite {
-                    name:        "pigletEatsCakeFour"
-                    source:      "qrc:/resources/animations/piglet/piglet_eats_cake.jpg"
-                    frameCount:  20
-                    frameWidth:  360
-                    frameHeight: 640
-                    frameX:      21600
-                    frameRate:   15
-                    to:          { "pigletEatsCakeFive" : 1 }
-                }
-                Sprite {
-                    name:        "pigletEatsCakeFive"
-                    source:      "qrc:/resources/animations/piglet/piglet_eats_cake.jpg"
-                    frameCount:  20
-                    frameWidth:  360
-                    frameHeight: 640
-                    frameX:      28800
-                    frameRate:   15
-                    to:          { "pigletEatsCakeSix" : 1 }
-                }
-
-                Sprite {
-                    name:        "pigletEatsCakeSix"
-                    source:      "qrc:/resources/animations/piglet/piglet_eats_cake.jpg"
-                    frameCount:  15
-                    frameWidth:  360
-                    frameHeight: 640
-                    frameX:      36000
-                    frameRate:   15
-                    to:          { "pigletEatsCakeStart" : 1 }
-                }
-
-            }
-
-            SpriteSequence {
-                id:           spriteSequencePigletFalls
-                anchors.fill: parent
-                z:            pigletIdleImage.z - 1
-                running:      false
-
-                property string animationName: "piglet_falls"
-
-                onRunningChanged: {
-                    if (running) {
-                        z = pigletIdleImage.z + 1;
-                    } else {
-                        z = pigletIdleImage.z - 1;
-
-                        jumpTo("pigletFallsStart");
-
-                        pigletAnimationTimer.start();
-                    }
-                }
-
-                onCurrentSpriteChanged: {
-                    pigletPage.animationInitialized();
-
-                    if (running && currentSprite === "pigletFallsStart") {
-                        running = false;
-                    }
-                }
-
-                Sprite {
-                    name:        "pigletFallsStart"
-                    source:      "qrc:/resources/animations/piglet/piglet_falls.jpg"
-                    frameCount:  1
-                    frameWidth:  360
-                    frameHeight: 640
-                    frameX:      0
-                    frameRate:   1
-                    to:          { "pigletFallsOne" : 1 }
-                }
-
-                Sprite {
-                    name:        "pigletFallsOne"
-                    source:      "qrc:/resources/animations/piglet/piglet_falls.jpg"
-                    frameCount:  20
-                    frameWidth:  360
-                    frameHeight: 640
-                    frameX:      0
-                    frameRate:   15
-                    to:          { "pigletFallsTwo" : 1 }
-                }
-
-                Sprite {
-                    name:        "pigletFallsTwo"
-                    source:      "qrc:/resources/animations/piglet/piglet_falls.jpg"
-                    frameCount:  20
-                    frameWidth:  360
-                    frameHeight: 640
-                    frameX:      7200
-                    frameRate:   15
-                    to:          { "pigletFallsThree" : 1 }
-                }
-
-                Sprite {
-                    name:        "pigletFallsThree"
-                    source:      "qrc:/resources/animations/piglet/piglet_falls.jpg"
-                    frameCount:  20
-                    frameWidth:  360
-                    frameHeight: 640
-                    frameX:      14400
-                    frameRate:   15
-                    to:          { "pigletFallsFour" : 1 }
-                }
-
-                Sprite {
-                    name:        "pigletFallsFour"
-                    source:      "qrc:/resources/animations/piglet/piglet_falls.jpg"
-                    frameCount:  20
-                    frameWidth:  360
-                    frameHeight: 640
-                    frameX:      21600
-                    frameRate:   15
-                    to:          { "pigletFallsStart" : 1 }
-                }
-            }
-
-            SpriteSequence {
-                id:           spriteSequencePigletFeedGameFinished
-                anchors.fill: parent
-                z:            pigletIdleImage.z - 1
-                running:      false
-
-                property string animationName: "piglet_feed_game_finished"
-
-                onRunningChanged: {
-                    if (running) {
-                        z = pigletIdleImage.z + 1;
-                    } else {
-                        z = pigletIdleImage.z - 1;
-
-                        jumpTo("pigletFeedGameFinishedStart");
-
-                        pigletAnimationTimer.start();
-                    }
-                }
-
-                onCurrentSpriteChanged: {
-                    pigletPage.animationInitialized();
-
-                    if (running && currentSprite === "pigletFeedGameFinishedStart") {
-                        running = false;
-                    }
-                }
-
-                Sprite {
-                    name:        "pigletFeedGameFinishedStart"
-                    source:      "qrc:/resources/animations/piglet/piglet_feed_game_finished.jpg"
-                    frameCount:  1
-                    frameWidth:  360
-                    frameHeight: 640
-                    frameX:      0
-                    frameRate:   1
-                    to:          { "pigletFeedGameFinishedOne" : 1 }
-                }
-
-                Sprite {
-                    name:        "pigletFeedGameFinishedOne"
-                    source:      "qrc:/resources/animations/piglet/piglet_feed_game_finished.jpg"
-                    frameCount:  20
-                    frameWidth:  360
-                    frameHeight: 640
-                    frameX:      0
-                    frameRate:   15
-                    to:          { "pigletFeedGameFinishedTwo" : 1 }
-                }
-
-                Sprite {
-                    name:        "pigletFeedGameFinishedTwo"
-                    source:      "qrc:/resources/animations/piglet/piglet_feed_game_finished.jpg"
-                    frameCount:  20
-                    frameWidth:  360
-                    frameHeight: 640
-                    frameX:      7200
-                    frameRate:   15
-                    to:          { "pigletFeedGameFinishedThree" : 1 }
-                }
-
-                Sprite {
-                    name:        "pigletFeedGameFinishedThree"
-                    source:      "qrc:/resources/animations/piglet/piglet_feed_game_finished.jpg"
-                    frameCount:  20
-                    frameWidth:  360
-                    frameHeight: 640
-                    frameX:      14400
-                    frameRate:   15
-                    to:          { "pigletFeedGameFinishedFour" : 1 }
-                }
-
-                Sprite {
-                    name:        "pigletFeedGameFinishedFour"
-                    source:      "qrc:/resources/animations/piglet/piglet_feed_game_finished.jpg"
-                    frameCount:  6
-                    frameWidth:  360
-                    frameHeight: 640
-                    frameX:      21600
-                    frameRate:   15
-                    to:          { "pigletFeedGameFinishedStart" : 1 }
-                }
-            }
-
-            SpriteSequence {
-                id:           spriteSequencePigletWashGameFinished
-                anchors.fill: parent
-                z:            pigletIdleImage.z - 1
-                running:      false
-
-                property string animationName: "piglet_wash_game_finished"
-
-                onRunningChanged: {
-                    if (running) {
-                        z = pigletIdleImage.z + 1;
-                    } else {
-                        z = pigletIdleImage.z - 1;
-
-                        jumpTo("pigletWashGameFinishedStart");
-
-                        pigletAnimationTimer.start();
-                    }
-                }
-
-                onCurrentSpriteChanged: {
-                    pigletPage.animationInitialized();
-
-                    if (running && currentSprite === "pigletWashGameFinishedStart") {
-                        running = false;
-                    }
-                }
-
-                Sprite {
-                    name:        "pigletWashGameFinishedStart"
-                    source:      "qrc:/resources/animations/piglet/piglet_wash_game_finished.jpg"
-                    frameCount:  1
-                    frameWidth:  360
-                    frameHeight: 640
-                    frameX:      0
-                    frameRate:   1
-                    to:          { "pigletWashGameFinishedOne" : 1 }
-                }
-
-                Sprite {
-                    name:        "pigletWashGameFinishedOne"
-                    source:      "qrc:/resources/animations/piglet/piglet_wash_game_finished.jpg"
-                    frameCount:  20
-                    frameWidth:  360
-                    frameHeight: 640
-                    frameX:      0
-                    frameRate:   15
-                    to:          { "pigletWashGameFinishedTwo" : 1 }
-                }
-
-                Sprite {
-                    name:        "pigletWashGameFinishedTwo"
-                    source:      "qrc:/resources/animations/piglet/piglet_wash_game_finished.jpg"
-                    frameCount:  20
-                    frameWidth:  360
-                    frameHeight: 640
-                    frameX:      7200
-                    frameRate:   15
-                    to:          { "pigletWashGameFinishedThree" : 1 }
-                }
-
-                Sprite {
-                    name:        "pigletWashGameFinishedThree"
-                    source:      "qrc:/resources/animations/piglet/piglet_wash_game_finished.jpg"
-                    frameCount:  16
-                    frameWidth:  360
-                    frameHeight: 640
-                    frameX:      14400
-                    frameRate:   15
-                    to:          { "pigletWashGameFinishedStart" : 1 }
-                }
-            }
-
-
-            SpriteSequence {
-                id:           spriteSequencePigletListen
-                anchors.fill: parent
-                z:            pigletIdleImage.z - 1
-                running:      false
-
-                property string animationName: "piglet_listen"
-
-                onRunningChanged: {
-                    if (running) {
-                        z = pigletIdleImage.z + 1;
-                    } else {
-                        z = pigletIdleImage.z - 1;
-
-                        jumpTo("pigletListenStart");
-
-                        pigletAnimationTimer.start();
-                    }
-                }
-
-                onCurrentSpriteChanged: {
-                    pigletPage.animationInitialized();
-
-                    if (running && currentSprite === "pigletListenStart") {
-                        running = false;
-                    }
-                }
-
-                Sprite {
-                    name:        "pigletListenStart"
-                    source:      "qrc:/resources/animations/piglet/piglet_listen.jpg"
-                    frameCount:  1
-                    frameWidth:  360
-                    frameHeight: 640
-                    frameX:      0
-                    frameRate:   1
-                    to:          { "pigletListenOne" : 1 }
-                }
-
-                Sprite {
-                    name:        "pigletListenOne"
-                    source:      "qrc:/resources/animations/piglet/piglet_listen.jpg"
-                    frameCount:  5
-                    frameWidth:  360
-                    frameHeight: 640
-                    frameX:      0
-                    frameRate:   15
-                    to:          { "pigletListenStart" : 1 }
+                    name: "dummySprite"
                 }
             }
         }

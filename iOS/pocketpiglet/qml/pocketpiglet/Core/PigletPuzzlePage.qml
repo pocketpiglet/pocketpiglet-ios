@@ -78,6 +78,7 @@ Item {
 
         function playAudio(src) {
             source = src;
+
             seek(0);
             play();
         }

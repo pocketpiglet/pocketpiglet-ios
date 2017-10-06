@@ -348,7 +348,7 @@ Rectangle {
         }
     ]
 
-    signal validFoodItemSelected(string itemType, bool lastItem)
+    signal validFoodItemSelected(string item_type, bool last_item)
     signal invalidFoodItemSelected()
 
     onRefrigeratorTypeChanged: {
@@ -361,10 +361,10 @@ Rectangle {
         }
     }
 
-    function prepareOrder(itemsToOrder) {
+    function prepareOrder(items_to_order) {
         RefrigeratorScript.OrderedFood = [];
 
-        for (var i = 0; i < itemsToOrder; i++) {
+        for (var i = 0; i < items_to_order; i++) {
             if (refrigeratorType === "easy") {
                 RefrigeratorScript.OrderedFood[i] = Math.floor(Math.random() * foodItemsEasy.length);
             } else if (refrigeratorType === "medium") {
@@ -383,9 +383,9 @@ Rectangle {
         }
     }
 
-    function beginOrder(itemsToOrder) {
+    function beginOrder(items_to_order) {
         foodItemsClickable    = false;
-        orderedFoodItemsCount = itemsToOrder;
+        orderedFoodItemsCount = items_to_order;
         currentFoodItemNum    = 0;
 
         orderIntervalTimer.start();
@@ -416,40 +416,40 @@ Rectangle {
         orderIntervalTimer.stop();
     }
 
-    function validateSelectedFoodItem(itemType) {
+    function validateSelectedFoodItem(item_type) {
         if (currentFoodItemNum < orderedFoodItemsCount) {
             if (refrigeratorType === "easy") {
-                if (itemType === foodItemsEasy[RefrigeratorScript.OrderedFood[currentFoodItemNum]].itemType) {
+                if (item_type === foodItemsEasy[RefrigeratorScript.OrderedFood[currentFoodItemNum]].itemType) {
                     currentFoodItemNum = currentFoodItemNum + 1;
 
                     if (currentFoodItemNum >= orderedFoodItemsCount) {
-                        validFoodItemSelected(itemType, true);
+                        validFoodItemSelected(item_type, true);
                     } else {
-                        validFoodItemSelected(itemType, false);
+                        validFoodItemSelected(item_type, false);
                     }
                 } else {
                     invalidFoodItemSelected();
                 }
             } else if (refrigeratorType === "medium") {
-                if (itemType === foodItemsMedium[RefrigeratorScript.OrderedFood[currentFoodItemNum]].itemType) {
+                if (item_type === foodItemsMedium[RefrigeratorScript.OrderedFood[currentFoodItemNum]].itemType) {
                     currentFoodItemNum = currentFoodItemNum + 1;
 
                     if (currentFoodItemNum >= orderedFoodItemsCount) {
-                        validFoodItemSelected(itemType, true);
+                        validFoodItemSelected(item_type, true);
                     } else {
-                        validFoodItemSelected(itemType, false);
+                        validFoodItemSelected(item_type, false);
                     }
                 } else {
                     invalidFoodItemSelected();
                 }
             } else if (refrigeratorType === "hard") {
-                if (itemType === foodItemsHard[RefrigeratorScript.OrderedFood[currentFoodItemNum]].itemType) {
+                if (item_type === foodItemsHard[RefrigeratorScript.OrderedFood[currentFoodItemNum]].itemType) {
                     currentFoodItemNum = currentFoodItemNum + 1;
 
                     if (currentFoodItemNum >= orderedFoodItemsCount) {
-                        validFoodItemSelected(itemType, true);
+                        validFoodItemSelected(item_type, true);
                     } else {
-                        validFoodItemSelected(itemType, false);
+                        validFoodItemSelected(item_type, false);
                     }
                 } else {
                     invalidFoodItemSelected();
