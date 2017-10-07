@@ -256,28 +256,11 @@ Item {
                         sprite.frameRate   = animationFrameRate;
 
                         if (i < sprites_count - 1) {
-                            switch (i) {
-                            case 0:
-                                sprite.to = { "animation1Sprite" : 1 }; break;
-                            case 1:
-                                sprite.to = { "animation2Sprite" : 1 }; break;
-                            case 2:
-                                sprite.to = { "animation3Sprite" : 1 }; break;
-                            case 3:
-                                sprite.to = { "animation4Sprite" : 1 }; break;
-                            case 4:
-                                sprite.to = { "animation5Sprite" : 1 }; break;
-                            case 5:
-                                sprite.to = { "animation6Sprite" : 1 }; break;
-                            case 6:
-                                sprite.to = { "animation7Sprite" : 1 }; break;
-                            case 7:
-                                sprite.to = { "animation8Sprite" : 1 }; break;
-                            case 8:
-                                sprite.to = { "animation9Sprite" : 1 }; break;
-                            default:
-                                sprite.to = { "animationFinishSprite" : 1 }; break;
-                            }
+                            var to = {};
+
+                            to["animation%1Sprite".arg(i + 1)] = 1;
+
+                            sprite.to = to;
                         } else {
                             sprite.to = { "animationFinishSprite" : 1 };
                         }
