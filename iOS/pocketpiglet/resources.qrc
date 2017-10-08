@@ -7,12 +7,15 @@
         <file>resources/animations/piglet/piglet_falls.jpg</file>
         <file>resources/animations/piglet/piglet_in_sorrow.jpg</file>
         <file>resources/animations/piglet/piglet_laughs.jpg</file>
-        <file>resources/animations/piglet/piglet_listen.jpg</file>
         <file>resources/animations/piglet/piglet_look_around.jpg</file>
+        <file>resources/animations/piglet/piglet_speech.jpg</file>
+        <file>resources/animations/piglet/piglet_voice_ended.jpg</file>
+        <file>resources/animations/piglet/piglet_voice_found.jpg</file>
         <file>resources/animations/piglet/piglet_wash_game_finished.jpg</file>
         <file>resources/images/piglet/action_cake.png</file>
         <file>resources/images/piglet/action_candy.png</file>
         <file>resources/images/piglet/piglet_idle.jpg</file>
+        <file>resources/images/piglet/piglet_listen.jpg</file>
         <file>resources/images/piglet/game_piglet_feed.png</file>
         <file>resources/images/piglet/game_piglet_feed_highlighted.png</file>
         <file>resources/images/piglet/game_piglet_puzzle.png</file>

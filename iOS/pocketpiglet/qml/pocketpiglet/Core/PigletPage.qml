@@ -1,49 +1,48 @@
 import QtQuick 2.9
 import QtMultimedia 5.9
 import QtSensors 5.9
+import SpeechRecorder 1.0
 
 import "Piglet"
 
 Item {
     id: pigletPage
 
-    property bool appInForeground:            Qt.application.active
-    property bool pageActive:                 false
-    property bool animationEnabled:           false
+    property bool appInForeground:     Qt.application.active
+    property bool pageActive:          false
+    property bool animationEnabled:    false
 
-    property real lastGameTime:               (new Date()).getTime()
-    property real accelShakeThreshold:        20.0
+    property real lastGameTime:        (new Date()).getTime()
+    property real accelShakeThreshold: 20.0
 
-    property string nextAnimation:            ""
-    property string wantedGame:               ""
+    property string nextAnimation:     ""
+    property string wantedGame:        ""
 
     onAppInForegroundChanged: {
         if (appInForeground && pageActive) {
-            animationEnabled = true;
+            if (!pigletSpeechAnimatedSprite.running) {
+                animationEnabled = true;
 
-            accelerometer.active = true;
+                pigletAnimationTimer.restart();
+            }
 
-            pigletAnimationTimer.restart();
             pigletRandomAnimationTimer.restart();
         } else {
             animationEnabled = false;
-
-            accelerometer.active = false;
         }
     }
 
     onPageActiveChanged: {
         if (appInForeground && pageActive) {
-            animationEnabled = true;
+            if (!pigletSpeechAnimatedSprite.running) {
+                animationEnabled = true;
 
-            accelerometer.active = true;
+                pigletAnimationTimer.restart();
+            }
 
-            pigletAnimationTimer.restart();
             pigletRandomAnimationTimer.restart();
         } else {
             animationEnabled = false;
-
-            accelerometer.active = false;
         }
     }
 
@@ -90,9 +89,6 @@ Item {
         } else if (nextAnimation === "piglet_wash_game_finished") {
             animationSpriteSequence.playAnimation("qrc:/resources/animations/piglet/piglet_wash_game_finished.jpg",
                                                   "qrc:/resources/sound/piglet/piglet_wash_game_finished.wav", nextAnimation, 56);
-        } else if (nextAnimation === "piglet_listen") {
-            animationSpriteSequence.playAnimation("qrc:/resources/animations/piglet/piglet_listen.jpg",
-                                                  "", nextAnimation, 5);
         } else {
             animationSpriteSequence.playAnimation("qrc:/resources/animations/piglet/piglet_eyes_blink.jpg",
                                                   "", "piglet_eyes_blink", 40);
@@ -105,6 +101,10 @@ Item {
         animationSpriteSequence.running = false;
 
         pigletAnimationTimer.restart();
+    }
+
+    function stopAnimation() {
+        animationSpriteSequence.running = false;
     }
 
     function isAnimationActive(src) {
@@ -124,7 +124,7 @@ Item {
     Audio {
         id:     audio
         volume: 1.0
-        muted:  !pigletPage.appInForeground || !pigletPage.pageActive
+        muted:  !pigletPage.appInForeground || !pigletPage.pageActive || speechAudio.playbackState === Audio.PlayingState
 
         property string audioSource: ""
 
@@ -138,6 +138,70 @@ Item {
 
             seek(0);
             play();
+        }
+    }
+
+    Audio {
+        id:     speechAudio
+        volume: 1.0
+        muted:  !pigletPage.appInForeground || !pigletPage.pageActive || audio.playbackState === Audio.PlayingState
+
+        property bool playbackWasStarted: false
+
+        onError: {
+            console.log(errorString);
+        }
+
+        onPlaybackStateChanged: {
+            if (playbackWasStarted && playbackState !== Audio.PlayingState) {
+                playbackWasStarted = false;
+
+                pigletSpeechAnimatedSprite.running = false;
+            }
+        }
+
+        function playAudio(src) {
+            source = "";
+            source = src;
+
+            seek(0);
+            play();
+
+            playbackWasStarted = true;
+        }
+    }
+
+    SpeechRecorder {
+        id:                 speechRecorder
+        volume:             1.0
+        sampleRate:         8000
+        minVoiceDuration:   500
+        minSilenceDuration: 250
+        active:             pigletPage.appInForeground && pigletPage.pageActive && audio.playbackState       !== Audio.PlayingState &&
+                                                                                   speechAudio.playbackState !== Audio.PlayingState
+
+        onError: {
+            console.log(errorString);
+        }
+
+        onVoiceFound: {
+            pigletPage.animationEnabled = false;
+
+            pigletPage.stopAnimation();
+
+            pigletVoiceFoundAnimatedSprite.playAnimation();
+        }
+
+        onVoiceRecorded: {
+            pigletVoiceFoundAnimatedSprite.running = false;
+
+            pigletVoiceEndedAnimatedSprite.playAnimation(true);
+        }
+
+        onVoiceReset: {
+            pigletVoiceFoundAnimatedSprite.running = false;
+
+            pigletVoiceEndedAnimatedSprite.playAnimation(false);
         }
     }
 
@@ -299,6 +363,127 @@ Item {
                     name: "dummySprite"
                 }
             }
+
+            Image {
+                id:           pigletListenImage
+                anchors.fill: parent
+                z:            pigletIdleImage.z - 1
+                source:       "qrc:/resources/images/piglet/piglet_listen.jpg"
+                fillMode:     Image.Stretch
+                smooth:       true
+            }
+
+            AnimatedSprite {
+                id:           pigletVoiceFoundAnimatedSprite
+                anchors.fill: parent
+                z:            pigletIdleImage.z - 1
+                running:      false
+                source:       "qrc:/resources/animations/piglet/piglet_voice_found.jpg"
+                frameCount:   5
+                frameWidth:   360
+                frameHeight:  640
+                frameX:       0
+                frameRate:    15
+                loops:        1
+
+                onRunningChanged: {
+                    if (running) {
+                        z                   = pigletIdleImage.z + 1;
+                    } else {
+                        pigletListenImage.z = pigletIdleImage.z + 1;
+                        z                   = pigletIdleImage.z - 1;
+                    }
+                }
+
+                onCurrentFrameChanged: {
+                    if (running && currentFrame === frameCount - 1) {
+                        running = false;
+                    }
+                }
+
+                function playAnimation() {
+                    currentFrame = 0;
+                    running      = true;
+                }
+            }
+
+            AnimatedSprite {
+                id:           pigletVoiceEndedAnimatedSprite
+                anchors.fill: parent
+                z:            pigletIdleImage.z - 1
+                running:      false
+                source:       "qrc:/resources/animations/piglet/piglet_voice_ended.jpg"
+                frameCount:   5
+                frameWidth:   360
+                frameHeight:  640
+                frameX:       0
+                frameRate:    15
+                loops:        1
+
+                property bool voiceRecorded: false
+
+                onRunningChanged: {
+                    if (running) {
+                        z                   = pigletIdleImage.z + 1;
+                        pigletListenImage.z = pigletIdleImage.z - 1;
+                    } else {
+                        z                   = pigletIdleImage.z - 1;
+
+                        if (voiceRecorded) {
+                            pigletSpeechAnimatedSprite.playAnimation();
+                        } else {
+                            pigletPage.animationEnabled = true;
+
+                            pigletPage.restartAnimation();
+                        }
+                    }
+                }
+
+                onCurrentFrameChanged: {
+                    if (running && currentFrame === frameCount - 1) {
+                        running = false;
+                    }
+                }
+
+                function playAnimation(voice_recorded) {
+                    currentFrame  = 0;
+                    voiceRecorded = voice_recorded;
+                    running       = true;
+                }
+            }
+
+            AnimatedSprite {
+                id:           pigletSpeechAnimatedSprite
+                anchors.fill: parent
+                z:            pigletIdleImage.z - 1
+                running:      false
+                source:       "qrc:/resources/animations/piglet/piglet_speech.jpg"
+                frameCount:   5
+                frameWidth:   360
+                frameHeight:  640
+                frameX:       0
+                frameRate:    10
+                loops:        AnimatedSprite.Infinite
+
+                onRunningChanged: {
+                    if (running) {
+                        z = pigletIdleImage.z + 1;
+
+                        speechAudio.playAudio(speechRecorder.voiceFileURL);
+                    } else {
+                        z = pigletIdleImage.z - 1;
+
+                        pigletPage.animationEnabled = true;
+
+                        pigletPage.restartAnimation();
+                    }
+                }
+
+                function playAnimation() {
+                    currentFrame = 0;
+                    running      = true;
+                }
+            }
         }
 
         Column {
@@ -398,56 +583,12 @@ Item {
                 }
             }
         }
-
-        /*
-        Image {
-            id:             helpButtonImage
-            anchors.bottom: parent.bottom
-            anchors.left:   parent.left
-            width:          48
-            height:         48
-            z:              10
-            source:         "qrc:/resources/images/help.png"
-
-            MouseArea {
-                id:           helpButtonMouseArea
-                anchors.fill: parent
-
-                onClicked: {
-                    waitRectangle.visible = true;
-
-                    pigletPage.animationEnabled = false;
-                    pigletPage.nextPage         = helpPage;
-
-                    pigletAnimationVideoPlayerLoader.unloadVideoPlayerAndReplacePage();
-                }
-            }
-        }
-
-        Image {
-            id:             exitButtonImage
-            anchors.bottom: parent.bottom
-            anchors.right:  parent.right
-            width:          48
-            height:         48
-            z:              10
-            source:         "qrc:/resources/images/exit.png"
-
-            MouseArea {
-                id:           exitButtonMouseArea
-                anchors.fill: parent
-
-                onClicked: {
-                    Qt.quit();
-                }
-            }
-        }
-        */
     }
 
     Accelerometer {
         id:       accelerometer
         dataRate: 10
+        active:   pigletPage.appInForeground && pigletPage.pageActive
 
         property real lastReadingX: 0.0
         property real lastReadingY: 0.0

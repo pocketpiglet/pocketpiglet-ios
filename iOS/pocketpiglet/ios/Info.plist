@@ -24,6 +24,8 @@
 	<true/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Please enable microphone access if you want to talk with me</string>
 	<key>UIRequiresFullScreen</key>
 	<true/>
 	<key>UIRequiredDeviceCapabilities</key>
