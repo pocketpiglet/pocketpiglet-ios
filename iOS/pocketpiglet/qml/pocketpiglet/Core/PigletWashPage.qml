@@ -302,16 +302,16 @@ Item {
         }
 
         Image {
-            id:             exitButtonImage
+            id:             backButtonImage
             anchors.bottom: parent.bottom
             anchors.right:  parent.right
-            width:          48
-            height:         48
+            width:          64
+            height:         64
             z:              10
-            source:         "qrc:/resources/images/exit.png"
+            source:         "qrc:/resources/images/back.png"
 
             MouseArea {
-                id:           exitButtonMouseArea
+                id:           backButtonMouseArea
                 anchors.fill: parent
 
                 onClicked: {

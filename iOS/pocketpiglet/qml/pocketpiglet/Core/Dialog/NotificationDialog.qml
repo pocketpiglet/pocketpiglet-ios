@@ -22,14 +22,16 @@ MouseArea {
         closed();
     }
 
-    Rectangle {
+    Image {
         anchors.centerIn: parent
-        width:            parent.width < parent.height ? parent.width * 0.85 : parent.height * 0.85
-        height:           parent.width < parent.height ? parent.width * 0.85 : parent.height * 0.85
-        color:            "white"
+        width:            parent.width < parent.height ? parent.width : parent.height
+        fillMode:         Image.PreserveAspectFit
+        source:           "qrc:/resources/images/dialog/dialog.png"
 
         Text {
             anchors.fill:        parent
+            anchors.margins:     16
+            clip:                true
             color:               "black"
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment:   Text.AlignVCenter

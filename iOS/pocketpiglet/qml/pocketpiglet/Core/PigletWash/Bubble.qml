@@ -13,7 +13,7 @@ Rectangle {
     signal bubbleDestroyed()
 
     function destroyBubble() {
-        if (typeof(bubble) !== "undefined") {
+        if (typeof(bubble) !== "undefined" && bubble !== null) {
             if (valid) {
                 valid = false;
 

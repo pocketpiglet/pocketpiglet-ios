@@ -1,5 +1,4 @@
 import QtQuick 2.9
-import QtQuick.Controls 2.2
 
 MouseArea {
     id:               dialogScreenLockMouseArea
@@ -27,32 +26,40 @@ MouseArea {
         closed();
     }
 
-    Rectangle {
+    Image {
+        id:               dialogImage
         anchors.centerIn: parent
-        width:            parent.width < parent.height ? parent.width * 0.85 : parent.height * 0.85
-        height:           parent.width < parent.height ? parent.width * 0.85 : parent.height * 0.85
-        color:            "white"
+        width:            parent.width < parent.height ? parent.width : parent.height
+        fillMode:         Image.PreserveAspectFit
+        source:           "qrc:/resources/images/dialog/dialog.png"
 
         Text {
-            anchors.top:         parent.top
-            anchors.bottom:      dialogButtonRow.top
-            anchors.left:        parent.left
-            anchors.right:       parent.right
-            color:               "black"
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment:   Text.AlignVCenter
-            wrapMode:            Text.Wrap
-            text:                dialogScreenLockMouseArea.text
+            anchors.fill:         parent
+            anchors.margins:      16
+            anchors.bottomMargin: 40
+            clip:                 true
+            color:                "black"
+            horizontalAlignment:  Text.AlignHCenter
+            verticalAlignment:    Text.AlignVCenter
+            wrapMode:             Text.Wrap
+            text:                 dialogScreenLockMouseArea.text
         }
+    }
 
-        Row {
-            id:                       dialogButtonRow
-            anchors.bottom:           parent.bottom
-            anchors.horizontalCenter: parent.horizontalCenter
-            spacing:                  16
+    Row {
+        anchors.horizontalCenter: dialogImage.horizontalCenter
+        anchors.verticalCenter:   dialogImage.bottom
+        spacing:                  dialogImage.width - yesButtonImage.width * 2 - noButtonImage.width * 2
 
-            Button {
-                text: "Yes"
+        Image {
+            id:     yesButtonImage
+            width:  64
+            height: 64
+            z:      dialogImage.z + 1
+            source: "qrc:/resources/images/dialog/yes.png"
+
+            MouseArea {
+                anchors.fill: parent
 
                 onClicked: {
                     dialogScreenLockMouseArea.visible = false;
@@ -61,9 +68,17 @@ MouseArea {
                     dialogScreenLockMouseArea.closed();
                 }
             }
+        }
 
-            Button {
-                text: "No"
+        Image {
+            id:     noButtonImage
+            width:  64
+            height: 64
+            z:      dialogImage.z + 1
+            source: "qrc:/resources/images/dialog/no.png"
+
+            MouseArea {
+                anchors.fill: parent
 
                 onClicked: {
                     dialogScreenLockMouseArea.visible = false;

@@ -65,7 +65,7 @@ Item {
     }
 
     function screenOrientationUpdated(orientation) {
-        if (typeof(pigletFeedPage) !== "undefined") {
+        if (typeof(pigletFeedPage) !== "undefined" && pigletFeedPage !== null) {
             if (orientation === Qt.LandscapeOrientation) {
                 screenRotation = 90;
             } else if (orientation === Qt.InvertedLandscapeOrientation) {
@@ -176,16 +176,16 @@ Item {
         }
 
         Image {
-            id:             exitButtonImage
+            id:             backButtonImage
             anchors.bottom: parent.bottom
             anchors.right:  parent.right
-            width:          48
-            height:         48
+            width:          64
+            height:         64
             z:              10
-            source:         "qrc:/resources/images/exit.png"
+            source:         "qrc:/resources/images/back.png"
 
             MouseArea {
-                id:           exitButtonMouseArea
+                id:           backButtonMouseArea
                 anchors.fill: parent
 
                 onClicked: {
@@ -299,35 +299,16 @@ Item {
                 }
 
                 Image {
-                    id:             complexitySelectionHelpButtonImage
-                    anchors.bottom: parent.bottom
-                    anchors.left:   parent.left
-                    width:          48
-                    height:         48
-                    z:              21
-                    source:         "qrc:/resources/images/help.png"
-
-                    MouseArea {
-                        id:           complexitySelectionHelpButtonMouseArea
-                        anchors.fill: parent
-
-                        onClicked: {
-                            // helpMessageDialog.open();
-                        }
-                    }
-                }
-
-                Image {
-                    id:             complexitySelectionExitButtonImage
+                    id:             complexitySelectionBackButtonImage
                     anchors.bottom: parent.bottom
                     anchors.right:  parent.right
-                    width:          48
-                    height:         48
+                    width:          64
+                    height:         64
                     z:              21
-                    source:         "qrc:/resources/images/exit.png"
+                    source:         "qrc:/resources/images/back.png"
 
                     MouseArea {
-                        id:           complexitySelectionExitButtonMouseArea
+                        id:           complexitySelectionBackButtonMouseArea
                         anchors.fill: parent
 
                         onClicked: {

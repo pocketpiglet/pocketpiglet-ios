@@ -40,7 +40,7 @@ Item {
     }
 
     function screenOrientationUpdated(orientation) {
-        if (typeof(pigletPuzzlePage) !== "undefined") {
+        if (typeof(pigletPuzzlePage) !== "undefined" && pigletPuzzlePage !== null) {
             if (orientation === Qt.LandscapeOrientation) {
                 screenRotation = 90;
             } else if (orientation === Qt.InvertedLandscapeOrientation) {
@@ -685,35 +685,16 @@ Item {
         }
 
         Image {
-            id:             refreshButtonImage
-            anchors.bottom: parent.bottom
-            anchors.left:   parent.left
-            width:          48
-            height:         48
-            z:              10
-            source:         "qrc:/resources/images/refresh.png"
-
-            MouseArea {
-                id:           refreshButtonMouseArea
-                anchors.fill: parent
-
-                onClicked: {
-                    gameBeginTimer.start();
-                }
-            }
-        }
-
-        Image {
-            id:             exitButtonImage
+            id:             backButtonImage
             anchors.bottom: parent.bottom
             anchors.right:  parent.right
-            width:          48
-            height:         48
+            width:          64
+            height:         64
             z:              10
-            source:         "qrc:/resources/images/exit.png"
+            source:         "qrc:/resources/images/back.png"
 
             MouseArea {
-                id:           exitButtonMouseArea
+                id:           backButtonMouseArea
                 anchors.fill: parent
 
                 onClicked: {
@@ -827,34 +808,16 @@ Item {
                 }
 
                 Image {
-                    id:             complexitySelectionHelpButtonImage
-                    anchors.bottom: parent.bottom
-                    anchors.left:   parent.left
-                    width:          48
-                    height:         48
-                    z:              51
-                    source:         "qrc:/resources/images/help.png"
-
-                    MouseArea {
-                        id:           complexitySelectionHelpButtonMouseArea
-                        anchors.fill: parent
-
-                        onClicked: {
-                        }
-                    }
-                }
-
-                Image {
-                    id:             complexitySelectionExitButtonImage
+                    id:             complexitySelectionBackButtonImage
                     anchors.bottom: parent.bottom
                     anchors.right:  parent.right
-                    width:          48
-                    height:         48
+                    width:          64
+                    height:         64
                     z:              51
-                    source:         "qrc:/resources/images/exit.png"
+                    source:         "qrc:/resources/images/back.png"
 
                     MouseArea {
-                        id:           complexitySelectionExitButtonMouseArea
+                        id:           complexitySelectionBackButtonMouseArea
                         anchors.fill: parent
 
                         onClicked: {
@@ -961,35 +924,16 @@ Item {
                 }
 
                 Image {
-                    id:             puzzleSelectionHelpButtonImage
-                    anchors.bottom: parent.bottom
-                    anchors.left:   parent.left
-                    width:          48
-                    height:         48
-                    z:              51
-                    source:         "qrc:/resources/images/help.png"
-
-                    MouseArea {
-                        id:           puzzleSelectionHelpButtonMouseArea
-                        anchors.fill: parent
-
-                        onClicked: {
-                            // helpQueryDialog.open();
-                        }
-                    }
-                }
-
-                Image {
-                    id:             puzzleSelectionExitButtonImage
+                    id:             puzzleSelectionBackButtonImage
                     anchors.bottom: parent.bottom
                     anchors.right:  parent.right
-                    width:          48
-                    height:         48
+                    width:          64
+                    height:         64
                     z:              51
-                    source:         "qrc:/resources/images/exit.png"
+                    source:         "qrc:/resources/images/back.png"
 
                     MouseArea {
-                        id:           puzzleSelectionExitButtonMouseArea
+                        id:           puzzleSelectionBackButtonMouseArea
                         anchors.fill: parent
 
                         onClicked: {

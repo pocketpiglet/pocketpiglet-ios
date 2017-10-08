@@ -459,7 +459,7 @@ Item {
                 z:            pigletIdleImage.z - 1
                 running:      false
                 source:       "qrc:/resources/animations/piglet/piglet_speech.jpg"
-                frameCount:   5
+                frameCount:   4
                 frameWidth:   360
                 frameHeight:  640
                 frameX:       0
