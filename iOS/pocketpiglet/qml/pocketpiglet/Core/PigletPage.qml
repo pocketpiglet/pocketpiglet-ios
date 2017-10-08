@@ -13,7 +13,7 @@ Item {
     property bool animationEnabled:    false
 
     property real lastGameTime:        (new Date()).getTime()
-    property real accelShakeThreshold: 20.0
+    property real accelShakeThreshold: 50.0
 
     property string nextAnimation:     ""
     property string wantedGame:        ""
@@ -176,7 +176,7 @@ Item {
         volume:             1.0
         sampleRate:         8000
         minVoiceDuration:   500
-        minSilenceDuration: 250
+        minSilenceDuration: 100
         active:             pigletPage.appInForeground && pigletPage.pageActive && audio.playbackState       !== Audio.PlayingState &&
                                                                                    speechAudio.playbackState !== Audio.PlayingState
 
