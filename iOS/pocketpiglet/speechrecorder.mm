@@ -218,6 +218,19 @@ void SpeechRecorder::DeleteAudioInput()
         AudioInput->deleteLater();
     }
 
+    //
+    // Workaround for Qt for IOS bug with low playback volume when
+    // recording is enabled. See qt-patches contents for details.
+    //
+    QAudioDeviceInfo info = QAudioDeviceInfo::defaultOutputDevice();
+
+    if (info.isNull()) {
+        emit error("QAudioDeviceInfo::defaultOutputDevice() returned null");
+    }
+    //
+    // -------------------------------------------------------------
+    //
+
     if (VoiceDetected) {
         emit voiceReset();
     }
