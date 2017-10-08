@@ -1,0 +1,13 @@
+--- qtmultimedia/src/plugins/coreaudio/coreaudiodeviceinfo.mm.orig	2017-10-08 04:04:04.000000000 +0300
++++ qtmultimedia/src/plugins/coreaudio/coreaudiodeviceinfo.mm	2017-10-08 04:08:04.000000000 +0300
+@@ -63,6 +63,10 @@
+     if (mode == QAudio::AudioInput) {
+         if (CoreAudioSessionManager::instance().category() != CoreAudioSessionManager::PlayAndRecord) {
+             CoreAudioSessionManager::instance().setCategory(CoreAudioSessionManager::PlayAndRecord);
++        } else {
++            if (CoreAudioSessionManager::instance().category() != CoreAudioSessionManager::Playback) {
++                CoreAudioSessionManager::instance().setCategory(CoreAudioSessionManager::Playback);
++            }
+         }
+     }
+ #endif
