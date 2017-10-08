@@ -174,7 +174,7 @@ Item {
     SpeechRecorder {
         id:                 speechRecorder
         volume:             1.0
-        sampleRate:         8000
+        sampleRate:         16000
         minVoiceDuration:   500
         minSilenceDuration: 100
         active:             pigletPage.appInForeground && pigletPage.pageActive && audio.playbackState       !== Audio.PlayingState &&
