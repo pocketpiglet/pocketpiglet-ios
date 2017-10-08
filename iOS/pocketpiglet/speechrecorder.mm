@@ -314,6 +314,6 @@ void SpeechRecorder::SaveVoice()
 
         voice_file.close();
     } else {
-        emit error(QString("Cannot open voice file %1: %2").arg(VoiceFilePath).arg(voice_file.errorString()));
+        emit error(QString("Cannot create voice file %1: %2").arg(VoiceFilePath).arg(voice_file.errorString()));
     }
 }
