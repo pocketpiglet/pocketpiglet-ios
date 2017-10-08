@@ -10,17 +10,18 @@
 
 SpeechRecorder::SpeechRecorder(QObject *parent) : QObject(parent)
 {
-    Active             = false;
-    VoiceDetected      = false;
-    SampleRate         = 0;
-    MinVoiceDuration   = 1000;
-    MinSilenceDuration = 1000;
-    SilenceSize        = 0;
-    Volume             = 1.0;
-    VoiceFilePath      = QDir(QString::fromNSString(NSTemporaryDirectory())).filePath("voice.wav");
-    VadInstance        = NULL;
-    AudioInput         = NULL;
-    AudioInputDevice   = NULL;
+    Active               = false;
+    VoiceDetected        = false;
+    SampleRate           = 0;
+    MinVoiceDuration     = 1000;
+    MinSilenceDuration   = 1000;
+    SilenceSize          = 0;
+    Volume               = 1.0;
+    SampleRateMultiplier = 1.0;
+    VoiceFilePath        = QDir(QString::fromNSString(NSTemporaryDirectory())).filePath("voice.wav");
+    VadInstance          = NULL;
+    AudioInput           = NULL;
+    AudioInputDevice     = NULL;
 }
 
 SpeechRecorder::~SpeechRecorder()
@@ -108,6 +109,18 @@ void SpeechRecorder::setVolume(const qreal &vol)
     }
 
     emit volumeChanged(Volume);
+}
+
+qreal SpeechRecorder::sampleRateMultiplier() const
+{
+    return SampleRateMultiplier;
+}
+
+void SpeechRecorder::setSampleRateMultiplier(const qreal &multiplier)
+{
+    SampleRateMultiplier = multiplier;
+
+    emit sampleRateMultiplierChanged(SampleRateMultiplier);
 }
 
 QString SpeechRecorder::voiceFileURL() const
@@ -303,6 +316,8 @@ void SpeechRecorder::SaveVoice()
     QFile voice_file(VoiceFilePath);
 
     if (voice_file.open(QIODevice::WriteOnly)) {
+        int sample_rate_high_tone = SampleRate * SampleRateMultiplier; // To make voice funny
+
         memset(wav_header.raw_header, 0, sizeof(wav_header.raw_header));
 
         memcpy(wav_header.chunk_id,       "RIFF", sizeof(wav_header.chunk_id));
@@ -315,8 +330,8 @@ void SpeechRecorder::SaveVoice()
         wav_header.sub_chunk_1_size = qToLittleEndian<uint32_t>(16); // For PCM
         wav_header.audio_format     = qToLittleEndian<uint16_t>(1); // PCM
         wav_header.num_channels     = qToLittleEndian<uint16_t>(1);
-        wav_header.sample_rate      = qToLittleEndian<uint32_t>(SampleRate);
-        wav_header.byte_rate        = qToLittleEndian<uint32_t>(SampleRate * 1 * 8 / 8); // sample_rate * num_channels * bits_per_sample / 8
+        wav_header.sample_rate      = qToLittleEndian<uint32_t>(sample_rate_high_tone);
+        wav_header.byte_rate        = qToLittleEndian<uint32_t>(sample_rate_high_tone * 1 * 8 / 8); // sample_rate * num_channels * bits_per_sample / 8
         wav_header.block_align      = qToLittleEndian<uint16_t>(1 * 8 / 8); // num_channels * bits_per_sample / 8
         wav_header.bits_per_sample  = qToLittleEndian<uint16_t>(8);
 

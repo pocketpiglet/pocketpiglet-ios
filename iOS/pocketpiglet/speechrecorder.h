@@ -12,11 +12,12 @@ class SpeechRecorder : public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY(bool    active             READ active             WRITE setActive             NOTIFY activeChanged)
-    Q_PROPERTY(int     sampleRate         READ sampleRate         WRITE setSampleRate         NOTIFY sampleRateChanged)
-    Q_PROPERTY(int     minVoiceDuration   READ minVoiceDuration   WRITE setMinVoiceDuration   NOTIFY minVoiceDurationChanged)
-    Q_PROPERTY(int     minSilenceDuration READ minSilenceDuration WRITE setMinSilenceDuration NOTIFY minSilenceDurationChanged)
-    Q_PROPERTY(qreal   volume             READ volume             WRITE setVolume             NOTIFY volumeChanged)
+    Q_PROPERTY(bool    active               READ active               WRITE setActive               NOTIFY activeChanged)
+    Q_PROPERTY(int     sampleRate           READ sampleRate           WRITE setSampleRate           NOTIFY sampleRateChanged)
+    Q_PROPERTY(int     minVoiceDuration     READ minVoiceDuration     WRITE setMinVoiceDuration     NOTIFY minVoiceDurationChanged)
+    Q_PROPERTY(int     minSilenceDuration   READ minSilenceDuration   WRITE setMinSilenceDuration   NOTIFY minSilenceDurationChanged)
+    Q_PROPERTY(qreal   volume               READ volume               WRITE setVolume               NOTIFY volumeChanged)
+    Q_PROPERTY(qreal   sampleRateMultiplier READ sampleRateMultiplier WRITE setSampleRateMultiplier NOTIFY sampleRateMultiplierChanged)
 
     Q_PROPERTY(QString voiceFileURL       READ voiceFileURL)
 
@@ -39,6 +40,9 @@ public:
     qreal volume() const;
     void setVolume(const qreal &vol);
 
+    qreal sampleRateMultiplier() const;
+    void setSampleRateMultiplier(const qreal &multiplier);
+
     QString voiceFileURL() const;
 
 private slots:
@@ -50,6 +54,7 @@ signals:
     void minVoiceDurationChanged(int minVoiceDuration);
     void minSilenceDurationChanged(int minSilenceDuration);
     void volumeChanged(qreal volume);
+    void sampleRateMultiplierChanged(qreal sampleRateMultiplier);
     void error(QString errorString);
     void voiceFound();
     void voiceRecorded();
@@ -66,7 +71,7 @@ private:
 
     bool         Active, VoiceDetected;
     int          SampleRate, MinVoiceDuration, MinSilenceDuration, SilenceSize;
-    qreal        Volume;
+    qreal        Volume, SampleRateMultiplier;
     QString      VoiceFilePath;
     QByteArray   AudioBuffer, VoiceBuffer;
     VadInst     *VadInstance;
