@@ -1,12 +1,18 @@
+#include <QtCore/QLocale>
+#include <QtCore/QTranslator>
 #include <QtGui/QGuiApplication>
 #include <QtQml/QQmlApplicationEngine>
-#include <QtQml/QQmlContext>
 
 #include "speechrecorder.h"
 
 int main(int argc, char *argv[])
 {
+    QTranslator     translator;
     QGuiApplication app(argc, argv);
+
+    if (translator.load(QString("qrc:/tr/pocketpiglet_%1").arg(QLocale::system().name()))) {
+        app.installTranslator(&translator);
+    }
 
     qmlRegisterType<SpeechRecorder>("SpeechRecorder", 1, 0, "SpeechRecorder");
 

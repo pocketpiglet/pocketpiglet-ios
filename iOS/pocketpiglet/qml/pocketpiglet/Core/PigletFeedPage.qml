@@ -326,7 +326,7 @@ Item {
         id:       newLevelNotificationDialog
         rotation: pigletFeedPage.screenRotation
         z:        30
-        text:     "Level " + pigletFeedPage.currentLevel + " of " + pigletFeedPage.maximumLevel + ". Get ready to remember a sandwich recipe..."
+        text:     qsTr("Level %1 of %2. Get ready to remember a sandwich recipe...").arg(pigletFeedPage.currentLevel).arg(pigletFeedPage.maximumLevel)
 
         onOpened: {
             audio.playAudio("qrc:/resources/sound/piglet_feed/new_level.wav");
@@ -348,7 +348,7 @@ Item {
         id:       gameCompleteQueryDialog
         rotation: pigletFeedPage.screenRotation
         z:        30
-        text:     "Congratulations, you have just won the game! Do you want to play again?"
+        text:     qsTr("Congratulations, you have just won the game! Do you want to play again?")
 
         onOpened: {
             audio.playAudio("qrc:/resources/sound/piglet_feed/game_complete.wav");
@@ -369,7 +369,7 @@ Item {
         id:       gameOverQueryDialog
         rotation: pigletFeedPage.screenRotation
         z:        30
-        text:     "Game over. Do you want to play again?"
+        text:     qsTr("Game over. Do you want to play again?")
 
         onOpened: {
             audio.playAudio("qrc:/resources/sound/piglet_feed/game_over.wav");

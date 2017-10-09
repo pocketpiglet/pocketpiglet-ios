@@ -330,7 +330,7 @@ Item {
     NotificationDialog {
         id:   gameStartNotificationDialog
         z:    20
-        text: "Your piglet wants to take a bath and play with soap bubbles! Help him to catch and pop as many bubbles as you can."
+        text: qsTr("Your piglet wants to take a bath and play with soap bubbles! Help him to catch and pop as many bubbles as you can.")
 
         onOpened: {
             audio.playAudio("qrc:/resources/sound/piglet_wash/game_start.wav");
@@ -354,7 +354,7 @@ Item {
     QueryDialog {
         id:   highScoreQueryDialog
         z:    20
-        text: "Congratulations, you have a new highscore! Do you want to play again?"
+        text: qsTr("Congratulations, you have a new highscore! Do you want to play again?")
 
         onOpened: {
             audio.playAudio("qrc:/resources/sound/piglet_wash/high_score.wav");
@@ -374,7 +374,7 @@ Item {
     QueryDialog {
         id:   gameOverQueryDialog
         z:    20
-        text: "Game over. Do you want to play again?"
+        text: qsTr("Game over. Do you want to play again?")
 
         onOpened: {
             audio.playAudio("qrc:/resources/sound/piglet_wash/game_over.wav");

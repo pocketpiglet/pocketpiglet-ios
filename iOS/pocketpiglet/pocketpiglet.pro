@@ -46,8 +46,13 @@ HEADERS += \
     webrtc/system_wrappers/interface/cpu_features_wrapper.h \
     webrtc/typedefs.h
 
-RESOURCES += qml.qrc \
-             resources.qrc
+RESOURCES += \
+    qml.qrc \
+    resources.qrc \
+    translations.qrc
+
+TRANSLATIONS += \
+    translations/pocketpiglet_ru.ts
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =

@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/tr">
+        <file alias="pocketpiglet_ru.qm">translations/pocketpiglet_ru.qm</file>
+    </qresource>
+</RCC>
