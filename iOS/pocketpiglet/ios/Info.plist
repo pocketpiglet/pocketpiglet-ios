@@ -4,22 +4,22 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en_US</string>
-	<key>CFBundleIconFile</key>
-	<string></string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleExecutable</key>
 	<string>pocketpiglet</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.derevenetz.natalia.pocketpiglet</string>
-	<key>CFBundleDisplayName</key>
-	<string>PocketPiglet</string>
 	<key>CFBundleName</key>
+	<string>PocketPiglet</string>
+	<key>CFBundleDisplayName</key>
 	<string>PocketPiglet</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
+	<key>CFBundleIconFile</key>
+	<string></string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
