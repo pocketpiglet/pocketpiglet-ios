@@ -134,6 +134,7 @@ Item {
 
         function playAudio(src) {
             audioSource = src;
+            source      = "";
             source      = src;
 
             seek(0);
