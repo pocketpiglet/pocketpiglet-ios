@@ -13,8 +13,8 @@ Item {
 
     property int screenRotation:      90
 
-    property real screenFactorX:      backgroundImage.paintedWidth / backgroundImage.sourceSize.width
-    property real screenFactorY:      backgroundImage.paintedHeight / backgroundImage.sourceSize.height
+    property real screenFactor:       Math.min(backgroundRectangle.width  / backgroundImage.sourceSize.width,
+                                               backgroundRectangle.height / backgroundImage.sourceSize.height);
 
     property string puzzleType:       "watering_flowers"
     property string puzzleComplexity: ""
@@ -96,7 +96,7 @@ Item {
             id:           backgroundImage
             anchors.fill: parent
             source:       "qrc:/resources/images/background.png"
-            fillMode:     Image.Stretch
+            fillMode:     Image.PreserveAspectCrop
             smooth:       true
         }
 
@@ -104,8 +104,8 @@ Item {
             id:           originalSampleImageThumbnail
             anchors.top:  parent.top
             anchors.left: parent.left
-            width:        120 * pigletPuzzlePage.screenFactorX
-            height:       120 * pigletPuzzlePage.screenFactorY
+            width:        120 * pigletPuzzlePage.screenFactor
+            height:       120 * pigletPuzzlePage.screenFactor
             z:            2
             source:       "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/original_thumbnail.png"
             fillMode:     Image.PreserveAspectFit
@@ -124,18 +124,18 @@ Item {
         Rectangle {
             id:               gameFieldRectangle
             anchors.centerIn: parent
-            width:            360 * pigletPuzzlePage.screenFactorX
-            height:           360 * pigletPuzzlePage.screenFactorY
+            width:            360 * pigletPuzzlePage.screenFactor
+            height:           360 * pigletPuzzlePage.screenFactor
             z:                2
             color:            "transparent"
 
             property list<Image> puzzleElementsMedium: [
                 Image {
                     parent:   gameFieldRectangle
-                    width:    120 * pigletPuzzlePage.screenFactorX
-                    height:   120 * pigletPuzzlePage.screenFactorY
-                    x:        0   * pigletPuzzlePage.screenFactorX
-                    y:        0   * pigletPuzzlePage.screenFactorY
+                    width:    120 * pigletPuzzlePage.screenFactor
+                    height:   120 * pigletPuzzlePage.screenFactor
+                    x:        0   * pigletPuzzlePage.screenFactor
+                    y:        0   * pigletPuzzlePage.screenFactor
                     visible:  pigletPuzzlePage.puzzleComplexity === "medium"
                     source:   pigletPuzzlePage.puzzleSolved ? "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/medium/9.png"
                                                             : "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/medium/0.png"
@@ -149,10 +149,10 @@ Item {
                 },
                 Image {
                     parent:   gameFieldRectangle
-                    width:    120 * pigletPuzzlePage.screenFactorX
-                    height:   120 * pigletPuzzlePage.screenFactorY
-                    x:        120 * pigletPuzzlePage.screenFactorX
-                    y:        0   * pigletPuzzlePage.screenFactorY
+                    width:    120 * pigletPuzzlePage.screenFactor
+                    height:   120 * pigletPuzzlePage.screenFactor
+                    x:        120 * pigletPuzzlePage.screenFactor
+                    y:        0   * pigletPuzzlePage.screenFactor
                     visible:  pigletPuzzlePage.puzzleComplexity === "medium"
                     source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/medium/1.png"
                     fillMode: Image.PreserveAspectFit
@@ -169,10 +169,10 @@ Item {
                 },
                 Image {
                     parent:   gameFieldRectangle
-                    width:    120 * pigletPuzzlePage.screenFactorX
-                    height:   120 * pigletPuzzlePage.screenFactorY
-                    x:        240 * pigletPuzzlePage.screenFactorX
-                    y:        0   * pigletPuzzlePage.screenFactorY
+                    width:    120 * pigletPuzzlePage.screenFactor
+                    height:   120 * pigletPuzzlePage.screenFactor
+                    x:        240 * pigletPuzzlePage.screenFactor
+                    y:        0   * pigletPuzzlePage.screenFactor
                     visible:  pigletPuzzlePage.puzzleComplexity === "medium"
                     source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/medium/2.png"
                     fillMode: Image.PreserveAspectFit
@@ -189,10 +189,10 @@ Item {
                 },
                 Image {
                     parent:   gameFieldRectangle
-                    width:    120 * pigletPuzzlePage.screenFactorX
-                    height:   120 * pigletPuzzlePage.screenFactorY
-                    x:        0   * pigletPuzzlePage.screenFactorX
-                    y:        120 * pigletPuzzlePage.screenFactorY
+                    width:    120 * pigletPuzzlePage.screenFactor
+                    height:   120 * pigletPuzzlePage.screenFactor
+                    x:        0   * pigletPuzzlePage.screenFactor
+                    y:        120 * pigletPuzzlePage.screenFactor
                     visible:  pigletPuzzlePage.puzzleComplexity === "medium"
                     source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/medium/3.png"
                     fillMode: Image.PreserveAspectFit
@@ -209,10 +209,10 @@ Item {
                 },
                 Image {
                     parent:   gameFieldRectangle
-                    width:    120 * pigletPuzzlePage.screenFactorX
-                    height:   120 * pigletPuzzlePage.screenFactorY
-                    x:        120 * pigletPuzzlePage.screenFactorX
-                    y:        120 * pigletPuzzlePage.screenFactorY
+                    width:    120 * pigletPuzzlePage.screenFactor
+                    height:   120 * pigletPuzzlePage.screenFactor
+                    x:        120 * pigletPuzzlePage.screenFactor
+                    y:        120 * pigletPuzzlePage.screenFactor
                     visible:  pigletPuzzlePage.puzzleComplexity === "medium"
                     source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/medium/4.png"
                     fillMode: Image.PreserveAspectFit
@@ -229,10 +229,10 @@ Item {
                 },
                 Image {
                     parent:   gameFieldRectangle
-                    width:    120 * pigletPuzzlePage.screenFactorX
-                    height:   120 * pigletPuzzlePage.screenFactorY
-                    x:        240 * pigletPuzzlePage.screenFactorX
-                    y:        120 * pigletPuzzlePage.screenFactorY
+                    width:    120 * pigletPuzzlePage.screenFactor
+                    height:   120 * pigletPuzzlePage.screenFactor
+                    x:        240 * pigletPuzzlePage.screenFactor
+                    y:        120 * pigletPuzzlePage.screenFactor
                     visible:  pigletPuzzlePage.puzzleComplexity === "medium"
                     source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/medium/5.png"
                     fillMode: Image.PreserveAspectFit
@@ -249,10 +249,10 @@ Item {
                 },
                 Image {
                     parent:   gameFieldRectangle
-                    width:    120 * pigletPuzzlePage.screenFactorX
-                    height:   120 * pigletPuzzlePage.screenFactorY
-                    x:        0   * pigletPuzzlePage.screenFactorX
-                    y:        240 * pigletPuzzlePage.screenFactorY
+                    width:    120 * pigletPuzzlePage.screenFactor
+                    height:   120 * pigletPuzzlePage.screenFactor
+                    x:        0   * pigletPuzzlePage.screenFactor
+                    y:        240 * pigletPuzzlePage.screenFactor
                     visible:  pigletPuzzlePage.puzzleComplexity === "medium"
                     source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/medium/6.png"
                     fillMode: Image.PreserveAspectFit
@@ -269,10 +269,10 @@ Item {
                 },
                 Image {
                     parent:   gameFieldRectangle
-                    width:    120 * pigletPuzzlePage.screenFactorX
-                    height:   120 * pigletPuzzlePage.screenFactorY
-                    x:        120 * pigletPuzzlePage.screenFactorX
-                    y:        240 * pigletPuzzlePage.screenFactorY
+                    width:    120 * pigletPuzzlePage.screenFactor
+                    height:   120 * pigletPuzzlePage.screenFactor
+                    x:        120 * pigletPuzzlePage.screenFactor
+                    y:        240 * pigletPuzzlePage.screenFactor
                     visible:  pigletPuzzlePage.puzzleComplexity === "medium"
                     source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/medium/7.png"
                     fillMode: Image.PreserveAspectFit
@@ -289,10 +289,10 @@ Item {
                 },
                 Image {
                     parent:   gameFieldRectangle
-                    width:    120 * pigletPuzzlePage.screenFactorX
-                    height:   120 * pigletPuzzlePage.screenFactorY
-                    x:        240 * pigletPuzzlePage.screenFactorX
-                    y:        240 * pigletPuzzlePage.screenFactorY
+                    width:    120 * pigletPuzzlePage.screenFactor
+                    height:   120 * pigletPuzzlePage.screenFactor
+                    x:        240 * pigletPuzzlePage.screenFactor
+                    y:        240 * pigletPuzzlePage.screenFactor
                     visible:  pigletPuzzlePage.puzzleComplexity === "medium"
                     source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/medium/8.png"
                     fillMode: Image.PreserveAspectFit
@@ -312,10 +312,10 @@ Item {
             property list<Image> puzzleElementsHard: [
                 Image {
                     parent:   gameFieldRectangle
-                    width:    90 * pigletPuzzlePage.screenFactorX
-                    height:   90 * pigletPuzzlePage.screenFactorY
-                    x:        0  * pigletPuzzlePage.screenFactorX
-                    y:        0  * pigletPuzzlePage.screenFactorY
+                    width:    90 * pigletPuzzlePage.screenFactor
+                    height:   90 * pigletPuzzlePage.screenFactor
+                    x:        0  * pigletPuzzlePage.screenFactor
+                    y:        0  * pigletPuzzlePage.screenFactor
                     visible:  pigletPuzzlePage.puzzleComplexity === "hard"
                     source:   pigletPuzzlePage.puzzleSolved ? "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/16.png"
                                                             : "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/0.png"
@@ -329,10 +329,10 @@ Item {
                 },
                 Image {
                     parent:   gameFieldRectangle
-                    width:    90 * pigletPuzzlePage.screenFactorX
-                    height:   90 * pigletPuzzlePage.screenFactorY
-                    x:        90 * pigletPuzzlePage.screenFactorX
-                    y:        0  * pigletPuzzlePage.screenFactorY
+                    width:    90 * pigletPuzzlePage.screenFactor
+                    height:   90 * pigletPuzzlePage.screenFactor
+                    x:        90 * pigletPuzzlePage.screenFactor
+                    y:        0  * pigletPuzzlePage.screenFactor
                     visible:  pigletPuzzlePage.puzzleComplexity === "hard"
                     source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/1.png"
                     fillMode: Image.PreserveAspectFit
@@ -349,10 +349,10 @@ Item {
                 },
                 Image {
                     parent:   gameFieldRectangle
-                    width:    90  * pigletPuzzlePage.screenFactorX
-                    height:   90  * pigletPuzzlePage.screenFactorY
-                    x:        180 * pigletPuzzlePage.screenFactorX
-                    y:        0   * pigletPuzzlePage.screenFactorY
+                    width:    90  * pigletPuzzlePage.screenFactor
+                    height:   90  * pigletPuzzlePage.screenFactor
+                    x:        180 * pigletPuzzlePage.screenFactor
+                    y:        0   * pigletPuzzlePage.screenFactor
                     visible:  pigletPuzzlePage.puzzleComplexity === "hard"
                     source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/2.png"
                     fillMode: Image.PreserveAspectFit
@@ -369,10 +369,10 @@ Item {
                 },
                 Image {
                     parent:   gameFieldRectangle
-                    width:    90  * pigletPuzzlePage.screenFactorX
-                    height:   90  * pigletPuzzlePage.screenFactorY
-                    x:        270 * pigletPuzzlePage.screenFactorX
-                    y:        0   * pigletPuzzlePage.screenFactorY
+                    width:    90  * pigletPuzzlePage.screenFactor
+                    height:   90  * pigletPuzzlePage.screenFactor
+                    x:        270 * pigletPuzzlePage.screenFactor
+                    y:        0   * pigletPuzzlePage.screenFactor
                     visible:  pigletPuzzlePage.puzzleComplexity === "hard"
                     source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/3.png"
                     fillMode: Image.PreserveAspectFit
@@ -389,10 +389,10 @@ Item {
                 },
                 Image {
                     parent:   gameFieldRectangle
-                    width:    90 * pigletPuzzlePage.screenFactorX
-                    height:   90 * pigletPuzzlePage.screenFactorY
-                    x:        0  * pigletPuzzlePage.screenFactorX
-                    y:        90 * pigletPuzzlePage.screenFactorY
+                    width:    90 * pigletPuzzlePage.screenFactor
+                    height:   90 * pigletPuzzlePage.screenFactor
+                    x:        0  * pigletPuzzlePage.screenFactor
+                    y:        90 * pigletPuzzlePage.screenFactor
                     visible:  pigletPuzzlePage.puzzleComplexity === "hard"
                     source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/4.png"
                     fillMode: Image.PreserveAspectFit
@@ -409,10 +409,10 @@ Item {
                 },
                 Image {
                     parent:   gameFieldRectangle
-                    width:    90 * pigletPuzzlePage.screenFactorX
-                    height:   90 * pigletPuzzlePage.screenFactorY
-                    x:        90 * pigletPuzzlePage.screenFactorX
-                    y:        90 * pigletPuzzlePage.screenFactorY
+                    width:    90 * pigletPuzzlePage.screenFactor
+                    height:   90 * pigletPuzzlePage.screenFactor
+                    x:        90 * pigletPuzzlePage.screenFactor
+                    y:        90 * pigletPuzzlePage.screenFactor
                     visible:  pigletPuzzlePage.puzzleComplexity === "hard"
                     source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/5.png"
                     fillMode: Image.PreserveAspectFit
@@ -429,10 +429,10 @@ Item {
                 },
                 Image {
                     parent:   gameFieldRectangle
-                    width:    90  * pigletPuzzlePage.screenFactorX
-                    height:   90  * pigletPuzzlePage.screenFactorY
-                    x:        180 * pigletPuzzlePage.screenFactorX
-                    y:        90  * pigletPuzzlePage.screenFactorY
+                    width:    90  * pigletPuzzlePage.screenFactor
+                    height:   90  * pigletPuzzlePage.screenFactor
+                    x:        180 * pigletPuzzlePage.screenFactor
+                    y:        90  * pigletPuzzlePage.screenFactor
                     visible:  pigletPuzzlePage.puzzleComplexity === "hard"
                     source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/6.png"
                     fillMode: Image.PreserveAspectFit
@@ -449,10 +449,10 @@ Item {
                 },
                 Image {
                     parent:   gameFieldRectangle
-                    width:    90  * pigletPuzzlePage.screenFactorX
-                    height:   90  * pigletPuzzlePage.screenFactorY
-                    x:        270 * pigletPuzzlePage.screenFactorX
-                    y:        90  * pigletPuzzlePage.screenFactorY
+                    width:    90  * pigletPuzzlePage.screenFactor
+                    height:   90  * pigletPuzzlePage.screenFactor
+                    x:        270 * pigletPuzzlePage.screenFactor
+                    y:        90  * pigletPuzzlePage.screenFactor
                     visible:  pigletPuzzlePage.puzzleComplexity === "hard"
                     source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/7.png"
                     fillMode: Image.PreserveAspectFit
@@ -469,10 +469,10 @@ Item {
                 },
                 Image {
                     parent:   gameFieldRectangle
-                    width:    90  * pigletPuzzlePage.screenFactorX
-                    height:   90  * pigletPuzzlePage.screenFactorY
-                    x:        0   * pigletPuzzlePage.screenFactorX
-                    y:        180 * pigletPuzzlePage.screenFactorY
+                    width:    90  * pigletPuzzlePage.screenFactor
+                    height:   90  * pigletPuzzlePage.screenFactor
+                    x:        0   * pigletPuzzlePage.screenFactor
+                    y:        180 * pigletPuzzlePage.screenFactor
                     visible:  pigletPuzzlePage.puzzleComplexity === "hard"
                     source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/8.png"
                     fillMode: Image.PreserveAspectFit
@@ -489,10 +489,10 @@ Item {
                 },
                 Image {
                     parent:   gameFieldRectangle
-                    width:    90  * pigletPuzzlePage.screenFactorX
-                    height:   90  * pigletPuzzlePage.screenFactorY
-                    x:        90  * pigletPuzzlePage.screenFactorX
-                    y:        180 * pigletPuzzlePage.screenFactorY
+                    width:    90  * pigletPuzzlePage.screenFactor
+                    height:   90  * pigletPuzzlePage.screenFactor
+                    x:        90  * pigletPuzzlePage.screenFactor
+                    y:        180 * pigletPuzzlePage.screenFactor
                     visible:  pigletPuzzlePage.puzzleComplexity === "hard"
                     source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/9.png"
                     fillMode: Image.PreserveAspectFit
@@ -509,10 +509,10 @@ Item {
                 },
                 Image {
                     parent:   gameFieldRectangle
-                    width:    90  * pigletPuzzlePage.screenFactorX
-                    height:   90  * pigletPuzzlePage.screenFactorY
-                    x:        180 * pigletPuzzlePage.screenFactorX
-                    y:        180 * pigletPuzzlePage.screenFactorY
+                    width:    90  * pigletPuzzlePage.screenFactor
+                    height:   90  * pigletPuzzlePage.screenFactor
+                    x:        180 * pigletPuzzlePage.screenFactor
+                    y:        180 * pigletPuzzlePage.screenFactor
                     visible:  pigletPuzzlePage.puzzleComplexity === "hard"
                     source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/10.png"
                     fillMode: Image.PreserveAspectFit
@@ -529,10 +529,10 @@ Item {
                 },
                 Image {
                     parent:   gameFieldRectangle
-                    width:    90  * pigletPuzzlePage.screenFactorX
-                    height:   90  * pigletPuzzlePage.screenFactorY
-                    x:        270 * pigletPuzzlePage.screenFactorX
-                    y:        180 * pigletPuzzlePage.screenFactorY
+                    width:    90  * pigletPuzzlePage.screenFactor
+                    height:   90  * pigletPuzzlePage.screenFactor
+                    x:        270 * pigletPuzzlePage.screenFactor
+                    y:        180 * pigletPuzzlePage.screenFactor
                     visible:  pigletPuzzlePage.puzzleComplexity === "hard"
                     source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/11.png"
                     fillMode: Image.PreserveAspectFit
@@ -549,10 +549,10 @@ Item {
                 },
                 Image {
                     parent:   gameFieldRectangle
-                    width:    90  * pigletPuzzlePage.screenFactorX
-                    height:   90  * pigletPuzzlePage.screenFactorY
-                    x:        0   * pigletPuzzlePage.screenFactorX
-                    y:        270 * pigletPuzzlePage.screenFactorY
+                    width:    90  * pigletPuzzlePage.screenFactor
+                    height:   90  * pigletPuzzlePage.screenFactor
+                    x:        0   * pigletPuzzlePage.screenFactor
+                    y:        270 * pigletPuzzlePage.screenFactor
                     visible:  pigletPuzzlePage.puzzleComplexity === "hard"
                     source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/12.png"
                     fillMode: Image.PreserveAspectFit
@@ -569,10 +569,10 @@ Item {
                 },
                 Image {
                     parent:   gameFieldRectangle
-                    width:    90  * pigletPuzzlePage.screenFactorX
-                    height:   90  * pigletPuzzlePage.screenFactorY
-                    x:        90  * pigletPuzzlePage.screenFactorX
-                    y:        270 * pigletPuzzlePage.screenFactorY
+                    width:    90  * pigletPuzzlePage.screenFactor
+                    height:   90  * pigletPuzzlePage.screenFactor
+                    x:        90  * pigletPuzzlePage.screenFactor
+                    y:        270 * pigletPuzzlePage.screenFactor
                     visible:  pigletPuzzlePage.puzzleComplexity === "hard"
                     source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/13.png"
                     fillMode: Image.PreserveAspectFit
@@ -589,10 +589,10 @@ Item {
                 },
                 Image {
                     parent:   gameFieldRectangle
-                    width:    90  * pigletPuzzlePage.screenFactorX
-                    height:   90  * pigletPuzzlePage.screenFactorY
-                    x:        180 * pigletPuzzlePage.screenFactorX
-                    y:        270 * pigletPuzzlePage.screenFactorY
+                    width:    90  * pigletPuzzlePage.screenFactor
+                    height:   90  * pigletPuzzlePage.screenFactor
+                    x:        180 * pigletPuzzlePage.screenFactor
+                    y:        270 * pigletPuzzlePage.screenFactor
                     visible:  pigletPuzzlePage.puzzleComplexity === "hard"
                     source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/14.png"
                     fillMode: Image.PreserveAspectFit
@@ -609,10 +609,10 @@ Item {
                 },
                 Image {
                     parent:   gameFieldRectangle
-                    width:    90  * pigletPuzzlePage.screenFactorX
-                    height:   90  * pigletPuzzlePage.screenFactorY
-                    x:        270 * pigletPuzzlePage.screenFactorX
-                    y:        270 * pigletPuzzlePage.screenFactorY
+                    width:    90  * pigletPuzzlePage.screenFactor
+                    height:   90  * pigletPuzzlePage.screenFactor
+                    x:        270 * pigletPuzzlePage.screenFactor
+                    y:        270 * pigletPuzzlePage.screenFactor
                     visible:  pigletPuzzlePage.puzzleComplexity === "hard"
                     source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/15.png"
                     fillMode: Image.PreserveAspectFit
@@ -719,8 +719,8 @@ Item {
         Image {
             id:               originalSampleImage
             anchors.centerIn: parent
-            width:            360 * pigletPuzzlePage.screenFactorX
-            height:           360 * pigletPuzzlePage.screenFactorY
+            width:            360 * pigletPuzzlePage.screenFactor
+            height:           360 * pigletPuzzlePage.screenFactor
             source:           "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/original.png"
             fillMode:         Image.PreserveAspectFit
             smooth:           true
@@ -754,7 +754,7 @@ Item {
                 id:           complexitySelectionBackgroundImage
                 anchors.fill: parent
                 source:       "qrc:/resources/images/background.png"
-                fillMode:     Image.Stretch
+                fillMode:     Image.PreserveAspectCrop
                 smooth:       true
 
                 Image {
@@ -849,7 +849,7 @@ Item {
                 id:           puzzleSelectionBackgroundImage
                 anchors.fill: parent
                 source:       "qrc:/resources/images/background.png"
-                fillMode:     Image.Stretch
+                fillMode:     Image.PreserveAspectCrop
                 smooth:       true
 
                 Image {

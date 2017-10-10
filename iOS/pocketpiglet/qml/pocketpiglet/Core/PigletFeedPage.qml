@@ -109,7 +109,7 @@ Item {
             id:           backgroundAnimatedImage
             anchors.fill: parent
             source:       "qrc:/resources/images/piglet_feed/background.gif"
-            fillMode:     Image.Stretch
+            fillMode:     Image.PreserveAspectCrop
             smooth:       true
             playing:      false
         }
@@ -119,7 +119,7 @@ Item {
             anchors.fill: parent
             z:            1
             source:       "qrc:/resources/images/piglet_feed/background_eat.gif"
-            fillMode:     Image.Stretch
+            fillMode:     Image.PreserveAspectCrop
             smooth:       true
             playing:      false
             visible:      false
@@ -215,7 +215,7 @@ Item {
                 id:           complexitySelectionBackgroundImage
                 anchors.fill: parent
                 source:       "qrc:/resources/images/background.png"
-                fillMode:     Image.Stretch
+                fillMode:     Image.PreserveAspectCrop
                 smooth:       true
 
                 Image {

@@ -247,19 +247,45 @@ Item {
             }
 
             Image {
-                id:           pigletIdleImage
-                anchors.fill: parent
-                z:            5
-                source:       "qrc:/resources/images/piglet/piglet_idle.jpg"
-                fillMode:     Image.Stretch
-                smooth:       true
+                id:               pigletIdleImage
+                anchors.centerIn: parent
+                width:            parent.width
+                height:           parent.height
+                z:                5
+                source:           "qrc:/resources/images/piglet/piglet_idle.jpg"
+                fillMode:         Image.PreserveAspectCrop
+                smooth:           true
+
+                property bool geometrySettled: false
+
+                onPaintedWidthChanged: {
+                    if (!geometrySettled && width > 0 && height > 0 && paintedWidth > 0 && paintedHeight > 0) {
+                        geometrySettled = true;
+
+                        width    = paintedWidth;
+                        height   = paintedHeight;
+                        fillMode = Image.Stretch;
+                    }
+                }
+
+                onPaintedHeightChanged: {
+                    if (!geometrySettled && width > 0 && height > 0 && paintedWidth > 0 && paintedHeight > 0) {
+                        geometrySettled = true;
+
+                        width    = paintedWidth;
+                        height   = paintedHeight;
+                        fillMode = Image.Stretch;
+                    }
+                }
             }
 
             SpriteSequence {
-                id:           animationSpriteSequence
-                anchors.fill: parent
-                z:            pigletIdleImage.z - 1
-                running:      false
+                id:               animationSpriteSequence
+                anchors.centerIn: parent
+                width:            pigletIdleImage.width
+                height:           pigletIdleImage.height
+                z:                pigletIdleImage.z - 1
+                running:          false
 
                 property int animationFrameWidth:          360
                 property int animationFrameHeight:         640
@@ -367,26 +393,52 @@ Item {
             }
 
             Image {
-                id:           pigletListenImage
-                anchors.fill: parent
-                z:            pigletIdleImage.z - 1
-                source:       "qrc:/resources/images/piglet/piglet_listen.jpg"
-                fillMode:     Image.Stretch
-                smooth:       true
+                id:               pigletListenImage
+                anchors.centerIn: parent
+                width:            parent.width
+                height:           parent.height
+                z:                pigletIdleImage.z - 1
+                source:           "qrc:/resources/images/piglet/piglet_listen.jpg"
+                fillMode:         Image.PreserveAspectCrop
+                smooth:           true
+
+                property bool geometrySettled: false
+
+                onPaintedWidthChanged: {
+                    if (!geometrySettled && width > 0 && height > 0 && paintedWidth > 0 && paintedHeight > 0) {
+                        geometrySettled = true;
+
+                        width    = paintedWidth;
+                        height   = paintedHeight;
+                        fillMode = Image.Stretch;
+                    }
+                }
+
+                onPaintedHeightChanged: {
+                    if (!geometrySettled && width > 0 && height > 0 && paintedWidth > 0 && paintedHeight > 0) {
+                        geometrySettled = true;
+
+                        width    = paintedWidth;
+                        height   = paintedHeight;
+                        fillMode = Image.Stretch;
+                    }
+                }
             }
 
             AnimatedSprite {
-                id:           pigletVoiceFoundAnimatedSprite
-                anchors.fill: parent
-                z:            pigletIdleImage.z - 1
-                running:      false
-                source:       "qrc:/resources/animations/piglet/piglet_voice_found.jpg"
-                frameCount:   5
-                frameWidth:   360
-                frameHeight:  640
-                frameX:       0
-                frameRate:    15
-                loops:        1
+                id:               pigletVoiceFoundAnimatedSprite
+                anchors.centerIn: parent
+                width:            pigletListenImage.width
+                height:           pigletListenImage.height
+                z:                pigletIdleImage.z - 1
+                running:          false
+                source:           "qrc:/resources/animations/piglet/piglet_voice_found.jpg"
+                frameCount:       5
+                frameWidth:       360
+                frameHeight:      640
+                frameX:           0
+                frameRate:        15
+                loops:            1
 
                 onRunningChanged: {
                     if (running) {
@@ -410,17 +462,19 @@ Item {
             }
 
             AnimatedSprite {
-                id:           pigletVoiceEndedAnimatedSprite
-                anchors.fill: parent
-                z:            pigletIdleImage.z - 1
-                running:      false
-                source:       "qrc:/resources/animations/piglet/piglet_voice_ended.jpg"
-                frameCount:   5
-                frameWidth:   360
-                frameHeight:  640
-                frameX:       0
-                frameRate:    15
-                loops:        1
+                id:               pigletVoiceEndedAnimatedSprite
+                anchors.centerIn: parent
+                width:            pigletListenImage.width
+                height:           pigletListenImage.height
+                z:                pigletIdleImage.z - 1
+                running:          false
+                source:           "qrc:/resources/animations/piglet/piglet_voice_ended.jpg"
+                frameCount:       5
+                frameWidth:       360
+                frameHeight:      640
+                frameX:           0
+                frameRate:        15
+                loops:            1
 
                 property bool voiceRecorded: false
 
@@ -455,17 +509,19 @@ Item {
             }
 
             AnimatedSprite {
-                id:           pigletSpeechAnimatedSprite
-                anchors.fill: parent
-                z:            pigletIdleImage.z - 1
-                running:      false
-                source:       "qrc:/resources/animations/piglet/piglet_speech.jpg"
-                frameCount:   4
-                frameWidth:   360
-                frameHeight:  640
-                frameX:       0
-                frameRate:    10
-                loops:        AnimatedSprite.Infinite
+                id:               pigletSpeechAnimatedSprite
+                anchors.centerIn: parent
+                width:            pigletIdleImage.width
+                height:           pigletIdleImage.height
+                z:                pigletIdleImage.z - 1
+                running:          false
+                source:           "qrc:/resources/animations/piglet/piglet_speech.jpg"
+                frameCount:       4
+                frameWidth:       360
+                frameHeight:      640
+                frameX:           0
+                frameRate:        10
+                loops:            AnimatedSprite.Infinite
 
                 onRunningChanged: {
                     if (running) {

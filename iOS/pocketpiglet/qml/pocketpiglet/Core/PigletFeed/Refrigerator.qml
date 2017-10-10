@@ -19,8 +19,8 @@ Rectangle {
         FoodItem {
             id:            saladFoodItemEasy
             parent:        refrigerator
-            x:             pigletFeedPage.screenDeltaX + 20  * pigletFeedPage.screenFactorX
-            y:             pigletFeedPage.screenDeltaY + 100 * pigletFeedPage.screenFactorY
+            x:             20  * pigletFeedPage.screenFactorX
+            y:             100 * pigletFeedPage.screenFactorY
             z:             refrigerator.z + 1
             visible:       refrigerator.refrigeratorType === "easy"
             itemClickable: refrigerator.foodItemsClickable
@@ -37,8 +37,8 @@ Rectangle {
         FoodItem {
             id:            tomatoFoodItemEasy
             parent:        refrigerator
-            x:             pigletFeedPage.screenDeltaX + 156 * pigletFeedPage.screenFactorX
-            y:             pigletFeedPage.screenDeltaY + 100 * pigletFeedPage.screenFactorY
+            x:             156 * pigletFeedPage.screenFactorX
+            y:             100 * pigletFeedPage.screenFactorY
             z:             refrigerator.z + 1
             visible:       refrigerator.refrigeratorType === "easy"
             itemClickable: refrigerator.foodItemsClickable
@@ -55,8 +55,8 @@ Rectangle {
         FoodItem {
             id:            fishFoodItemEasy
             parent:        refrigerator
-            x:             pigletFeedPage.screenDeltaX + 20  * pigletFeedPage.screenFactorX
-            y:             pigletFeedPage.screenDeltaY + 260 * pigletFeedPage.screenFactorY
+            x:             20  * pigletFeedPage.screenFactorX
+            y:             260 * pigletFeedPage.screenFactorY
             z:             refrigerator.z + 1
             visible:       refrigerator.refrigeratorType === "easy"
             itemClickable: refrigerator.foodItemsClickable
@@ -73,8 +73,8 @@ Rectangle {
         FoodItem {
             id:            cheeseFoodItemEasy
             parent:        refrigerator
-            x:             pigletFeedPage.screenDeltaX + 156 * pigletFeedPage.screenFactorX
-            y:             pigletFeedPage.screenDeltaY + 260 * pigletFeedPage.screenFactorY
+            x:             156 * pigletFeedPage.screenFactorX
+            y:             260 * pigletFeedPage.screenFactorY
             z:             refrigerator.z + 1
             visible:       refrigerator.refrigeratorType === "easy"
             itemClickable: refrigerator.foodItemsClickable
@@ -94,8 +94,8 @@ Rectangle {
         FoodItem {
             id:            saladFoodItemMedium
             parent:        refrigerator
-            x:             pigletFeedPage.screenDeltaX + 20 * pigletFeedPage.screenFactorX
-            y:             pigletFeedPage.screenDeltaY + 50 * pigletFeedPage.screenFactorY
+            x:             20 * pigletFeedPage.screenFactorX
+            y:             50 * pigletFeedPage.screenFactorY
             z:             refrigerator.z + 1
             visible:       refrigerator.refrigeratorType === "medium"
             itemClickable: refrigerator.foodItemsClickable
@@ -112,8 +112,8 @@ Rectangle {
         FoodItem {
             id:            tomatoFoodItemMedium
             parent:        refrigerator
-            x:             pigletFeedPage.screenDeltaX + 156 * pigletFeedPage.screenFactorX
-            y:             pigletFeedPage.screenDeltaY + 50  * pigletFeedPage.screenFactorY
+            x:             156 * pigletFeedPage.screenFactorX
+            y:             50  * pigletFeedPage.screenFactorY
             z:             refrigerator.z + 1
             visible:       refrigerator.refrigeratorType === "medium"
             itemClickable: refrigerator.foodItemsClickable
@@ -130,8 +130,8 @@ Rectangle {
         FoodItem {
             id:            fishFoodItemMedium
             parent:        refrigerator
-            x:             pigletFeedPage.screenDeltaX + 20  * pigletFeedPage.screenFactorX
-            y:             pigletFeedPage.screenDeltaY + 160 * pigletFeedPage.screenFactorY
+            x:             20  * pigletFeedPage.screenFactorX
+            y:             160 * pigletFeedPage.screenFactorY
             z:             refrigerator.z + 1
             visible:       refrigerator.refrigeratorType === "medium"
             itemClickable: refrigerator.foodItemsClickable
@@ -148,8 +148,8 @@ Rectangle {
         FoodItem {
             id:            cheeseFoodItemMedium
             parent:        refrigerator
-            x:             pigletFeedPage.screenDeltaX + 156 * pigletFeedPage.screenFactorX
-            y:             pigletFeedPage.screenDeltaY + 160 * pigletFeedPage.screenFactorY
+            x:             156 * pigletFeedPage.screenFactorX
+            y:             160 * pigletFeedPage.screenFactorY
             z:             refrigerator.z + 1
             visible:       refrigerator.refrigeratorType === "medium"
             itemClickable: refrigerator.foodItemsClickable
@@ -166,8 +166,8 @@ Rectangle {
         FoodItem {
             id:            cucumberFoodItemMedium
             parent:        refrigerator
-            x:             pigletFeedPage.screenDeltaX + 20  * pigletFeedPage.screenFactorX
-            y:             pigletFeedPage.screenDeltaY + 260 * pigletFeedPage.screenFactorY
+            x:             20  * pigletFeedPage.screenFactorX
+            y:             260 * pigletFeedPage.screenFactorY
             z:             refrigerator.z + 1
             visible:       refrigerator.refrigeratorType === "medium"
             itemClickable: refrigerator.foodItemsClickable
@@ -184,8 +184,8 @@ Rectangle {
         FoodItem {
             id:            olivesFoodItemMedium
             parent:        refrigerator
-            x:             pigletFeedPage.screenDeltaX + 156 * pigletFeedPage.screenFactorX
-            y:             pigletFeedPage.screenDeltaY + 260 * pigletFeedPage.screenFactorY
+            x:             156 * pigletFeedPage.screenFactorX
+            y:             260 * pigletFeedPage.screenFactorY
             z:             refrigerator.z + 1
             visible:       refrigerator.refrigeratorType === "medium"
             itemClickable: refrigerator.foodItemsClickable
@@ -205,8 +205,8 @@ Rectangle {
         FoodItem {
             id:            saladFoodItemHard
             parent:        refrigerator
-            x:             pigletFeedPage.screenDeltaX + 20 * pigletFeedPage.screenFactorX
-            y:             pigletFeedPage.screenDeltaY + 20 * pigletFeedPage.screenFactorY
+            x:             20 * pigletFeedPage.screenFactorX
+            y:             20 * pigletFeedPage.screenFactorY
             z:             refrigerator.z + 1
             visible:       refrigerator.refrigeratorType === "hard"
             itemClickable: refrigerator.foodItemsClickable
@@ -223,8 +223,8 @@ Rectangle {
         FoodItem {
             id:            fishFoodItemHard
             parent:        refrigerator
-            x:             pigletFeedPage.screenDeltaX + 156 * pigletFeedPage.screenFactorX
-            y:             pigletFeedPage.screenDeltaY + 20  * pigletFeedPage.screenFactorY
+            x:             156 * pigletFeedPage.screenFactorX
+            y:             20  * pigletFeedPage.screenFactorY
             z:             refrigerator.z + 1
             visible:       refrigerator.refrigeratorType === "hard"
             itemClickable: refrigerator.foodItemsClickable
@@ -241,8 +241,8 @@ Rectangle {
         FoodItem {
             id:            cucumberFoodItemHard
             parent:        refrigerator
-            x:             pigletFeedPage.screenDeltaX + 20  * pigletFeedPage.screenFactorX
-            y:             pigletFeedPage.screenDeltaY + 100 * pigletFeedPage.screenFactorY
+            x:             20  * pigletFeedPage.screenFactorX
+            y:             100 * pigletFeedPage.screenFactorY
             z:             refrigerator.z + 1
             visible:       refrigerator.refrigeratorType === "hard"
             itemClickable: refrigerator.foodItemsClickable
@@ -259,8 +259,8 @@ Rectangle {
         FoodItem {
             id:            olivesFoodItemHard
             parent:        refrigerator
-            x:             pigletFeedPage.screenDeltaX + 156 * pigletFeedPage.screenFactorX
-            y:             pigletFeedPage.screenDeltaY + 100 * pigletFeedPage.screenFactorY
+            x:             156 * pigletFeedPage.screenFactorX
+            y:             100 * pigletFeedPage.screenFactorY
             z:             refrigerator.z + 1
             visible:       refrigerator.refrigeratorType === "hard"
             itemClickable: refrigerator.foodItemsClickable
@@ -277,8 +277,8 @@ Rectangle {
         FoodItem {
             id:            cheeseFoodItemHard
             parent:        refrigerator
-            x:             pigletFeedPage.screenDeltaX + 20  * pigletFeedPage.screenFactorX
-            y:             pigletFeedPage.screenDeltaY + 180 * pigletFeedPage.screenFactorY
+            x:             20  * pigletFeedPage.screenFactorX
+            y:             180 * pigletFeedPage.screenFactorY
             z:             refrigerator.z + 1
             visible:       refrigerator.refrigeratorType === "hard"
             itemClickable: refrigerator.foodItemsClickable
@@ -295,8 +295,8 @@ Rectangle {
         FoodItem {
             id:            tomatoFoodItemHard
             parent:        refrigerator
-            x:             pigletFeedPage.screenDeltaX + 156 * pigletFeedPage.screenFactorX
-            y:             pigletFeedPage.screenDeltaY + 180 * pigletFeedPage.screenFactorY
+            x:             156 * pigletFeedPage.screenFactorX
+            y:             180 * pigletFeedPage.screenFactorY
             z:             refrigerator.z + 1
             visible:       refrigerator.refrigeratorType === "hard"
             itemClickable: refrigerator.foodItemsClickable
@@ -313,8 +313,8 @@ Rectangle {
         FoodItem {
             id:            ketchupFoodItemHard
             parent:        refrigerator
-            x:             pigletFeedPage.screenDeltaX + 20  * pigletFeedPage.screenFactorX
-            y:             pigletFeedPage.screenDeltaY + 260 * pigletFeedPage.screenFactorY
+            x:             20  * pigletFeedPage.screenFactorX
+            y:             260 * pigletFeedPage.screenFactorY
             z:             refrigerator.z + 1
             visible:       refrigerator.refrigeratorType === "hard"
             itemClickable: refrigerator.foodItemsClickable
@@ -331,8 +331,8 @@ Rectangle {
         FoodItem {
             id:            mayonnaiseFoodItemHard
             parent:        refrigerator
-            x:             pigletFeedPage.screenDeltaX + 156 * pigletFeedPage.screenFactorX
-            y:             pigletFeedPage.screenDeltaY + 260 * pigletFeedPage.screenFactorY
+            x:             156 * pigletFeedPage.screenFactorX
+            y:             260 * pigletFeedPage.screenFactorY
             z:             refrigerator.z + 1
             visible:       refrigerator.refrigeratorType === "hard"
             itemClickable: refrigerator.foodItemsClickable
