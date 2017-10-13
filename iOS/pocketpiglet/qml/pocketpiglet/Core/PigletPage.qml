@@ -295,6 +295,8 @@ Item {
                 property string animationName:             ""
                 property string audioSource:               ""
 
+                property var animationCache:               ({})
+
                 onRunningChanged: {
                     if (running) {
                         z = pigletIdleImage.z + 1;
@@ -320,6 +322,81 @@ Item {
                 }
 
                 function playAnimation(src, audio_src, name, frames_count) {
+                    var sprites_list = [];
+
+                    if (animationCache.hasOwnProperty(name)) {
+                        sprites_list = animationCache[name];
+                    } else {
+                        var sprite_code = "import QtQuick 2.9; Sprite {}";
+                        var sprite      = null;
+
+                        var sprites_count = frames_count / animationSpriteMaxFrameCount;
+
+                        if (frames_count % animationSpriteMaxFrameCount > 0) {
+                            sprites_count++;
+                        }
+
+                        for (var i = 0; i < sprites_count; i++) {
+                            sprite = Qt.createQmlObject(sprite_code, animationSpriteSequence, "animation%1Sprite".arg(i));
+
+                            sprite.name   = "animation%1Sprite".arg(i);
+                            sprite.source = src;
+
+                            if (frames_count - animationSpriteMaxFrameCount * i >= animationSpriteMaxFrameCount) {
+                                sprite.frameCount = animationSpriteMaxFrameCount;
+                            } else {
+                                sprite.frameCount = frames_count - animationSpriteMaxFrameCount * i;
+                            }
+
+                            sprite.frameWidth  = animationFrameWidth;
+                            sprite.frameHeight = animationFrameHeight;
+                            sprite.frameX      = animationSpriteMaxFrameCount * i * animationFrameWidth;
+                            sprite.frameRate   = animationFrameRate;
+
+                            if (i < sprites_count - 1) {
+                                var to = {};
+
+                                to["animation%1Sprite".arg(i + 1)] = 1;
+
+                                sprite.to = to;
+                            } else {
+                                sprite.to = { "animationFinishSprite" : 1 };
+                            }
+
+                            sprites_list.push(sprite);
+                        }
+
+                        sprite = Qt.createQmlObject(sprite_code, animationSpriteSequence, "animationFinishSprite");
+
+                        sprite.name        = "animationFinishSprite";
+                        sprite.source      = src;
+                        sprite.frameCount  = 1;
+                        sprite.frameWidth  = animationFrameWidth;
+                        sprite.frameHeight = animationFrameHeight;
+                        sprite.frameX      = 0;
+                        sprite.frameRate   = 1;
+                        sprite.to          = { "animation0Sprite" : 1 };
+
+                        sprites_list.push(sprite);
+                    }
+
+                    running = false;
+
+                    if (!animationCache.hasOwnProperty(animationName)) {
+                        for (var j = 0; j < sprites.length; j++) {
+                            if (sprites[j].name !== "dummySprite") {
+                                sprites[j].destroy();
+                            }
+                        }
+                    }
+
+                    animationName = name;
+                    audioSource   = audio_src;
+                    sprites       = sprites_list;
+                    running       = true;
+                }
+
+                function cacheAnimation(src, name, frames_count) {
                     var sprite_code  = "import QtQuick 2.9; Sprite {}";
                     var sprites_list = [];
                     var sprite       = null;
@@ -373,18 +450,7 @@ Item {
 
                     sprites_list.push(sprite);
 
-                    running = false;
-
-                    for (var j = 0; j < sprites.length; j++) {
-                        if (sprites[j].name !== "dummySprite") {
-                            sprites[j].destroy();
-                        }
-                    }
-
-                    animationName = name;
-                    audioSource   = audio_src;
-                    sprites       = sprites_list;
-                    running       = true;
+                    animationCache[name] = sprites_list;
                 }
 
                 Sprite {
@@ -721,5 +787,12 @@ Item {
 
             restart();
         }
+    }
+
+    Component.onCompleted: {
+        animationSpriteSequence.cacheAnimation("qrc:/resources/animations/piglet/piglet_eats_candy.jpg",
+                                               "piglet_eats_candy", 80);
+        animationSpriteSequence.cacheAnimation("qrc:/resources/animations/piglet/piglet_eats_cake.jpg",
+                                               "piglet_eats_cake", 115);
     }
 }
