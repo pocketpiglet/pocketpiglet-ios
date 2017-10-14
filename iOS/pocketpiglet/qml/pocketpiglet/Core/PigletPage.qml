@@ -67,31 +67,31 @@ Item {
     function performAnimation() {
         if (nextAnimation === "piglet_look_around") {
             animationSpriteSequence.playAnimation("qrc:/resources/animations/piglet/piglet_look_around.jpg",
-                                                  "", nextAnimation, 55);
+                                                  "", nextAnimation, 55, 15);
         } else if (nextAnimation === "piglet_laughs") {
             animationSpriteSequence.playAnimation("qrc:/resources/animations/piglet/piglet_laughs.jpg",
-                                                  "qrc:/resources/sound/piglet/piglet_laughs.wav", nextAnimation, 55);
+                                                  "qrc:/resources/sound/piglet/piglet_laughs.wav", nextAnimation, 55, 15);
         } else if (nextAnimation === "piglet_in_sorrow"){
             animationSpriteSequence.playAnimation("qrc:/resources/animations/piglet/piglet_in_sorrow.jpg",
-                                                  "", nextAnimation, 105);
+                                                  "", nextAnimation, 105, 15);
         } else if (nextAnimation === "piglet_eats_candy") {
             animationSpriteSequence.playAnimation("qrc:/resources/animations/piglet/piglet_eats_candy.jpg",
-                                                  "qrc:/resources/sound/piglet/piglet_eats_candy.wav", nextAnimation, 75);
+                                                  "qrc:/resources/sound/piglet/piglet_eats_candy.wav", nextAnimation, 75, 15);
         } else if (nextAnimation === "piglet_eats_cake") {
             animationSpriteSequence.playAnimation("qrc:/resources/animations/piglet/piglet_eats_cake.jpg",
-                                                  "qrc:/resources/sound/piglet/piglet_eats_cake.wav", nextAnimation, 110);
+                                                  "qrc:/resources/sound/piglet/piglet_eats_cake.wav", nextAnimation, 110, 15);
         } else if (nextAnimation === "piglet_falls") {
             animationSpriteSequence.playAnimation("qrc:/resources/animations/piglet/piglet_falls.jpg",
-                                                  "qrc:/resources/sound/piglet/piglet_falls.wav", nextAnimation, 80);
+                                                  "qrc:/resources/sound/piglet/piglet_falls.wav", nextAnimation, 80, 15);
         } else if (nextAnimation === "piglet_feed_game_finished") {
             animationSpriteSequence.playAnimation("qrc:/resources/animations/piglet/piglet_feed_game_finished.jpg",
-                                                  "qrc:/resources/sound/piglet/piglet_feed_game_finished.wav", nextAnimation, 66);
+                                                  "qrc:/resources/sound/piglet/piglet_feed_game_finished.wav", nextAnimation, 66, 15);
         } else if (nextAnimation === "piglet_wash_game_finished") {
             animationSpriteSequence.playAnimation("qrc:/resources/animations/piglet/piglet_wash_game_finished.jpg",
-                                                  "qrc:/resources/sound/piglet/piglet_wash_game_finished.wav", nextAnimation, 56);
+                                                  "qrc:/resources/sound/piglet/piglet_wash_game_finished.wav", nextAnimation, 56, 15);
         } else {
             animationSpriteSequence.playAnimation("qrc:/resources/animations/piglet/piglet_eyes_blink.jpg",
-                                                  "", "piglet_eyes_blink", 40);
+                                                  "", "piglet_eyes_blink", 40, 15);
         }
 
         nextAnimation = "";
@@ -289,7 +289,6 @@ Item {
 
                 property int animationFrameWidth:          360
                 property int animationFrameHeight:         640
-                property int animationFrameRate:           15
                 property int animationSpriteMaxFrameCount: 20
 
                 property string animationName:             ""
@@ -321,7 +320,7 @@ Item {
                     }
                 }
 
-                function playAnimation(src, audio_src, name, frames_count) {
+                function playAnimation(src, audio_src, name, frames_count, frame_rate) {
                     var sprites_list = [];
 
                     if (animationCache.hasOwnProperty(name)) {
@@ -351,7 +350,7 @@ Item {
                             sprite.frameWidth  = animationFrameWidth;
                             sprite.frameHeight = animationFrameHeight;
                             sprite.frameX      = animationSpriteMaxFrameCount * i * animationFrameWidth;
-                            sprite.frameRate   = animationFrameRate;
+                            sprite.frameRate   = frame_rate;
 
                             if (i < sprites_count - 1) {
                                 var to = {};
@@ -396,7 +395,7 @@ Item {
                     running       = true;
                 }
 
-                function cacheAnimation(src, name, frames_count) {
+                function cacheAnimation(src, name, frames_count, frame_rate) {
                     var sprite_code  = "import QtQuick 2.9; Sprite {}";
                     var sprites_list = [];
                     var sprite       = null;
@@ -422,7 +421,7 @@ Item {
                         sprite.frameWidth  = animationFrameWidth;
                         sprite.frameHeight = animationFrameHeight;
                         sprite.frameX      = animationSpriteMaxFrameCount * i * animationFrameWidth;
-                        sprite.frameRate   = animationFrameRate;
+                        sprite.frameRate   = frame_rate;
 
                         if (i < sprites_count - 1) {
                             var to = {};
@@ -795,8 +794,8 @@ Item {
 
     Component.onCompleted: {
         animationSpriteSequence.cacheAnimation("qrc:/resources/animations/piglet/piglet_eats_candy.jpg",
-                                               "piglet_eats_candy", 75);
+                                               "piglet_eats_candy", 75, 15);
         animationSpriteSequence.cacheAnimation("qrc:/resources/animations/piglet/piglet_eats_cake.jpg",
-                                               "piglet_eats_cake", 110);
+                                               "piglet_eats_cake", 110, 15);
     }
 }
