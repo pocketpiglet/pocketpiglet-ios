@@ -76,10 +76,10 @@ Item {
                                                   "", nextAnimation, 105);
         } else if (nextAnimation === "piglet_eats_candy") {
             animationSpriteSequence.playAnimation("qrc:/resources/animations/piglet/piglet_eats_candy.jpg",
-                                                  "qrc:/resources/sound/piglet/piglet_eats_candy.wav", nextAnimation, 80);
+                                                  "qrc:/resources/sound/piglet/piglet_eats_candy.wav", nextAnimation, 75);
         } else if (nextAnimation === "piglet_eats_cake") {
             animationSpriteSequence.playAnimation("qrc:/resources/animations/piglet/piglet_eats_cake.jpg",
-                                                  "qrc:/resources/sound/piglet/piglet_eats_cake.wav", nextAnimation, 115);
+                                                  "qrc:/resources/sound/piglet/piglet_eats_cake.wav", nextAnimation, 110);
         } else if (nextAnimation === "piglet_falls") {
             animationSpriteSequence.playAnimation("qrc:/resources/animations/piglet/piglet_falls.jpg",
                                                   "qrc:/resources/sound/piglet/piglet_falls.wav", nextAnimation, 80);
@@ -795,8 +795,8 @@ Item {
 
     Component.onCompleted: {
         animationSpriteSequence.cacheAnimation("qrc:/resources/animations/piglet/piglet_eats_candy.jpg",
-                                               "piglet_eats_candy", 80);
+                                               "piglet_eats_candy", 75);
         animationSpriteSequence.cacheAnimation("qrc:/resources/animations/piglet/piglet_eats_cake.jpg",
-                                               "piglet_eats_cake", 115);
+                                               "piglet_eats_cake", 110);
     }
 }
