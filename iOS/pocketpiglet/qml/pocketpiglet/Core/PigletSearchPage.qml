@@ -261,24 +261,66 @@ Item {
             id:                     turnLeftImage
             anchors.verticalCenter: parent.verticalCenter
             anchors.left:           parent.left
-            width:                  120
-            height:                 256
+            width:                  64
+            height:                 128
             z:                      4
             visible:                pigletSearchPage.currentPiglet !== null &&
                                     pigletSearchPage.currentPiglet.x < 0 - pigletSearchPage.currentPiglet.width
             source:                 "qrc:/resources/images/piglet_search/turn_left.png"
+
+            SequentialAnimation {
+                loops:   Animation.Infinite
+                running: true
+
+                PropertyAnimation {
+                    target:   turnLeftImage
+                    property: "opacity"
+                    from:     1.0
+                    to:       0.0
+                    duration: 300
+                }
+
+                PropertyAnimation {
+                    target:   turnLeftImage
+                    property: "opacity"
+                    from:     0.0
+                    to:       1.0
+                    duration: 300
+                }
+            }
         }
 
         Image {
             id:                     turnRightImage
             anchors.verticalCenter: parent.verticalCenter
             anchors.right:          parent.right
-            width:                  120
-            height:                 256
+            width:                  64
+            height:                 128
             z:                      4
             visible:                pigletSearchPage.currentPiglet !== null &&
                                     pigletSearchPage.currentPiglet.x > backgroundRectangle.width
             source:                 "qrc:/resources/images/piglet_search/turn_right.png"
+
+            SequentialAnimation {
+                loops:   Animation.Infinite
+                running: true
+
+                PropertyAnimation {
+                    target:   turnRightImage
+                    property: "opacity"
+                    from:     1.0
+                    to:       0.0
+                    duration: 300
+                }
+
+                PropertyAnimation {
+                    target:   turnRightImage
+                    property: "opacity"
+                    from:     0.0
+                    to:       1.0
+                    duration: 300
+                }
+            }
         }
 
         Image {
