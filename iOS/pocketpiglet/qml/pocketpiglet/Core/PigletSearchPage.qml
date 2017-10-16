@@ -413,7 +413,7 @@ Item {
         interval: 100
 
         onTriggered: {
-            var mseconds = 15000 - (pigletSearchPage.foundPigletsCount + pigletSearchPage.missedPigletsCount) * 1000;
+            var mseconds = 30000 - (pigletSearchPage.foundPigletsCount + pigletSearchPage.missedPigletsCount) * 2000;
 
             if (mseconds < 3000) {
                 mseconds = 3000;

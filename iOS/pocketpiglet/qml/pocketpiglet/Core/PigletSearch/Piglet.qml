@@ -6,18 +6,24 @@ Rectangle {
     height: pigletImage.sourceSize.height
     color:  "transparent"
 
-    property bool valid:    true
+    property bool valid:        true
 
-    property int waitTime:  0
+    property int waitTime:      0
 
-    property real distance: 500.0
-    property real azimuth:  0.0
+    property real azimuth:      0.0
+    property real distance:     500.0
+    property real mirrorMargin: 20.0
 
     signal pigletFound()
     signal pigletMissed()
 
     function updatePosition(device_azimuth) {
-        x = distance * Math.cos((device_azimuth - azimuth) * Math.PI / 180.0);
+        if ((device_azimuth       > azimuth + 180 - mirrorMargin && device_azimuth       < azimuth + 270 + mirrorMargin) ||
+            (device_azimuth + 360 > azimuth + 180 - mirrorMargin && device_azimuth + 360 < azimuth + 270 + mirrorMargin)) {
+            x = 65536;
+        } else {
+            x = 0 - distance * Math.sin((device_azimuth - azimuth) * Math.PI / 180.0);
+        }
     }
 
     MouseArea {
