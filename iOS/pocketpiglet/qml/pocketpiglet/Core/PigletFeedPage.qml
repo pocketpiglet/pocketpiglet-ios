@@ -406,7 +406,7 @@ Item {
 
     Timer {
         id:       newLevelBeginTimer
-        interval: 2000
+        interval: 3000
 
         onTriggered: {
             newLevelNotificationDialog.close();

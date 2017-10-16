@@ -394,7 +394,7 @@ Item {
 
     Timer {
         id:       gameStartTimer
-        interval: 2000
+        interval: 3000
 
         onTriggered: {
            gameStartNotificationDialog.close();
