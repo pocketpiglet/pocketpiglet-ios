@@ -251,7 +251,7 @@ Item {
             z:                        4
             visible:                  false
             text:                     "00"
-            color:                    "red"
+            color:                    "yellow"
             horizontalAlignment:      Text.AlignHCenter
             verticalAlignment:        Text.AlignVCenter
             font.pixelSize:           32
@@ -261,8 +261,8 @@ Item {
             id:                     turnLeftImage
             anchors.verticalCenter: parent.verticalCenter
             anchors.left:           parent.left
-            width:                  29
-            height:                 29
+            width:                  120
+            height:                 256
             z:                      4
             visible:                pigletSearchPage.currentPiglet !== null &&
                                     pigletSearchPage.currentPiglet.x < 0 - pigletSearchPage.currentPiglet.width
@@ -273,8 +273,8 @@ Item {
             id:                     turnRightImage
             anchors.verticalCenter: parent.verticalCenter
             anchors.right:          parent.right
-            width:                  29
-            height:                 29
+            width:                  120
+            height:                 256
             z:                      4
             visible:                pigletSearchPage.currentPiglet !== null &&
                                     pigletSearchPage.currentPiglet.x > backgroundRectangle.width
