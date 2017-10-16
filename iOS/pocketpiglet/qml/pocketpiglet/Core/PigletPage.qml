@@ -670,6 +670,24 @@ Item {
                     }
                 }
             }
+
+            GameButton {
+                id:                pigletSearchGameButton
+                width:             64
+                height:            64
+                sourceNormal:      "qrc:/resources/images/piglet/game_piglet_search.png"
+                sourceHighlighted: "qrc:/resources/images/piglet/game_piglet_search_highlighted.png"
+
+                onStartGame: {
+                    var component = Qt.createComponent("PigletSearchPage.qml");
+
+                    if (component.status === Component.Ready) {
+                        mainStackView.push(component);
+                    } else {
+                        console.log(component.errorString());
+                    }
+                }
+            }
         }
 
         Column {
@@ -763,18 +781,22 @@ Item {
                     if (pigletPage.wantedGame === "") {
                         var rand = Math.random();
 
-                        if (rand < 0.33) {
+                        if (rand < 0.25) {
                             pigletPage.wantedGame = "piglet_feed";
 
                             pigletFeedGameButton.highlightButton();
-                        } else if (rand < 0.66) {
+                        } else if (rand < 0.50) {
                             pigletPage.wantedGame = "piglet_wash";
 
                             pigletWashGameButton.highlightButton();
-                        } else {
+                        } else if (rand < 0.75) {
                             pigletPage.wantedGame = "piglet_puzzle";
 
                             pigletPuzzleGameButton.highlightButton();
+                        } else {
+                            pigletPage.wantedGame = "piglet_search";
+
+                            pigletSearchGameButton.highlightButton();
                         }
                     }
                 }

@@ -24,6 +24,8 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Please enable camera access to find me in your room</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Please enable microphone access if you want to talk with me</string>
 	<key>UILaunchStoryboardName</key>

@@ -30,10 +30,6 @@ Item {
             background2MissedAnimatedImage.playing = true;
             background3MissedAnimatedImage.playing = true;
 
-            bubbleCreationTimer.stop();
-
-            destroyBubbles();
-
             if (!pageInitialized) {
                 pageInitialized = true;
 
@@ -59,10 +55,6 @@ Item {
             background1MissedAnimatedImage.playing = true;
             background2MissedAnimatedImage.playing = true;
             background3MissedAnimatedImage.playing = true;
-
-            bubbleCreationTimer.stop();
-
-            destroyBubbles();
 
             if (!pageInitialized) {
                 pageInitialized = true;
@@ -248,30 +240,30 @@ Item {
 
                 Image {
                     id:      bubble1MissedImage
-                    source:  "qrc:/resources/images/piglet_wash/missed_bubble_grayed.png"
                     width:   29
                     height:  29
+                    source:  "qrc:/resources/images/piglet_wash/missed_bubble_grayed.png"
                 }
 
                 Image {
                     id:      bubble2MissedImage
-                    source:  "qrc:/resources/images/piglet_wash/missed_bubble_grayed.png"
                     width:   29
                     height:  29
+                    source:  "qrc:/resources/images/piglet_wash/missed_bubble_grayed.png"
                 }
 
                 Image {
                     id:      bubble3MissedImage
-                    source:  "qrc:/resources/images/piglet_wash/missed_bubble_grayed.png"
                     width:   29
                     height:  29
+                    source:  "qrc:/resources/images/piglet_wash/missed_bubble_grayed.png"
                 }
 
                 Image {
                     id:      bubble4MissedImage
-                    source:  "qrc:/resources/images/piglet_wash/missed_bubble_grayed.png"
                     width:   29
                     height:  29
+                    source:  "qrc:/resources/images/piglet_wash/missed_bubble_grayed.png"
                 }
             }
         }

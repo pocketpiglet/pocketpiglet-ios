@@ -5,6 +5,7 @@
         <file>qml/pocketpiglet/Core/PigletPage.qml</file>
         <file>qml/pocketpiglet/Core/PigletPuzzlePage.js</file>
         <file>qml/pocketpiglet/Core/PigletPuzzlePage.qml</file>
+        <file>qml/pocketpiglet/Core/PigletSearchPage.qml</file>
         <file>qml/pocketpiglet/Core/PigletWashPage.js</file>
         <file>qml/pocketpiglet/Core/PigletWashPage.qml</file>
         <file>qml/pocketpiglet/Core/Dialog/NotificationDialog.qml</file>
@@ -16,6 +17,7 @@
         <file>qml/pocketpiglet/Core/PigletFeed/Refrigerator.qml</file>
         <file>qml/pocketpiglet/Core/PigletFeed/Sandwich.qml</file>
         <file>qml/pocketpiglet/Core/PigletFeed/SandwichItem.qml</file>
+        <file>qml/pocketpiglet/Core/PigletSearch/Piglet.qml</file>
         <file>qml/pocketpiglet/Core/PigletWash/Bubble.qml</file>
     </qresource>
 </RCC>
