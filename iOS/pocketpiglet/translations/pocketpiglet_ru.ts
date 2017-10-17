@@ -17,6 +17,21 @@
     </message>
 </context>
 <context>
+    <name>PigletSearchPage</name>
+    <message>
+        <source>Your piglet wants to play hide-and-seek! Try to find him in your room using your phone&apos;s camera as fast as you can.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Congratulations, you have a new highscore! Do you want to play again?</source>
+        <translation type="unfinished">Поздравляю, у тебя новый рекорд! Хочешь попробовать еще раз?</translation>
+    </message>
+    <message>
+        <source>Game over. Do you want to play again?</source>
+        <translation type="unfinished">Игра окончена. Хочешь попробовать еще раз?</translation>
+    </message>
+</context>
+<context>
     <name>PigletWashPage</name>
     <message>
         <source>Your piglet wants to take a bath and play with soap bubbles! Help him to catch and pop as many bubbles as you can.</source>
