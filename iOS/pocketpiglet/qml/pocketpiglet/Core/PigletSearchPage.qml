@@ -130,10 +130,12 @@ Item {
 
     function pigletFound() {
         foundPigletsCount = foundPigletsCount + 1;
+        currentPiglet     = null;
     }
 
     function pigletMissed() {
         missedPigletsCount = missedPigletsCount + 1;
+        currentPiglet      = null;
     }
 
     Audio {
@@ -452,7 +454,8 @@ Item {
                 zenith = 180 - zenith;
             }
 
-            lastZenith = lastZenith + 0.5 * (zenith - lastZenith);
+            // Low-pass filter
+            lastZenith = lastZenith + 0.25 * (zenith - lastZenith);
 
             if (pigletSearchPage.currentPiglet !== null) {
                 pigletSearchPage.currentPiglet.updatePosition(compass.lastAzimuth, lastZenith);
