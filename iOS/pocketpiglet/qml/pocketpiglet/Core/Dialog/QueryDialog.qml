@@ -29,8 +29,8 @@ MouseArea {
     Image {
         id:               dialogImage
         anchors.centerIn: parent
-        width:            parent.width < parent.height ? parent.width : parent.height
-        fillMode:         Image.PreserveAspectFit
+        width:            360
+        height:           240
         source:           "qrc:/resources/images/dialog/dialog.png"
 
         Text {
