@@ -152,8 +152,10 @@
         <file>resources/images/piglet_search/missed_piglet.png</file>
         <file>resources/images/piglet_search/missed_piglet_grayed.png</file>
         <file>resources/images/piglet_search/missed_piglets_background.png</file>
+        <file>resources/images/piglet_search/turn_down.png</file>
         <file>resources/images/piglet_search/turn_left.png</file>
         <file>resources/images/piglet_search/turn_right.png</file>
+        <file>resources/images/piglet_search/turn_up.png</file>
         <file>resources/images/piglet_wash/background_0_missed.gif</file>
         <file>resources/images/piglet_wash/background_1_missed.gif</file>
         <file>resources/images/piglet_wash/background_2_missed.gif</file>

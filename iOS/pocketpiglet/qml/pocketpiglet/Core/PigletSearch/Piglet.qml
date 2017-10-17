@@ -11,19 +11,22 @@ Rectangle {
     property int waitTime:      0
 
     property real azimuth:      0.0
+    property real zenith:       0.0
     property real distance:     500.0
-    property real mirrorMargin: 20.0
+    property real mirrorMargin: 45.0
 
     signal pigletFound()
     signal pigletMissed()
 
-    function updatePosition(device_azimuth) {
+    function updatePosition(device_azimuth, device_zenith) {
         if ((device_azimuth       > azimuth + 180 - mirrorMargin && device_azimuth       < azimuth + 270 + mirrorMargin) ||
             (device_azimuth + 360 > azimuth + 180 - mirrorMargin && device_azimuth + 360 < azimuth + 270 + mirrorMargin)) {
             x = 65536;
         } else {
-            x = 0 - distance * Math.sin((device_azimuth - azimuth) * Math.PI / 180.0);
+            x = parent.width / 2 - distance * Math.sin((device_azimuth - azimuth) * Math.PI / 180.0);
         }
+
+        y = parent.height / 2 + distance * Math.sin((device_zenith - zenith) * Math.PI / 180.0);
     }
 
     MouseArea {

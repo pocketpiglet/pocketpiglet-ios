@@ -258,6 +258,74 @@ Item {
         }
 
         Image {
+            id:                       turnUpImage
+            anchors.top:              highScoreText.bottom
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.topMargin:        8
+            width:                    29
+            height:                   29
+            z:                        4
+            visible:                  pigletSearchPage.currentPiglet !== null &&
+                                      pigletSearchPage.currentPiglet.y < 0 - pigletSearchPage.currentPiglet.height
+            source:                   "qrc:/resources/images/piglet_search/turn_up.png"
+
+            SequentialAnimation {
+                loops:   Animation.Infinite
+                running: true
+
+                PropertyAnimation {
+                    target:   turnUpImage
+                    property: "opacity"
+                    from:     1.0
+                    to:       0.0
+                    duration: 300
+                }
+
+                PropertyAnimation {
+                    target:   turnUpImage
+                    property: "opacity"
+                    from:     0.0
+                    to:       1.0
+                    duration: 300
+                }
+            }
+        }
+
+        Image {
+            id:                       turnDownImage
+            anchors.bottom:           timerText.top
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.bottomMargin:     8
+            width:                    29
+            height:                   29
+            z:                        4
+            visible:                  pigletSearchPage.currentPiglet !== null &&
+                                      pigletSearchPage.currentPiglet.y > backgroundRectangle.height
+            source:                   "qrc:/resources/images/piglet_search/turn_down.png"
+
+            SequentialAnimation {
+                loops:   Animation.Infinite
+                running: true
+
+                PropertyAnimation {
+                    target:   turnDownImage
+                    property: "opacity"
+                    from:     1.0
+                    to:       0.0
+                    duration: 300
+                }
+
+                PropertyAnimation {
+                    target:   turnDownImage
+                    property: "opacity"
+                    from:     0.0
+                    to:       1.0
+                    duration: 300
+                }
+            }
+        }
+
+        Image {
             id:                     turnLeftImage
             anchors.verticalCenter: parent.verticalCenter
             anchors.left:           parent.left
@@ -353,6 +421,45 @@ Item {
         }
     }
 
+    Accelerometer {
+        id:               accelerometer
+        dataRate:         10
+        accelerationMode: Accelerometer.Gravity
+        active:           pigletSearchPage.appInForeground && pigletSearchPage.pageActive
+
+        property real lastZAccel: 0.0
+
+        onReadingChanged: {
+            lastZAccel = reading.z;
+        }
+    }
+
+    RotationSensor {
+        id:       rotationSensor
+        dataRate: 10
+        active:   pigletSearchPage.appInForeground && pigletSearchPage.pageActive
+
+        property real lastZenith: 0.0
+
+        onReadingChanged: {
+            var zenith = reading.x;
+
+            if (zenith < 0) {
+                zenith = 0;
+            }
+
+            if (accelerometer.lastZAccel < 0) {
+                zenith = 180 - zenith;
+            }
+
+            lastZenith = lastZenith + 0.5 * (zenith - lastZenith);
+
+            if (pigletSearchPage.currentPiglet !== null) {
+                pigletSearchPage.currentPiglet.updatePosition(compass.lastAzimuth, lastZenith);
+            }
+        }
+    }
+
     Compass {
         id:       compass
         dataRate: 10
@@ -364,7 +471,7 @@ Item {
             lastAzimuth = reading.azimuth;
 
             if (pigletSearchPage.currentPiglet !== null) {
-                pigletSearchPage.currentPiglet.updatePosition(lastAzimuth);
+                pigletSearchPage.currentPiglet.updatePosition(lastAzimuth, rotationSensor.lastZenith);
             }
         }
     }
@@ -463,14 +570,14 @@ Item {
 
             pigletSearchPage.currentPiglet = Qt.createComponent("PigletSearch/Piglet.qml").createObject(backgroundRectangle, {"z": 5});
 
-            pigletSearchPage.currentPiglet.y        = Math.random() * (parent.height - pigletSearchPage.currentPiglet.height);
             pigletSearchPage.currentPiglet.azimuth  = Math.random() * 180;
+            pigletSearchPage.currentPiglet.zenith   = Math.random() * 45 + 45;
             pigletSearchPage.currentPiglet.waitTime = mseconds;
 
             pigletSearchPage.currentPiglet.pigletFound.connect(pigletSearchPage.pigletFound);
             pigletSearchPage.currentPiglet.pigletMissed.connect(pigletSearchPage.pigletMissed);
 
-            pigletSearchPage.currentPiglet.updatePosition(compass.lastAzimuth);
+            pigletSearchPage.currentPiglet.updatePosition(compass.lastAzimuth, rotationSensor.lastZenith);
 
             countdownTimer.restart();
         }
