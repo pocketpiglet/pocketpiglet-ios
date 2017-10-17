@@ -262,8 +262,8 @@ Item {
             anchors.top:              highScoreText.bottom
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.topMargin:        8
-            width:                    29
-            height:                   29
+            width:                    128
+            height:                   32
             z:                        4
             visible:                  pigletSearchPage.currentPiglet !== null &&
                                       pigletSearchPage.currentPiglet.y < 0 - pigletSearchPage.currentPiglet.height
@@ -296,8 +296,8 @@ Item {
             anchors.bottom:           timerText.top
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottomMargin:     8
-            width:                    29
-            height:                   29
+            width:                    128
+            height:                   32
             z:                        4
             visible:                  pigletSearchPage.currentPiglet !== null &&
                                       pigletSearchPage.currentPiglet.y > backgroundRectangle.height
@@ -329,7 +329,7 @@ Item {
             id:                     turnLeftImage
             anchors.verticalCenter: parent.verticalCenter
             anchors.left:           parent.left
-            width:                  64
+            width:                  32
             height:                 128
             z:                      4
             visible:                pigletSearchPage.currentPiglet !== null &&
@@ -362,7 +362,7 @@ Item {
             id:                     turnRightImage
             anchors.verticalCenter: parent.verticalCenter
             anchors.right:          parent.right
-            width:                  64
+            width:                  32
             height:                 128
             z:                      4
             visible:                pigletSearchPage.currentPiglet !== null &&
