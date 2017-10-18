@@ -13,8 +13,8 @@ Item {
 
     property int screenRotation:      90
 
-    property real screenFactor:       Math.min(backgroundRectangle.width  / backgroundImage.sourceSize.width,
-                                               backgroundRectangle.height / backgroundImage.sourceSize.height);
+    property real screenFactor:       Math.min(backgroundImage.width  / backgroundImage.sourceSize.width,
+                                               backgroundImage.height / backgroundImage.sourceSize.height);
 
     property string puzzleType:       "watering_flowers"
     property string puzzleComplexity: ""

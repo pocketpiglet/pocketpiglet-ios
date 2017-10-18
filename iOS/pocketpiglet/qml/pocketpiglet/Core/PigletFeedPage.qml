@@ -19,11 +19,6 @@ Item {
     property int maximumLevelMedium: 10
     property int maximumLevelHard:   15
 
-    property real sandwichDeltaX:    (backgroundAnimatedImage.width  - backgroundAnimatedImage.paintedWidth)  / 2
-    property real sandwichDeltaY:    (backgroundAnimatedImage.height - backgroundAnimatedImage.paintedHeight) / 2
-    property real sandwichFactorX:   backgroundAnimatedImage.paintedWidth  / backgroundAnimatedImage.sourceSize.width
-    property real sandwichFactorY:   backgroundAnimatedImage.paintedHeight / backgroundAnimatedImage.sourceSize.height
-
     onAppInForegroundChanged: {
         if (appInForeground && pageActive) {
             backgroundAnimatedImage.playing    = true;
@@ -143,12 +138,14 @@ Item {
         }
 
         Sandwich {
-            id:     sandwich
-            x:      pigletFeedPage.sandwichDeltaX + 412 * pigletFeedPage.sandwichFactorX
-            y:      pigletFeedPage.sandwichDeltaY + 0   * pigletFeedPage.sandwichFactorY
-            z:      2
-            width:  80  * pigletFeedPage.sandwichFactorX
-            height: 275 * pigletFeedPage.sandwichFactorY
+            id:              sandwich
+            x:               (backgroundAnimatedImage.width  - backgroundAnimatedImage.paintedWidth)  / 2 + 412 * sandwichFactorX
+            y:               (backgroundAnimatedImage.height - backgroundAnimatedImage.paintedHeight) / 2 + 0   * sandwichFactorY
+            z:               2
+            width:           80  * sandwichFactorX
+            height:          275 * sandwichFactorY
+            sandwichFactorX: backgroundAnimatedImage.paintedWidth  / backgroundAnimatedImage.sourceSize.width
+            sandwichFactorY: backgroundAnimatedImage.paintedHeight / backgroundAnimatedImage.sourceSize.height
 
             onAllItemsInPlace: {
                 audio.playAudio("qrc:/resources/sound/piglet_feed/sandwich_eat.wav");
