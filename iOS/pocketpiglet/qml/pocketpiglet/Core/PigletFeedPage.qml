@@ -19,10 +19,10 @@ Item {
     property int maximumLevelMedium: 10
     property int maximumLevelHard:   15
 
-    property real screenDeltaX:      (backgroundAnimatedImage.width - backgroundAnimatedImage.paintedWidth) / 2
-    property real screenDeltaY:      (backgroundAnimatedImage.height - backgroundAnimatedImage.paintedHeight) / 2
-    property real screenFactorX:     backgroundAnimatedImage.paintedWidth / backgroundAnimatedImage.sourceSize.width
-    property real screenFactorY:     backgroundAnimatedImage.paintedHeight / backgroundAnimatedImage.sourceSize.height
+    property real sandwichDeltaX:    (backgroundAnimatedImage.width  - backgroundAnimatedImage.paintedWidth)  / 2
+    property real sandwichDeltaY:    (backgroundAnimatedImage.height - backgroundAnimatedImage.paintedHeight) / 2
+    property real sandwichFactorX:   backgroundAnimatedImage.paintedWidth  / backgroundAnimatedImage.sourceSize.width
+    property real sandwichFactorY:   backgroundAnimatedImage.paintedHeight / backgroundAnimatedImage.sourceSize.height
 
     onAppInForegroundChanged: {
         if (appInForeground && pageActive) {
@@ -126,10 +126,10 @@ Item {
         }
 
         Refrigerator {
-            id: refrigerator
-            x:  pigletFeedPage.screenDeltaX
-            y:  pigletFeedPage.screenDeltaY
-            z:  2
+            id:           refrigerator
+            anchors.top:  parent.top
+            anchors.left: parent.left
+            z:            2
 
             onValidFoodItemSelected: {
                 sandwich.addItem(item_type);
@@ -144,11 +144,11 @@ Item {
 
         Sandwich {
             id:     sandwich
-            x:      pigletFeedPage.screenDeltaX + 412 * pigletFeedPage.screenFactorX
-            y:      pigletFeedPage.screenDeltaY + 0   * pigletFeedPage.screenFactorY
+            x:      pigletFeedPage.sandwichDeltaX + 412 * pigletFeedPage.sandwichFactorX
+            y:      pigletFeedPage.sandwichDeltaY + 0   * pigletFeedPage.sandwichFactorY
             z:      2
-            width:  80  * pigletFeedPage.screenFactorX
-            height: 275 * pigletFeedPage.screenFactorY
+            width:  80  * pigletFeedPage.sandwichFactorX
+            height: 275 * pigletFeedPage.sandwichFactorY
 
             onAllItemsInPlace: {
                 audio.playAudio("qrc:/resources/sound/piglet_feed/sandwich_eat.wav");

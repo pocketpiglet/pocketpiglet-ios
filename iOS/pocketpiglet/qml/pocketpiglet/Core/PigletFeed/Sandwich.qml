@@ -4,7 +4,7 @@ Rectangle {
     id:    sandwich
     color: "transparent"
 
-    property int itemShiftPixels:   4 * pigletFeedPage.screenFactorY
+    property int itemShiftPixels:   4 * pigletFeedPage.sandwichFactorY
     property int maxItemsCount:     0
     property int visibleItemsCount: 0
     property int itemsInPlaceCount: 0

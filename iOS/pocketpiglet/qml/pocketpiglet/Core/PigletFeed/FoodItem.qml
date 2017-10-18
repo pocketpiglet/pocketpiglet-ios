@@ -2,8 +2,8 @@ import QtQuick 2.9
 
 Rectangle {
     id:     foodItem
-    width:  foodItemImage.sourceSize.width  * pigletFeedPage.screenFactorX
-    height: foodItemImage.sourceSize.height * pigletFeedPage.screenFactorY
+    width:  foodItemImage.sourceSize.width  * parent.refrigeratorFactor
+    height: foodItemImage.sourceSize.height * parent.refrigeratorFactor
     color:  "transparent"
 
     property bool itemClickable: false
