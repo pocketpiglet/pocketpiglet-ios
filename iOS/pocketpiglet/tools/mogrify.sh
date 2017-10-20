@@ -1,3 +1,3 @@
 #!/bin/sh
 
-find .. -name '*.png' -exec mogrify -verbose {} \;
+find ../resources -name '*.png' -exec mogrify -verbose {} \;

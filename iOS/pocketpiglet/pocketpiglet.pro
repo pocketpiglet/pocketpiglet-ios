@@ -3,7 +3,7 @@ CONFIG += c++11
 
 DEFINES += QT_DEPRECATED_WARNINGS WEBRTC_POSIX
 
-SOURCES += main.cpp \
+SOURCES += src/main.cpp \
     webrtc/common_audio/signal_processing/complex_bit_reverse.c \
     webrtc/common_audio/signal_processing/complex_fft.c \
     webrtc/common_audio/signal_processing/cross_correlation.c \
@@ -25,10 +25,10 @@ SOURCES += main.cpp \
     webrtc/common_audio/vad/webrtc_vad.c
 
 OBJECTIVE_SOURCES += \
-    speechrecorder.mm
+    src/speechrecorder.mm
 
 HEADERS += \
-    speechrecorder.h \
+    src/speechrecorder.h \
     webrtc/common_audio/signal_processing/complex_fft_tables.h \
     webrtc/common_audio/signal_processing/include/real_fft.h \
     webrtc/common_audio/signal_processing/include/signal_processing_library.h \
