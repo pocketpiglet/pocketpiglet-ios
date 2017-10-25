@@ -7,7 +7,7 @@
 
 #include "admobhelper.h"
 
-const QString AdMobHelper::ADMOB_APP_ID                    ("ca-app-pub-2455088855015693~7279538773");
+const QString AdMobHelper::ADMOB_APP_ID                    ("ca-app-pub-2455088855015693~5306005769");
 const QString AdMobHelper::ADMOB_REWARDBASEDVIDEOAD_UNIT_ID("ca-app-pub-3940256099942544/1712485313");
 const QString AdMobHelper::ADMOB_TEST_DEVICE_ID            ("");
 
@@ -69,7 +69,6 @@ AdMobHelper *AdMobHelper::Instance = NULL;
 
 - (void)rewardBasedVideoAd:(GADRewardBasedVideoAd *)rewardBasedVideoAd didRewardUserWithReward:(GADAdReward *)reward {
     Q_UNUSED(rewardBasedVideoAd)
-    Q_UNUSED(reward)
 
     AdMobHelper::rewardBasedVideoAdDidReward(QString::fromNSString(reward.type), (int)[reward.amount integerValue]);
 }
