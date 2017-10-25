@@ -8,18 +8,19 @@ import "Piglet"
 Item {
     id: pigletPage
 
-    property bool appInForeground:     Qt.application.active
-    property bool pageActive:          false
-    property bool animationEnabled:    false
+    property bool appInForeground:          Qt.application.active
+    property bool pageActive:               false
+    property bool rewardBasedVideoAdActive: AdMobHelper.rewardBasedVideoAdActive
+    property bool animationEnabled:         false
 
-    property real lastGameTime:        (new Date()).getTime()
-    property real accelShakeThreshold: 50.0
+    property real lastGameTime:             (new Date()).getTime()
+    property real accelShakeThreshold:      50.0
 
-    property string nextAnimation:     ""
-    property string wantedGame:        ""
+    property string nextAnimation:          ""
+    property string wantedGame:             ""
 
     onAppInForegroundChanged: {
-        if (appInForeground && pageActive) {
+        if (appInForeground && pageActive && !rewardBasedVideoAdActive) {
             if (!pigletSpeechAnimatedSprite.running) {
                 animationEnabled = true;
 
@@ -33,7 +34,21 @@ Item {
     }
 
     onPageActiveChanged: {
-        if (appInForeground && pageActive) {
+        if (appInForeground && pageActive && !rewardBasedVideoAdActive) {
+            if (!pigletSpeechAnimatedSprite.running) {
+                animationEnabled = true;
+
+                pigletAnimationTimer.restart();
+            }
+
+            pigletRandomAnimationTimer.restart();
+        } else {
+            animationEnabled = false;
+        }
+    }
+
+    onRewardBasedVideoAdActiveChanged: {
+        if (appInForeground && pageActive && !rewardBasedVideoAdActive) {
             if (!pigletSpeechAnimatedSprite.running) {
                 animationEnabled = true;
 
@@ -121,10 +136,15 @@ Item {
         }
     }
 
+    function videoAdNewReward(type, amount) {
+        console.debug(type + " " + amount);
+    }
+
     Audio {
         id:     audio
         volume: 1.0
-        muted:  !pigletPage.appInForeground || !pigletPage.pageActive || speechAudio.playbackState === Audio.PlayingState
+        muted:  !pigletPage.appInForeground         || !pigletPage.pageActive ||
+                pigletPage.rewardBasedVideoAdActive || speechAudio.playbackState === Audio.PlayingState
 
         property string audioSource: ""
 
@@ -145,7 +165,8 @@ Item {
     Audio {
         id:     speechAudio
         volume: 1.0
-        muted:  !pigletPage.appInForeground || !pigletPage.pageActive || audio.playbackState === Audio.PlayingState
+        muted:  !pigletPage.appInForeground         || !pigletPage.pageActive ||
+                pigletPage.rewardBasedVideoAdActive || audio.playbackState === Audio.PlayingState
 
         property bool playbackWasStarted: false
 
@@ -179,8 +200,9 @@ Item {
         sampleRateMultiplier: 1.5
         minVoiceDuration:     500
         minSilenceDuration:   100
-        active:               pigletPage.appInForeground && pigletPage.pageActive && audio.playbackState       !== Audio.PlayingState &&
-                                                                                     speechAudio.playbackState !== Audio.PlayingState
+        active:               pigletPage.appInForeground           && pigletPage.pageActive &&
+                              !pigletPage.rewardBasedVideoAdActive && audio.playbackState       !== Audio.PlayingState &&
+                                                                      speechAudio.playbackState !== Audio.PlayingState
 
         onError: {
             console.log(errorString);
@@ -705,11 +727,15 @@ Item {
                 source: "qrc:/resources/images/piglet/action_cake.png"
 
                 onStartAction: {
+                    /*
                     if (!pigletPage.isAnimationActive("piglet_eats_cake") && pigletPage.nextAnimation !== "piglet_eats_cake") {
                         pigletPage.nextAnimation = "piglet_eats_cake";
 
                         pigletPage.restartAnimation();
                     }
+                    */
+
+                    AdMobHelper.showRewardBasedVideoAd();
                 }
             }
 
@@ -733,7 +759,7 @@ Item {
     Accelerometer {
         id:       accelerometer
         dataRate: 10
-        active:   pigletPage.appInForeground && pigletPage.pageActive
+        active:   pigletPage.appInForeground && pigletPage.pageActive && !pigletPage.rewardBasedVideoAdActive
 
         property real lastReadingX: 0.0
         property real lastReadingY: 0.0
@@ -815,6 +841,8 @@ Item {
     }
 
     Component.onCompleted: {
+        AdMobHelper.rewardBasedVideoAdNewReward.connect(videoAdNewReward);
+
         animationSpriteSequence.cacheAnimation("qrc:/resources/animations/piglet/piglet_eats_candy.jpg",
                                                "piglet_eats_candy", 75, 15);
         animationSpriteSequence.cacheAnimation("qrc:/resources/animations/piglet/piglet_eats_cake.jpg",

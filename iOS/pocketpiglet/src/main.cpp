@@ -2,7 +2,9 @@
 #include <QtCore/QTranslator>
 #include <QtGui/QGuiApplication>
 #include <QtQml/QQmlApplicationEngine>
+#include <QtQml/QQmlContext>
 
+#include "admobhelper.h"
 #include "speechrecorder.h"
 
 int main(int argc, char *argv[])
@@ -17,6 +19,8 @@ int main(int argc, char *argv[])
     qmlRegisterType<SpeechRecorder>("SpeechRecorder", 1, 0, "SpeechRecorder");
 
     QQmlApplicationEngine engine;
+
+    engine.rootContext()->setContextProperty(QStringLiteral("AdMobHelper"), new AdMobHelper(&app));
 
     engine.load(QUrl(QStringLiteral("qrc:/qml/main.qml")));
 

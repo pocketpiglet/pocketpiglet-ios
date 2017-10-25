@@ -100,6 +100,8 @@ ApplicationWindow {
     }
 
     Component.onCompleted: {
+        AdMobHelper.initialize();
+
         mainStackView.push(pigletPage);
     }
 }

@@ -25,9 +25,11 @@ SOURCES += src/main.cpp \
     webrtc/common_audio/vad/webrtc_vad.c
 
 OBJECTIVE_SOURCES += \
+    src/admobhelper.mm \
     src/speechrecorder.mm
 
 HEADERS += \
+    src/admobhelper.h \
     src/speechrecorder.h \
     webrtc/common_audio/signal_processing/complex_fft_tables.h \
     webrtc/common_audio/signal_processing/include/real_fft.h \
@@ -57,6 +59,16 @@ QML_IMPORT_PATH =
 QML_DESIGNER_IMPORT_PATH =
 
 ios {
+    LIBS += -F $$PWD/admob -framework GoogleMobileAds \
+                -framework AdSupport \
+                -framework CFNetwork \
+                -framework CoreTelephony \
+                -framework GLKit \
+                -framework MediaPlayer \
+                -framework MessageUI \
+                -framework StoreKit \
+                -framework SystemConfiguration
+
     QMAKE_APPLE_DEVICE_ARCHS = arm64
     QMAKE_INFO_PLIST = ios/Info.plist
 }
