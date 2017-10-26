@@ -278,6 +278,7 @@ Item {
             color:               "yellow"
             horizontalAlignment: Text.AlignRight
             verticalAlignment:   Text.AlignVCenter
+            font.family:         "Courier"
             font.pixelSize:      32
         }
 
@@ -290,6 +291,7 @@ Item {
             color:               "red"
             horizontalAlignment: Text.AlignRight
             verticalAlignment:   Text.AlignVCenter
+            font.family:         "Courier"
             font.pixelSize:      32
         }
 
