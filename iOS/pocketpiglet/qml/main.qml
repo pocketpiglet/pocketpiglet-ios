@@ -12,9 +12,15 @@ ApplicationWindow {
     Screen.orientationUpdateMask: Qt.PortraitOrientation         | Qt.LandscapeOrientation |
                                   Qt.InvertedPortraitOrientation | Qt.InvertedLandscapeOrientation
 
+    property bool fullVersion:      false
+
     property int screenOrientation: Screen.orientation
 
     signal screenOrientationUpdated(int orientation)
+
+    onFullVersionChanged: {
+        setSetting("FullVersion", fullVersion ? "true" : "false");
+    }
 
     onScreenOrientationChanged: {
         screenOrientationUpdated(screenOrientation);
@@ -100,6 +106,8 @@ ApplicationWindow {
     }
 
     Component.onCompleted: {
+        fullVersion = (getSetting("FullVersion", "false") === "true");
+
         AdMobHelper.initialize();
 
         mainStackView.push(pigletPage);

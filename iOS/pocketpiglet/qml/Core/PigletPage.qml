@@ -77,6 +77,10 @@ Item {
         }
     }
 
+    onTrufflesAmountChanged: {
+        mainWindow.setSetting("PigletTrufflesAmount", trufflesAmount);
+    }
+
     function gameFinished(game) {
         lastGameTime = (new Date()).getTime();
 
@@ -152,14 +156,6 @@ Item {
         }
     }
 
-    function updateCurrencies() {
-        trufflesAmount = mainWindow.getSetting("PigletTrufflesAmount", trufflesMaxAmount);
-    }
-
-    function saveCurrencies() {
-        mainWindow.setSetting("PigletTrufflesAmount", trufflesAmount);
-    }
-
     function videoAdNewReward(type, amount) {
         console.debug(type + " " + amount);
 
@@ -167,8 +163,6 @@ Item {
         if (type === "coins") {
             trufflesAmount = Math.min(trufflesAmount + amount, trufflesMaxAmount);
         }
-
-        saveCurrencies();
     }
 
     Audio {
@@ -671,12 +665,14 @@ Item {
             topPadding:   16
 
             CurrencyButton {
-                id:        truffleCurrencyButton
-                width:     64
-                height:    64
-                source:    "qrc:/resources/images/piglet/currency_truffle.png"
-                amount:    pigletPage.trufflesAmount
-                maxAmount: pigletPage.trufflesMaxAmount
+                id:                truffleCurrencyButton
+                width:             64
+                height:            64
+                sourceNormal:      "qrc:/resources/images/piglet/currency_truffle.png"
+                sourceHighlighted: "qrc:/resources/images/piglet/currency_truffle_highlighted.png"
+                amount:            pigletPage.trufflesAmount
+                maxAmount:         pigletPage.trufflesMaxAmount
+                visible:           !mainWindow.fullVersion
 
                 onAddCurrency: {
                     AdMobHelper.showRewardBasedVideoAd();
@@ -700,7 +696,7 @@ Item {
                 sourceHighlighted: "qrc:/resources/images/piglet/game_piglet_feed_highlighted.png"
 
                 onStartGame: {
-                    if (trufflesAmount > 0) {
+                    if (mainWindow.fullVersion || trufflesAmount > 0) {
                         var component = Qt.createComponent("PigletFeedPage.qml");
 
                         if (component.status === Component.Ready) {
@@ -709,9 +705,7 @@ Item {
                             console.log(component.errorString());
                         }
 
-                        trufflesAmount = trufflesAmount - 1;
-
-                        pigletPage.saveCurrencies();
+                        trufflesAmount = Math.max(trufflesAmount - 1, 0);
                     } else {
                         outOfTrufflesQueryDialog.open();
                     }
@@ -726,7 +720,7 @@ Item {
                 sourceHighlighted: "qrc:/resources/images/piglet/game_piglet_wash_highlighted.png"
 
                 onStartGame: {
-                    if (trufflesAmount > 0) {
+                    if (mainWindow.fullVersion || trufflesAmount > 0) {
                         var component = Qt.createComponent("PigletWashPage.qml");
 
                         if (component.status === Component.Ready) {
@@ -735,9 +729,7 @@ Item {
                             console.log(component.errorString());
                         }
 
-                        trufflesAmount = trufflesAmount - 1;
-
-                        pigletPage.saveCurrencies();
+                        trufflesAmount = Math.max(trufflesAmount - 1, 0);
                     } else {
                         outOfTrufflesQueryDialog.open();
                     }
@@ -752,7 +744,7 @@ Item {
                 sourceHighlighted: "qrc:/resources/images/piglet/game_piglet_puzzle_highlighted.png"
 
                 onStartGame: {
-                    if (trufflesAmount > 0) {
+                    if (mainWindow.fullVersion || trufflesAmount > 0) {
                         var component = Qt.createComponent("PigletPuzzlePage.qml");
 
                         if (component.status === Component.Ready) {
@@ -761,9 +753,7 @@ Item {
                             console.log(component.errorString());
                         }
 
-                        trufflesAmount = trufflesAmount - 1;
-
-                        pigletPage.saveCurrencies();
+                        trufflesAmount = Math.max(trufflesAmount - 1, 0);
                     } else {
                         outOfTrufflesQueryDialog.open();
                     }
@@ -778,7 +768,7 @@ Item {
                 sourceHighlighted: "qrc:/resources/images/piglet/game_piglet_search_highlighted.png"
 
                 onStartGame: {
-                    if (trufflesAmount > 0) {
+                    if (mainWindow.fullVersion || trufflesAmount > 0) {
                         var component = Qt.createComponent("PigletSearchPage.qml");
 
                         if (component.status === Component.Ready) {
@@ -787,9 +777,7 @@ Item {
                             console.log(component.errorString());
                         }
 
-                        trufflesAmount = trufflesAmount - 1;
-
-                        pigletPage.saveCurrencies();
+                        trufflesAmount = Math.max(trufflesAmount - 1, 0);
                     } else {
                         outOfTrufflesQueryDialog.open();
                     }
@@ -934,7 +922,7 @@ Item {
     Component.onCompleted: {
         AdMobHelper.rewardBasedVideoAdNewReward.connect(videoAdNewReward);
 
-        updateCurrencies();
+        trufflesAmount = mainWindow.getSetting("PigletTrufflesAmount", trufflesMaxAmount);
 
         animationSpriteSequence.cacheAnimation("qrc:/resources/animations/piglet/piglet_eats_candy.jpg",
                                                "piglet_eats_candy", 75, 15);
