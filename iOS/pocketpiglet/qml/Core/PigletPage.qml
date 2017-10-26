@@ -33,7 +33,11 @@ Item {
 
             pigletRandomAnimationTimer.restart();
         } else {
-            animationEnabled = false;
+            if (!appInForeground && rewardBasedVideoAdActive) {
+                Qt.quit();
+            } else {
+                animationEnabled = false;
+            }
         }
     }
 
@@ -47,7 +51,11 @@ Item {
 
             pigletRandomAnimationTimer.restart();
         } else {
-            animationEnabled = false;
+            if (!appInForeground && rewardBasedVideoAdActive) {
+                Qt.quit();
+            } else {
+                animationEnabled = false;
+            }
         }
     }
 
@@ -61,7 +69,11 @@ Item {
 
             pigletRandomAnimationTimer.restart();
         } else {
-            animationEnabled = false;
+            if (!appInForeground && rewardBasedVideoAdActive) {
+                Qt.quit();
+            } else {
+                animationEnabled = false;
+            }
         }
     }
 
