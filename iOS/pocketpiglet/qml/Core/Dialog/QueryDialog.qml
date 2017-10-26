@@ -5,13 +5,46 @@ MouseArea {
     anchors.centerIn: parent
     visible:          false
 
-    property string text: ""
+    property int parentWidth:  parent.width
+    property int parentHeight: parent.height
+
+    property string text:      ""
 
     signal opened()
     signal closed()
 
     signal yes()
     signal no()
+
+    onParentWidthChanged: {
+        if (rotation === 0 || rotation === 180) {
+            width  = parent.width;
+            height = parent.height;
+        } else if (rotation === 90 || rotation === 270) {
+            width  = parent.height;
+            height = parent.width;
+        }
+    }
+
+    onParentHeightChanged: {
+        if (rotation === 0 || rotation === 180) {
+            width  = parent.width;
+            height = parent.height;
+        } else if (rotation === 90 || rotation === 270) {
+            width  = parent.height;
+            height = parent.width;
+        }
+    }
+
+    onRotationChanged: {
+        if (rotation === 0 || rotation === 180) {
+            width  = parent.width;
+            height = parent.height;
+        } else if (rotation === 90 || rotation === 270) {
+            width  = parent.height;
+            height = parent.width;
+        }
+    }
 
     function open() {
         visible = true;
@@ -108,16 +141,6 @@ MouseArea {
                     dialogScreenLockMouseArea.closed();
                 }
             }
-        }
-    }
-
-    Component.onCompleted: {
-        if (rotation === 0 || rotation === 180) {
-            width  = parent.width;
-            height = parent.height;
-        } else if (rotation === 90 || rotation === 270) {
-            width  = parent.height;
-            height = parent.width;
         }
     }
 }
