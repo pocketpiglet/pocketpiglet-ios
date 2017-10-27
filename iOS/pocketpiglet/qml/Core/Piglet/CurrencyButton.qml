@@ -1,10 +1,11 @@
 import QtQuick 2.6
 
-Image {
+Column {
     id: currencyButton
 
+    property int imageWidth:        0
+    property int imageHeight:       0
     property int amount:            0
-    property int maxAmount:         0
 
     property url sourceNormal:      ""
     property url sourceHighlighted: ""
@@ -13,70 +14,51 @@ Image {
 
     onAmountChanged: {
         if (amount > 0) {
-            buttonHighlightSequentalAnimation.running = false;
-            opacity                                   = 1.0;
-            source                                    = sourceNormal;
+            currencyButtonImage.source = sourceNormal;
         } else {
-            buttonHighlightSequentalAnimation.running = true;
-            opacity                                   = 1.0;
-            source                                    = sourceHighlighted;
+            currencyButtonImage.source = sourceHighlighted;
         }
     }
 
-    MouseArea {
-        id:           currencyButtonMouseArea
-        anchors.fill: parent
+    Image {
+        id:     currencyButtonImage
+        width:  currencyButton.imageWidth
+        height: currencyButton.imageHeight
 
-        onClicked: {
-            if (amount < maxAmount) {
+        MouseArea {
+            anchors.fill: parent
+
+            onClicked: {
                 currencyButton.addCurrency();
             }
         }
+    }
+
+    Rectangle {
+        color:  "white"
+        width:  currencyButton.imageWidth
+        height: currencyButtonAmountText.height + currencyButtonAmountText.anchors.margins * 2
+        radius: 16
 
         Text {
-            id:                  amountText
-            anchors.centerIn:    parent
-            width:               Math.min(parent.width, parent.height) * 0.95 / Math.sqrt(2.0)
-            height:              Math.min(parent.width, parent.height) * 0.95 / Math.sqrt(2.0)
+            id:                  currencyButtonAmountText
+            anchors.left:        parent.left
+            anchors.right:       parent.right
+            anchors.top:         parent.top
+            anchors.margins:     4
             text:                currencyButton.amount
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment:   Text.AlignVCenter
-            fontSizeMode:        Text.Fit
-            font.pixelSize:      width
-            color:               "white"
-        }
-    }
-
-    SequentialAnimation {
-        id:    buttonHighlightSequentalAnimation
-        loops: Animation.Infinite
-
-        PropertyAnimation {
-            target:   currencyButton
-            property: "opacity"
-            from:     1.0
-            to:       0.5
-            duration: 500
-        }
-
-        PropertyAnimation {
-            target:   currencyButton
-            property: "opacity"
-            from:     0.5
-            to:       1.0
-            duration: 500
+            font.pixelSize:      16
+            color:               "black"
         }
     }
 
     Component.onCompleted: {
         if (amount > 0) {
-            buttonHighlightSequentalAnimation.running = false;
-            opacity                                   = 1.0;
-            source                                    = sourceNormal;
+            currencyButtonImage.source = sourceNormal;
         } else {
-            buttonHighlightSequentalAnimation.running = true;
-            opacity                                   = 1.0;
-            source                                    = sourceHighlighted;
+            currencyButtonImage.source = sourceHighlighted;
         }
     }
 }

@@ -14,8 +14,8 @@ Item {
     property bool rewardBasedVideoAdActive: AdMobHelper.rewardBasedVideoAdActive
     property bool animationEnabled:         false
 
-    property int trufflesAmount:            0
-    property int trufflesMaxAmount:         10
+    property int diamondsAmount:            0
+    property int diamondsMaxAmount:         10
 
     property real lastGameTime:             (new Date()).getTime()
     property real accelShakeThreshold:      50.0
@@ -77,8 +77,8 @@ Item {
         }
     }
 
-    onTrufflesAmountChanged: {
-        mainWindow.setSetting("PigletTrufflesAmount", trufflesAmount);
+    onDiamondsAmountChanged: {
+        mainWindow.setSetting("PigletDiamondsAmount", diamondsAmount);
     }
 
     function gameFinished(game) {
@@ -161,7 +161,7 @@ Item {
 
         // TODO
         if (type === "coins") {
-            trufflesAmount = Math.min(trufflesAmount + amount, trufflesMaxAmount);
+            diamondsAmount = Math.min(diamondsAmount + amount, diamondsMaxAmount);
         }
     }
 
@@ -665,17 +665,16 @@ Item {
             topPadding:   16
 
             CurrencyButton {
-                id:                truffleCurrencyButton
-                width:             64
-                height:            64
-                sourceNormal:      "qrc:/resources/images/piglet/currency_truffle.png"
-                sourceHighlighted: "qrc:/resources/images/piglet/currency_truffle_highlighted.png"
-                amount:            pigletPage.trufflesAmount
-                maxAmount:         pigletPage.trufflesMaxAmount
+                id:                diamondCurrencyButton
+                imageWidth:        64
+                imageHeight:       64
+                sourceNormal:      "qrc:/resources/images/piglet/currency_diamond.png"
+                sourceHighlighted: "qrc:/resources/images/piglet/currency_diamond_highlighted.png"
+                amount:            pigletPage.diamondsAmount
                 visible:           !mainWindow.fullVersion
 
                 onAddCurrency: {
-                    AdMobHelper.showRewardBasedVideoAd();
+                    outOfDiamondsQueryDialog.open();
                 }
             }
         }
@@ -696,7 +695,7 @@ Item {
                 sourceHighlighted: "qrc:/resources/images/piglet/game_piglet_feed_highlighted.png"
 
                 onStartGame: {
-                    if (mainWindow.fullVersion || trufflesAmount > 0) {
+                    if (mainWindow.fullVersion || diamondsAmount > 0) {
                         var component = Qt.createComponent("PigletFeedPage.qml");
 
                         if (component.status === Component.Ready) {
@@ -705,9 +704,9 @@ Item {
                             console.log(component.errorString());
                         }
 
-                        trufflesAmount = Math.max(trufflesAmount - 1, 0);
+                        diamondsAmount = Math.max(diamondsAmount - 1, 0);
                     } else {
-                        outOfTrufflesQueryDialog.open();
+                        outOfDiamondsQueryDialog.open();
                     }
                 }
             }
@@ -720,7 +719,7 @@ Item {
                 sourceHighlighted: "qrc:/resources/images/piglet/game_piglet_wash_highlighted.png"
 
                 onStartGame: {
-                    if (mainWindow.fullVersion || trufflesAmount > 0) {
+                    if (mainWindow.fullVersion || diamondsAmount > 0) {
                         var component = Qt.createComponent("PigletWashPage.qml");
 
                         if (component.status === Component.Ready) {
@@ -729,9 +728,9 @@ Item {
                             console.log(component.errorString());
                         }
 
-                        trufflesAmount = Math.max(trufflesAmount - 1, 0);
+                        diamondsAmount = Math.max(diamondsAmount - 1, 0);
                     } else {
-                        outOfTrufflesQueryDialog.open();
+                        outOfDiamondsQueryDialog.open();
                     }
                 }
             }
@@ -744,7 +743,7 @@ Item {
                 sourceHighlighted: "qrc:/resources/images/piglet/game_piglet_puzzle_highlighted.png"
 
                 onStartGame: {
-                    if (mainWindow.fullVersion || trufflesAmount > 0) {
+                    if (mainWindow.fullVersion || diamondsAmount > 0) {
                         var component = Qt.createComponent("PigletPuzzlePage.qml");
 
                         if (component.status === Component.Ready) {
@@ -753,9 +752,9 @@ Item {
                             console.log(component.errorString());
                         }
 
-                        trufflesAmount = Math.max(trufflesAmount - 1, 0);
+                        diamondsAmount = Math.max(diamondsAmount - 1, 0);
                     } else {
-                        outOfTrufflesQueryDialog.open();
+                        outOfDiamondsQueryDialog.open();
                     }
                 }
             }
@@ -768,7 +767,7 @@ Item {
                 sourceHighlighted: "qrc:/resources/images/piglet/game_piglet_search_highlighted.png"
 
                 onStartGame: {
-                    if (mainWindow.fullVersion || trufflesAmount > 0) {
+                    if (mainWindow.fullVersion || diamondsAmount > 0) {
                         var component = Qt.createComponent("PigletSearchPage.qml");
 
                         if (component.status === Component.Ready) {
@@ -777,9 +776,9 @@ Item {
                             console.log(component.errorString());
                         }
 
-                        trufflesAmount = Math.max(trufflesAmount - 1, 0);
+                        diamondsAmount = Math.max(diamondsAmount - 1, 0);
                     } else {
-                        outOfTrufflesQueryDialog.open();
+                        outOfDiamondsQueryDialog.open();
                     }
                 }
             }
@@ -826,9 +825,9 @@ Item {
     }
 
     QueryDialog {
-        id:   outOfTrufflesQueryDialog
+        id:   outOfDiamondsQueryDialog
         z:    20
-        text: qsTr("You have run out of truffles! Do you want to earn additional truffles?")
+        text: qsTr("You have run out of diamonds! Do you want to earn additional diamonds?")
 
         onYes: {
             AdMobHelper.showRewardBasedVideoAd();
@@ -922,7 +921,7 @@ Item {
     Component.onCompleted: {
         AdMobHelper.rewardBasedVideoAdNewReward.connect(videoAdNewReward);
 
-        trufflesAmount = mainWindow.getSetting("PigletTrufflesAmount", trufflesMaxAmount);
+        diamondsAmount = mainWindow.getSetting("PigletDiamondsAmount", diamondsMaxAmount);
 
         animationSpriteSequence.cacheAnimation("qrc:/resources/animations/piglet/piglet_eats_candy.jpg",
                                                "piglet_eats_candy", 75, 15);
