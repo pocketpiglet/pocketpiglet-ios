@@ -1,7 +1,7 @@
 import QtQuick 2.9
 
 MouseArea {
-    id:               dialogScreenLockMouseArea
+    id:               queryDialog
     anchors.centerIn: parent
     visible:          false
 
@@ -17,32 +17,38 @@ MouseArea {
     signal no()
 
     onParentWidthChanged: {
-        if (rotation === 0 || rotation === 180) {
-            width  = parent.width;
-            height = parent.height;
-        } else if (rotation === 90 || rotation === 270) {
-            width  = parent.height;
-            height = parent.width;
+        if (typeof(parent) !== "undefined" && parent !== null) {
+            if (rotation === 0 || rotation === 180) {
+                width  = parent.width;
+                height = parent.height;
+            } else if (rotation === 90 || rotation === 270) {
+                width  = parent.height;
+                height = parent.width;
+            }
         }
     }
 
     onParentHeightChanged: {
-        if (rotation === 0 || rotation === 180) {
-            width  = parent.width;
-            height = parent.height;
-        } else if (rotation === 90 || rotation === 270) {
-            width  = parent.height;
-            height = parent.width;
+        if (typeof(parent) !== "undefined" && parent !== null) {
+            if (rotation === 0 || rotation === 180) {
+                width  = parent.width;
+                height = parent.height;
+            } else if (rotation === 90 || rotation === 270) {
+                width  = parent.height;
+                height = parent.width;
+            }
         }
     }
 
     onRotationChanged: {
-        if (rotation === 0 || rotation === 180) {
-            width  = parent.width;
-            height = parent.height;
-        } else if (rotation === 90 || rotation === 270) {
-            width  = parent.height;
-            height = parent.width;
+        if (typeof(parent) !== "undefined" && parent !== null) {
+            if (rotation === 0 || rotation === 180) {
+                width  = parent.width;
+                height = parent.height;
+            } else if (rotation === 90 || rotation === 270) {
+                width  = parent.height;
+                height = parent.width;
+            }
         }
     }
 
@@ -62,8 +68,8 @@ MouseArea {
     Image {
         id:               dialogImage
         anchors.centerIn: parent
-        width:            (parent.width < parent.height ? parent.width : parent.height) - 16
-        height:           (parent.width < parent.height ? parent.width : parent.height) - 72
+        width:            Math.min(parent.width, parent.height) - 16
+        height:           Math.min(parent.width, parent.height) - 72
         source:           "qrc:/resources/images/dialog/dialog.png"
         fillMode:         Image.PreserveAspectFit
 
@@ -96,7 +102,7 @@ MouseArea {
             horizontalAlignment:  Text.AlignHCenter
             verticalAlignment:    Text.AlignVCenter
             wrapMode:             Text.Wrap
-            text:                 dialogScreenLockMouseArea.text
+            text:                 queryDialog.text
         }
     }
 
@@ -116,10 +122,10 @@ MouseArea {
                 anchors.fill: parent
 
                 onClicked: {
-                    dialogScreenLockMouseArea.visible = false;
+                    queryDialog.visible = false;
 
-                    dialogScreenLockMouseArea.yes();
-                    dialogScreenLockMouseArea.closed();
+                    queryDialog.yes();
+                    queryDialog.closed();
                 }
             }
         }
@@ -135,10 +141,10 @@ MouseArea {
                 anchors.fill: parent
 
                 onClicked: {
-                    dialogScreenLockMouseArea.visible = false;
+                    queryDialog.visible = false;
 
-                    dialogScreenLockMouseArea.no();
-                    dialogScreenLockMouseArea.closed();
+                    queryDialog.no();
+                    queryDialog.closed();
                 }
             }
         }

@@ -12,8 +12,14 @@
         <file>resources/animations/piglet/piglet_voice_ended.jpg</file>
         <file>resources/animations/piglet/piglet_voice_found.jpg</file>
         <file>resources/animations/piglet/piglet_wash_game_finished.jpg</file>
+        <file>resources/images/dialog/cancel.png</file>
         <file>resources/images/dialog/dialog.png</file>
         <file>resources/images/dialog/no.png</file>
+        <file>resources/images/dialog/purchase_dialog.png</file>
+        <file>resources/images/dialog/purchase_dialog_button.png</file>
+        <file>resources/images/dialog/purchase_dialog_purchase.png</file>
+        <file>resources/images/dialog/purchase_dialog_restore.png</file>
+        <file>resources/images/dialog/purchase_dialog_watch.png</file>
         <file>resources/images/dialog/yes.png</file>
         <file>resources/images/piglet/action_cake.png</file>
         <file>resources/images/piglet/action_candy.png</file>

@@ -1,7 +1,7 @@
 import QtQuick 2.9
 
 MouseArea {
-    id:               dialogScreenLockMouseArea
+    id:               notificationDialog
     anchors.centerIn: parent
     visible:          false
 
@@ -14,32 +14,38 @@ MouseArea {
     signal closed()
 
     onParentWidthChanged: {
-        if (rotation === 0 || rotation === 180) {
-            width  = parent.width;
-            height = parent.height;
-        } else if (rotation === 90 || rotation === 270) {
-            width  = parent.height;
-            height = parent.width;
+        if (typeof(parent) !== "undefined" && parent !== null) {
+            if (rotation === 0 || rotation === 180) {
+                width  = parent.width;
+                height = parent.height;
+            } else if (rotation === 90 || rotation === 270) {
+                width  = parent.height;
+                height = parent.width;
+            }
         }
     }
 
     onParentHeightChanged: {
-        if (rotation === 0 || rotation === 180) {
-            width  = parent.width;
-            height = parent.height;
-        } else if (rotation === 90 || rotation === 270) {
-            width  = parent.height;
-            height = parent.width;
+        if (typeof(parent) !== "undefined" && parent !== null) {
+            if (rotation === 0 || rotation === 180) {
+                width  = parent.width;
+                height = parent.height;
+            } else if (rotation === 90 || rotation === 270) {
+                width  = parent.height;
+                height = parent.width;
+            }
         }
     }
 
     onRotationChanged: {
-        if (rotation === 0 || rotation === 180) {
-            width  = parent.width;
-            height = parent.height;
-        } else if (rotation === 90 || rotation === 270) {
-            width  = parent.height;
-            height = parent.width;
+        if (typeof(parent) !== "undefined" && parent !== null) {
+            if (rotation === 0 || rotation === 180) {
+                width  = parent.width;
+                height = parent.height;
+            } else if (rotation === 90 || rotation === 270) {
+                width  = parent.height;
+                height = parent.width;
+            }
         }
     }
 
@@ -57,8 +63,8 @@ MouseArea {
 
     Image {
         anchors.centerIn: parent
-        width:            (parent.width < parent.height ? parent.width : parent.height) - 16
-        height:           (parent.width < parent.height ? parent.width : parent.height) - 72
+        width:            Math.min(parent.width, parent.height) - 16
+        height:           Math.min(parent.width, parent.height) - 72
         source:           "qrc:/resources/images/dialog/dialog.png"
         fillMode:         Image.PreserveAspectFit
 
@@ -90,7 +96,7 @@ MouseArea {
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment:   Text.AlignVCenter
             wrapMode:            Text.Wrap
-            text:                dialogScreenLockMouseArea.text
+            text:                notificationDialog.text
         }
     }
 

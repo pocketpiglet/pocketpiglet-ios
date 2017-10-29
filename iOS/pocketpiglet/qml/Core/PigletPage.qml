@@ -674,7 +674,7 @@ Item {
                 visible:           !mainWindow.fullVersion
 
                 onAddCurrency: {
-                    outOfDiamondsQueryDialog.open();
+                    purchaseDialog.open(AdMobHelper.rewardBasedVideoAdReady);
                 }
             }
         }
@@ -706,7 +706,7 @@ Item {
 
                         diamondsAmount = Math.max(diamondsAmount - 1, 0);
                     } else {
-                        outOfDiamondsQueryDialog.open();
+                        purchaseDialog.open(AdMobHelper.rewardBasedVideoAdReady);
                     }
                 }
             }
@@ -730,7 +730,7 @@ Item {
 
                         diamondsAmount = Math.max(diamondsAmount - 1, 0);
                     } else {
-                        outOfDiamondsQueryDialog.open();
+                        purchaseDialog.open(AdMobHelper.rewardBasedVideoAdReady);
                     }
                 }
             }
@@ -754,7 +754,7 @@ Item {
 
                         diamondsAmount = Math.max(diamondsAmount - 1, 0);
                     } else {
-                        outOfDiamondsQueryDialog.open();
+                        purchaseDialog.open(AdMobHelper.rewardBasedVideoAdReady);
                     }
                 }
             }
@@ -778,7 +778,7 @@ Item {
 
                         diamondsAmount = Math.max(diamondsAmount - 1, 0);
                     } else {
-                        outOfDiamondsQueryDialog.open();
+                        purchaseDialog.open(AdMobHelper.rewardBasedVideoAdReady);
                     }
                 }
             }
@@ -824,13 +824,20 @@ Item {
         }
     }
 
-    QueryDialog {
-        id:   outOfDiamondsQueryDialog
-        z:    20
-        text: qsTr("You have run out of diamonds! Do you want to earn additional diamonds?")
+    PurchaseDialog {
+        id: purchaseDialog
+        z:  20
 
-        onYes: {
+        onWatchVideo: {
             AdMobHelper.showRewardBasedVideoAd();
+        }
+
+        onPurchaseFullVersion: {
+            // TODO
+        }
+
+        onRestorePurchases: {
+            // TODO
         }
     }
 

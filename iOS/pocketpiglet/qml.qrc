@@ -9,6 +9,7 @@
         <file>qml/Core/PigletWashPage.js</file>
         <file>qml/Core/PigletWashPage.qml</file>
         <file>qml/Core/Dialog/NotificationDialog.qml</file>
+        <file>qml/Core/Dialog/PurchaseDialog.qml</file>
         <file>qml/Core/Dialog/QueryDialog.qml</file>
         <file>qml/Core/Piglet/ActionButton.qml</file>
         <file>qml/Core/Piglet/CurrencyButton.qml</file>
