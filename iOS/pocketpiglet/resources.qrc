@@ -17,9 +17,11 @@
         <file>resources/images/dialog/no.png</file>
         <file>resources/images/dialog/purchase_dialog.png</file>
         <file>resources/images/dialog/purchase_dialog_button.png</file>
+        <file>resources/images/dialog/purchase_dialog_button_disabled.png</file>
         <file>resources/images/dialog/purchase_dialog_purchase.png</file>
         <file>resources/images/dialog/purchase_dialog_restore.png</file>
         <file>resources/images/dialog/purchase_dialog_watch.png</file>
+        <file>resources/images/dialog/purchase_dialog_watch_disabled.png</file>
         <file>resources/images/dialog/yes.png</file>
         <file>resources/images/piglet/action_cake.png</file>
         <file>resources/images/piglet/action_candy.png</file>
