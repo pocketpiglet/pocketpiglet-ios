@@ -672,7 +672,7 @@ Item {
                 visible:           !mainWindow.fullVersion
 
                 onAddCurrency: {
-                    purchaseDialog.open(AdMobHelper.rewardBasedVideoAdReady);
+                    purchaseDialog.open(AdMobHelper.rewardBasedVideoAdReady && pigletPage.diamondsAmount < pigletPage.diamondsMaxAmount);
                 }
             }
         }
@@ -693,7 +693,7 @@ Item {
                 sourceHighlighted: "qrc:/resources/images/piglet/game_piglet_feed_highlighted.png"
 
                 onStartGame: {
-                    if (mainWindow.fullVersion || diamondsAmount > 0) {
+                    if (mainWindow.fullVersion || pigletPage.diamondsAmount > 0) {
                         var component = Qt.createComponent("PigletFeedPage.qml");
 
                         if (component.status === Component.Ready) {
@@ -702,9 +702,9 @@ Item {
                             console.log(component.errorString());
                         }
 
-                        diamondsAmount = Math.max(diamondsAmount - 1, 0);
+                        pigletPage.diamondsAmount = Math.max(pigletPage.diamondsAmount - 1, 0);
                     } else {
-                        purchaseDialog.open(AdMobHelper.rewardBasedVideoAdReady);
+                        purchaseDialog.open(AdMobHelper.rewardBasedVideoAdReady && pigletPage.diamondsAmount < pigletPage.diamondsMaxAmount);
                     }
                 }
             }
@@ -717,7 +717,7 @@ Item {
                 sourceHighlighted: "qrc:/resources/images/piglet/game_piglet_wash_highlighted.png"
 
                 onStartGame: {
-                    if (mainWindow.fullVersion || diamondsAmount > 0) {
+                    if (mainWindow.fullVersion || pigletPage.diamondsAmount > 0) {
                         var component = Qt.createComponent("PigletWashPage.qml");
 
                         if (component.status === Component.Ready) {
@@ -726,9 +726,9 @@ Item {
                             console.log(component.errorString());
                         }
 
-                        diamondsAmount = Math.max(diamondsAmount - 1, 0);
+                        pigletPage.diamondsAmount = Math.max(pigletPage.diamondsAmount - 1, 0);
                     } else {
-                        purchaseDialog.open(AdMobHelper.rewardBasedVideoAdReady);
+                        purchaseDialog.open(AdMobHelper.rewardBasedVideoAdReady && pigletPage.diamondsAmount < pigletPage.diamondsMaxAmount);
                     }
                 }
             }
@@ -741,7 +741,7 @@ Item {
                 sourceHighlighted: "qrc:/resources/images/piglet/game_piglet_puzzle_highlighted.png"
 
                 onStartGame: {
-                    if (mainWindow.fullVersion || diamondsAmount > 0) {
+                    if (mainWindow.fullVersion || pigletPage.diamondsAmount > 0) {
                         var component = Qt.createComponent("PigletPuzzlePage.qml");
 
                         if (component.status === Component.Ready) {
@@ -750,9 +750,9 @@ Item {
                             console.log(component.errorString());
                         }
 
-                        diamondsAmount = Math.max(diamondsAmount - 1, 0);
+                        pigletPage.diamondsAmount = Math.max(pigletPage.diamondsAmount - 1, 0);
                     } else {
-                        purchaseDialog.open(AdMobHelper.rewardBasedVideoAdReady);
+                        purchaseDialog.open(AdMobHelper.rewardBasedVideoAdReady && pigletPage.diamondsAmount < pigletPage.diamondsMaxAmount);
                     }
                 }
             }
@@ -765,7 +765,7 @@ Item {
                 sourceHighlighted: "qrc:/resources/images/piglet/game_piglet_search_highlighted.png"
 
                 onStartGame: {
-                    if (mainWindow.fullVersion || diamondsAmount > 0) {
+                    if (mainWindow.fullVersion || pigletPage.diamondsAmount > 0) {
                         var component = Qt.createComponent("PigletSearchPage.qml");
 
                         if (component.status === Component.Ready) {
@@ -774,9 +774,9 @@ Item {
                             console.log(component.errorString());
                         }
 
-                        diamondsAmount = Math.max(diamondsAmount - 1, 0);
+                        pigletPage.diamondsAmount = Math.max(pigletPage.diamondsAmount - 1, 0);
                     } else {
-                        purchaseDialog.open(AdMobHelper.rewardBasedVideoAdReady);
+                        purchaseDialog.open(AdMobHelper.rewardBasedVideoAdReady && pigletPage.diamondsAmount < pigletPage.diamondsMaxAmount);
                     }
                 }
             }
