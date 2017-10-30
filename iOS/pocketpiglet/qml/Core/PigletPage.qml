@@ -301,7 +301,6 @@ Item {
                 z:                5
                 source:           "qrc:/resources/images/piglet/piglet_idle.jpg"
                 fillMode:         Image.PreserveAspectCrop
-                smooth:           true
 
                 property bool geometrySettled: false
 
@@ -512,7 +511,6 @@ Item {
                 z:                pigletIdleImage.z - 1
                 source:           "qrc:/resources/images/piglet/piglet_listen.jpg"
                 fillMode:         Image.PreserveAspectCrop
-                smooth:           true
 
                 property bool geometrySettled: false
 

@@ -186,7 +186,6 @@ Item {
             anchors.fill: parent
             source:       "qrc:/resources/images/piglet_wash/background_0_missed.gif"
             fillMode:     Image.PreserveAspectCrop
-            smooth:       true
             playing:      false
         }
 
@@ -196,7 +195,6 @@ Item {
             z:            1
             source:       "qrc:/resources/images/piglet_wash/background_1_missed.gif"
             fillMode:     Image.PreserveAspectCrop
-            smooth:       true
             playing:      false
             visible:      false
         }
@@ -207,7 +205,6 @@ Item {
             z:            2
             source:       "qrc:/resources/images/piglet_wash/background_2_missed.gif"
             fillMode:     Image.PreserveAspectCrop
-            smooth:       true
             playing:      false
             visible:      false
         }
@@ -218,7 +215,6 @@ Item {
             z:            3
             source:       "qrc:/resources/images/piglet_wash/background_3_missed.gif"
             fillMode:     Image.PreserveAspectCrop
-            smooth:       true
             playing:      false
             visible:      false
         }

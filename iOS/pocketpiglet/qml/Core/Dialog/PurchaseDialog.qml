@@ -5,10 +5,10 @@ MouseArea {
     anchors.centerIn: parent
     visible:          false
 
-    property bool showWatchVideoButton: true
+    property bool enableWatchVideoButton: true
 
-    property int parentWidth:           parent.width
-    property int parentHeight:          parent.height
+    property int parentWidth:             parent.width
+    property int parentHeight:            parent.height
 
     signal opened()
     signal closed()
@@ -54,9 +54,9 @@ MouseArea {
         }
     }
 
-    function open(show_watch_video_button) {
-        visible              = true;
-        showWatchVideoButton = show_watch_video_button;
+    function open(enable_watch_video_button) {
+        visible                = true;
+        enableWatchVideoButton = enable_watch_video_button;
 
         opened();
     }
@@ -98,15 +98,14 @@ MouseArea {
 
         Column {
             anchors.centerIn: parent
-            spacing:          16
+            spacing:          8
 
             Image {
                 id:       watchVideoButtonImage
-                width:    dialogImage.width  - 32
-                height:   dialogImage.height - 32
+                width:    dialogImage.width  - 16
+                height:   dialogImage.height - 16
                 source:   "qrc:/resources/images/dialog/purchase_dialog_button.png"
                 fillMode: Image.PreserveAspectFit
-                visible:  purchaseDialog.showWatchVideoButton
 
                 property bool geometrySettled: false
 
@@ -130,6 +129,7 @@ MouseArea {
 
                 MouseArea {
                     anchors.fill: parent
+                    enabled:      purchaseDialog.enableWatchVideoButton
 
                     onClicked: {
                         purchaseDialog.visible = false;
@@ -141,33 +141,38 @@ MouseArea {
 
                 Row {
                     anchors.fill: parent
+                    leftPadding:  4
+                    rightPadding: 4
                     spacing:      4
 
                     Image {
-                        id:       watchVideoImage
-                        width:    sourceSize.width * (height / sourceSize.height)
-                        height:   parent.height
-                        source:   "qrc:/resources/images/dialog/purchase_dialog_watch.png"
-                        fillMode: Image.PreserveAspectFit
+                        id:                     watchVideoImage
+                        anchors.verticalCenter: parent.verticalCenter
+                        width:                  sourceSize.width * (height / sourceSize.height)
+                        height:                 parent.height - 8
+                        source:                 "qrc:/resources/images/dialog/purchase_dialog_watch.png"
+                        fillMode:               Image.PreserveAspectFit
                     }
 
                     Text {
-                        width:               parent.width - watchVideoImage.width - parent.spacing
-                        height:              parent.height
-                        clip:                true
-                        color:               "black"
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment:   Text.AlignVCenter
-                        wrapMode:            Text.Wrap
-                        text:                qsTr("Watch the video")
+                        anchors.verticalCenter: parent.verticalCenter
+                        width:                  parent.width - watchVideoImage.width - parent.spacing -
+                                                parent.leftPadding - parent.rightPadding
+                        height:                 parent.height - 8
+                        clip:                   true
+                        color:                  "black"
+                        horizontalAlignment:    Text.AlignHCenter
+                        verticalAlignment:      Text.AlignVCenter
+                        wrapMode:               Text.Wrap
+                        text:                   qsTr("Watch the video")
                     }
                 }
             }
 
             Image {
                 id:       purchaseFullVersionButtonImage
-                width:    dialogImage.width  - 32
-                height:   dialogImage.height - 32
+                width:    dialogImage.width  - 16
+                height:   dialogImage.height - 16
                 source:   "qrc:/resources/images/dialog/purchase_dialog_button.png"
                 fillMode: Image.PreserveAspectFit
 
@@ -204,33 +209,38 @@ MouseArea {
 
                 Row {
                     anchors.fill: parent
+                    leftPadding:  4
+                    rightPadding: 4
                     spacing:      4
 
                     Image {
-                        id:       purchaseFullVersionImage
-                        width:    sourceSize.width * (height / sourceSize.height)
-                        height:   parent.height
-                        source:   "qrc:/resources/images/dialog/purchase_dialog_purchase.png"
-                        fillMode: Image.PreserveAspectFit
+                        id:                     purchaseFullVersionImage
+                        anchors.verticalCenter: parent.verticalCenter
+                        width:                  sourceSize.width * (height / sourceSize.height)
+                        height:                 parent.height - 8
+                        source:                 "qrc:/resources/images/dialog/purchase_dialog_purchase.png"
+                        fillMode:               Image.PreserveAspectFit
                     }
 
                     Text {
-                        width:               parent.width - purchaseFullVersionImage.width - parent.spacing
-                        height:              parent.height
-                        clip:                true
-                        color:               "black"
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment:   Text.AlignVCenter
-                        wrapMode:            Text.Wrap
-                        text:                qsTr("Purchase full version")
+                        anchors.verticalCenter: parent.verticalCenter
+                        width:                  parent.width - purchaseFullVersionImage.width - parent.spacing -
+                                                parent.leftPadding - parent.rightPadding
+                        height:                 parent.height - 8
+                        clip:                   true
+                        color:                  "black"
+                        horizontalAlignment:    Text.AlignHCenter
+                        verticalAlignment:      Text.AlignVCenter
+                        wrapMode:               Text.Wrap
+                        text:                   qsTr("Purchase full version")
                     }
                 }
             }
 
             Image {
                 id:       restorePurchasesButtonImage
-                width:    dialogImage.width  - 32
-                height:   dialogImage.height - 32
+                width:    dialogImage.width  - 16
+                height:   dialogImage.height - 16
                 source:   "qrc:/resources/images/dialog/purchase_dialog_button.png"
                 fillMode: Image.PreserveAspectFit
 
@@ -267,25 +277,30 @@ MouseArea {
 
                 Row {
                     anchors.fill: parent
+                    leftPadding:  4
+                    rightPadding: 4
                     spacing:      4
 
                     Image {
-                        id:       restorePurchasesImage
-                        width:    sourceSize.width * (height / sourceSize.height)
-                        height:   parent.height
-                        source:   "qrc:/resources/images/dialog/purchase_dialog_restore.png"
-                        fillMode: Image.PreserveAspectFit
+                        id:                     restorePurchasesImage
+                        anchors.verticalCenter: parent.verticalCenter
+                        width:                  sourceSize.width * (height / sourceSize.height)
+                        height:                 parent.height - 8
+                        source:                 "qrc:/resources/images/dialog/purchase_dialog_restore.png"
+                        fillMode:               Image.PreserveAspectFit
                     }
 
                     Text {
-                        width:               parent.width - restorePurchasesImage.width - parent.spacing
-                        height:              parent.height
-                        clip:                true
-                        color:               "black"
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment:   Text.AlignVCenter
-                        wrapMode:            Text.Wrap
-                        text:                qsTr("Restore purchases")
+                        anchors.verticalCenter: parent.verticalCenter
+                        width:                  parent.width - restorePurchasesImage.width - parent.spacing -
+                                                parent.leftPadding - parent.rightPadding
+                        height:                 parent.height - 8
+                        clip:                   true
+                        color:                  "black"
+                        horizontalAlignment:    Text.AlignHCenter
+                        verticalAlignment:      Text.AlignVCenter
+                        wrapMode:               Text.Wrap
+                        text:                   qsTr("Restore purchases")
                     }
                 }
             }

@@ -105,7 +105,6 @@ Item {
             anchors.fill: parent
             source:       "qrc:/resources/images/piglet_feed/background.gif"
             fillMode:     Image.PreserveAspectCrop
-            smooth:       true
             playing:      false
         }
 
@@ -115,7 +114,6 @@ Item {
             z:            1
             source:       "qrc:/resources/images/piglet_feed/background_eat.gif"
             fillMode:     Image.PreserveAspectCrop
-            smooth:       true
             playing:      false
             visible:      false
         }
@@ -213,7 +211,6 @@ Item {
                 anchors.fill: parent
                 source:       "qrc:/resources/images/background.png"
                 fillMode:     Image.PreserveAspectCrop
-                smooth:       true
 
                 Image {
                     id:               complexitySelectionRowBackgroundImage

@@ -97,7 +97,6 @@ Item {
             anchors.fill: parent
             source:       "qrc:/resources/images/background.png"
             fillMode:     Image.PreserveAspectCrop
-            smooth:       true
         }
 
         Image {
@@ -109,7 +108,6 @@ Item {
             z:            2
             source:       "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/original_thumbnail.png"
             fillMode:     Image.PreserveAspectFit
-            smooth:       true
 
             MouseArea {
                 id:           originalSampleImageThumbnailMouseArea
@@ -140,7 +138,6 @@ Item {
                     source:   pigletPuzzlePage.puzzleSolved ? "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/medium/9.png"
                                                             : "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/medium/0.png"
                     fillMode: Image.PreserveAspectFit
-                    smooth:   true
 
                     MouseArea {
                         anchors.fill: parent
@@ -156,7 +153,6 @@ Item {
                     visible:  pigletPuzzlePage.puzzleComplexity === "medium"
                     source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/medium/1.png"
                     fillMode: Image.PreserveAspectFit
-                    smooth:   true
 
                     MouseArea {
                         anchors.fill: parent
@@ -176,7 +172,6 @@ Item {
                     visible:  pigletPuzzlePage.puzzleComplexity === "medium"
                     source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/medium/2.png"
                     fillMode: Image.PreserveAspectFit
-                    smooth:   true
 
                     MouseArea {
                         anchors.fill: parent
@@ -196,7 +191,6 @@ Item {
                     visible:  pigletPuzzlePage.puzzleComplexity === "medium"
                     source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/medium/3.png"
                     fillMode: Image.PreserveAspectFit
-                    smooth:   true
 
                     MouseArea {
                         anchors.fill: parent
@@ -216,7 +210,6 @@ Item {
                     visible:  pigletPuzzlePage.puzzleComplexity === "medium"
                     source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/medium/4.png"
                     fillMode: Image.PreserveAspectFit
-                    smooth:   true
 
                     MouseArea {
                         anchors.fill: parent
@@ -236,7 +229,6 @@ Item {
                     visible:  pigletPuzzlePage.puzzleComplexity === "medium"
                     source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/medium/5.png"
                     fillMode: Image.PreserveAspectFit
-                    smooth:   true
 
                     MouseArea {
                         anchors.fill: parent
@@ -256,7 +248,6 @@ Item {
                     visible:  pigletPuzzlePage.puzzleComplexity === "medium"
                     source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/medium/6.png"
                     fillMode: Image.PreserveAspectFit
-                    smooth:   true
 
                     MouseArea {
                         anchors.fill: parent
@@ -276,7 +267,6 @@ Item {
                     visible:  pigletPuzzlePage.puzzleComplexity === "medium"
                     source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/medium/7.png"
                     fillMode: Image.PreserveAspectFit
-                    smooth:   true
 
                     MouseArea {
                         anchors.fill: parent
@@ -296,7 +286,6 @@ Item {
                     visible:  pigletPuzzlePage.puzzleComplexity === "medium"
                     source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/medium/8.png"
                     fillMode: Image.PreserveAspectFit
-                    smooth:   true
 
                     MouseArea {
                         anchors.fill: parent
@@ -320,7 +309,6 @@ Item {
                     source:   pigletPuzzlePage.puzzleSolved ? "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/16.png"
                                                             : "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/0.png"
                     fillMode: Image.PreserveAspectFit
-                    smooth:   true
 
                     MouseArea {
                         anchors.fill: parent
@@ -336,7 +324,6 @@ Item {
                     visible:  pigletPuzzlePage.puzzleComplexity === "hard"
                     source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/1.png"
                     fillMode: Image.PreserveAspectFit
-                    smooth:   true
 
                     MouseArea {
                         anchors.fill: parent
@@ -356,7 +343,6 @@ Item {
                     visible:  pigletPuzzlePage.puzzleComplexity === "hard"
                     source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/2.png"
                     fillMode: Image.PreserveAspectFit
-                    smooth:   true
 
                     MouseArea {
                         anchors.fill: parent
@@ -376,7 +362,6 @@ Item {
                     visible:  pigletPuzzlePage.puzzleComplexity === "hard"
                     source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/3.png"
                     fillMode: Image.PreserveAspectFit
-                    smooth:   true
 
                     MouseArea {
                         anchors.fill: parent
@@ -396,7 +381,6 @@ Item {
                     visible:  pigletPuzzlePage.puzzleComplexity === "hard"
                     source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/4.png"
                     fillMode: Image.PreserveAspectFit
-                    smooth:   true
 
                     MouseArea {
                         anchors.fill: parent
@@ -416,7 +400,6 @@ Item {
                     visible:  pigletPuzzlePage.puzzleComplexity === "hard"
                     source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/5.png"
                     fillMode: Image.PreserveAspectFit
-                    smooth:   true
 
                     MouseArea {
                         anchors.fill: parent
@@ -436,7 +419,6 @@ Item {
                     visible:  pigletPuzzlePage.puzzleComplexity === "hard"
                     source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/6.png"
                     fillMode: Image.PreserveAspectFit
-                    smooth:   true
 
                     MouseArea {
                         anchors.fill: parent
@@ -456,7 +438,6 @@ Item {
                     visible:  pigletPuzzlePage.puzzleComplexity === "hard"
                     source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/7.png"
                     fillMode: Image.PreserveAspectFit
-                    smooth:   true
 
                     MouseArea {
                         anchors.fill: parent
@@ -476,7 +457,6 @@ Item {
                     visible:  pigletPuzzlePage.puzzleComplexity === "hard"
                     source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/8.png"
                     fillMode: Image.PreserveAspectFit
-                    smooth:   true
 
                     MouseArea {
                         anchors.fill: parent
@@ -496,7 +476,6 @@ Item {
                     visible:  pigletPuzzlePage.puzzleComplexity === "hard"
                     source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/9.png"
                     fillMode: Image.PreserveAspectFit
-                    smooth:   true
 
                     MouseArea {
                         anchors.fill: parent
@@ -516,7 +495,6 @@ Item {
                     visible:  pigletPuzzlePage.puzzleComplexity === "hard"
                     source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/10.png"
                     fillMode: Image.PreserveAspectFit
-                    smooth:   true
 
                     MouseArea {
                         anchors.fill: parent
@@ -536,7 +514,6 @@ Item {
                     visible:  pigletPuzzlePage.puzzleComplexity === "hard"
                     source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/11.png"
                     fillMode: Image.PreserveAspectFit
-                    smooth:   true
 
                     MouseArea {
                         anchors.fill: parent
@@ -556,7 +533,6 @@ Item {
                     visible:  pigletPuzzlePage.puzzleComplexity === "hard"
                     source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/12.png"
                     fillMode: Image.PreserveAspectFit
-                    smooth:   true
 
                     MouseArea {
                         anchors.fill: parent
@@ -576,7 +552,6 @@ Item {
                     visible:  pigletPuzzlePage.puzzleComplexity === "hard"
                     source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/13.png"
                     fillMode: Image.PreserveAspectFit
-                    smooth:   true
 
                     MouseArea {
                         anchors.fill: parent
@@ -596,7 +571,6 @@ Item {
                     visible:  pigletPuzzlePage.puzzleComplexity === "hard"
                     source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/14.png"
                     fillMode: Image.PreserveAspectFit
-                    smooth:   true
 
                     MouseArea {
                         anchors.fill: parent
@@ -616,7 +590,6 @@ Item {
                     visible:  pigletPuzzlePage.puzzleComplexity === "hard"
                     source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/15.png"
                     fillMode: Image.PreserveAspectFit
-                    smooth:   true
 
                     MouseArea {
                         anchors.fill: parent
@@ -636,7 +609,6 @@ Item {
                 visible:      false
                 source:       "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/original.png"
                 fillMode:     Image.PreserveAspectFit
-                smooth:       true
                 opacity:      0.0
 
                 function blink() {
@@ -723,7 +695,6 @@ Item {
             height:           360 * pigletPuzzlePage.screenFactor
             source:           "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/original.png"
             fillMode:         Image.PreserveAspectFit
-            smooth:           true
         }
 
         MouseArea {
@@ -755,7 +726,6 @@ Item {
                 anchors.fill: parent
                 source:       "qrc:/resources/images/background.png"
                 fillMode:     Image.PreserveAspectCrop
-                smooth:       true
 
                 Image {
                     id:               complexitySelectionRowBackgroundImage
@@ -850,7 +820,6 @@ Item {
                 anchors.fill: parent
                 source:       "qrc:/resources/images/background.png"
                 fillMode:     Image.PreserveAspectCrop
-                smooth:       true
 
                 Image {
                     id:               puzzleSelectionRowBackgroundImage

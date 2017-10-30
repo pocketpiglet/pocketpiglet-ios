@@ -52,7 +52,6 @@ Rectangle {
             anchors.fill: parent
             source:       "qrc:/resources/images/piglet_search/piglet_1.png"
             fillMode:     Image.PreserveAspectFit
-            smooth:       true
         }
 
         Image {
@@ -60,7 +59,6 @@ Rectangle {
             anchors.fill: parent
             source:       "qrc:/resources/images/piglet_search/piglet_found.png"
             fillMode:     Image.PreserveAspectFit
-            smooth:       true
             visible:      false
         }
     }

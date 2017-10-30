@@ -47,7 +47,6 @@ Rectangle {
             anchors.fill: parent
             source:       "qrc:/resources/images/piglet_wash/bubble_1.png"
             fillMode:     Image.PreserveAspectFit
-            smooth:       true
         }
 
         Image {
@@ -55,7 +54,6 @@ Rectangle {
             anchors.fill: parent
             source:       "qrc:/resources/images/piglet_wash/bubble_bursted.png"
             fillMode:     Image.PreserveAspectFit
-            smooth:       true
             visible:      false
         }
     }

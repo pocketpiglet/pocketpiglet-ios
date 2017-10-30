@@ -475,7 +475,6 @@ Rectangle {
         id:           refrigeratorImage
         anchors.fill: parent
         fillMode:     Image.PreserveAspectFit
-        smooth:       true
 
         onPaintedWidthChanged: {
             if (!refrigerator.geometrySettled && width > 0 && height > 0 && paintedWidth > 0 && paintedHeight > 0) {

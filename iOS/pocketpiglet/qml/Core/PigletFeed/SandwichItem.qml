@@ -58,7 +58,6 @@ Rectangle {
         anchors.fill: parent
         visible:      false
         fillMode:     Image.PreserveAspectFit
-        smooth:       true
     }
 
     PropertyAnimation {
