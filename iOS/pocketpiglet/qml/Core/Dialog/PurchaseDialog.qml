@@ -102,8 +102,8 @@ MouseArea {
 
             Image {
                 id:       watchVideoButtonImage
-                width:    dialogImage.width  - 16
-                height:   dialogImage.height - 16
+                width:    dialogImage.width  - 24
+                height:   dialogImage.height - 24
                 source:   purchaseDialog.enableWatchVideoButton ? "qrc:/resources/images/dialog/purchase_dialog_button.png" :
                                                                   "qrc:/resources/images/dialog/purchase_dialog_button_disabled.png"
                 fillMode: Image.PreserveAspectFit
@@ -173,8 +173,8 @@ MouseArea {
 
             Image {
                 id:       purchaseFullVersionButtonImage
-                width:    dialogImage.width  - 16
-                height:   dialogImage.height - 16
+                width:    dialogImage.width  - 24
+                height:   dialogImage.height - 24
                 source:   "qrc:/resources/images/dialog/purchase_dialog_button.png"
                 fillMode: Image.PreserveAspectFit
 
@@ -241,8 +241,8 @@ MouseArea {
 
             Image {
                 id:       restorePurchasesButtonImage
-                width:    dialogImage.width  - 16
-                height:   dialogImage.height - 16
+                width:    dialogImage.width  - 24
+                height:   dialogImage.height - 24
                 source:   "qrc:/resources/images/dialog/purchase_dialog_button.png"
                 fillMode: Image.PreserveAspectFit
 
