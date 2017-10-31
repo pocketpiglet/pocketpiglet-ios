@@ -157,9 +157,7 @@ Item {
     }
 
     function videoAdNewReward(type, amount) {
-        if (type === "diamonds") {
-            diamondsAmount = Math.min(diamondsAmount + amount, diamondsMaxAmount);
-        }
+        diamondsAmount = Math.min(diamondsAmount + amount, diamondsMaxAmount);
     }
 
     Audio {
