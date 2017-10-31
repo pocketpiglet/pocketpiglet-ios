@@ -9,7 +9,7 @@
 
 const QString AdMobHelper::ADMOB_APP_ID                    ("ca-app-pub-2455088855015693~5306005769");
 const QString AdMobHelper::ADMOB_REWARDBASEDVIDEOAD_UNIT_ID("ca-app-pub-3940256099942544/1712485313");
-const QString AdMobHelper::ADMOB_TEST_DEVICE_ID            ("");
+const QString AdMobHelper::ADMOB_TEST_DEVICE_ID            ("ac878e09bd5bd55f0b72b20a8fca6ffa");
 
 AdMobHelper *AdMobHelper::Instance = NULL;
 

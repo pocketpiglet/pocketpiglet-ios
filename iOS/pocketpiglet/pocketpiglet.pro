@@ -1,4 +1,4 @@
-QT += quick sql multimedia sensors
+QT += quick sql multimedia sensors purchasing
 CONFIG += c++11
 
 DEFINES += QT_DEPRECATED_WARNINGS WEBRTC_POSIX

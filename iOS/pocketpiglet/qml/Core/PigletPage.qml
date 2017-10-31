@@ -831,11 +831,11 @@ Item {
         }
 
         onPurchaseFullVersion: {
-            // TODO
+            mainWindow.purchaseFullVersion();
         }
 
         onRestorePurchases: {
-            // TODO
+            mainWindow.restorePurchases();
         }
     }
 

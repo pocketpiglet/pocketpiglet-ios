@@ -2,6 +2,7 @@ import QtQuick 2.9
 import QtQuick.Window 2.3
 import QtQuick.Controls 2.2
 import QtQuick.LocalStorage 2.0
+import QtPurchasing 1.0
 
 import "Core"
 
@@ -55,54 +56,86 @@ ApplicationWindow {
         return value;
     }
 
-    Rectangle {
-        id:           backgroundRectangle
-        anchors.fill: parent
-        color:        "black"
+    function purchaseFullVersion() {
+        fullVersionProduct.purchase();
+    }
 
-        StackView {
-            id:           mainStackView
-            anchors.fill: parent
+    function restorePurchases() {
+        store.restorePurchases();
+    }
 
-            onCurrentItemChanged: {
-                for (var i = 0; i < depth; i++) {
-                    var item = get(i, false);
+    Store {
+        id: store
 
-                    if (item !== null) {
-                        item.focus = false;
+        Product {
+            id:         fullVersionProduct
+            identifier: "pocketpiglet.version.full"
+            type:       Product.Unlockable
 
-                        if (item.hasOwnProperty("pageActive")) {
-                            item.pageActive = false;
-                        }
-                    }
+            onPurchaseSucceeded: {
+                mainWindow.fullVersion = true;
+
+                transaction.finalize();
+            }
+
+            onPurchaseRestored: {
+                mainWindow.fullVersion = true;
+
+                transaction.finalize();
+            }
+
+            onPurchaseFailed: {
+                if (transaction.failureReason === Transaction.ErrorOccurred) {
+                    console.log(transaction.errorString);
                 }
 
-                if (depth > 0) {
-                    get(depth - 1).forceActiveFocus();
+                transaction.finalize();
+            }
+        }
+    }
+
+    StackView {
+        id:           mainStackView
+        anchors.fill: parent
+
+        onCurrentItemChanged: {
+            for (var i = 0; i < depth; i++) {
+                var item = get(i, false);
+
+                if (item !== null) {
+                    item.focus = false;
 
                     if (item.hasOwnProperty("pageActive")) {
-                        item.pageActive = true;
-                    }
-
-                    if (item.hasOwnProperty("screenOrientationUpdated")) {
-                        mainWindow.screenOrientationUpdated.connect(item.screenOrientationUpdated);
-
-                        mainWindow.screenOrientationUpdated(mainWindow.screenOrientation);
+                        item.pageActive = false;
                     }
                 }
             }
-        }
 
-        PigletPage {
-            id: pigletPage
-        }
+            if (depth > 0) {
+                get(depth - 1).forceActiveFocus();
 
-        MouseArea {
-            id:           screenLockMouseArea
-            anchors.fill: parent
-            z:            100
-            enabled:      mainStackView.busy
+                if (item.hasOwnProperty("pageActive")) {
+                    item.pageActive = true;
+                }
+
+                if (item.hasOwnProperty("screenOrientationUpdated")) {
+                    mainWindow.screenOrientationUpdated.connect(item.screenOrientationUpdated);
+
+                    mainWindow.screenOrientationUpdated(mainWindow.screenOrientation);
+                }
+            }
         }
+    }
+
+    PigletPage {
+        id: pigletPage
+    }
+
+    MouseArea {
+        id:           screenLockMouseArea
+        anchors.fill: parent
+        z:            100
+        enabled:      mainStackView.busy
     }
 
     Component.onCompleted: {
