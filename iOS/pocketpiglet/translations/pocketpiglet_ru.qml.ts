@@ -20,15 +20,15 @@
     <name>PigletSearchPage</name>
     <message>
         <source>Your piglet wants to play hide-and-seek! Try to find him in your room using your phone&apos;s camera as fast as you can.</source>
-        <translation type="unfinished"></translation>
+        <translation>Твой поросенок хочет поиграть в прятки! Попробуй отыскать его в своей комнате как можно быстрее.</translation>
     </message>
     <message>
         <source>Congratulations, you have a new highscore! Do you want to play again?</source>
-        <translation type="unfinished">Поздравляю, у тебя новый рекорд! Хочешь попробовать еще раз?</translation>
+        <translation>Поздравляю, у тебя новый рекорд! Хочешь попробовать еще раз?</translation>
     </message>
     <message>
         <source>Game over. Do you want to play again?</source>
-        <translation type="unfinished">Игра окончена. Хочешь попробовать еще раз?</translation>
+        <translation>Игра окончена. Хочешь попробовать еще раз?</translation>
     </message>
 </context>
 <context>
@@ -50,15 +50,15 @@
     <name>PurchaseDialog</name>
     <message>
         <source>Watch the video</source>
-        <translation type="unfinished"></translation>
+        <translation>Посмотреть видео</translation>
     </message>
     <message>
         <source>Purchase full version</source>
-        <translation type="unfinished"></translation>
+        <translation>Купить полную версию</translation>
     </message>
     <message>
         <source>Restore purchases</source>
-        <translation type="unfinished"></translation>
+        <translation>Восстановить покупки</translation>
     </message>
 </context>
 </TS>
