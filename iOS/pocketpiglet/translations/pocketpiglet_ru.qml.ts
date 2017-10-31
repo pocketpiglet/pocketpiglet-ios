@@ -46,4 +46,19 @@
         <translation>Игра окончена. Хочешь попробовать еще раз?</translation>
     </message>
 </context>
+<context>
+    <name>PurchaseDialog</name>
+    <message>
+        <source>Watch the video</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Purchase full version</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Restore purchases</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
 </TS>
