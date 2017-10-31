@@ -1,0 +1,9 @@
+/* 
+  InfoPlist.strings
+*/
+
+CFBundleDisplayName              = "Хрюша";
+NSCameraUsageDescription         = "Для этой игры необходим доступ к камере";
+NSLocationAlwaysUsageDescription = "Для этой игры необходим доступ к местоположению";
+NSMicrophoneUsageDescription     = "Разреши доступ к микрофону, чтобы я мог говорить с тобой";
+NSMotionUsageDescription         = "Разреши доступ к датчикам движения, чтобы я мог реагировать на движения телефона";
