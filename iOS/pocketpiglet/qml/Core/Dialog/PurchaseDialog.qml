@@ -166,7 +166,7 @@ MouseArea {
                         horizontalAlignment:    Text.AlignHCenter
                         verticalAlignment:      Text.AlignVCenter
                         wrapMode:               Text.Wrap
-                        text:                   qsTr("Watch the video")
+                        text:                   qsTr("Watch video ad")
                     }
                 }
             }
