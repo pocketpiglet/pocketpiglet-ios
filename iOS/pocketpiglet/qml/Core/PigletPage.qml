@@ -157,10 +157,7 @@ Item {
     }
 
     function videoAdNewReward(type, amount) {
-        console.debug(type + " " + amount);
-
-        // TODO
-        if (type === "coins") {
+        if (type === "diamonds") {
             diamondsAmount = Math.min(diamondsAmount + amount, diamondsMaxAmount);
         }
     }
