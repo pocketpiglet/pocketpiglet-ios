@@ -49,10 +49,6 @@
 <context>
     <name>PurchaseDialog</name>
     <message>
-        <source>Watch the video</source>
-        <translation type="vanished">Посмотреть видео</translation>
-    </message>
-    <message>
         <source>Purchase full version</source>
         <translation>Купить полную версию</translation>
     </message>
@@ -62,7 +58,7 @@
     </message>
     <message>
         <source>Watch video ad</source>
-        <translation type="unfinished"></translation>
+        <translation>Посмотреть рекламное видео</translation>
     </message>
 </context>
 </TS>
