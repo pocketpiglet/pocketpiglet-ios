@@ -49,7 +49,7 @@
 <context>
     <name>PurchaseDialog</name>
     <message>
-        <source>Watch the video</source>
+        <source>Watch video ad</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

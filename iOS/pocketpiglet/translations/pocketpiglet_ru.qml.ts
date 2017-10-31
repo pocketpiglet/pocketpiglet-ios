@@ -50,7 +50,7 @@
     <name>PurchaseDialog</name>
     <message>
         <source>Watch the video</source>
-        <translation>Посмотреть видео</translation>
+        <translation type="vanished">Посмотреть видео</translation>
     </message>
     <message>
         <source>Purchase full version</source>
@@ -59,6 +59,10 @@
     <message>
         <source>Restore purchases</source>
         <translation>Восстановить покупки</translation>
+    </message>
+    <message>
+        <source>Watch video ad</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -59,7 +59,7 @@
     <name>PurchaseDialog</name>
     <message>
         <location filename="../qml/Core/Dialog/PurchaseDialog.qml" line="169"/>
-        <source>Watch the video</source>
+        <source>Watch video ad</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
