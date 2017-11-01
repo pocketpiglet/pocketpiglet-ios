@@ -71,6 +71,8 @@ ios {
                 -framework StoreKit \
                 -framework SystemConfiguration
 
+    # To avoid linker errors in Qt 5.9.2
+    QMAKE_APPLE_DEVICE_ARCHS = arm64
     QMAKE_INFO_PLIST = ios/Info.plist
 }
 

@@ -792,10 +792,16 @@ Item {
                 source: "qrc:/resources/images/piglet/action_cake.png"
 
                 onStartAction: {
-                    if (!pigletPage.isAnimationActive("piglet_eats_cake") && pigletPage.nextAnimation !== "piglet_eats_cake") {
-                        pigletPage.nextAnimation = "piglet_eats_cake";
+                    if (mainWindow.fullVersion || pigletPage.diamondsAmount > 0) {
+                        if (!pigletPage.isAnimationActive("piglet_eats_cake") && pigletPage.nextAnimation !== "piglet_eats_cake") {
+                            pigletPage.nextAnimation = "piglet_eats_cake";
 
-                        pigletPage.restartAnimation();
+                            pigletPage.restartAnimation();
+
+                            pigletPage.diamondsAmount = Math.max(pigletPage.diamondsAmount - 1, 0);
+                        }
+                    } else {
+                        purchaseDialog.open(AdMobHelper.rewardBasedVideoAdReady && pigletPage.diamondsAmount < pigletPage.diamondsMaxAmount);
                     }
                 }
             }
@@ -807,10 +813,16 @@ Item {
                 source: "qrc:/resources/images/piglet/action_candy.png"
 
                 onStartAction: {
-                    if (!pigletPage.isAnimationActive("piglet_eats_candy") && pigletPage.nextAnimation !== "piglet_eats_candy") {
-                        pigletPage.nextAnimation = "piglet_eats_candy";
+                    if (mainWindow.fullVersion || pigletPage.diamondsAmount > 0) {
+                        if (!pigletPage.isAnimationActive("piglet_eats_candy") && pigletPage.nextAnimation !== "piglet_eats_candy") {
+                            pigletPage.nextAnimation = "piglet_eats_candy";
 
-                        pigletPage.restartAnimation();
+                            pigletPage.restartAnimation();
+
+                            pigletPage.diamondsAmount = Math.max(pigletPage.diamondsAmount - 1, 0);
+                        }
+                    } else {
+                        purchaseDialog.open(AdMobHelper.rewardBasedVideoAdReady && pigletPage.diamondsAmount < pigletPage.diamondsMaxAmount);
                     }
                 }
             }
