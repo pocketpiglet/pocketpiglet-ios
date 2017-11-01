@@ -1,3 +1,9 @@
 /* 
   InfoPlist.strings
 */
+
+CFBundleDisplayName              = "Porcelet";
+NSCameraUsageDescription         = "Veuillez activer l'accès à la caméra pour ce jeu";
+NSLocationAlwaysUsageDescription = "Veuillez activer l'accès à la localisation pour ce jeu";
+NSMicrophoneUsageDescription     = "S'il vous plaît activer l'accès au microphone si vous voulez parler avec moi";
+NSMotionUsageDescription         = "Veuillez activer l'accès aux capteurs de mouvement pour pouvoir répondre aux mouvements du téléphone";

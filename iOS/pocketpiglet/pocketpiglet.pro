@@ -71,7 +71,6 @@ ios {
                 -framework StoreKit \
                 -framework SystemConfiguration
 
-    QMAKE_APPLE_DEVICE_ARCHS = arm64
     QMAKE_INFO_PLIST = ios/Info.plist
 }
 

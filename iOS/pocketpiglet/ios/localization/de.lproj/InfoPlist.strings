@@ -1,3 +1,9 @@
 /* 
   InfoPlist.strings
 */
+
+CFBundleDisplayName              = "Ferkel";
+NSCameraUsageDescription         = "Bitte aktivieren Sie den Zugriff auf die Kamera für dieses Spiel";
+NSLocationAlwaysUsageDescription = "Bitte aktivieren Sie den Standortzugriff für dieses Spiel";
+NSMicrophoneUsageDescription     = "Bitte aktivieren Sie den Mikrofonzugang, wenn Sie mit mir sprechen möchten";
+NSMotionUsageDescription         = "Bitte aktivieren Sie den Zugriff auf Bewegungssensoren, damit ich auf Telefonbewegungen reagieren kann";
