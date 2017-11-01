@@ -132,16 +132,16 @@ void AdMobHelper::initialize()
 void AdMobHelper::showRewardBasedVideoAd()
 {
     if (Initialized) {
-        UIViewController * __block rootViewController = nil;
+        UIViewController * __block root_view_controller = nil;
 
         [[[UIApplication sharedApplication] windows] enumerateObjectsUsingBlock:^(UIWindow * _Nonnull window, NSUInteger, BOOL * _Nonnull stop) {
-            rootViewController = [window rootViewController];
+            root_view_controller = [window rootViewController];
 
-            *stop = (rootViewController != nil);
+            *stop = (root_view_controller != nil);
         }];
 
         if ([[GADRewardBasedVideoAd sharedInstance] isReady]) {
-            [[GADRewardBasedVideoAd sharedInstance] presentFromRootViewController:rootViewController];
+            [[GADRewardBasedVideoAd sharedInstance] presentFromRootViewController:root_view_controller];
         }
     }
 }
