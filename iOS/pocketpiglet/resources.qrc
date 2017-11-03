@@ -14,7 +14,10 @@
         <file>resources/animations/piglet/piglet_wash_game_finished.jpg</file>
         <file>resources/images/dialog/cancel.png</file>
         <file>resources/images/dialog/dialog.png</file>
+        <file>resources/images/dialog/new_diamonds_dialog.png</file>
+        <file>resources/images/dialog/new_diamonds_dialog_diamond.png</file>
         <file>resources/images/dialog/no.png</file>
+        <file>resources/images/dialog/ok.png</file>
         <file>resources/images/dialog/purchase_dialog.png</file>
         <file>resources/images/dialog/purchase_dialog_button.png</file>
         <file>resources/images/dialog/purchase_dialog_button_disabled.png</file>

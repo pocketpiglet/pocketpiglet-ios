@@ -157,7 +157,11 @@ Item {
     }
 
     function videoAdNewReward(type, amount) {
+        var old_diamonds_amount = diamondsAmount;
+
         diamondsAmount = Math.min(diamondsAmount + amount, diamondsMaxAmount);
+
+        newDiamondsDialog.open(diamondsAmount - old_diamonds_amount);
     }
 
     Audio {
@@ -844,6 +848,11 @@ Item {
         onRestorePurchases: {
             mainWindow.restorePurchases();
         }
+    }
+
+    NewDiamondsDialog {
+        id: newDiamondsDialog
+        z:  20
     }
 
     Accelerometer {
