@@ -112,7 +112,7 @@ MouseArea {
                 horizontalAlignment:  Text.AlignHCenter
                 verticalAlignment:    Text.AlignVCenter
                 font.pixelSize:       32
-                text:                 "+%1".arg(newDiamondsDialog.newDiamondsCount)
+                text:                 "+ %1".arg(newDiamondsDialog.newDiamondsCount)
             }
         }
     }
