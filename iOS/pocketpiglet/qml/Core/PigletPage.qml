@@ -274,7 +274,7 @@ Item {
                     pressX    = mouse.x;
                     pressY    = mouse.y;
 
-                    if (totalPath > 500) {
+                    if (totalPath > 250) {
                         if (!pigletPage.isAnimationActive("piglet_laughs") && pigletPage.nextAnimation !== "piglet_laughs") {
                             pigletPage.nextAnimation = "piglet_laughs";
 
