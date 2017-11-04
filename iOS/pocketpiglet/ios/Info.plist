@@ -27,9 +27,9 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>Please enable camera access for this game</string>
+	<string>Please enable camera access if you want to play hide-and-seek with me</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Please enable location access for this game</string>
+	<string>Please enable location access if you want to play hide-and-seek with me</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Please enable microphone access if you want to talk with me</string>
 	<key>NSMotionUsageDescription</key>

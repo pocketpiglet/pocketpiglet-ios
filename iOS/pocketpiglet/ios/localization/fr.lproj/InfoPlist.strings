@@ -3,7 +3,7 @@
 */
 
 CFBundleDisplayName              = "Porcelet";
-NSCameraUsageDescription         = "Veuillez activer l'accès à la caméra pour ce jeu";
-NSLocationAlwaysUsageDescription = "Veuillez activer l'accès à la localisation pour ce jeu";
+NSCameraUsageDescription         = "Veuillez activer l'accès à la caméra si vous voulez jouer à cache-cache avec moi";
+NSLocationAlwaysUsageDescription = "Veuillez activer l'accès à la localisation si vous voulez jouer à cache-cache avec moi";
 NSMicrophoneUsageDescription     = "S'il vous plaît activer l'accès au microphone si vous voulez parler avec moi";
 NSMotionUsageDescription         = "Veuillez activer l'accès aux capteurs de mouvement pour pouvoir répondre aux mouvements du téléphone";
