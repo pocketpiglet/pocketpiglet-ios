@@ -20,7 +20,7 @@ class SpeechRecorder : public QObject
     Q_PROPERTY(qreal   volume               READ volume               WRITE setVolume               NOTIFY volumeChanged)
     Q_PROPERTY(qreal   sampleRateMultiplier READ sampleRateMultiplier WRITE setSampleRateMultiplier NOTIFY sampleRateMultiplierChanged)
 
-    Q_PROPERTY(QString voiceFileURL       READ voiceFileURL)
+    Q_PROPERTY(QString voiceFileURL         READ voiceFileURL)
 
 public:
     explicit SpeechRecorder(QObject *parent = 0);
