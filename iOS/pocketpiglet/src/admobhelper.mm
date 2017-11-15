@@ -45,21 +45,25 @@ AdMobHelper *AdMobHelper::Instance = NULL;
                                             withAdUnitID:AdMobHelper::ADMOB_REWARDBASEDVIDEOAD_UNIT_ID.toNSString()];
 }
 
-- (void)rewardBasedVideoAdDidReceiveAd:(GADRewardBasedVideoAd *)rewardBasedVideoAd {
+- (void)rewardBasedVideoAdDidReceiveAd:(GADRewardBasedVideoAd *)rewardBasedVideoAd
+{
     Q_UNUSED(rewardBasedVideoAd)
 }
 
-- (void)rewardBasedVideoAdDidOpen:(GADRewardBasedVideoAd *)rewardBasedVideoAd {
+- (void)rewardBasedVideoAdDidOpen:(GADRewardBasedVideoAd *)rewardBasedVideoAd
+{
     Q_UNUSED(rewardBasedVideoAd)
 
     AdMobHelper::setRewardBasedVideoAdActive(true);
 }
 
-- (void)rewardBasedVideoAdDidStartPlaying:(GADRewardBasedVideoAd *)rewardBasedVideoAd {
+- (void)rewardBasedVideoAdDidStartPlaying:(GADRewardBasedVideoAd *)rewardBasedVideoAd
+{
     Q_UNUSED(rewardBasedVideoAd)
 }
 
-- (void)rewardBasedVideoAdDidClose:(GADRewardBasedVideoAd *)rewardBasedVideoAd {
+- (void)rewardBasedVideoAdDidClose:(GADRewardBasedVideoAd *)rewardBasedVideoAd
+{
     Q_UNUSED(rewardBasedVideoAd)
 
     AdMobHelper::setRewardBasedVideoAdActive(false);
@@ -67,17 +71,20 @@ AdMobHelper *AdMobHelper::Instance = NULL;
     [self performSelector:@selector(loadAd) withObject:nil afterDelay:0.0];
 }
 
-- (void)rewardBasedVideoAd:(GADRewardBasedVideoAd *)rewardBasedVideoAd didRewardUserWithReward:(GADAdReward *)reward {
+- (void)rewardBasedVideoAd:(GADRewardBasedVideoAd *)rewardBasedVideoAd didRewardUserWithReward:(GADAdReward *)reward
+{
     Q_UNUSED(rewardBasedVideoAd)
 
     AdMobHelper::rewardBasedVideoAdDidReward(QString::fromNSString(reward.type), (int)[reward.amount integerValue]);
 }
 
-- (void)rewardBasedVideoAdWillLeaveApplication:(GADRewardBasedVideoAd *)rewardBasedVideoAd {
+- (void)rewardBasedVideoAdWillLeaveApplication:(GADRewardBasedVideoAd *)rewardBasedVideoAd
+{
     Q_UNUSED(rewardBasedVideoAd)
 }
 
-- (void)rewardBasedVideoAd:(GADRewardBasedVideoAd *)rewardBasedVideoAd didFailToLoadWithError:(NSError *)error {
+- (void)rewardBasedVideoAd:(GADRewardBasedVideoAd *)rewardBasedVideoAd didFailToLoadWithError:(NSError *)error
+{
     Q_UNUSED(rewardBasedVideoAd)
 
     qWarning() << QString::fromNSString([error localizedDescription]);
