@@ -41,6 +41,8 @@ private:
     static AdMobHelper         *Instance;
 #ifdef __OBJC__
     RewardBasedVideoAdDelegate *RewardBasedVideoAdDelegateInstance;
+#else
+    void                       *RewardBasedVideoAdDelegateInstance;
 #endif
 };
 
