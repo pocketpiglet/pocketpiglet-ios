@@ -99,14 +99,4 @@ MouseArea {
             text:                notificationDialog.text
         }
     }
-
-    Component.onCompleted: {
-        if (rotation === 0 || rotation === 180) {
-            width  = parent.width;
-            height = parent.height;
-        } else if (rotation === 90 || rotation === 270) {
-            width  = parent.height;
-            height = parent.width;
-        }
-    }
 }
