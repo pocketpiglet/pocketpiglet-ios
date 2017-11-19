@@ -112,14 +112,14 @@ ApplicationWindow {
             }
 
             if (depth > 0) {
-                get(depth - 1).forceActiveFocus();
+                currentItem.forceActiveFocus();
 
-                if (item.hasOwnProperty("pageActive")) {
-                    item.pageActive = true;
+                if (currentItem.hasOwnProperty("pageActive")) {
+                    currentItem.pageActive = true;
                 }
 
-                if (item.hasOwnProperty("screenOrientationUpdated")) {
-                    mainWindow.screenOrientationUpdated.connect(item.screenOrientationUpdated);
+                if (currentItem.hasOwnProperty("screenOrientationUpdated")) {
+                    mainWindow.screenOrientationUpdated.connect(currentItem.screenOrientationUpdated);
 
                     mainWindow.screenOrientationUpdated(mainWindow.screenOrientation);
                 }
