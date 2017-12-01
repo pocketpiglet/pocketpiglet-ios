@@ -52,7 +52,8 @@ RESOURCES += \
 TRANSLATIONS += \
     translations/pocketpiglet_ru.ts \
     translations/pocketpiglet_de.ts \
-    translations/pocketpiglet_fr.ts
+    translations/pocketpiglet_fr.ts \
+    translations/pocketpiglet_zh.ts
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =

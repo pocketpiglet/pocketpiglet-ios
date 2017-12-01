@@ -3,5 +3,6 @@
         <file alias="pocketpiglet_ru.qm">translations/pocketpiglet_ru.qm</file>
         <file alias="pocketpiglet_de.qm">translations/pocketpiglet_de.qm</file>
         <file alias="pocketpiglet_fr.qm">translations/pocketpiglet_fr.qm</file>
+        <file alias="pocketpiglet_zh.qm">translations/pocketpiglet_zh.qm</file>
     </qresource>
 </RCC>
