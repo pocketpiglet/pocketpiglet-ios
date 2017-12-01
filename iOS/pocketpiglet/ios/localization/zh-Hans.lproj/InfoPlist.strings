@@ -1,0 +1,9 @@
+/* 
+  InfoPlist.strings
+*/
+
+CFBundleDisplayName              = "小猪";
+NSCameraUsageDescription         = "如果你想玩捉迷藏，请启用相机";
+NSLocationAlwaysUsageDescription = "如果您想和我玩捉迷藏，请启用位置访问权限";
+NSMicrophoneUsageDescription     = "如果您想与我交谈，请启用麦克风";
+NSMotionUsageDescription         = "请启用运动传感器，以便我可以响应手机的移动";
