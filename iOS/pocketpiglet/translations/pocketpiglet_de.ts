@@ -5,7 +5,7 @@
     <name>ParentalGateDialog</name>
     <message>
         <source>Slide with two fingers over this dialog to continue</source>
-        <translation type="unfinished"></translation>
+        <translation>Schiebe mit zwei Fingern über diesen Dialog, um fortzufahren</translation>
     </message>
 </context>
 <context>
