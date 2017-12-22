@@ -26,10 +26,12 @@ SOURCES += src/main.cpp \
 
 OBJECTIVE_SOURCES += \
     src/admobhelper.mm \
+    src/storehelper.mm \
     src/speechrecorder.mm
 
 HEADERS += \
     src/admobhelper.h \
+    src/storehelper.h \
     src/speechrecorder.h \
     webrtc/common_audio/signal_processing/complex_fft_tables.h \
     webrtc/common_audio/signal_processing/include/real_fft.h \

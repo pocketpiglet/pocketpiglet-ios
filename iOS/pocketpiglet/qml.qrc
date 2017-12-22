@@ -10,6 +10,7 @@
         <file>qml/Core/PigletWashPage.qml</file>
         <file>qml/Core/Dialog/NewDiamondsDialog.qml</file>
         <file>qml/Core/Dialog/NotificationDialog.qml</file>
+        <file>qml/Core/Dialog/ParentalGateDialog.qml</file>
         <file>qml/Core/Dialog/PurchaseDialog.qml</file>
         <file>qml/Core/Dialog/QueryDialog.qml</file>
         <file>qml/Core/Piglet/ActionButton.qml</file>

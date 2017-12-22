@@ -671,7 +671,7 @@ Item {
                 visible:           !mainWindow.fullVersion
 
                 onAddCurrency: {
-                    purchaseDialog.open(AdMobHelper.rewardBasedVideoAdReady && pigletPage.diamondsAmount < pigletPage.diamondsMaxAmount);
+                    parentalGateDialog.open();
                 }
             }
         }
@@ -703,7 +703,7 @@ Item {
 
                         pigletPage.diamondsAmount = Math.max(pigletPage.diamondsAmount - 1, 0);
                     } else {
-                        purchaseDialog.open(AdMobHelper.rewardBasedVideoAdReady && pigletPage.diamondsAmount < pigletPage.diamondsMaxAmount);
+                        parentalGateDialog.open();
                     }
                 }
             }
@@ -727,7 +727,7 @@ Item {
 
                         pigletPage.diamondsAmount = Math.max(pigletPage.diamondsAmount - 1, 0);
                     } else {
-                        purchaseDialog.open(AdMobHelper.rewardBasedVideoAdReady && pigletPage.diamondsAmount < pigletPage.diamondsMaxAmount);
+                        parentalGateDialog.open();
                     }
                 }
             }
@@ -751,7 +751,7 @@ Item {
 
                         pigletPage.diamondsAmount = Math.max(pigletPage.diamondsAmount - 1, 0);
                     } else {
-                        purchaseDialog.open(AdMobHelper.rewardBasedVideoAdReady && pigletPage.diamondsAmount < pigletPage.diamondsMaxAmount);
+                        parentalGateDialog.open();
                     }
                 }
             }
@@ -775,7 +775,7 @@ Item {
 
                         pigletPage.diamondsAmount = Math.max(pigletPage.diamondsAmount - 1, 0);
                     } else {
-                        purchaseDialog.open(AdMobHelper.rewardBasedVideoAdReady && pigletPage.diamondsAmount < pigletPage.diamondsMaxAmount);
+                        parentalGateDialog.open();
                     }
                 }
             }
@@ -805,7 +805,7 @@ Item {
                             pigletPage.diamondsAmount = Math.max(pigletPage.diamondsAmount - 1, 0);
                         }
                     } else {
-                        purchaseDialog.open(AdMobHelper.rewardBasedVideoAdReady && pigletPage.diamondsAmount < pigletPage.diamondsMaxAmount);
+                        parentalGateDialog.open();
                     }
                 }
             }
@@ -826,7 +826,7 @@ Item {
                             pigletPage.diamondsAmount = Math.max(pigletPage.diamondsAmount - 1, 0);
                         }
                     } else {
-                        purchaseDialog.open(AdMobHelper.rewardBasedVideoAdReady && pigletPage.diamondsAmount < pigletPage.diamondsMaxAmount);
+                        parentalGateDialog.open();
                     }
                 }
             }
@@ -853,6 +853,19 @@ Item {
     NewDiamondsDialog {
         id: newDiamondsDialog
         z:  20
+
+        onOk: {
+            StoreHelper.requestReview();
+        }
+    }
+
+    ParentalGateDialog {
+        id: parentalGateDialog
+        z:  20
+
+        onPass: {
+            purchaseDialog.open(AdMobHelper.rewardBasedVideoAdReady && pigletPage.diamondsAmount < pigletPage.diamondsMaxAmount);
+        }
     }
 
     Accelerometer {
