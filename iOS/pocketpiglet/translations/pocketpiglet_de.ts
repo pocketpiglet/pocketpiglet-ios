@@ -2,6 +2,13 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="de_DE">
 <context>
+    <name>ParentalGateDialog</name>
+    <message>
+        <source>Slide with two fingers over this dialog to continue</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>PigletFeedPage</name>
     <message>
         <source>Level %1 of %2. Get ready to remember a sandwich recipe...</source>

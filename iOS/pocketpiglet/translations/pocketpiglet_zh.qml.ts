@@ -2,6 +2,14 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="zh_CN">
 <context>
+    <name>ParentalGateDialog</name>
+    <message>
+        <location filename="../qml/Core/Dialog/ParentalGateDialog.qml" line="122"/>
+        <source>Slide with two fingers over this dialog to continue</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>PigletFeedPage</name>
     <message>
         <location filename="../qml/Core/PigletFeedPage.qml" line="323"/>
