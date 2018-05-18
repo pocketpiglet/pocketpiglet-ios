@@ -143,7 +143,7 @@ void SpeechRecorder::audioInputDeviceReadyRead()
                     int16_t audio_data_16bit[frame_length];
 
                     for (int i = 0; i < frame_length; i++) {
-                        audio_data_16bit[i] = ((uint8_t)(AudioBuffer[p + i]) - 0x80) << 8;
+                        audio_data_16bit[i] = ((uint8_t)(AudioBuffer[p + i]) - 0x80) * 256;
                     }
 
                     if (WebRtcVad_Process(VadInstance, SampleRate, audio_data_16bit, frame_length) > 0) {
