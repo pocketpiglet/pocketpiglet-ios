@@ -29,8 +29,8 @@ public:
     Q_INVOKABLE void initialize();
     Q_INVOKABLE void showRewardBasedVideoAd();
 
-    static void setRewardBasedVideoAdActive(const bool &active);
-    static void rewardBasedVideoAdDidReward(const QString &type, const int &amount);
+    static void setRewardBasedVideoAdActive(bool active);
+    static void rewardBasedVideoAdDidReward(QString type, int amount);
 
 signals:
     void rewardBasedVideoAdActiveChanged(bool rewardBasedVideoAdActive);

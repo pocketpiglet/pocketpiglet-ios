@@ -36,7 +36,7 @@ bool SpeechRecorder::active() const
     return Active;
 }
 
-void SpeechRecorder::setActive(const bool &active)
+void SpeechRecorder::setActive(bool active)
 {
     Active = active;
 
@@ -56,7 +56,7 @@ int SpeechRecorder::sampleRate() const
     return SampleRate;
 }
 
-void SpeechRecorder::setSampleRate(const int &sample_rate)
+void SpeechRecorder::setSampleRate(int sample_rate)
 {
     SampleRate = sample_rate;
 
@@ -76,7 +76,7 @@ int SpeechRecorder::minVoiceDuration() const
     return MinVoiceDuration;
 }
 
-void SpeechRecorder::setMinVoiceDuration(const int &duration)
+void SpeechRecorder::setMinVoiceDuration(int duration)
 {
     MinVoiceDuration = duration;
 
@@ -88,7 +88,7 @@ int SpeechRecorder::minSilenceDuration() const
     return MinSilenceDuration;
 }
 
-void SpeechRecorder::setMinSilenceDuration(const int &duration)
+void SpeechRecorder::setMinSilenceDuration(int duration)
 {
     MinSilenceDuration = duration;
 
@@ -100,7 +100,7 @@ qreal SpeechRecorder::volume() const
     return Volume;
 }
 
-void SpeechRecorder::setVolume(const qreal &vol)
+void SpeechRecorder::setVolume(qreal vol)
 {
     Volume = vol;
 
@@ -116,7 +116,7 @@ qreal SpeechRecorder::sampleRateMultiplier() const
     return SampleRateMultiplier;
 }
 
-void SpeechRecorder::setSampleRateMultiplier(const qreal &multiplier)
+void SpeechRecorder::setSampleRateMultiplier(qreal multiplier)
 {
     SampleRateMultiplier = multiplier;
 

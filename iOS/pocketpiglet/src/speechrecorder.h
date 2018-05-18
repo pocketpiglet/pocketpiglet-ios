@@ -27,22 +27,22 @@ public:
     virtual ~SpeechRecorder();
 
     bool active() const;
-    void setActive(const bool &active);
+    void setActive(bool active);
 
     int sampleRate() const;
-    void setSampleRate(const int &sample_rate);
+    void setSampleRate(int sample_rate);
 
     int minVoiceDuration() const;
-    void setMinVoiceDuration(const int &duration);
+    void setMinVoiceDuration(int duration);
 
     int minSilenceDuration() const;
-    void setMinSilenceDuration(const int &duration);
+    void setMinSilenceDuration(int duration);
 
     qreal volume() const;
-    void setVolume(const qreal &vol);
+    void setVolume(qreal vol);
 
     qreal sampleRateMultiplier() const;
-    void setSampleRateMultiplier(const qreal &multiplier);
+    void setSampleRateMultiplier(qreal multiplier);
 
     QString voiceFileURL() const;
 

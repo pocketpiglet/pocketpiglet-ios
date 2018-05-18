@@ -153,14 +153,14 @@ void AdMobHelper::showRewardBasedVideoAd()
     }
 }
 
-void AdMobHelper::setRewardBasedVideoAdActive(const bool &active)
+void AdMobHelper::setRewardBasedVideoAdActive(bool active)
 {
     Instance->RewardBasedVideoAdActive = active;
 
     emit Instance->rewardBasedVideoAdActiveChanged(Instance->RewardBasedVideoAdActive);
 }
 
-void AdMobHelper::rewardBasedVideoAdDidReward(const QString &type, const int &amount)
+void AdMobHelper::rewardBasedVideoAdDidReward(QString type, int amount)
 {
     emit Instance->rewardBasedVideoAdNewReward(type, amount);
 }
