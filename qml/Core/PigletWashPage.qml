@@ -150,7 +150,7 @@ Item {
             pigletWashPage.allowGameRestart = false;
 
             if (burstedBubblesCount > highScore) {
-                mainWindow.setSetting("PigletWashHighScore", burstedBubblesCount);
+                mainWindow.setSetting("PigletWashHighScore", burstedBubblesCount.toString(10));
 
                 highScoreQueryDialog.open();
             } else {
@@ -332,7 +332,7 @@ Item {
             gameStartTimer.stop();
 
             pigletWashPage.allowGameRestart    = true;
-            pigletWashPage.highScore           = mainWindow.getSetting("PigletWashHighScore", 0);
+            pigletWashPage.highScore           = parseInt(mainWindow.getSetting("PigletWashHighScore", "0"), 10);
             pigletWashPage.burstedBubblesCount = 0;
             pigletWashPage.missedBubblesCount  = 0;
             pigletWashPage.gameStartTime       = (new Date()).getTime();

@@ -117,7 +117,7 @@ Item {
             pigletSearchPage.allowGameRestart = false;
 
             if (foundPigletsCount > highScore) {
-                mainWindow.setSetting("PigletSearchHighScore", foundPigletsCount);
+                mainWindow.setSetting("PigletSearchHighScore", foundPigletsCount.toString(10));
 
                 highScoreQueryDialog.open();
             } else {
@@ -497,7 +497,7 @@ Item {
             gameStartTimer.stop();
 
             pigletSearchPage.allowGameRestart   = true;
-            pigletSearchPage.highScore          = mainWindow.getSetting("PigletSearchHighScore", 0);
+            pigletSearchPage.highScore          = parseInt(mainWindow.getSetting("PigletSearchHighScore", "0"), 10);
             pigletSearchPage.foundPigletsCount  = 0;
             pigletSearchPage.missedPigletsCount = 0;
 

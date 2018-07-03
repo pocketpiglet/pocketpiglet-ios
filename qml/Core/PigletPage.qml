@@ -78,7 +78,7 @@ Item {
     }
 
     onDiamondsAmountChanged: {
-        mainWindow.setSetting("PigletDiamondsAmount", diamondsAmount);
+        mainWindow.setSetting("PigletDiamondsAmount", diamondsAmount.toString(10));
     }
 
     function gameFinished(game) {
@@ -955,7 +955,7 @@ Item {
     Component.onCompleted: {
         AdMobHelper.rewardBasedVideoAdNewReward.connect(videoAdNewReward);
 
-        diamondsAmount = mainWindow.getSetting("PigletDiamondsAmount", diamondsMaxAmount);
+        diamondsAmount = parseInt(mainWindow.getSetting("PigletDiamondsAmount", diamondsMaxAmount.toString(10)), 10);
 
         animationSpriteSequence.cacheAnimation("qrc:/resources/animations/piglet/piglet_eats_candy.jpg",
                                                "piglet_eats_candy", 75, 15);
