@@ -221,7 +221,7 @@ void SpeechRecorder::CreateAudioInput()
 
     AudioInputDevice = AudioInput->start();
 
-    connect(AudioInputDevice, SIGNAL(readyRead()), this, SLOT(audioInputDeviceReadyRead()));
+    connect(AudioInputDevice, &QIODevice::readyRead, this, &SpeechRecorder::audioInputDeviceReadyRead);
 }
 
 void SpeechRecorder::DeleteAudioInput()
