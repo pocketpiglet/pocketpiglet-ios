@@ -26,7 +26,6 @@ public:
     bool rewardBasedVideoAdReady() const;
     bool rewardBasedVideoAdActive() const;
 
-    Q_INVOKABLE void initialize();
     Q_INVOKABLE void showRewardBasedVideoAd();
 
     static void setRewardBasedVideoAdActive(bool active);
@@ -37,7 +36,7 @@ signals:
     void rewardBasedVideoAdNewReward(QString type, int amount);
 
 private:
-    bool                        Initialized, RewardBasedVideoAdActive;
+    bool                        RewardBasedVideoAdActive;
     static AdMobHelper         *Instance;
 #ifdef __OBJC__
     RewardBasedVideoAdDelegate *RewardBasedVideoAdDelegateInstance;

@@ -96,26 +96,23 @@ AdMobHelper *AdMobHelper::Instance = NULL;
 
 AdMobHelper::AdMobHelper(QObject *parent) : QObject(parent)
 {
-    Initialized                        = false;
+    [GADMobileAds configureWithApplicationID:ADMOB_APP_ID.toNSString()];
+
     RewardBasedVideoAdActive           = false;
     Instance                           = this;
-    RewardBasedVideoAdDelegateInstance = NULL;
+    RewardBasedVideoAdDelegateInstance = [[RewardBasedVideoAdDelegate alloc] init];
+
+    [RewardBasedVideoAdDelegateInstance loadAd];
 }
 
 AdMobHelper::~AdMobHelper()
 {
-    if (Initialized) {
-        [RewardBasedVideoAdDelegateInstance release];
-    }
+    [RewardBasedVideoAdDelegateInstance release];
 }
 
 bool AdMobHelper::rewardBasedVideoAdReady() const
 {
-    if (Initialized) {
-        return [[GADRewardBasedVideoAd sharedInstance] isReady];
-    } else {
-        return false;
-    }
+    return [[GADRewardBasedVideoAd sharedInstance] isReady];
 }
 
 bool AdMobHelper::rewardBasedVideoAdActive() const
@@ -123,33 +120,18 @@ bool AdMobHelper::rewardBasedVideoAdActive() const
     return RewardBasedVideoAdActive;
 }
 
-void AdMobHelper::initialize()
-{
-    if (!Initialized) {
-        [GADMobileAds configureWithApplicationID:ADMOB_APP_ID.toNSString()];
-
-        RewardBasedVideoAdDelegateInstance = [[RewardBasedVideoAdDelegate alloc] init];
-
-        [RewardBasedVideoAdDelegateInstance loadAd];
-
-        Initialized = true;
-    }
-}
-
 void AdMobHelper::showRewardBasedVideoAd()
 {
-    if (Initialized) {
-        UIViewController * __block root_view_controller = nil;
+    UIViewController * __block root_view_controller = nil;
 
-        [[[UIApplication sharedApplication] windows] enumerateObjectsUsingBlock:^(UIWindow * _Nonnull window, NSUInteger, BOOL * _Nonnull stop) {
-            root_view_controller = [window rootViewController];
+    [[[UIApplication sharedApplication] windows] enumerateObjectsUsingBlock:^(UIWindow * _Nonnull window, NSUInteger, BOOL * _Nonnull stop) {
+        root_view_controller = [window rootViewController];
 
-            *stop = (root_view_controller != nil);
-        }];
+        *stop = (root_view_controller != nil);
+    }];
 
-        if ([[GADRewardBasedVideoAd sharedInstance] isReady]) {
-            [[GADRewardBasedVideoAd sharedInstance] presentFromRootViewController:root_view_controller];
-        }
+    if ([[GADRewardBasedVideoAd sharedInstance] isReady]) {
+        [[GADRewardBasedVideoAd sharedInstance] presentFromRootViewController:root_view_controller];
     }
 }
 

@@ -139,8 +139,6 @@ ApplicationWindow {
     Component.onCompleted: {
         fullVersion = (getSetting("FullVersion", "false") === "true");
 
-        AdMobHelper.initialize();
-
         mainStackView.push(pigletPage);
     }
 }
