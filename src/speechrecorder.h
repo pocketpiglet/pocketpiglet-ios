@@ -1,6 +1,7 @@
 #ifndef SPEECHRECORDER_H
 #define SPEECHRECORDER_H
 
+#include <QtCore/QtGlobal>
 #include <QtCore/QObject>
 #include <QtCore/QString>
 #include <QtCore/QByteArray>
