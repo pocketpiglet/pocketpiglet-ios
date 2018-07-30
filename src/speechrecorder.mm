@@ -1,7 +1,6 @@
-#import <Foundation/Foundation.h>
-
 #include <QtCore/QtEndian>
 #include <QtCore/QDir>
+#include <QtCore/QStandardPaths>
 #include <QtCore/QUrl>
 #include <QtMultimedia/QAudioFormat>
 #include <QtMultimedia/QAudioDeviceInfo>
@@ -18,10 +17,17 @@ SpeechRecorder::SpeechRecorder(QObject *parent) : QObject(parent)
     SilenceSize          = 0;
     Volume               = 1.0;
     SampleRateMultiplier = 1.0;
-    VoiceFilePath        = QDir(QString::fromNSString(NSTemporaryDirectory())).filePath("voice.wav");
     VadInstance          = NULL;
     AudioInput           = NULL;
     AudioInputDevice     = NULL;
+
+    QString tmp_dir = QStandardPaths::writableLocation(QStandardPaths::TempLocation);
+
+    if (tmp_dir != "") {
+        QDir().mkpath(tmp_dir);
+    }
+
+    VoiceFilePath = QDir(tmp_dir).filePath("voice.wav");
 }
 
 SpeechRecorder::~SpeechRecorder()
