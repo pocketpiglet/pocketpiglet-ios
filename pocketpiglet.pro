@@ -4,6 +4,7 @@ CONFIG += c++11
 DEFINES += QT_DEPRECATED_WARNINGS WEBRTC_POSIX
 
 SOURCES += src/main.cpp \
+    src/speechrecorder.cpp \
     webrtc/common_audio/signal_processing/complex_bit_reverse.c \
     webrtc/common_audio/signal_processing/complex_fft.c \
     webrtc/common_audio/signal_processing/cross_correlation.c \
@@ -26,8 +27,7 @@ SOURCES += src/main.cpp \
 
 OBJECTIVE_SOURCES += \
     src/admobhelper.mm \
-    src/storehelper.mm \
-    src/speechrecorder.mm
+    src/storehelper.mm
 
 HEADERS += \
     src/admobhelper.h \
