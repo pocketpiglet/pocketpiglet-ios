@@ -75,7 +75,7 @@ AdMobHelper *AdMobHelper::Instance = nullptr;
 {
     Q_UNUSED(rewardBasedVideoAd)
 
-    AdMobHelper::rewardBasedVideoAdDidReward(QString::fromNSString(reward.type), (int)[reward.amount integerValue]);
+    AdMobHelper::rewardBasedVideoAdDidReward(QString::fromNSString(reward.type), static_cast<int>([reward.amount integerValue]));
 }
 
 - (void)rewardBasedVideoAdWillLeaveApplication:(GADRewardBasedVideoAd *)rewardBasedVideoAd
