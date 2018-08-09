@@ -11,7 +11,7 @@ const QString AdMobHelper::ADMOB_APP_ID                    ("ca-app-pub-24550888
 const QString AdMobHelper::ADMOB_REWARDBASEDVIDEOAD_UNIT_ID("ca-app-pub-2455088855015693/5886144590");
 const QString AdMobHelper::ADMOB_TEST_DEVICE_ID            ("");
 
-AdMobHelper *AdMobHelper::Instance = NULL;
+AdMobHelper *AdMobHelper::Instance = nullptr;
 
 @interface RewardBasedVideoAdDelegate : NSObject<GADRewardBasedVideoAdDelegate>
 

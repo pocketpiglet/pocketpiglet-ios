@@ -24,7 +24,7 @@ class SpeechRecorder : public QObject
     Q_PROPERTY(QString voiceFileURL         READ voiceFileURL)
 
 public:
-    explicit SpeechRecorder(QObject *parent = 0);
+    explicit SpeechRecorder(QObject *parent = nullptr);
     virtual ~SpeechRecorder();
 
     bool active() const;

@@ -1,4 +1,6 @@
+#include <QtCore/QtMath>
 #include <QtCore/QtEndian>
+#include <QtCore/QVarLengthArray>
 #include <QtCore/QDir>
 #include <QtCore/QStandardPaths>
 #include <QtCore/QUrl>
@@ -17,9 +19,9 @@ SpeechRecorder::SpeechRecorder(QObject *parent) : QObject(parent)
     SilenceSize          = 0;
     Volume               = 1.0;
     SampleRateMultiplier = 1.0;
-    VadInstance          = NULL;
-    AudioInput           = NULL;
-    AudioInputDevice     = NULL;
+    VadInstance          = nullptr;
+    AudioInput           = nullptr;
+    AudioInputDevice     = nullptr;
 
     QString tmp_dir = QStandardPaths::writableLocation(QStandardPaths::TempLocation);
 
@@ -32,7 +34,7 @@ SpeechRecorder::SpeechRecorder(QObject *parent) : QObject(parent)
 
 SpeechRecorder::~SpeechRecorder()
 {
-    if (VadInstance != NULL) {
+    if (VadInstance != nullptr) {
         WebRtcVad_Free(VadInstance);
     }
 }
@@ -110,7 +112,7 @@ void SpeechRecorder::setVolume(qreal vol)
 {
     Volume = vol;
 
-    if (AudioInput != NULL) {
+    if (AudioInput != nullptr) {
         AudioInput->setVolume(Volume);
     }
 
@@ -136,7 +138,7 @@ QString SpeechRecorder::voiceFileURL() const
 
 void SpeechRecorder::audioInputDeviceReadyRead()
 {
-    if (SampleRate != 0 && VadInstance != NULL) {
+    if (SampleRate != 0 && VadInstance != nullptr) {
         int frame_length = (SampleRate / 1000) * 30;
 
         AudioBuffer.append(AudioInputDevice->readAll());
@@ -146,13 +148,13 @@ void SpeechRecorder::audioInputDeviceReadyRead()
 
             while (p < AudioBuffer.size()) {
                 if (p + frame_length <= AudioBuffer.size()) {
-                    int16_t audio_data_16bit[frame_length];
+                    QVarLengthArray<int16_t, 1024>audio_data_16bit(frame_length);
 
                     for (int i = 0; i < frame_length; i++) {
-                        audio_data_16bit[i] = ((uint8_t)(AudioBuffer[p + i]) - 0x80) * 256;
+                        audio_data_16bit[i] = (static_cast<uint8_t>(AudioBuffer[p + i]) - 0x80) * 256;
                     }
 
-                    if (WebRtcVad_Process(VadInstance, SampleRate, audio_data_16bit, frame_length) > 0) {
+                    if (WebRtcVad_Process(VadInstance, SampleRate, audio_data_16bit.data(), frame_length) > 0) {
                         VoiceBuffer.append(AudioBuffer.mid(p, frame_length));
 
                         SilenceSize = 0;
@@ -199,7 +201,7 @@ void SpeechRecorder::audioInputDeviceReadyRead()
 
 void SpeechRecorder::CreateAudioInput()
 {
-    if (AudioInput != NULL) {
+    if (AudioInput != nullptr) {
         AudioInput->stop();
         AudioInput->deleteLater();
     }
@@ -232,7 +234,7 @@ void SpeechRecorder::CreateAudioInput()
 
 void SpeechRecorder::DeleteAudioInput()
 {
-    if (AudioInput != NULL) {
+    if (AudioInput != nullptr) {
         AudioInput->stop();
         AudioInput->deleteLater();
     }
@@ -260,8 +262,8 @@ void SpeechRecorder::DeleteAudioInput()
     AudioBuffer.clear();
     VoiceBuffer.clear();
 
-    AudioInput       = NULL;
-    AudioInputDevice = NULL;
+    AudioInput       = nullptr;
+    AudioInputDevice = nullptr;
 }
 
 void SpeechRecorder::CreateVAD()
@@ -279,7 +281,7 @@ void SpeechRecorder::CreateVAD()
 
 void SpeechRecorder::DeleteVAD()
 {
-    if (VadInstance != NULL) {
+    if (VadInstance != nullptr) {
         WebRtcVad_Free(VadInstance);
     }
 
@@ -293,7 +295,7 @@ void SpeechRecorder::DeleteVAD()
     AudioBuffer.clear();
     VoiceBuffer.clear();
 
-    VadInstance = NULL;
+    VadInstance = nullptr;
 }
 
 void SpeechRecorder::SaveVoice()
@@ -315,33 +317,33 @@ void SpeechRecorder::SaveVoice()
 
             char     sub_chunk_2_id[4];
             uint32_t sub_chunk_2_size;
-        };
+        } str_header;
         char raw_header[44];
     } wav_header;
 
     QFile voice_file(VoiceFilePath);
 
     if (voice_file.open(QIODevice::WriteOnly)) {
-        int sample_rate_high_tone = SampleRate * SampleRateMultiplier; // To make voice funny
+        uint32_t sample_rate_high_tone = static_cast<uint32_t>(qFloor(SampleRate * SampleRateMultiplier)); // To make voice funny
 
         memset(wav_header.raw_header, 0, sizeof(wav_header.raw_header));
 
-        memcpy(wav_header.chunk_id,       "RIFF", sizeof(wav_header.chunk_id));
-        memcpy(wav_header.format,         "WAVE", sizeof(wav_header.format));
-        memcpy(wav_header.sub_chunk_1_id, "fmt ", sizeof(wav_header.sub_chunk_1_id));
-        memcpy(wav_header.sub_chunk_2_id, "data", sizeof(wav_header.sub_chunk_2_id));
+        memcpy(wav_header.str_header.chunk_id,       "RIFF", sizeof(wav_header.str_header.chunk_id));
+        memcpy(wav_header.str_header.format,         "WAVE", sizeof(wav_header.str_header.format));
+        memcpy(wav_header.str_header.sub_chunk_1_id, "fmt ", sizeof(wav_header.str_header.sub_chunk_1_id));
+        memcpy(wav_header.str_header.sub_chunk_2_id, "data", sizeof(wav_header.str_header.sub_chunk_2_id));
 
-        wav_header.chunk_size       = qToLittleEndian<uint32_t>(4 + (8 + 16) + (8 + VoiceBuffer.size())); // 4 + (8 + sub_chunk_1_size) + (8 + sub_chunk_2_size)
+        wav_header.str_header.chunk_size       = qToLittleEndian<uint32_t>(4 + (8 + 16) + (8 + static_cast<uint32_t>(VoiceBuffer.size()))); // 4 + (8 + sub_chunk_1_size) + (8 + sub_chunk_2_size)
 
-        wav_header.sub_chunk_1_size = qToLittleEndian<uint32_t>(16); // For PCM
-        wav_header.audio_format     = qToLittleEndian<uint16_t>(1); // PCM
-        wav_header.num_channels     = qToLittleEndian<uint16_t>(1);
-        wav_header.sample_rate      = qToLittleEndian<uint32_t>(sample_rate_high_tone);
-        wav_header.byte_rate        = qToLittleEndian<uint32_t>(sample_rate_high_tone * 1 * 8 / 8); // sample_rate * num_channels * bits_per_sample / 8
-        wav_header.block_align      = qToLittleEndian<uint16_t>(1 * 8 / 8); // num_channels * bits_per_sample / 8
-        wav_header.bits_per_sample  = qToLittleEndian<uint16_t>(8);
+        wav_header.str_header.sub_chunk_1_size = qToLittleEndian<uint32_t>(16); // For PCM
+        wav_header.str_header.audio_format     = qToLittleEndian<uint16_t>(1); // PCM
+        wav_header.str_header.num_channels     = qToLittleEndian<uint16_t>(1);
+        wav_header.str_header.sample_rate      = qToLittleEndian<uint32_t>(sample_rate_high_tone);
+        wav_header.str_header.byte_rate        = qToLittleEndian<uint32_t>(sample_rate_high_tone * 1 * 8 / 8); // sample_rate * num_channels * bits_per_sample / 8
+        wav_header.str_header.block_align      = qToLittleEndian<uint16_t>(1 * 8 / 8); // num_channels * bits_per_sample / 8
+        wav_header.str_header.bits_per_sample  = qToLittleEndian<uint16_t>(8);
 
-        wav_header.sub_chunk_2_size = qToLittleEndian<uint32_t>(VoiceBuffer.size());
+        wav_header.str_header.sub_chunk_2_size = qToLittleEndian<uint32_t>(static_cast<uint32_t>(VoiceBuffer.size()));
 
         voice_file.write(wav_header.raw_header, sizeof(wav_header.raw_header));
         voice_file.write(VoiceBuffer);
