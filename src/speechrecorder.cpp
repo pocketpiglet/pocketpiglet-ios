@@ -317,33 +317,33 @@ void SpeechRecorder::SaveVoice()
 
             char     sub_chunk_2_id[4];
             uint32_t sub_chunk_2_size;
-        } str_header;
+        } struct_header;
         char raw_header[44];
     } wav_header;
 
     QFile voice_file(VoiceFilePath);
 
     if (voice_file.open(QIODevice::WriteOnly)) {
-        uint32_t sample_rate_high_tone = static_cast<uint32_t>(qFloor(SampleRate * SampleRateMultiplier)); // To make voice funny
+        uint32_t sample_rate_multiplied = static_cast<uint32_t>(qFloor(SampleRate * SampleRateMultiplier)); // To change voice pitch
 
         memset(wav_header.raw_header, 0, sizeof(wav_header.raw_header));
 
-        memcpy(wav_header.str_header.chunk_id,       "RIFF", sizeof(wav_header.str_header.chunk_id));
-        memcpy(wav_header.str_header.format,         "WAVE", sizeof(wav_header.str_header.format));
-        memcpy(wav_header.str_header.sub_chunk_1_id, "fmt ", sizeof(wav_header.str_header.sub_chunk_1_id));
-        memcpy(wav_header.str_header.sub_chunk_2_id, "data", sizeof(wav_header.str_header.sub_chunk_2_id));
+        memcpy(wav_header.struct_header.chunk_id,       "RIFF", sizeof(wav_header.struct_header.chunk_id));
+        memcpy(wav_header.struct_header.format,         "WAVE", sizeof(wav_header.struct_header.format));
+        memcpy(wav_header.struct_header.sub_chunk_1_id, "fmt ", sizeof(wav_header.struct_header.sub_chunk_1_id));
+        memcpy(wav_header.struct_header.sub_chunk_2_id, "data", sizeof(wav_header.struct_header.sub_chunk_2_id));
 
-        wav_header.str_header.chunk_size       = qToLittleEndian<uint32_t>(4 + (8 + 16) + (8 + static_cast<uint32_t>(VoiceBuffer.size()))); // 4 + (8 + sub_chunk_1_size) + (8 + sub_chunk_2_size)
+        wav_header.struct_header.chunk_size       = qToLittleEndian<uint32_t>(4 + (8 + 16) + (8 + static_cast<uint32_t>(VoiceBuffer.size()))); // 4 + (8 + sub_chunk_1_size) + (8 + sub_chunk_2_size)
 
-        wav_header.str_header.sub_chunk_1_size = qToLittleEndian<uint32_t>(16); // For PCM
-        wav_header.str_header.audio_format     = qToLittleEndian<uint16_t>(1); // PCM
-        wav_header.str_header.num_channels     = qToLittleEndian<uint16_t>(1);
-        wav_header.str_header.sample_rate      = qToLittleEndian<uint32_t>(sample_rate_high_tone);
-        wav_header.str_header.byte_rate        = qToLittleEndian<uint32_t>(sample_rate_high_tone * 1 * 8 / 8); // sample_rate * num_channels * bits_per_sample / 8
-        wav_header.str_header.block_align      = qToLittleEndian<uint16_t>(1 * 8 / 8); // num_channels * bits_per_sample / 8
-        wav_header.str_header.bits_per_sample  = qToLittleEndian<uint16_t>(8);
+        wav_header.struct_header.sub_chunk_1_size = qToLittleEndian<uint32_t>(16); // For PCM
+        wav_header.struct_header.audio_format     = qToLittleEndian<uint16_t>(1); // PCM
+        wav_header.struct_header.num_channels     = qToLittleEndian<uint16_t>(1);
+        wav_header.struct_header.sample_rate      = qToLittleEndian<uint32_t>(sample_rate_multiplied);
+        wav_header.struct_header.byte_rate        = qToLittleEndian<uint32_t>(sample_rate_multiplied * 1 * 8 / 8); // sample_rate * num_channels * bits_per_sample / 8
+        wav_header.struct_header.block_align      = qToLittleEndian<uint16_t>(1 * 8 / 8); // num_channels * bits_per_sample / 8
+        wav_header.struct_header.bits_per_sample  = qToLittleEndian<uint16_t>(8);
 
-        wav_header.str_header.sub_chunk_2_size = qToLittleEndian<uint32_t>(static_cast<uint32_t>(VoiceBuffer.size()));
+        wav_header.struct_header.sub_chunk_2_size = qToLittleEndian<uint32_t>(static_cast<uint32_t>(VoiceBuffer.size()));
 
         voice_file.write(wav_header.raw_header, sizeof(wav_header.raw_header));
         voice_file.write(VoiceBuffer);
