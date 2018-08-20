@@ -17,8 +17,9 @@ Item {
     property int diamondsAmount:            0
     property int diamondsMaxAmount:         10
 
-    property real lastGameTime:             (new Date()).getTime()
     property real accelShakeThreshold:      50.0
+
+    property double lastGameTime:           (new Date()).getTime()
 
     property string nextAnimation:          ""
     property string wantedGame:             ""
@@ -915,7 +916,7 @@ Item {
 
         onTriggered: {
             if (pigletPage.nextAnimation === "") {
-                if ((new Date()).getTime() > pigletPage.lastGameTime + 60000) {
+                if ((new Date()).getTime() - pigletPage.lastGameTime > 60000) {
                     if (pigletPage.wantedGame === "") {
                         var rand = Math.random();
 

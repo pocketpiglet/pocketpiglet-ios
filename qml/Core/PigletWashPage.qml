@@ -19,7 +19,7 @@ Item {
     property int burstedBubblesCount: 0
     property int missedBubblesCount:  0
 
-    property real gameStartTime:      (new Date()).getTime()
+    property double gameStartTime:    (new Date()).getTime()
 
     signal destroyBubbles()
 
