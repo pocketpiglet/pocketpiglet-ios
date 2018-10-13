@@ -8,6 +8,7 @@ import "Core"
 
 ApplicationWindow {
     id:                           mainWindow
+    title:                        qsTr("Piglet")
     visible:                      true
     visibility:                   Window.FullScreen
     Screen.orientationUpdateMask: Qt.PortraitOrientation         | Qt.LandscapeOrientation |
