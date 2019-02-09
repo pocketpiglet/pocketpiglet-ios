@@ -64,6 +64,8 @@ QML_IMPORT_PATH =
 QML_DESIGNER_IMPORT_PATH =
 
 ios {
+    CONFIG += qtquickcompiler
+
     INCLUDEPATH += $$PWD/ios/frameworks
     DEPENDPATH += $$PWD/ios/frameworks
 
