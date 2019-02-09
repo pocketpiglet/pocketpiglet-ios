@@ -75,7 +75,7 @@ AdMobHelper *AdMobHelper::Instance = nullptr;
 {
     Q_UNUSED(rewardBasedVideoAd)
 
-    AdMobHelper::rewardBasedVideoAdDidReward(QString::fromNSString(reward.type), static_cast<int>([reward.amount integerValue]));
+    AdMobHelper::rewardBasedVideoAdDidReward(QString::fromNSString(reward.type), reward.amount.intValue);
 }
 
 - (void)rewardBasedVideoAdWillLeaveApplication:(GADRewardBasedVideoAd *)rewardBasedVideoAd
@@ -87,7 +87,7 @@ AdMobHelper *AdMobHelper::Instance = nullptr;
 {
     Q_UNUSED(rewardBasedVideoAd)
 
-    qWarning() << QString::fromNSString([error localizedDescription]);
+    qWarning() << QString::fromNSString(error.localizedDescription);
 
     [self performSelector:@selector(loadAd) withObject:nil afterDelay:10.0];
 }
@@ -112,7 +112,7 @@ AdMobHelper::~AdMobHelper()
 
 bool AdMobHelper::rewardBasedVideoAdReady() const
 {
-    return [[GADRewardBasedVideoAd sharedInstance] isReady];
+    return [GADRewardBasedVideoAd sharedInstance].ready;
 }
 
 bool AdMobHelper::rewardBasedVideoAdActive() const
@@ -124,13 +124,13 @@ void AdMobHelper::showRewardBasedVideoAd()
 {
     UIViewController * __block root_view_controller = nil;
 
-    [[[UIApplication sharedApplication] windows] enumerateObjectsUsingBlock:^(UIWindow * _Nonnull window, NSUInteger, BOOL * _Nonnull stop) {
-        root_view_controller = [window rootViewController];
+    [UIApplication.sharedApplication.windows enumerateObjectsUsingBlock:^(UIWindow * _Nonnull window, NSUInteger, BOOL * _Nonnull stop) {
+        root_view_controller = window.rootViewController;
 
         *stop = (root_view_controller != nil);
     }];
 
-    if ([[GADRewardBasedVideoAd sharedInstance] isReady]) {
+    if ([GADRewardBasedVideoAd sharedInstance].ready) {
         [[GADRewardBasedVideoAd sharedInstance] presentFromRootViewController:root_view_controller];
     }
 }
