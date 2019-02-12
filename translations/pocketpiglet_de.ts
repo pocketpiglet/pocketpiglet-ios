@@ -68,4 +68,11 @@
         <translation>Käufe wiederherstellen</translation>
     </message>
 </context>
+<context>
+    <name>main</name>
+    <message>
+        <source>Piglet</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
 </TS>

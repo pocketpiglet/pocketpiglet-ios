@@ -4,7 +4,7 @@
 <context>
     <name>ParentalGateDialog</name>
     <message>
-        <location filename="../qml/Core/Dialog/ParentalGateDialog.qml" line="122"/>
+        <location filename="../qml/Core/Dialog/ParentalGateDialog.qml" line="126"/>
         <source>Slide with two fingers over this dialog to continue</source>
         <translation>Faites glisser avec deux doigts sur cette boîte de dialogue pour continuer</translation>
     </message>
@@ -66,19 +66,27 @@
 <context>
     <name>PurchaseDialog</name>
     <message>
-        <location filename="../qml/Core/Dialog/PurchaseDialog.qml" line="169"/>
+        <location filename="../qml/Core/Dialog/PurchaseDialog.qml" line="177"/>
         <source>Watch video ad</source>
         <translation>Regarder une annonce vidéo</translation>
     </message>
     <message>
-        <location filename="../qml/Core/Dialog/PurchaseDialog.qml" line="237"/>
+        <location filename="../qml/Core/Dialog/PurchaseDialog.qml" line="249"/>
         <source>Purchase full version</source>
         <translation>Acheter la version complète</translation>
     </message>
     <message>
-        <location filename="../qml/Core/Dialog/PurchaseDialog.qml" line="305"/>
+        <location filename="../qml/Core/Dialog/PurchaseDialog.qml" line="321"/>
         <source>Restore purchases</source>
         <translation>Restaurer les achats</translation>
+    </message>
+</context>
+<context>
+    <name>main</name>
+    <message>
+        <location filename="../qml/main.qml" line="11"/>
+        <source>Piglet</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
