@@ -66,28 +66,32 @@ MouseArea {
     Image {
         id:               dialogImage
         anchors.centerIn: parent
-        width:            Math.min(parent.width, parent.height) - 16
-        height:           Math.min(parent.width, parent.height) - 72
+        width:            calculateWidth (sourceSize.width, sourceSize.height, parent.width - 72, parent.height - 72)
+        height:           calculateHeight(sourceSize.width, sourceSize.height, parent.width - 72, parent.height - 72)
         source:           "qrc:/resources/images/dialog/parental_gate_dialog.png"
         fillMode:         Image.PreserveAspectFit
 
-        property bool geometrySettled: false
-
-        onPaintedWidthChanged: {
-            if (!geometrySettled && width > 0 && height > 0 && paintedWidth > 0 && paintedHeight > 0) {
-                geometrySettled = true;
-
-                width  = paintedWidth;
-                height = paintedHeight;
+        function calculateWidth(src_width, src_height, dst_width, dst_height) {
+            if (src_width > 0 && src_height > 0 && dst_width > 0 && dst_height > 0) {
+                if (dst_width / dst_height > src_width / src_height) {
+                    return src_width * dst_height / src_height;
+                } else {
+                    return dst_width;
+                }
+            } else {
+                return 0;
             }
         }
 
-        onPaintedHeightChanged: {
-            if (!geometrySettled && width > 0 && height > 0 && paintedWidth > 0 && paintedHeight > 0) {
-                geometrySettled = true;
-
-                width  = paintedWidth;
-                height = paintedHeight;
+        function calculateHeight(src_width, src_height, dst_width, dst_height) {
+            if (src_width > 0 && src_height > 0 && dst_width > 0 && dst_height > 0) {
+                if (dst_width / dst_height > src_width / src_height) {
+                    return dst_height;
+                } else {
+                    return src_height * dst_width / src_width;
+                }
+            } else {
+                return 0;
             }
         }
 
