@@ -2,8 +2,8 @@ import QtQuick 2.9
 
 Rectangle {
     id:     sandwichItem
-    width:  sandwichItemImage.sourceSize.width  * parent.sandwichFactorX
-    height: sandwichItemImage.sourceSize.height * parent.sandwichFactorY
+    width:  sandwichItemImage.sourceSize.width  * parent.sandwichScaleX
+    height: sandwichItemImage.sourceSize.height * parent.sandwichScaleY
     color:  "transparent"
 
     property int initialY:    0

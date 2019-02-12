@@ -106,8 +106,8 @@ function createMap(complexity) {
 
     for (var k = 0; k < map_height; k++) {
         for (var l = 0; l < map_width; l++) {
-            puzzle_elements[PuzzleMap[l][k]].x = l * element_width  * pigletPuzzlePage.screenFactor;
-            puzzle_elements[PuzzleMap[l][k]].y = k * element_height * pigletPuzzlePage.screenFactor;
+            puzzle_elements[PuzzleMap[l][k]].x = l * element_width  * pigletPuzzlePage.screenScale;
+            puzzle_elements[PuzzleMap[l][k]].y = k * element_height * pigletPuzzlePage.screenScale;
         }
     }
 }

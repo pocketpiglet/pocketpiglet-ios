@@ -136,14 +136,14 @@ Item {
         }
 
         Sandwich {
-            id:              sandwich
-            x:               (backgroundAnimatedImage.width  - backgroundAnimatedImage.paintedWidth)  / 2 + 412 * sandwichFactorX
-            y:               (backgroundAnimatedImage.height - backgroundAnimatedImage.paintedHeight) / 2 + 0   * sandwichFactorY
-            z:               2
-            width:           80  * sandwichFactorX
-            height:          275 * sandwichFactorY
-            sandwichFactorX: backgroundAnimatedImage.paintedWidth  / backgroundAnimatedImage.sourceSize.width
-            sandwichFactorY: backgroundAnimatedImage.paintedHeight / backgroundAnimatedImage.sourceSize.height
+            id:             sandwich
+            x:              (backgroundAnimatedImage.width  - backgroundAnimatedImage.paintedWidth)  / 2 + 412 * sandwichScaleX
+            y:              (backgroundAnimatedImage.height - backgroundAnimatedImage.paintedHeight) / 2 + 0   * sandwichScaleY
+            z:              2
+            width:          80  * sandwichScaleX
+            height:         275 * sandwichScaleY
+            sandwichScaleX: backgroundAnimatedImage.paintedWidth  / backgroundAnimatedImage.sourceSize.width
+            sandwichScaleY: backgroundAnimatedImage.paintedHeight / backgroundAnimatedImage.sourceSize.height
 
             onAllItemsInPlace: {
                 audio.playAudio("qrc:/resources/sound/piglet_feed/sandwich_eat.wav");

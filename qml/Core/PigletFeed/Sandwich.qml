@@ -4,14 +4,14 @@ Rectangle {
     id:    sandwich
     color: "transparent"
 
-    property int itemShiftPixels:   4 * sandwichFactorY
+    property int itemShiftPixels:   4 * sandwichScaleY
     property int maxItemsCount:     0
     property int visibleItemsCount: 0
     property int itemsInPlaceCount: 0
     property int eatenItemsCount:   0
 
-    property real sandwichFactorX:  1.0
-    property real sandwichFactorY:  1.0
+    property real sandwichScaleX:   1.0
+    property real sandwichScaleY:   1.0
 
     property list<SandwichItem> sandwichItems: [
         SandwichItem {
