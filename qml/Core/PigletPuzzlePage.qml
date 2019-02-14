@@ -644,13 +644,14 @@ Item {
         }
 
         Image {
-            id:             backButtonImage
-            anchors.bottom: parent.bottom
-            anchors.right:  parent.right
-            width:          64
-            height:         64
-            z:              10
-            source:         "qrc:/resources/images/back.png"
+            id:                  backButtonImage
+            anchors.bottom:      parent.bottom
+            anchors.right:       parent.right
+            anchors.rightMargin: 30
+            width:               64
+            height:              64
+            z:                   10
+            source:              "qrc:/resources/images/back.png"
 
             MouseArea {
                 id:           backButtonMouseArea
@@ -764,13 +765,14 @@ Item {
                 }
 
                 Image {
-                    id:             complexitySelectionBackButtonImage
-                    anchors.bottom: parent.bottom
-                    anchors.right:  parent.right
-                    width:          64
-                    height:         64
-                    z:              51
-                    source:         "qrc:/resources/images/back.png"
+                    id:                  complexitySelectionBackButtonImage
+                    anchors.bottom:      parent.bottom
+                    anchors.right:       parent.right
+                    anchors.rightMargin: 30
+                    width:               64
+                    height:              64
+                    z:                   51
+                    source:              "qrc:/resources/images/back.png"
 
                     MouseArea {
                         id:           complexitySelectionBackButtonMouseArea
@@ -879,13 +881,14 @@ Item {
                 }
 
                 Image {
-                    id:             puzzleSelectionBackButtonImage
-                    anchors.bottom: parent.bottom
-                    anchors.right:  parent.right
-                    width:          64
-                    height:         64
-                    z:              51
-                    source:         "qrc:/resources/images/back.png"
+                    id:                  puzzleSelectionBackButtonImage
+                    anchors.bottom:      parent.bottom
+                    anchors.right:       parent.right
+                    anchors.rightMargin: 30
+                    width:               64
+                    height:              64
+                    z:                   51
+                    source:              "qrc:/resources/images/back.png"
 
                     MouseArea {
                         id:           puzzleSelectionBackButtonMouseArea

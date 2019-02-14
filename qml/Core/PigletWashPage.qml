@@ -298,13 +298,14 @@ Item {
         }
 
         Image {
-            id:             backButtonImage
-            anchors.bottom: parent.bottom
-            anchors.right:  parent.right
-            width:          64
-            height:         64
-            z:              10
-            source:         "qrc:/resources/images/back.png"
+            id:                   backButtonImage
+            anchors.bottom:       parent.bottom
+            anchors.right:        parent.right
+            anchors.bottomMargin: 30
+            width:                64
+            height:               64
+            z:                    10
+            source:               "qrc:/resources/images/back.png"
 
             MouseArea {
                 id:           backButtonMouseArea
