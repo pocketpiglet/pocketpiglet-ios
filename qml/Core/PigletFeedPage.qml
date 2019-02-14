@@ -10,7 +10,6 @@ Item {
 
     property bool appInForeground:   Qt.application.active
     property bool pageActive:        StackView.status === StackView.Active
-    property bool pageInitialized:   false
     property bool allowLevelRestart: false
 
     property int screenRotation:     90
@@ -27,11 +26,7 @@ Item {
             backgroundAnimatedImage.playing    = true;
             backgroundEatAnimatedImage.playing = true;
 
-            if (!pageInitialized) {
-                pageInitialized = true;
-
-                gameBeginTimer.start();
-            } else if (allowLevelRestart) {
+            if (allowLevelRestart) {
                 newLevelNotificationDialog.open();
             }
         } else {
@@ -47,11 +42,7 @@ Item {
             backgroundAnimatedImage.playing    = true;
             backgroundEatAnimatedImage.playing = true;
 
-            if (!pageInitialized) {
-                pageInitialized = true;
-
-                gameBeginTimer.start();
-            } else if (allowLevelRestart) {
+            if (allowLevelRestart) {
                 newLevelNotificationDialog.open();
             }
         } else {
@@ -207,7 +198,6 @@ Item {
         rotation:         pigletFeedPage.screenRotation
         z:                20
         color:            "black"
-        visible:          false
 
         MouseArea {
             id:           complexitySelectionRectangleMouseArea
@@ -384,15 +374,6 @@ Item {
             pigletFeedPage.gameFinished("piglet_feed");
 
             mainStackView.pop();
-        }
-    }
-
-    Timer {
-        id:       gameBeginTimer
-        interval: 100
-
-        onTriggered: {
-            complexitySelectionRectangle.visible = true;
         }
     }
 

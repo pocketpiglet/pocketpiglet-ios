@@ -22,26 +22,6 @@ Item {
 
     signal gameFinished(string game)
 
-    onAppInForegroundChanged: {
-        if (appInForeground && pageActive) {
-            if (!pageInitialized) {
-                pageInitialized = true;
-
-                gameBeginTimer.start();
-            }
-        }
-    }
-
-    onPageActiveChanged: {
-        if (appInForeground && pageActive) {
-            if (!pageInitialized) {
-                pageInitialized = true;
-
-                gameBeginTimer.start();
-            }
-        }
-    }
-
     StackView.onRemoved: {
         destroy();
     }
@@ -722,7 +702,6 @@ Item {
         rotation:         pigletPuzzlePage.screenRotation
         z:                50
         color:            "black"
-        visible:          false
 
         MouseArea {
             id:           complexitySelectionRectangleMouseArea
@@ -920,16 +899,6 @@ Item {
                     }
                 }
             }
-        }
-    }
-
-    Timer {
-        id:       gameBeginTimer
-        interval: 100
-
-        onTriggered: {
-            puzzleSelectionRectangle.visible     = false;
-            complexitySelectionRectangle.visible = true;
         }
     }
 }

@@ -27,7 +27,7 @@ Item {
             if (!pageInitialized) {
                 pageInitialized = true;
 
-                gameBeginTimer.start();
+                gameStartNotificationDialog.open();
             } else if (allowGameRestart) {
                 pigletCreationTimer.start();
             }
@@ -47,7 +47,7 @@ Item {
             if (!pageInitialized) {
                 pageInitialized = true;
 
-                gameBeginTimer.start();
+                gameStartNotificationDialog.open();
             } else if (allowGameRestart) {
                 pigletCreationTimer.start();
             }
@@ -549,15 +549,6 @@ Item {
             pigletSearchPage.gameFinished("piglet_search");
 
             mainStackView.pop();
-        }
-    }
-
-    Timer {
-        id:       gameBeginTimer
-        interval: 100
-
-        onTriggered: {
-            gameStartNotificationDialog.open();
         }
     }
 

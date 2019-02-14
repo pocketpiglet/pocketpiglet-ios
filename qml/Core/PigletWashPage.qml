@@ -35,7 +35,7 @@ Item {
             if (!pageInitialized) {
                 pageInitialized = true;
 
-                gameBeginTimer.start();
+                gameStartNotificationDialog.open();
             } else if (allowGameRestart) {
                 bubbleCreationTimer.start();
             }
@@ -61,7 +61,7 @@ Item {
             if (!pageInitialized) {
                 pageInitialized = true;
 
-                gameBeginTimer.start();
+                gameStartNotificationDialog.open();
             } else if (allowGameRestart) {
                 bubbleCreationTimer.start();
             }
@@ -384,15 +384,6 @@ Item {
             pigletWashPage.gameFinished("piglet_wash");
 
             mainStackView.pop();
-        }
-    }
-
-    Timer {
-        id:       gameBeginTimer
-        interval: 100
-
-        onTriggered: {
-            gameStartNotificationDialog.open();
         }
     }
 
