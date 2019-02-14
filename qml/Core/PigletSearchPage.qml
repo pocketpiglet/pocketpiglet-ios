@@ -1,7 +1,7 @@
-import QtQuick 2.9
+import QtQuick 2.12
 import QtQuick.Controls 2.5
-import QtMultimedia 5.9
-import QtSensors 5.9
+import QtMultimedia 5.12
+import QtSensors 5.12
 
 import "Dialog"
 import "PigletSearch"
