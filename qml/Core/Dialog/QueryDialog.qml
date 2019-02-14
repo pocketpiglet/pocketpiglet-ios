@@ -116,7 +116,7 @@ MouseArea {
     Row {
         anchors.horizontalCenter: dialogImage.horizontalCenter
         anchors.verticalCenter:   dialogImage.bottom
-        spacing:                  dialogImage.width - yesButtonImage.width * 2 - noButtonImage.width * 2
+        spacing:                  dialogImage.width - yesButtonImage.width * 1.5 - noButtonImage.width * 1.5
 
         Image {
             id:     yesButtonImage
