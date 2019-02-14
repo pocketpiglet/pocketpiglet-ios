@@ -95,12 +95,15 @@ MouseArea {
         Text {
             anchors.fill:        parent
             anchors.margins:     16
-            clip:                true
+            text:                notificationDialog.text
             color:               "black"
+            font.pointSize:      24
+            font.family:         "Helvetica"
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment:   Text.AlignVCenter
             wrapMode:            Text.Wrap
-            text:                notificationDialog.text
+            fontSizeMode:        Text.Fit
+            minimumPointSize:    8
         }
     }
 }

@@ -236,10 +236,10 @@ Item {
             z:                   4
             text:                "000000"
             color:               "yellow"
+            font.pixelSize:      32
+            font.family:         "Courier"
             horizontalAlignment: Text.AlignRight
             verticalAlignment:   Text.AlignVCenter
-            font.family:         "Courier"
-            font.pixelSize:      32
         }
 
         Text {
@@ -249,10 +249,10 @@ Item {
             z:                   4
             text:                "000000"
             color:               "red"
+            font.pixelSize:      32
+            font.family:         "Courier"
             horizontalAlignment: Text.AlignRight
             verticalAlignment:   Text.AlignVCenter
-            font.family:         "Courier"
-            font.pixelSize:      32
         }
 
         Text {
@@ -263,10 +263,10 @@ Item {
             visible:                  false
             text:                     "00"
             color:                    "yellow"
+            font.pixelSize:           32
+            font.family:              "Courier"
             horizontalAlignment:      Text.AlignHCenter
             verticalAlignment:        Text.AlignVCenter
-            font.family:              "Courier"
-            font.pixelSize:           32
         }
 
         Image {

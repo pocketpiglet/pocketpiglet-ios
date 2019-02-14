@@ -111,12 +111,14 @@ MouseArea {
             Text {
                 width:                diamondImage.width
                 height:               36
-                clip:                 true
+                text:                 "+ %1".arg(newDiamondsDialog.newDiamondsCount)
                 color:                "black"
+                font.pixelSize:       32
+                font.family:          "Helvetica"
                 horizontalAlignment:  Text.AlignHCenter
                 verticalAlignment:    Text.AlignVCenter
-                font.pixelSize:       32
-                text:                 "+ %1".arg(newDiamondsDialog.newDiamondsCount)
+                fontSizeMode:         Text.Fit
+                minimumPixelSize:     8
             }
         }
     }

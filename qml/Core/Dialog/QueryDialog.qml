@@ -101,12 +101,15 @@ MouseArea {
             anchors.fill:         parent
             anchors.margins:      16
             anchors.bottomMargin: 40
-            clip:                 true
+            text:                 queryDialog.text
             color:                "black"
+            font.pointSize:       24
+            font.family:          "Helvetica"
             horizontalAlignment:  Text.AlignHCenter
             verticalAlignment:    Text.AlignVCenter
             wrapMode:             Text.Wrap
-            text:                 queryDialog.text
+            fontSizeMode:         Text.Fit
+            minimumPointSize:     8
         }
     }
 

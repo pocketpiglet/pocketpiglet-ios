@@ -118,12 +118,15 @@ MouseArea {
                 anchors.fill:         parent
                 anchors.margins:      16
                 anchors.bottomMargin: 40
-                clip:                 true
+                text:                 qsTr("Slide with two fingers over this dialog to continue")
                 color:                "black"
+                font.pointSize:       24
+                font.family:          "Helvetica"
                 horizontalAlignment:  Text.AlignHCenter
                 verticalAlignment:    Text.AlignVCenter
                 wrapMode:             Text.Wrap
-                text:                 qsTr("Slide with two fingers over this dialog to continue")
+                fontSizeMode:         Text.Fit
+                minimumPointSize:     8
             }
         }
     }

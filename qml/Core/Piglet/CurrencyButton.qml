@@ -37,20 +37,21 @@ Column {
     Rectangle {
         color:  "white"
         width:  currencyButton.imageWidth
-        height: currencyButtonAmountText.height + currencyButtonAmountText.anchors.margins * 2
+        height: 24
         radius: 16
 
         Text {
             id:                  currencyButtonAmountText
-            anchors.left:        parent.left
-            anchors.right:       parent.right
-            anchors.top:         parent.top
+            anchors.fill:        parent
             anchors.margins:     4
             text:                currencyButton.amount
+            color:               "black"
+            font.pixelSize:      16
+            font.family:         "Helvetica"
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment:   Text.AlignVCenter
-            font.pixelSize:      16
-            color:               "black"
+            fontSizeMode:        Text.Fit
+            minimumPixelSize:    8
         }
     }
 
