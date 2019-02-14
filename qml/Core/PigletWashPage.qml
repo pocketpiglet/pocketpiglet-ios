@@ -1,4 +1,5 @@
 import QtQuick 2.9
+import QtQuick.Controls 2.5
 import QtMultimedia 5.9
 
 import "Dialog"
@@ -10,7 +11,7 @@ Item {
     id: pigletWashPage
 
     property bool appInForeground:    Qt.application.active
-    property bool pageActive:         false
+    property bool pageActive:         StackView.status === StackView.Active
     property bool pageInitialized:    false
     property bool allowGameRestart:   false
 
@@ -21,6 +22,7 @@ Item {
 
     property double gameStartTime:    (new Date()).getTime()
 
+    signal gameFinished(string game)
     signal destroyBubbles()
 
     onAppInForegroundChanged: {
@@ -157,6 +159,10 @@ Item {
                 gameOverQueryDialog.open();
             }
         }
+    }
+
+    StackView.onRemoved: {
+        destroy();
     }
 
     Audio {
@@ -309,7 +315,7 @@ Item {
 
                     pigletWashPage.destroyBubbles();
 
-                    pigletPage.gameFinished("piglet_wash");
+                    pigletWashPage.gameFinished("piglet_wash");
 
                     mainStackView.pop();
                 }
@@ -355,7 +361,7 @@ Item {
         }
 
         onNo: {
-            pigletPage.gameFinished("piglet_wash");
+            pigletWashPage.gameFinished("piglet_wash");
 
             mainStackView.pop();
         }
@@ -375,7 +381,7 @@ Item {
         }
 
         onNo: {
-            pigletPage.gameFinished("piglet_wash");
+            pigletWashPage.gameFinished("piglet_wash");
 
             mainStackView.pop();
         }

@@ -1,4 +1,5 @@
 import QtQuick 2.9
+import QtQuick.Controls 2.5
 import QtMultimedia 5.9
 import QtSensors 5.9
 
@@ -9,7 +10,7 @@ Item {
     id: pigletSearchPage
 
     property bool appInForeground:   Qt.application.active
-    property bool pageActive:        false
+    property bool pageActive:        StackView.status === StackView.Active
     property bool pageInitialized:   false
     property bool allowGameRestart:  false
 
@@ -18,6 +19,8 @@ Item {
     property int missedPigletsCount: 0
 
     property var currentPiglet:      null
+
+    signal gameFinished(string game)
 
     onAppInForegroundChanged: {
         if (appInForeground && pageActive) {
@@ -126,6 +129,10 @@ Item {
         } else if (missedPigletsCount > 0) {
             pigletCreationTimer.start();
         }
+    }
+
+    StackView.onRemoved: {
+        destroy();
     }
 
     function pigletFound() {
@@ -418,7 +425,7 @@ Item {
                         pigletSearchPage.currentPiglet = null;
                     }
 
-                    pigletPage.gameFinished("piglet_search");
+                    pigletSearchPage.gameFinished("piglet_search");
 
                     mainStackView.pop();
                 }
@@ -519,7 +526,7 @@ Item {
         }
 
         onNo: {
-            pigletPage.gameFinished("piglet_search");
+            pigletSearchPage.gameFinished("piglet_search");
 
             mainStackView.pop();
         }
@@ -539,7 +546,7 @@ Item {
         }
 
         onNo: {
-            pigletPage.gameFinished("piglet_search");
+            pigletSearchPage.gameFinished("piglet_search");
 
             mainStackView.pop();
         }

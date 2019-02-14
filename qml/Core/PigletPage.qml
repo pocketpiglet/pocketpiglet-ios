@@ -1,4 +1,5 @@
 import QtQuick 2.9
+import QtQuick.Controls 2.5
 import QtMultimedia 5.9
 import QtSensors 5.9
 import SpeechRecorder 1.0
@@ -10,7 +11,7 @@ Item {
     id: pigletPage
 
     property bool appInForeground:          Qt.application.active
-    property bool pageActive:               false
+    property bool pageActive:               StackView.status === StackView.Active
     property bool rewardBasedVideoAdActive: AdMobHelper.rewardBasedVideoAdActive
     property bool animationEnabled:         false
 
@@ -697,7 +698,11 @@ Item {
                         var component = Qt.createComponent("PigletFeedPage.qml");
 
                         if (component.status === Component.Ready) {
-                            mainStackView.push(component);
+                            var object = component.createObject(null, {});
+
+                            object.gameFinished.connect(pigletPage.gameFinished);
+
+                            mainStackView.push(object);
                         } else {
                             console.log(component.errorString());
                         }
@@ -721,7 +726,11 @@ Item {
                         var component = Qt.createComponent("PigletWashPage.qml");
 
                         if (component.status === Component.Ready) {
-                            mainStackView.push(component);
+                            var object = component.createObject(null, {});
+
+                            object.gameFinished.connect(pigletPage.gameFinished);
+
+                            mainStackView.push(object);
                         } else {
                             console.log(component.errorString());
                         }
@@ -745,7 +754,11 @@ Item {
                         var component = Qt.createComponent("PigletPuzzlePage.qml");
 
                         if (component.status === Component.Ready) {
-                            mainStackView.push(component);
+                            var object = component.createObject(null, {});
+
+                            object.gameFinished.connect(pigletPage.gameFinished);
+
+                            mainStackView.push(object);
                         } else {
                             console.log(component.errorString());
                         }
@@ -769,7 +782,11 @@ Item {
                         var component = Qt.createComponent("PigletSearchPage.qml");
 
                         if (component.status === Component.Ready) {
-                            mainStackView.push(component);
+                            var object = component.createObject(null, {});
+
+                            object.gameFinished.connect(pigletPage.gameFinished);
+
+                            mainStackView.push(object);
                         } else {
                             console.log(component.errorString());
                         }

@@ -1,4 +1,5 @@
 import QtQuick 2.9
+import QtQuick.Controls 2.5
 import QtMultimedia 5.9
 
 import "PigletPuzzlePage.js" as PigletPuzzlePageScript
@@ -7,7 +8,7 @@ Item {
     id: pigletPuzzlePage
 
     property bool appInForeground:    Qt.application.active
-    property bool pageActive:         false
+    property bool pageActive:         StackView.status === StackView.Active
     property bool pageInitialized:    false
     property bool puzzleSolved:       false
 
@@ -18,6 +19,8 @@ Item {
 
     property string puzzleType:       "watering_flowers"
     property string puzzleComplexity: ""
+
+    signal gameFinished(string game)
 
     onAppInForegroundChanged: {
         if (appInForeground && pageActive) {
@@ -37,6 +40,10 @@ Item {
                 gameBeginTimer.start();
             }
         }
+    }
+
+    StackView.onRemoved: {
+        destroy();
     }
 
     function screenOrientationUpdated(orientation) {
@@ -670,7 +677,7 @@ Item {
                 anchors.fill: parent
 
                 onClicked: {
-                    pigletPage.gameFinished("piglet_puzzle");
+                    pigletPuzzlePage.gameFinished("piglet_puzzle");
 
                     mainStackView.pop();
                 }
@@ -791,7 +798,7 @@ Item {
                         anchors.fill: parent
 
                         onClicked: {
-                            pigletPage.gameFinished("piglet_puzzle");
+                            pigletPuzzlePage.gameFinished("piglet_puzzle");
 
                             mainStackView.pop();
                         }
@@ -906,7 +913,7 @@ Item {
                         anchors.fill: parent
 
                         onClicked: {
-                            pigletPage.gameFinished("piglet_puzzle");
+                            pigletPuzzlePage.gameFinished("piglet_puzzle");
 
                             mainStackView.pop();
                         }

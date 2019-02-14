@@ -4,8 +4,6 @@ import QtQuick.Controls 2.2
 import QtQuick.LocalStorage 2.0
 import QtPurchasing 1.0
 
-import "Core"
-
 ApplicationWindow {
     id:                           mainWindow
     title:                        qsTr("Piglet")
@@ -103,19 +101,11 @@ ApplicationWindow {
 
                 if (item !== null) {
                     item.focus = false;
-
-                    if (item.hasOwnProperty("pageActive")) {
-                        item.pageActive = false;
-                    }
                 }
             }
 
             if (depth > 0) {
                 currentItem.forceActiveFocus();
-
-                if (currentItem.hasOwnProperty("pageActive")) {
-                    currentItem.pageActive = true;
-                }
 
                 if (currentItem.hasOwnProperty("screenOrientationUpdated")) {
                     mainWindow.screenOrientationUpdated.connect(currentItem.screenOrientationUpdated);
@@ -124,10 +114,6 @@ ApplicationWindow {
                 }
             }
         }
-    }
-
-    PigletPage {
-        id: pigletPage
     }
 
     MouseArea {
@@ -140,6 +126,12 @@ ApplicationWindow {
     Component.onCompleted: {
         fullVersion = (getSetting("FullVersion", "false") === "true");
 
-        mainStackView.push(pigletPage);
+        var component = Qt.createComponent("Core/PigletPage.qml");
+
+        if (component.status === Component.Ready) {
+            mainStackView.push(component);
+        } else {
+            console.log(component.errorString());
+        }
     }
 }

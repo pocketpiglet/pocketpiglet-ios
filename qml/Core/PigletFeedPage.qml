@@ -1,4 +1,5 @@
 import QtQuick 2.9
+import QtQuick.Controls 2.5
 import QtMultimedia 5.9
 
 import "Dialog"
@@ -8,7 +9,7 @@ Item {
     id: pigletFeedPage
 
     property bool appInForeground:   Qt.application.active
-    property bool pageActive:        false
+    property bool pageActive:        StackView.status === StackView.Active
     property bool pageInitialized:   false
     property bool allowLevelRestart: false
 
@@ -18,6 +19,8 @@ Item {
     property int maximumLevelEasy:   5
     property int maximumLevelMedium: 10
     property int maximumLevelHard:   15
+
+    signal gameFinished(string game)
 
     onAppInForegroundChanged: {
         if (appInForeground && pageActive) {
@@ -57,6 +60,10 @@ Item {
 
             refrigerator.cancelOrder();
         }
+    }
+
+    StackView.onRemoved: {
+        destroy();
     }
 
     function screenOrientationUpdated(orientation) {
@@ -184,7 +191,7 @@ Item {
                 anchors.fill: parent
 
                 onClicked: {
-                    pigletPage.gameFinished("piglet_feed");
+                    pigletFeedPage.gameFinished("piglet_feed");
 
                     mainStackView.pop();
                 }
@@ -306,7 +313,7 @@ Item {
                         anchors.fill: parent
 
                         onClicked: {
-                            pigletPage.gameFinished("piglet_feed");
+                            pigletFeedPage.gameFinished("piglet_feed");
 
                             mainStackView.pop();
                         }
@@ -353,7 +360,7 @@ Item {
         }
 
         onNo: {
-            pigletPage.gameFinished("piglet_feed");
+            pigletFeedPage.gameFinished("piglet_feed");
 
             mainStackView.pop();
         }
@@ -374,7 +381,7 @@ Item {
         }
 
         onNo: {
-            pigletPage.gameFinished("piglet_feed");
+            pigletFeedPage.gameFinished("piglet_feed");
 
             mainStackView.pop();
         }
