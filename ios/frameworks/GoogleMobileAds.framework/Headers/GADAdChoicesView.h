@@ -10,7 +10,7 @@
 #import <GoogleMobileAds/GADNativeAd.h>
 #import <GoogleMobileAds/GoogleMobileAdsDefines.h>
 
-GAD_ASSUME_NONNULL_BEGIN
+NS_ASSUME_NONNULL_BEGIN
 
 /// Displays AdChoices content.
 ///
@@ -20,10 +20,6 @@ GAD_ASSUME_NONNULL_BEGIN
 /// GADNativeAppInstallAdView and GADNativeContentAdView.
 @interface GADAdChoicesView : UIView
 
-/// Native ad object that contains the AdChoices asset. Set this property to populate this view's
-/// content.
-@property(nonatomic, weak) GADNativeAd *nativeAd;
-
 @end
 
-GAD_ASSUME_NONNULL_END
+NS_ASSUME_NONNULL_END
