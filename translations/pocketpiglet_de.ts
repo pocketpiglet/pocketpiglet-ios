@@ -72,7 +72,7 @@
     <name>main</name>
     <message>
         <source>Piglet</source>
-        <translation type="unfinished"></translation>
+        <translation>Ferkel</translation>
     </message>
 </context>
 </TS>

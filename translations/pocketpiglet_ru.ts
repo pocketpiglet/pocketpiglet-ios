@@ -72,7 +72,7 @@
     <name>main</name>
     <message>
         <source>Piglet</source>
-        <translation type="unfinished"></translation>
+        <translation>Хрюша</translation>
     </message>
 </context>
 </TS>
