@@ -10,7 +10,7 @@ import "Piglet"
 Item {
     id: pigletPage
 
-    property bool appInForeground:          Qt.application.active
+    property bool appInForeground:          Qt.application.state === Qt.ApplicationActive
     property bool pageActive:               StackView.status === StackView.Active
     property bool rewardBasedVideoAdActive: AdMobHelper.rewardBasedVideoAdActive
     property bool animationEnabled:         false

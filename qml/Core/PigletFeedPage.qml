@@ -8,7 +8,7 @@ import "PigletFeed"
 Item {
     id: pigletFeedPage
 
-    property bool appInForeground:   Qt.application.active
+    property bool appInForeground:   Qt.application.state === Qt.ApplicationActive
     property bool pageActive:        StackView.status === StackView.Active
     property bool allowLevelRestart: false
 

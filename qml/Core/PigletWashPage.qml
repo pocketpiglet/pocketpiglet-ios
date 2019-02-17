@@ -10,7 +10,7 @@ import "PigletWashPage.js" as PigletWashPageScript
 Item {
     id: pigletWashPage
 
-    property bool appInForeground:    Qt.application.active
+    property bool appInForeground:    Qt.application.state === Qt.ApplicationActive
     property bool pageActive:         StackView.status === StackView.Active
     property bool pageInitialized:    false
     property bool allowGameRestart:   false

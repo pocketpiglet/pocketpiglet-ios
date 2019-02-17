@@ -7,7 +7,7 @@ import "PigletPuzzlePage.js" as PigletPuzzlePageScript
 Item {
     id: pigletPuzzlePage
 
-    property bool appInForeground:    Qt.application.active
+    property bool appInForeground:    Qt.application.state === Qt.ApplicationActive
     property bool pageActive:         StackView.status === StackView.Active
     property bool pageInitialized:    false
     property bool puzzleSolved:       false
