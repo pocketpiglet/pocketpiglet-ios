@@ -75,14 +75,14 @@ MouseArea {
 
             Image {
                 id:       diamondImage
-                width:    120
-                height:   120
+                width:    dialogImage.width  - 80
+                height:   dialogImage.height - 120
                 source:   "qrc:/resources/images/dialog/new_diamonds_dialog_diamond.png"
                 fillMode: Image.PreserveAspectFit
             }
 
             Text {
-                width:                dialogImage.width - 32
+                width:                diamondImage.width
                 height:               48
                 text:                 "+ %1".arg(newDiamondsDialog.newDiamondsCount)
                 color:                "black"
