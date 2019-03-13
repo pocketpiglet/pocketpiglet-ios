@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     if (translator.load(QString(":/tr/pocketpiglet_%1").arg(QLocale::system().name()))) {
-        app.installTranslator(&translator);
+        QGuiApplication::installTranslator(&translator);
     }
 
     qmlRegisterType<SpeechRecorder>("SpeechRecorder", 1, 0, "SpeechRecorder");
@@ -29,5 +29,5 @@ int main(int argc, char *argv[])
     if (engine.rootObjects().isEmpty())
         return -1;
 
-    return app.exec();
+    return QGuiApplication::exec();
 }

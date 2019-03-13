@@ -319,12 +319,12 @@ void SpeechRecorder::SaveVoice()
             uint32_t sub_chunk_2_size;
         } struct_header;
         char raw_header[44];
-    } wav_header;
+    } wav_header = {};
 
     QFile voice_file(VoiceFilePath);
 
     if (voice_file.open(QIODevice::WriteOnly)) {
-        uint32_t sample_rate_multiplied = static_cast<uint32_t>(qFloor(SampleRate * SampleRateMultiplier)); // To change voice pitch
+        auto sample_rate_multiplied = static_cast<uint32_t>(qFloor(SampleRate * SampleRateMultiplier)); // To change voice pitch
 
         memset(wav_header.raw_header, 0, sizeof(wav_header.raw_header));
 

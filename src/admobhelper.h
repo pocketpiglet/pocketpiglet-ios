@@ -21,7 +21,7 @@ public:
                          ADMOB_TEST_DEVICE_ID;
 
     explicit AdMobHelper(QObject *parent = nullptr);
-    virtual ~AdMobHelper();
+    ~AdMobHelper() override;
 
     bool rewardBasedVideoAdReady() const;
     bool rewardBasedVideoAdActive() const;
@@ -29,11 +29,11 @@ public:
     Q_INVOKABLE void showRewardBasedVideoAd();
 
     static void setRewardBasedVideoAdActive(bool active);
-    static void rewardBasedVideoAdDidReward(QString type, int amount);
+    static void rewardBasedVideoAdDidReward(const QString &type, int amount);
 
 signals:
     void rewardBasedVideoAdActiveChanged(bool rewardBasedVideoAdActive);
-    void rewardBasedVideoAdNewReward(QString type, int amount);
+    void rewardBasedVideoAdNewReward(const QString &type, int amount);
 
 private:
     bool                        RewardBasedVideoAdActive;

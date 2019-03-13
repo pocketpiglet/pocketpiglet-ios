@@ -25,7 +25,7 @@ class SpeechRecorder : public QObject
 
 public:
     explicit SpeechRecorder(QObject *parent = nullptr);
-    virtual ~SpeechRecorder();
+    ~SpeechRecorder() override;
 
     bool active() const;
     void setActive(bool active);
@@ -57,7 +57,7 @@ signals:
     void minSilenceDurationChanged(int minSilenceDuration);
     void volumeChanged(qreal volume);
     void sampleRateMultiplierChanged(qreal sampleRateMultiplier);
-    void error(QString errorString);
+    void error(const QString &errorString);
     void voiceFound();
     void voiceRecorded();
     void voiceReset();
