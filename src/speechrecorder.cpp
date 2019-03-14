@@ -325,8 +325,6 @@ void SpeechRecorder::SaveVoice()
     if (voice_file.open(QIODevice::WriteOnly)) {
         auto sample_rate_multiplied = static_cast<uint32_t>(qFloor(SampleRate * SampleRateMultiplier)); // To change voice pitch
 
-        memset(&wav_header, 0, sizeof(wav_header));
-
         memcpy(wav_header.chunk_id,       "RIFF", sizeof(wav_header.chunk_id));
         memcpy(wav_header.format,         "WAVE", sizeof(wav_header.format));
         memcpy(wav_header.sub_chunk_1_id, "fmt ", sizeof(wav_header.sub_chunk_1_id));
