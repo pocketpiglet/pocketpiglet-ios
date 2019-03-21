@@ -1,3 +1,6 @@
+TEMPLATE = app
+TARGET = pocketpiglet
+
 QT += quick quickcontrols2 sql multimedia sensors purchasing
 CONFIG += c++11
 
@@ -83,6 +86,3 @@ ios {
     QMAKE_APPLE_DEVICE_ARCHS = arm64
     QMAKE_INFO_PLIST = ios/Info.plist
 }
-
-# Default rules for deployment.
-include(deployment.pri)
