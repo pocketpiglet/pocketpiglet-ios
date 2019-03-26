@@ -361,8 +361,6 @@ void SpeechRecorder::SaveVoice()
         voice_file_stream.writeRawData(reinterpret_cast<char *>(&wav_header.sub_chunk_2_size), sizeof(wav_header.sub_chunk_2_size));
 
         voice_file_stream.writeRawData(VoiceBuffer.data(), VoiceBuffer.size());
-
-        voice_file.close();
     } else {
         emit error(QString("Cannot create voice file %1: %2").arg(VoiceFilePath).arg(voice_file.errorString()));
     }
