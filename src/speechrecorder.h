@@ -25,7 +25,14 @@ class SpeechRecorder : public QObject
 
 public:
     explicit SpeechRecorder(QObject *parent = nullptr);
-    ~SpeechRecorder() override;
+
+    SpeechRecorder(const SpeechRecorder&) = delete;
+    SpeechRecorder(const SpeechRecorder&&) noexcept = delete;
+
+    SpeechRecorder& operator=(const SpeechRecorder&) = delete;
+    SpeechRecorder& operator=(const SpeechRecorder&&) noexcept = delete;
+
+    ~SpeechRecorder() noexcept override;
 
     bool active() const;
     void setActive(bool active);

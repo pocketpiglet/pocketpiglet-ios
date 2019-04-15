@@ -34,7 +34,7 @@ SpeechRecorder::SpeechRecorder(QObject *parent) : QObject(parent)
     VoiceFilePath = QDir(tmp_dir).filePath("voice.wav");
 }
 
-SpeechRecorder::~SpeechRecorder()
+SpeechRecorder::~SpeechRecorder() noexcept
 {
     if (VadInstance != nullptr) {
         WebRtcVad_Free(VadInstance);

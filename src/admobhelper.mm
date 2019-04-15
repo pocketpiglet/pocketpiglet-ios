@@ -1,7 +1,5 @@
-#import <GoogleMobileAds/GADMobileAds.h>
-#import <GoogleMobileAds/GADRequest.h>
-#import <GoogleMobileAds/GADRewardBasedVideoAd.h>
-#import <GoogleMobileAds/GADRewardBasedVideoAdDelegate.h>
+#import <UIKit/UIKit.h>
+#import <GoogleMobileAds/GoogleMobileAds.h>
 
 #include <QtCore/QDebug>
 
@@ -105,7 +103,7 @@ AdMobHelper::AdMobHelper(QObject *parent) : QObject(parent)
     [RewardBasedVideoAdDelegateInstance loadAd];
 }
 
-AdMobHelper::~AdMobHelper()
+AdMobHelper::~AdMobHelper() noexcept
 {
     [RewardBasedVideoAdDelegateInstance release];
 }
