@@ -698,7 +698,7 @@ Item {
                         var component = Qt.createComponent("PigletFeedPage.qml");
 
                         if (component.status === Component.Ready) {
-                            var object = component.createObject(null, {});
+                            var object = component.createObject(null);
 
                             object.gameFinished.connect(pigletPage.gameFinished);
 
@@ -726,7 +726,7 @@ Item {
                         var component = Qt.createComponent("PigletWashPage.qml");
 
                         if (component.status === Component.Ready) {
-                            var object = component.createObject(null, {});
+                            var object = component.createObject(null);
 
                             object.gameFinished.connect(pigletPage.gameFinished);
 
@@ -754,7 +754,7 @@ Item {
                         var component = Qt.createComponent("PigletPuzzlePage.qml");
 
                         if (component.status === Component.Ready) {
-                            var object = component.createObject(null, {});
+                            var object = component.createObject(null);
 
                             object.gameFinished.connect(pigletPage.gameFinished);
 
@@ -782,7 +782,7 @@ Item {
                         var component = Qt.createComponent("PigletSearchPage.qml");
 
                         if (component.status === Component.Ready) {
-                            var object = component.createObject(null, {});
+                            var object = component.createObject(null);
 
                             object.gameFinished.connect(pigletPage.gameFinished);
 
