@@ -406,7 +406,7 @@ Item {
 
                                 sprite.to = to;
                             } else {
-                                sprite.to = { "animationFinishSprite" : 1 };
+                                sprite.to = {"animationFinishSprite": 1};
                             }
 
                             sprites_list.push(sprite);
@@ -421,7 +421,7 @@ Item {
                         sprite.frameHeight = animationFrameHeight;
                         sprite.frameX      = 0;
                         sprite.frameRate   = 1;
-                        sprite.to          = { "animation0Sprite" : 1 };
+                        sprite.to          = {"animation0Sprite": 1};
 
                         sprites_list.push(sprite);
                     }
@@ -477,7 +477,7 @@ Item {
 
                             sprite.to = to;
                         } else {
-                            sprite.to = { "animationFinishSprite" : 1 };
+                            sprite.to = {"animationFinishSprite": 1};
                         }
 
                         sprites_list.push(sprite);
@@ -492,7 +492,7 @@ Item {
                     sprite.frameHeight = animationFrameHeight;
                     sprite.frameX      = 0;
                     sprite.frameRate   = 1;
-                    sprite.to          = { "animation0Sprite" : 1 };
+                    sprite.to          = {"animation0Sprite": 1};
 
                     sprites_list.push(sprite);
 
