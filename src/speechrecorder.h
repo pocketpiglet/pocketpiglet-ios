@@ -27,10 +27,10 @@ public:
     explicit SpeechRecorder(QObject *parent = nullptr);
 
     SpeechRecorder(const SpeechRecorder&) = delete;
-    SpeechRecorder(const SpeechRecorder&&) noexcept = delete;
+    SpeechRecorder(SpeechRecorder&&) noexcept = delete;
 
     SpeechRecorder& operator=(const SpeechRecorder&) = delete;
-    SpeechRecorder& operator=(const SpeechRecorder&&) noexcept = delete;
+    SpeechRecorder& operator=(SpeechRecorder&&) noexcept = delete;
 
     ~SpeechRecorder() noexcept override;
 
