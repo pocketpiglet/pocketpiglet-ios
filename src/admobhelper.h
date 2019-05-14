@@ -15,12 +15,14 @@ class AdMobHelper : public QObject
     Q_PROPERTY(bool rewardBasedVideoAdReady  READ rewardBasedVideoAdReady)
     Q_PROPERTY(bool rewardBasedVideoAdActive READ rewardBasedVideoAdActive NOTIFY rewardBasedVideoAdActiveChanged)
 
+private:
+    explicit AdMobHelper(QObject *parent = nullptr);
+    ~AdMobHelper() noexcept override;
+
 public:
     static const QString ADMOB_APP_ID,
                          ADMOB_REWARDBASEDVIDEOAD_UNIT_ID,
                          ADMOB_TEST_DEVICE_ID;
-
-    explicit AdMobHelper(QObject *parent = nullptr);
 
     AdMobHelper(const AdMobHelper&) = delete;
     AdMobHelper(AdMobHelper&&) noexcept = delete;
@@ -28,7 +30,7 @@ public:
     AdMobHelper &operator=(const AdMobHelper&) = delete;
     AdMobHelper &operator=(AdMobHelper&&) noexcept = delete;
 
-    ~AdMobHelper() noexcept override;
+    static AdMobHelper &GetInstance();
 
     bool rewardBasedVideoAdReady() const;
     bool rewardBasedVideoAdActive() const;
@@ -44,7 +46,6 @@ signals:
 
 private:
     bool                        RewardBasedVideoAdActive;
-    static AdMobHelper         *Instance;
 #ifdef __OBJC__
     RewardBasedVideoAdDelegate *RewardBasedVideoAdDelegateInstance;
 #else

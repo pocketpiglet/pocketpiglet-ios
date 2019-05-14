@@ -9,8 +9,6 @@ const QString AdMobHelper::ADMOB_APP_ID                    ("ca-app-pub-24550888
 const QString AdMobHelper::ADMOB_REWARDBASEDVIDEOAD_UNIT_ID("ca-app-pub-2455088855015693/5886144590");
 const QString AdMobHelper::ADMOB_TEST_DEVICE_ID            ("");
 
-AdMobHelper *AdMobHelper::Instance = nullptr;
-
 @interface RewardBasedVideoAdDelegate : NSObject<GADRewardBasedVideoAdDelegate>
 
 - (id)init;
@@ -97,7 +95,6 @@ AdMobHelper::AdMobHelper(QObject *parent) : QObject(parent)
     [GADMobileAds configureWithApplicationID:ADMOB_APP_ID.toNSString()];
 
     RewardBasedVideoAdActive           = false;
-    Instance                           = this;
     RewardBasedVideoAdDelegateInstance = [[RewardBasedVideoAdDelegate alloc] init];
 
     [RewardBasedVideoAdDelegateInstance loadAd];
@@ -106,6 +103,13 @@ AdMobHelper::AdMobHelper(QObject *parent) : QObject(parent)
 AdMobHelper::~AdMobHelper() noexcept
 {
     [RewardBasedVideoAdDelegateInstance release];
+}
+
+AdMobHelper &AdMobHelper::GetInstance()
+{
+    static AdMobHelper instance;
+
+    return instance;
 }
 
 bool AdMobHelper::rewardBasedVideoAdReady() const
@@ -135,12 +139,12 @@ void AdMobHelper::showRewardBasedVideoAd()
 
 void AdMobHelper::setRewardBasedVideoAdActive(bool active)
 {
-    Instance->RewardBasedVideoAdActive = active;
+    GetInstance().RewardBasedVideoAdActive = active;
 
-    emit Instance->rewardBasedVideoAdActiveChanged(Instance->RewardBasedVideoAdActive);
+    emit GetInstance().rewardBasedVideoAdActiveChanged(GetInstance().RewardBasedVideoAdActive);
 }
 
 void AdMobHelper::rewardBasedVideoAdDidReward(const QString &type, int amount)
 {
-    emit Instance->rewardBasedVideoAdNewReward(type, amount);
+    emit GetInstance().rewardBasedVideoAdNewReward(type, amount);
 }
