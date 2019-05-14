@@ -29,8 +29,8 @@ public:
     SpeechRecorder(const SpeechRecorder&) = delete;
     SpeechRecorder(SpeechRecorder&&) noexcept = delete;
 
-    SpeechRecorder& operator=(const SpeechRecorder&) = delete;
-    SpeechRecorder& operator=(SpeechRecorder&&) noexcept = delete;
+    SpeechRecorder &operator=(const SpeechRecorder&) = delete;
+    SpeechRecorder &operator=(SpeechRecorder&&) noexcept = delete;
 
     ~SpeechRecorder() noexcept override;
 
