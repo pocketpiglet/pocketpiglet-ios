@@ -12,6 +12,7 @@ const QString AdMobHelper::ADMOB_TEST_DEVICE_ID            ("");
 @interface RewardBasedVideoAdDelegate : NSObject<GADRewardBasedVideoAdDelegate>
 
 - (id)init;
+- (void)dealloc;
 - (void)loadAd;
 
 @end
@@ -27,6 +28,13 @@ const QString AdMobHelper::ADMOB_TEST_DEVICE_ID            ("");
     }
 
     return self;
+}
+
+- (void)dealloc
+{
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
+
+    [super dealloc];
 }
 
 - (void)loadAd
