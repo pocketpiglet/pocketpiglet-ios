@@ -11,18 +11,23 @@ const QString AdMobHelper::ADMOB_TEST_DEVICE_ID            ("");
 
 @interface RewardBasedVideoAdDelegate : NSObject<GADRewardBasedVideoAdDelegate>
 
-- (instancetype)init;
+- (instancetype)initWithHelper:(AdMobHelper *)helper;
 - (void)loadAd;
 
 @end
 
 @implementation RewardBasedVideoAdDelegate
+{
+    AdMobHelper *AdMobHelperInstance;
+}
 
-- (instancetype)init
+- (instancetype)initWithHelper:(AdMobHelper *)helper
 {
     self = [super init];
 
     if (self) {
+        AdMobHelperInstance = helper;
+
         [GADRewardBasedVideoAd sharedInstance].delegate = self;
     }
 
@@ -50,7 +55,7 @@ const QString AdMobHelper::ADMOB_TEST_DEVICE_ID            ("");
 {
     Q_UNUSED(rewardBasedVideoAd)
 
-    AdMobHelper::setRewardBasedVideoAdActive(true);
+    AdMobHelperInstance->setRewardBasedVideoAdActive(true);
 }
 
 - (void)rewardBasedVideoAdDidStartPlaying:(GADRewardBasedVideoAd *)rewardBasedVideoAd
@@ -62,7 +67,7 @@ const QString AdMobHelper::ADMOB_TEST_DEVICE_ID            ("");
 {
     Q_UNUSED(rewardBasedVideoAd)
 
-    AdMobHelper::setRewardBasedVideoAdActive(false);
+    AdMobHelperInstance->setRewardBasedVideoAdActive(false);
 
     [self performSelector:@selector(loadAd) withObject:nil afterDelay:0.0];
 }
@@ -71,7 +76,7 @@ const QString AdMobHelper::ADMOB_TEST_DEVICE_ID            ("");
 {
     Q_UNUSED(rewardBasedVideoAd)
 
-    AdMobHelper::rewardBasedVideoAdDidReward(QString::fromNSString(reward.type), reward.amount.intValue);
+    AdMobHelperInstance->rewardBasedVideoAdDidReward(QString::fromNSString(reward.type), reward.amount.intValue);
 }
 
 - (void)rewardBasedVideoAdWillLeaveApplication:(GADRewardBasedVideoAd *)rewardBasedVideoAd
@@ -95,7 +100,7 @@ AdMobHelper::AdMobHelper(QObject *parent) : QObject(parent)
     [GADMobileAds configureWithApplicationID:ADMOB_APP_ID.toNSString()];
 
     RewardBasedVideoAdActive           = false;
-    RewardBasedVideoAdDelegateInstance = [[RewardBasedVideoAdDelegate alloc] init];
+    RewardBasedVideoAdDelegateInstance = [[RewardBasedVideoAdDelegate alloc] initWithHelper:this];
 
     [RewardBasedVideoAdDelegateInstance loadAd];
 }
@@ -139,12 +144,12 @@ void AdMobHelper::showRewardBasedVideoAd()
 
 void AdMobHelper::setRewardBasedVideoAdActive(bool active)
 {
-    GetInstance().RewardBasedVideoAdActive = active;
+    RewardBasedVideoAdActive = active;
 
-    emit GetInstance().rewardBasedVideoAdActiveChanged(GetInstance().RewardBasedVideoAdActive);
+    emit rewardBasedVideoAdActiveChanged(RewardBasedVideoAdActive);
 }
 
 void AdMobHelper::rewardBasedVideoAdDidReward(const QString &type, int amount)
 {
-    emit GetInstance().rewardBasedVideoAdNewReward(type, amount);
+    emit rewardBasedVideoAdNewReward(type, amount);
 }
