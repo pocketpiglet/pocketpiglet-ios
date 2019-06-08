@@ -158,7 +158,7 @@ Item {
         }
     }
 
-    function videoAdNewReward(type, amount) {
+    function videoAdDidReward(type, amount) {
         var old_diamonds_amount = diamondsAmount;
 
         diamondsAmount = Math.min(diamondsAmount + amount, diamondsMaxAmount);
@@ -971,7 +971,7 @@ Item {
     }
 
     Component.onCompleted: {
-        AdMobHelper.rewardBasedVideoAdNewReward.connect(videoAdNewReward);
+        AdMobHelper.rewardBasedVideoAdDidReward.connect(videoAdDidReward);
 
         diamondsAmount = parseInt(mainWindow.getSetting("PigletDiamondsAmount", diamondsMaxAmount.toString(10)), 10);
 

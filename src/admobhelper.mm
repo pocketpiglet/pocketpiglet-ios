@@ -76,7 +76,7 @@ const QString AdMobHelper::ADMOB_TEST_DEVICE_ID            ("");
 {
     Q_UNUSED(rewardBasedVideoAd)
 
-    AdMobHelperInstance->rewardBasedVideoAdDidReward(QString::fromNSString(reward.type), reward.amount.intValue);
+    emit AdMobHelperInstance->rewardBasedVideoAdDidReward(QString::fromNSString(reward.type), reward.amount.intValue);
 }
 
 - (void)rewardBasedVideoAdWillLeaveApplication:(GADRewardBasedVideoAd *)rewardBasedVideoAd
@@ -147,9 +147,4 @@ void AdMobHelper::setRewardBasedVideoAdActive(bool active)
     RewardBasedVideoAdActive = active;
 
     emit rewardBasedVideoAdActiveChanged(RewardBasedVideoAdActive);
-}
-
-void AdMobHelper::rewardBasedVideoAdDidReward(const QString &type, int amount)
-{
-    emit rewardBasedVideoAdNewReward(type, amount);
 }
