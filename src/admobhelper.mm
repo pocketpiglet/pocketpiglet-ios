@@ -11,14 +11,14 @@ const QString AdMobHelper::ADMOB_TEST_DEVICE_ID            ("");
 
 @interface RewardBasedVideoAdDelegate : NSObject<GADRewardBasedVideoAdDelegate>
 
-- (id)init;
+- (instancetype)init;
 - (void)loadAd;
 
 @end
 
 @implementation RewardBasedVideoAdDelegate
 
-- (id)init
+- (instancetype)init
 {
     self = [super init];
 
