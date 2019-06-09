@@ -12,6 +12,7 @@ const QString AdMobHelper::ADMOB_TEST_DEVICE_ID            ("");
 @interface RewardBasedVideoAdDelegate : NSObject<GADRewardBasedVideoAdDelegate>
 
 - (instancetype)initWithHelper:(AdMobHelper *)helper;
+- (void)removeHelperAndAutorelease;
 - (void)loadAd;
 
 @end
@@ -32,6 +33,13 @@ const QString AdMobHelper::ADMOB_TEST_DEVICE_ID            ("");
     }
 
     return self;
+}
+
+- (void)removeHelperAndAutorelease
+{
+    AdMobHelperInstance = nullptr;
+
+    [self autorelease];
 }
 
 - (void)loadAd
@@ -55,7 +63,9 @@ const QString AdMobHelper::ADMOB_TEST_DEVICE_ID            ("");
 {
     Q_UNUSED(rewardBasedVideoAd)
 
-    AdMobHelperInstance->setRewardBasedVideoAdActive(true);
+    if (AdMobHelperInstance != nullptr) {
+        AdMobHelperInstance->setRewardBasedVideoAdActive(true);
+    }
 }
 
 - (void)rewardBasedVideoAdDidStartPlaying:(GADRewardBasedVideoAd *)rewardBasedVideoAd
@@ -67,7 +77,9 @@ const QString AdMobHelper::ADMOB_TEST_DEVICE_ID            ("");
 {
     Q_UNUSED(rewardBasedVideoAd)
 
-    AdMobHelperInstance->setRewardBasedVideoAdActive(false);
+    if (AdMobHelperInstance != nullptr) {
+        AdMobHelperInstance->setRewardBasedVideoAdActive(false);
+    }
 
     [self performSelector:@selector(loadAd) withObject:nil afterDelay:0.0];
 }
@@ -76,7 +88,9 @@ const QString AdMobHelper::ADMOB_TEST_DEVICE_ID            ("");
 {
     Q_UNUSED(rewardBasedVideoAd)
 
-    emit AdMobHelperInstance->rewardBasedVideoAdDidReward(QString::fromNSString(reward.type), reward.amount.intValue);
+    if (AdMobHelperInstance != nullptr) {
+        emit AdMobHelperInstance->rewardBasedVideoAdDidReward(QString::fromNSString(reward.type), reward.amount.intValue);
+    }
 }
 
 - (void)rewardBasedVideoAdWillLeaveApplication:(GADRewardBasedVideoAd *)rewardBasedVideoAd
@@ -107,7 +121,7 @@ AdMobHelper::AdMobHelper(QObject *parent) : QObject(parent)
 
 AdMobHelper::~AdMobHelper() noexcept
 {
-    [RewardBasedVideoAdDelegateInstance release];
+    [RewardBasedVideoAdDelegateInstance removeHelperAndAutorelease];
 }
 
 AdMobHelper &AdMobHelper::GetInstance()
