@@ -11,7 +11,8 @@ const QString AdMobHelper::ADMOB_TEST_DEVICE_ID            ("");
 
 @interface RewardBasedVideoAdDelegate : NSObject<GADRewardBasedVideoAdDelegate>
 
-- (instancetype)initWithHelper:(AdMobHelper *)helper;
+- (instancetype)init NS_UNAVAILABLE;
+- (instancetype)initWithHelper:(AdMobHelper *)helper NS_DESIGNATED_INITIALIZER;
 - (void)removeHelperAndAutorelease;
 - (void)loadAd;
 
