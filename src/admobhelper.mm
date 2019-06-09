@@ -26,7 +26,7 @@ const QString AdMobHelper::ADMOB_TEST_DEVICE_ID            ("");
 {
     self = [super init];
 
-    if (self) {
+    if (self != nil) {
         AdMobHelperInstance = helper;
 
         [GADRewardBasedVideoAd sharedInstance].delegate = self;
