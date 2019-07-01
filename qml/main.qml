@@ -107,7 +107,7 @@ ApplicationWindow {
             if (depth > 0) {
                 currentItem.forceActiveFocus();
 
-                if (currentItem.hasOwnProperty("screenOrientationUpdated")) {
+                if (typeof currentItem.screenOrientationUpdated === "function") {
                     mainWindow.screenOrientationUpdated.connect(currentItem.screenOrientationUpdated);
 
                     mainWindow.screenOrientationUpdated(mainWindow.screenOrientation);

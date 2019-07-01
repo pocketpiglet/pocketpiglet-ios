@@ -370,7 +370,7 @@ Item {
                 function playAnimation(src, audio_src, name, frames_count, frame_rate) {
                     var sprites_list = [];
 
-                    if (animationCache.hasOwnProperty(name)) {
+                    if (animationCache[name]) {
                         sprites_list = animationCache[name];
                     } else {
                         var sprite_code = "import QtQuick 2.9; Sprite {}";
@@ -428,7 +428,7 @@ Item {
 
                     running = false;
 
-                    if (!animationCache.hasOwnProperty(animationName)) {
+                    if (!animationCache[animationName]) {
                         for (var j = 0; j < sprites.length; j++) {
                             if (sprites[j].name !== "dummySprite") {
                                 sprites[j].destroy();
