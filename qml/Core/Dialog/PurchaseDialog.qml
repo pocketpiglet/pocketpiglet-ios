@@ -5,10 +5,10 @@ MouseArea {
     anchors.centerIn: parent
     visible:          false
 
-    property bool enableWatchVideoButton: true
+    readonly property int parentWidth:    parent.width
+    readonly property int parentHeight:   parent.height
 
-    property int parentWidth:             parent.width
-    property int parentHeight:            parent.height
+    property bool enableWatchVideoButton: true
 
     signal opened()
     signal closed()

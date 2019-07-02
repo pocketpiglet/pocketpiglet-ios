@@ -10,20 +10,22 @@ import "Piglet"
 Item {
     id: pigletPage
 
-    property bool appInForeground:          Qt.application.state === Qt.ApplicationActive
-    property bool pageActive:               StackView.status === StackView.Active
-    property bool rewardBasedVideoAdActive: AdMobHelper.rewardBasedVideoAdActive
-    property bool animationEnabled:         false
+    readonly property bool appInForeground:          Qt.application.state === Qt.ApplicationActive
+    readonly property bool pageActive:               StackView.status === StackView.Active
+    readonly property bool rewardBasedVideoAdActive: AdMobHelper.rewardBasedVideoAdActive
 
-    property int diamondsAmount:            0
-    property int diamondsMaxAmount:         10
+    readonly property int diamondsMaxAmount:         10
 
-    property real accelShakeThreshold:      50.0
+    readonly property real accelShakeThreshold:      50.0
 
-    property double lastGameTime:           (new Date()).getTime()
+    property bool animationEnabled:                  false
 
-    property string nextAnimation:          ""
-    property string wantedGame:             ""
+    property int diamondsAmount:                     0
+
+    property double lastGameTime:                    (new Date()).getTime()
+
+    property string nextAnimation:                   ""
+    property string wantedGame:                      ""
 
     onAppInForegroundChanged: {
         if (appInForeground && pageActive && !rewardBasedVideoAdActive) {
@@ -334,14 +336,14 @@ Item {
                 z:                pigletIdleImage.z - 1
                 running:          false
 
-                property int animationFrameWidth:          360
-                property int animationFrameHeight:         640
-                property int animationSpriteMaxFrameCount: 20
+                readonly property int animationFrameWidth:          360
+                readonly property int animationFrameHeight:         640
+                readonly property int animationSpriteMaxFrameCount: 20
 
-                property string animationName:             ""
-                property string audioSource:               ""
+                property string animationName:                      ""
+                property string audioSource:                        ""
 
-                property var animationCache:               ({})
+                property var animationCache:                        ({})
 
                 onRunningChanged: {
                     if (running) {

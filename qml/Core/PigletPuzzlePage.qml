@@ -7,18 +7,19 @@ import "PigletPuzzlePage.js" as PigletPuzzlePageScript
 Item {
     id: pigletPuzzlePage
 
-    property bool appInForeground:    Qt.application.state === Qt.ApplicationActive
-    property bool pageActive:         StackView.status === StackView.Active
-    property bool pageInitialized:    false
-    property bool puzzleSolved:       false
+    readonly property bool appInForeground: Qt.application.state === Qt.ApplicationActive
+    readonly property bool pageActive:      StackView.status === StackView.Active
 
-    property int screenRotation:      90
+    readonly property real screenScale:     Math.min(backgroundImage.width  / backgroundImage.sourceSize.width,
+                                                     backgroundImage.height / backgroundImage.sourceSize.height);
 
-    property real screenScale:        Math.min(backgroundImage.width  / backgroundImage.sourceSize.width,
-                                               backgroundImage.height / backgroundImage.sourceSize.height);
+    property bool pageInitialized:          false
+    property bool puzzleSolved:             false
 
-    property string puzzleType:       "watering_flowers"
-    property string puzzleComplexity: ""
+    property int screenRotation:            90
+
+    property string puzzleType:             "watering_flowers"
+    property string puzzleComplexity:       ""
 
     signal gameFinished(string game)
 

@@ -9,16 +9,17 @@ import "PigletSearch"
 Item {
     id: pigletSearchPage
 
-    property bool appInForeground:   Qt.application.state === Qt.ApplicationActive
-    property bool pageActive:        StackView.status === StackView.Active
-    property bool pageInitialized:   false
-    property bool allowGameRestart:  false
+    readonly property bool appInForeground: Qt.application.state === Qt.ApplicationActive
+    readonly property bool pageActive:      StackView.status === StackView.Active
 
-    property int highScore:          0
-    property int foundPigletsCount:  0
-    property int missedPigletsCount: 0
+    property bool pageInitialized:          false
+    property bool allowGameRestart:         false
 
-    property var currentPiglet:      null
+    property int highScore:                 0
+    property int foundPigletsCount:         0
+    property int missedPigletsCount:        0
+
+    property var currentPiglet:             null
 
     signal gameFinished(string game)
 

@@ -8,16 +8,18 @@ import "PigletFeed"
 Item {
     id: pigletFeedPage
 
-    property bool appInForeground:   Qt.application.state === Qt.ApplicationActive
-    property bool pageActive:        StackView.status === StackView.Active
-    property bool allowLevelRestart: false
+    readonly property bool appInForeground:   Qt.application.state === Qt.ApplicationActive
+    readonly property bool pageActive:        StackView.status === StackView.Active
 
-    property int screenRotation:     90
-    property int currentLevel:       1
-    property int maximumLevel:       1
-    property int maximumLevelEasy:   5
-    property int maximumLevelMedium: 10
-    property int maximumLevelHard:   15
+    readonly property int maximumLevelEasy:   5
+    readonly property int maximumLevelMedium: 10
+    readonly property int maximumLevelHard:   15
+
+    property bool allowLevelRestart:          false
+
+    property int screenRotation:              90
+    property int currentLevel:                1
+    property int maximumLevel:                1
 
     signal gameFinished(string game)
 

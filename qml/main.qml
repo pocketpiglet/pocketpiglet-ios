@@ -12,9 +12,9 @@ ApplicationWindow {
     Screen.orientationUpdateMask: Qt.PortraitOrientation         | Qt.LandscapeOrientation |
                                   Qt.InvertedPortraitOrientation | Qt.InvertedLandscapeOrientation
 
-    property bool fullVersion:      false
+    readonly property int screenOrientation: Screen.orientation
 
-    property int screenOrientation: Screen.orientation
+    property bool fullVersion:               false
 
     signal screenOrientationUpdated(int orientation)
 

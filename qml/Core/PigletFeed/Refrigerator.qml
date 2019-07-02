@@ -10,14 +10,14 @@ Rectangle {
                             parent.width,                       parent.height)
     color:  "transparent"
 
-    property bool foodItemsClickable:   false
+    readonly property real refrigeratorScale: refrigeratorImage.paintedWidth / refrigeratorImage.sourceSize.width
 
-    property int currentFoodItemNum:    0
-    property int orderedFoodItemsCount: 0
+    property bool foodItemsClickable:         false
 
-    property real refrigeratorScale:    refrigeratorImage.paintedWidth / refrigeratorImage.sourceSize.width
+    property int currentFoodItemNum:          0
+    property int orderedFoodItemsCount:       0
 
-    property string refrigeratorType:   ""
+    property string refrigeratorType:         ""
 
     property list<FoodItem> foodItemsEasy: [
         FoodItem {

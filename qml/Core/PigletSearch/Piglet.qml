@@ -6,14 +6,15 @@ Rectangle {
     height: pigletImage.sourceSize.height
     color:  "transparent"
 
-    property bool valid:        true
+    readonly property real distance:     500.0
+    readonly property real mirrorMargin: 45.0
 
-    property int waitTime:      0
+    property bool valid:                 true
 
-    property real azimuth:      0.0
-    property real zenith:       0.0
-    property real distance:     500.0
-    property real mirrorMargin: 45.0
+    property int waitTime:               0
+
+    property real azimuth:               0.0
+    property real zenith:                0.0
 
     signal pigletFound()
     signal pigletMissed()

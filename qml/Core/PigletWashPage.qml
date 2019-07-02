@@ -10,17 +10,18 @@ import "PigletWashPage.js" as PigletWashPageScript
 Item {
     id: pigletWashPage
 
-    property bool appInForeground:    Qt.application.state === Qt.ApplicationActive
-    property bool pageActive:         StackView.status === StackView.Active
-    property bool pageInitialized:    false
-    property bool allowGameRestart:   false
+    readonly property bool appInForeground: Qt.application.state === Qt.ApplicationActive
+    readonly property bool pageActive:      StackView.status === StackView.Active
 
-    property int highScore:           0
-    property int visibleBubblesCount: 0
-    property int burstedBubblesCount: 0
-    property int missedBubblesCount:  0
+    property bool pageInitialized:          false
+    property bool allowGameRestart:         false
 
-    property double gameStartTime:    (new Date()).getTime()
+    property int highScore:                 0
+    property int visibleBubblesCount:       0
+    property int burstedBubblesCount:       0
+    property int missedBubblesCount:        0
+
+    property double gameStartTime:          (new Date()).getTime()
 
     signal gameFinished(string game)
     signal destroyBubbles()

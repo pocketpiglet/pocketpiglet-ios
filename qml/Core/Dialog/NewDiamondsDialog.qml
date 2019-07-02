@@ -5,9 +5,10 @@ MouseArea {
     anchors.centerIn: parent
     visible:          false
 
-    property int parentWidth:      parent.width
-    property int parentHeight:     parent.height
-    property int newDiamondsCount: 0
+    readonly property int parentWidth:  parent.width
+    readonly property int parentHeight: parent.height
+
+    property int newDiamondsCount:      0
 
     signal opened()
     signal closed()
