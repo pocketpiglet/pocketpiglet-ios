@@ -4,6 +4,7 @@
 #include <QtGui/QGuiApplication>
 #include <QtQml/QQmlApplicationEngine>
 #include <QtQml/QQmlContext>
+#include <QtQuickControls2/QQuickStyle>
 
 #include "admobhelper.h"
 #include "storehelper.h"
@@ -24,6 +25,8 @@ int main(int argc, char *argv[])
 
     engine.rootContext()->setContextProperty(QStringLiteral("AdMobHelper"), &AdMobHelper::GetInstance());
     engine.rootContext()->setContextProperty(QStringLiteral("StoreHelper"), &StoreHelper::GetInstance());
+
+    QQuickStyle::setStyle("Default");
 
     engine.load(QUrl(QStringLiteral("qrc:/qml/main.qml")));
 

@@ -60,7 +60,7 @@ Item {
     }
 
     function screenOrientationUpdated(orientation) {
-        if (typeof(pigletFeedPage) !== "undefined" && pigletFeedPage !== null) {
+        if (pigletFeedPage) {
             if (orientation === Qt.LandscapeOrientation) {
                 screenRotation = 90;
             } else if (orientation === Qt.InvertedLandscapeOrientation) {
@@ -177,7 +177,7 @@ Item {
             anchors.rightMargin: 30
             width:               64
             height:              64
-            z:                   10
+            z:                   5
             source:              "qrc:/resources/images/back.png"
 
             MouseArea {
@@ -199,11 +199,11 @@ Item {
         width:            parent.height
         height:           parent.width
         rotation:         pigletFeedPage.screenRotation
-        z:                20
+        z:                1
         color:            "black"
 
-        MouseArea {
-            id:           complexitySelectionRectangleMouseArea
+        MultiPointTouchArea {
+            id:           complexitySelectionRectangleMultiPointTouchArea
             anchors.fill: parent
 
             Image {
@@ -299,7 +299,7 @@ Item {
                     anchors.rightMargin: 30
                     width:               64
                     height:              64
-                    z:                   21
+                    z:                   1
                     source:              "qrc:/resources/images/back.png"
 
                     MouseArea {
@@ -320,7 +320,7 @@ Item {
     NotificationDialog {
         id:       newLevelNotificationDialog
         rotation: pigletFeedPage.screenRotation
-        z:        30
+        z:        2
         text:     qsTr("Level %1 of %2. Get ready to remember a sandwich recipe...").arg(pigletFeedPage.currentLevel).arg(pigletFeedPage.maximumLevel)
 
         onOpened: {
@@ -342,7 +342,7 @@ Item {
     QueryDialog {
         id:       gameCompleteQueryDialog
         rotation: pigletFeedPage.screenRotation
-        z:        30
+        z:        2
         text:     qsTr("Congratulations, you have just won the game! Do you want to play again?")
 
         onOpened: {
@@ -363,7 +363,7 @@ Item {
     QueryDialog {
         id:       gameOverQueryDialog
         rotation: pigletFeedPage.screenRotation
-        z:        30
+        z:        2
         text:     qsTr("Game over. Do you want to play again?")
 
         onOpened: {

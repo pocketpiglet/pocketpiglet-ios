@@ -1,6 +1,6 @@
 import QtQuick 2.12
 
-MouseArea {
+MultiPointTouchArea {
     id:               queryDialog
     anchors.centerIn: parent
     visible:          false
@@ -17,7 +17,7 @@ MouseArea {
     signal no()
 
     onParentWidthChanged: {
-        if (typeof(parent) !== "undefined" && parent !== null) {
+        if (parent) {
             if (rotation === 0 || rotation === 180) {
                 width  = parent.width;
                 height = parent.height;
@@ -29,7 +29,7 @@ MouseArea {
     }
 
     onParentHeightChanged: {
-        if (typeof(parent) !== "undefined" && parent !== null) {
+        if (parent) {
             if (rotation === 0 || rotation === 180) {
                 width  = parent.width;
                 height = parent.height;
@@ -41,7 +41,7 @@ MouseArea {
     }
 
     onRotationChanged: {
-        if (typeof(parent) !== "undefined" && parent !== null) {
+        if (parent) {
             if (rotation === 0 || rotation === 180) {
                 width  = parent.width;
                 height = parent.height;
@@ -89,13 +89,13 @@ MouseArea {
     Row {
         anchors.horizontalCenter: dialogImage.horizontalCenter
         anchors.verticalCenter:   dialogImage.bottom
+        z:                        1
         spacing:                  dialogImage.width - yesButtonImage.width * 1.5 - noButtonImage.width * 1.5
 
         Image {
             id:     yesButtonImage
             width:  64
             height: 64
-            z:      dialogImage.z + 1
             source: "qrc:/resources/images/dialog/yes.png"
 
             MouseArea {
@@ -114,7 +114,6 @@ MouseArea {
             id:     noButtonImage
             width:  64
             height: 64
-            z:      dialogImage.z + 1
             source: "qrc:/resources/images/dialog/no.png"
 
             MouseArea {

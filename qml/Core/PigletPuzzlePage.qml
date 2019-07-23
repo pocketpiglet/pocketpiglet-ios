@@ -28,7 +28,7 @@ Item {
     }
 
     function screenOrientationUpdated(orientation) {
-        if (typeof(pigletPuzzlePage) !== "undefined" && pigletPuzzlePage !== null) {
+        if (pigletPuzzlePage) {
             if (orientation === Qt.LandscapeOrientation) {
                 screenRotation = 90;
             } else if (orientation === Qt.InvertedLandscapeOrientation) {
@@ -93,7 +93,7 @@ Item {
             anchors.left: parent.left
             width:        120 * pigletPuzzlePage.screenScale
             height:       120 * pigletPuzzlePage.screenScale
-            z:            2
+            z:            1
             source:       "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/original_thumbnail.png"
             fillMode:     Image.PreserveAspectFit
 
@@ -593,7 +593,7 @@ Item {
             Image {
                 id:           originalImage
                 anchors.fill: parent
-                z:            3
+                z:            1
                 visible:      false
                 source:       "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/original.png"
                 fillMode:     Image.PreserveAspectFit
@@ -605,8 +605,8 @@ Item {
                     originalImageIncOpacityPropertyAnimation.start();
                 }
 
-                MouseArea {
-                    id:           originalImageMouseArea
+                MultiPointTouchArea {
+                    id:           originalImageMultiPointTouchArea
                     anchors.fill: parent
                 }
 
@@ -651,7 +651,7 @@ Item {
             anchors.rightMargin: 30
             width:               64
             height:              64
-            z:                   10
+            z:                   5
             source:              "qrc:/resources/images/back.png"
 
             MouseArea {
@@ -673,7 +673,7 @@ Item {
         width:            parent.height
         height:           parent.width
         rotation:         pigletPuzzlePage.screenRotation
-        z:                40
+        z:                1
         color:            "transparent"
         visible:          false
 
@@ -702,11 +702,11 @@ Item {
         width:            parent.height
         height:           parent.width
         rotation:         pigletPuzzlePage.screenRotation
-        z:                50
+        z:                2
         color:            "black"
 
-        MouseArea {
-            id:           complexitySelectionRectangleMouseArea
+        MultiPointTouchArea {
+            id:           complexitySelectionRectangleMultiPointTouchArea
             anchors.fill: parent
 
             Image {
@@ -772,7 +772,7 @@ Item {
                     anchors.rightMargin: 30
                     width:               64
                     height:              64
-                    z:                   51
+                    z:                   1
                     source:              "qrc:/resources/images/back.png"
 
                     MouseArea {
@@ -796,12 +796,12 @@ Item {
         width:            parent.height
         height:           parent.width
         rotation:         pigletPuzzlePage.screenRotation
-        z:                50
+        z:                2
         color:            "black"
         visible:          false
 
-        MouseArea {
-            id:           puzzleSelectionRectangleMouseArea
+        MultiPointTouchArea {
+            id:           puzzleSelectionRectangleMultiPointTouchArea
             anchors.fill: parent
 
             Image {
@@ -888,7 +888,7 @@ Item {
                     anchors.rightMargin: 30
                     width:               64
                     height:              64
-                    z:                   51
+                    z:                   1
                     source:              "qrc:/resources/images/back.png"
 
                     MouseArea {

@@ -18,7 +18,7 @@ Rectangle {
         SandwichItem {
             parent:                   sandwich
             anchors.horizontalCenter: parent.horizontalCenter
-            z:                        sandwich.z + 1
+            z:                        1
 
             onFallAnimationDone: {
                 sandwich.itemsInPlaceCount = sandwich.itemsInPlaceCount + 1;
@@ -31,7 +31,7 @@ Rectangle {
         SandwichItem {
             parent:                   sandwich
             anchors.horizontalCenter: parent.horizontalCenter
-            z:                        sandwich.z + 2
+            z:                        2
 
             onFallAnimationDone: {
                 sandwich.itemsInPlaceCount = sandwich.itemsInPlaceCount + 1;
@@ -44,7 +44,7 @@ Rectangle {
         SandwichItem {
             parent:                   sandwich
             anchors.horizontalCenter: parent.horizontalCenter
-            z:                        sandwich.z + 3
+            z:                        3
 
             onFallAnimationDone: {
                 sandwich.itemsInPlaceCount = sandwich.itemsInPlaceCount + 1;
@@ -57,7 +57,7 @@ Rectangle {
         SandwichItem {
             parent:                   sandwich
             anchors.horizontalCenter: parent.horizontalCenter
-            z:                        sandwich.z + 4
+            z:                        4
 
             onFallAnimationDone: {
                 sandwich.itemsInPlaceCount = sandwich.itemsInPlaceCount + 1;
@@ -70,7 +70,7 @@ Rectangle {
         SandwichItem {
             parent:                   sandwich
             anchors.horizontalCenter: parent.horizontalCenter
-            z:                        sandwich.z + 5
+            z:                        5
 
             onFallAnimationDone: {
                 sandwich.itemsInPlaceCount = sandwich.itemsInPlaceCount + 1;
@@ -83,7 +83,7 @@ Rectangle {
         SandwichItem {
             parent:                   sandwich
             anchors.horizontalCenter: parent.horizontalCenter
-            z:                        sandwich.z + 6
+            z:                        6
 
             onFallAnimationDone: {
                 sandwich.itemsInPlaceCount = sandwich.itemsInPlaceCount + 1;
@@ -96,7 +96,7 @@ Rectangle {
         SandwichItem {
             parent:                   sandwich
             anchors.horizontalCenter: parent.horizontalCenter
-            z:                        sandwich.z + 7
+            z:                        7
 
             onFallAnimationDone: {
                 sandwich.itemsInPlaceCount = sandwich.itemsInPlaceCount + 1;
@@ -109,7 +109,7 @@ Rectangle {
         SandwichItem {
             parent:                   sandwich
             anchors.horizontalCenter: parent.horizontalCenter
-            z:                        sandwich.z + 8
+            z:                        8
 
             onFallAnimationDone: {
                 sandwich.itemsInPlaceCount = sandwich.itemsInPlaceCount + 1;
@@ -122,7 +122,7 @@ Rectangle {
         SandwichItem {
             parent:                   sandwich
             anchors.horizontalCenter: parent.horizontalCenter
-            z:                        sandwich.z + 9
+            z:                        9
 
             onFallAnimationDone: {
                 sandwich.itemsInPlaceCount = sandwich.itemsInPlaceCount + 1;
@@ -135,7 +135,7 @@ Rectangle {
         SandwichItem {
             parent:                   sandwich
             anchors.horizontalCenter: parent.horizontalCenter
-            z:                        sandwich.z + 10
+            z:                        10
 
             onFallAnimationDone: {
                 sandwich.itemsInPlaceCount = sandwich.itemsInPlaceCount + 1;
@@ -148,7 +148,7 @@ Rectangle {
         SandwichItem {
             parent:                   sandwich
             anchors.horizontalCenter: parent.horizontalCenter
-            z:                        sandwich.z + 11
+            z:                        11
 
             onFallAnimationDone: {
                 sandwich.itemsInPlaceCount = sandwich.itemsInPlaceCount + 1;
@@ -161,7 +161,7 @@ Rectangle {
         SandwichItem {
             parent:                   sandwich
             anchors.horizontalCenter: parent.horizontalCenter
-            z:                        sandwich.z + 12
+            z:                        12
 
             onFallAnimationDone: {
                 sandwich.itemsInPlaceCount = sandwich.itemsInPlaceCount + 1;
@@ -174,7 +174,7 @@ Rectangle {
         SandwichItem {
             parent:                   sandwich
             anchors.horizontalCenter: parent.horizontalCenter
-            z:                        sandwich.z + 13
+            z:                        13
 
             onFallAnimationDone: {
                 sandwich.itemsInPlaceCount = sandwich.itemsInPlaceCount + 1;
@@ -187,7 +187,7 @@ Rectangle {
         SandwichItem {
             parent:                   sandwich
             anchors.horizontalCenter: parent.horizontalCenter
-            z:                        sandwich.z + 14
+            z:                        14
 
             onFallAnimationDone: {
                 sandwich.itemsInPlaceCount = sandwich.itemsInPlaceCount + 1;
@@ -200,7 +200,7 @@ Rectangle {
         SandwichItem {
             parent:                   sandwich
             anchors.horizontalCenter: parent.horizontalCenter
-            z:                        sandwich.z + 15
+            z:                        15
 
             onFallAnimationDone: {
                 sandwich.itemsInPlaceCount = sandwich.itemsInPlaceCount + 1;
@@ -213,7 +213,7 @@ Rectangle {
         SandwichItem {
             parent:                   sandwich
             anchors.horizontalCenter: parent.horizontalCenter
-            z:                        sandwich.z + 16
+            z:                        16
 
             onFallAnimationDone: {
                 sandwich.itemsInPlaceCount = sandwich.itemsInPlaceCount + 1;
@@ -226,7 +226,7 @@ Rectangle {
         SandwichItem {
             parent:                   sandwich
             anchors.horizontalCenter: parent.horizontalCenter
-            z:                        sandwich.z + 17
+            z:                        17
 
             onFallAnimationDone: {
                 sandwich.itemsInPlaceCount = sandwich.itemsInPlaceCount + 1;
@@ -239,7 +239,7 @@ Rectangle {
         SandwichItem {
             parent:                   sandwich
             anchors.horizontalCenter: parent.horizontalCenter
-            z:                        sandwich.z + 18
+            z:                        18
 
             onFallAnimationDone: {
                 sandwich.itemsInPlaceCount = sandwich.itemsInPlaceCount + 1;
@@ -252,7 +252,7 @@ Rectangle {
         SandwichItem {
             parent:                   sandwich
             anchors.horizontalCenter: parent.horizontalCenter
-            z:                        sandwich.z + 19
+            z:                        19
 
             onFallAnimationDone: {
                 sandwich.itemsInPlaceCount = sandwich.itemsInPlaceCount + 1;
@@ -265,7 +265,7 @@ Rectangle {
         SandwichItem {
             parent:                   sandwich
             anchors.horizontalCenter: parent.horizontalCenter
-            z:                        sandwich.z + 20
+            z:                        20
 
             onFallAnimationDone: {
                 sandwich.itemsInPlaceCount = sandwich.itemsInPlaceCount + 1;

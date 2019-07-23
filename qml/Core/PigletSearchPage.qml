@@ -191,7 +191,7 @@ Item {
             anchors.topMargin: 30
             width:             133
             height:            38
-            z:                 4
+            z:                 1
             source:            "qrc:/resources/images/piglet_search/missed_piglets_background.png"
 
             Row {
@@ -234,7 +234,7 @@ Item {
             anchors.top:         parent.top
             anchors.right:       parent.right
             anchors.topMargin:   30
-            z:                   4
+            z:                   1
             text:                "000000"
             color:               "yellow"
             font.pixelSize:      32
@@ -247,7 +247,7 @@ Item {
             id:                  highScoreText
             anchors.top:         scoreText.bottom
             anchors.right:       parent.right
-            z:                   4
+            z:                   1
             text:                "000000"
             color:               "red"
             font.pixelSize:      32
@@ -261,7 +261,7 @@ Item {
             anchors.bottom:           parent.bottom
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottomMargin:     30
-            z:                        4
+            z:                        1
             visible:                  false
             text:                     "00"
             color:                    "yellow"
@@ -278,7 +278,7 @@ Item {
             anchors.topMargin:        8
             width:                    128
             height:                   32
-            z:                        4
+            z:                        1
             visible:                  pigletSearchPage.currentPiglet !== null &&
                                       pigletSearchPage.currentPiglet.y < 0 - pigletSearchPage.currentPiglet.height
             source:                   "qrc:/resources/images/piglet_search/turn_up.png"
@@ -312,7 +312,7 @@ Item {
             anchors.bottomMargin:     8
             width:                    128
             height:                   32
-            z:                        4
+            z:                        1
             visible:                  pigletSearchPage.currentPiglet !== null &&
                                       pigletSearchPage.currentPiglet.y > backgroundRectangle.height
             source:                   "qrc:/resources/images/piglet_search/turn_down.png"
@@ -345,7 +345,7 @@ Item {
             anchors.left:           parent.left
             width:                  32
             height:                 128
-            z:                      4
+            z:                      1
             visible:                pigletSearchPage.currentPiglet !== null &&
                                     pigletSearchPage.currentPiglet.x < 0 - pigletSearchPage.currentPiglet.width
             source:                 "qrc:/resources/images/piglet_search/turn_left.png"
@@ -378,7 +378,7 @@ Item {
             anchors.right:          parent.right
             width:                  32
             height:                 128
-            z:                      4
+            z:                      1
             visible:                pigletSearchPage.currentPiglet !== null &&
                                     pigletSearchPage.currentPiglet.x > backgroundRectangle.width
             source:                 "qrc:/resources/images/piglet_search/turn_right.png"
@@ -494,7 +494,7 @@ Item {
 
     NotificationDialog {
         id:   gameStartNotificationDialog
-        z:    20
+        z:    1
         text: qsTr("Your piglet wants to play hide-and-seek! Try to find him in your room using your phone's camera as fast as you can.")
 
         onOpened: {
@@ -517,7 +517,7 @@ Item {
 
     QueryDialog {
         id:   highScoreQueryDialog
-        z:    20
+        z:    1
         text: qsTr("Congratulations, you have a new highscore! Do you want to play again?")
 
         onOpened: {
@@ -537,7 +537,7 @@ Item {
 
     QueryDialog {
         id:   gameOverQueryDialog
-        z:    20
+        z:    1
         text: qsTr("Game over. Do you want to play again?")
 
         onOpened: {

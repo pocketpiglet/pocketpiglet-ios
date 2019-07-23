@@ -1,6 +1,6 @@
 import QtQuick 2.12
 
-MouseArea {
+MultiPointTouchArea {
     id:               notificationDialog
     anchors.centerIn: parent
     visible:          false
@@ -14,7 +14,7 @@ MouseArea {
     signal closed()
 
     onParentWidthChanged: {
-        if (typeof(parent) !== "undefined" && parent !== null) {
+        if (parent) {
             if (rotation === 0 || rotation === 180) {
                 width  = parent.width;
                 height = parent.height;
@@ -26,7 +26,7 @@ MouseArea {
     }
 
     onParentHeightChanged: {
-        if (typeof(parent) !== "undefined" && parent !== null) {
+        if (parent) {
             if (rotation === 0 || rotation === 180) {
                 width  = parent.width;
                 height = parent.height;
@@ -38,7 +38,7 @@ MouseArea {
     }
 
     onRotationChanged: {
-        if (typeof(parent) !== "undefined" && parent !== null) {
+        if (parent) {
             if (rotation === 0 || rotation === 180) {
                 width  = parent.width;
                 height = parent.height;

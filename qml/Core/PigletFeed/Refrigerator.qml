@@ -25,7 +25,6 @@ Rectangle {
             parent:        refrigerator
             x:             20  * refrigerator.refrigeratorScale
             y:             100 * refrigerator.refrigeratorScale
-            z:             refrigerator.z + 1
             visible:       refrigerator.refrigeratorType === "easy"
             itemClickable: refrigerator.foodItemsClickable
             itemType:      "salad"
@@ -43,7 +42,6 @@ Rectangle {
             parent:        refrigerator
             x:             156 * refrigerator.refrigeratorScale
             y:             100 * refrigerator.refrigeratorScale
-            z:             refrigerator.z + 1
             visible:       refrigerator.refrigeratorType === "easy"
             itemClickable: refrigerator.foodItemsClickable
             itemType:      "tomato"
@@ -61,7 +59,6 @@ Rectangle {
             parent:        refrigerator
             x:             20  * refrigerator.refrigeratorScale
             y:             260 * refrigerator.refrigeratorScale
-            z:             refrigerator.z + 1
             visible:       refrigerator.refrigeratorType === "easy"
             itemClickable: refrigerator.foodItemsClickable
             itemType:      "fish"
@@ -79,7 +76,6 @@ Rectangle {
             parent:        refrigerator
             x:             156 * refrigerator.refrigeratorScale
             y:             260 * refrigerator.refrigeratorScale
-            z:             refrigerator.z + 1
             visible:       refrigerator.refrigeratorType === "easy"
             itemClickable: refrigerator.foodItemsClickable
             itemType:      "cheese"
@@ -100,7 +96,6 @@ Rectangle {
             parent:        refrigerator
             x:             20 * refrigerator.refrigeratorScale
             y:             50 * refrigerator.refrigeratorScale
-            z:             refrigerator.z + 1
             visible:       refrigerator.refrigeratorType === "medium"
             itemClickable: refrigerator.foodItemsClickable
             itemType:      "salad"
@@ -118,7 +113,6 @@ Rectangle {
             parent:        refrigerator
             x:             156 * refrigerator.refrigeratorScale
             y:             50  * refrigerator.refrigeratorScale
-            z:             refrigerator.z + 1
             visible:       refrigerator.refrigeratorType === "medium"
             itemClickable: refrigerator.foodItemsClickable
             itemType:      "tomato"
@@ -136,7 +130,6 @@ Rectangle {
             parent:        refrigerator
             x:             20  * refrigerator.refrigeratorScale
             y:             160 * refrigerator.refrigeratorScale
-            z:             refrigerator.z + 1
             visible:       refrigerator.refrigeratorType === "medium"
             itemClickable: refrigerator.foodItemsClickable
             itemType:      "fish"
@@ -154,7 +147,6 @@ Rectangle {
             parent:        refrigerator
             x:             156 * refrigerator.refrigeratorScale
             y:             160 * refrigerator.refrigeratorScale
-            z:             refrigerator.z + 1
             visible:       refrigerator.refrigeratorType === "medium"
             itemClickable: refrigerator.foodItemsClickable
             itemType:      "cheese"
@@ -172,7 +164,6 @@ Rectangle {
             parent:        refrigerator
             x:             20  * refrigerator.refrigeratorScale
             y:             260 * refrigerator.refrigeratorScale
-            z:             refrigerator.z + 1
             visible:       refrigerator.refrigeratorType === "medium"
             itemClickable: refrigerator.foodItemsClickable
             itemType:      "cucumber"
@@ -190,7 +181,6 @@ Rectangle {
             parent:        refrigerator
             x:             156 * refrigerator.refrigeratorScale
             y:             260 * refrigerator.refrigeratorScale
-            z:             refrigerator.z + 1
             visible:       refrigerator.refrigeratorType === "medium"
             itemClickable: refrigerator.foodItemsClickable
             itemType:      "olives"
@@ -211,7 +201,6 @@ Rectangle {
             parent:        refrigerator
             x:             20 * refrigerator.refrigeratorScale
             y:             20 * refrigerator.refrigeratorScale
-            z:             refrigerator.z + 1
             visible:       refrigerator.refrigeratorType === "hard"
             itemClickable: refrigerator.foodItemsClickable
             itemType:      "salad"
@@ -229,7 +218,6 @@ Rectangle {
             parent:        refrigerator
             x:             156 * refrigerator.refrigeratorScale
             y:             20  * refrigerator.refrigeratorScale
-            z:             refrigerator.z + 1
             visible:       refrigerator.refrigeratorType === "hard"
             itemClickable: refrigerator.foodItemsClickable
             itemType:      "fish"
@@ -247,7 +235,6 @@ Rectangle {
             parent:        refrigerator
             x:             20  * refrigerator.refrigeratorScale
             y:             100 * refrigerator.refrigeratorScale
-            z:             refrigerator.z + 1
             visible:       refrigerator.refrigeratorType === "hard"
             itemClickable: refrigerator.foodItemsClickable
             itemType:      "cucumber"
@@ -265,7 +252,6 @@ Rectangle {
             parent:        refrigerator
             x:             156 * refrigerator.refrigeratorScale
             y:             100 * refrigerator.refrigeratorScale
-            z:             refrigerator.z + 1
             visible:       refrigerator.refrigeratorType === "hard"
             itemClickable: refrigerator.foodItemsClickable
             itemType:      "olives"
@@ -283,7 +269,6 @@ Rectangle {
             parent:        refrigerator
             x:             20  * refrigerator.refrigeratorScale
             y:             180 * refrigerator.refrigeratorScale
-            z:             refrigerator.z + 1
             visible:       refrigerator.refrigeratorType === "hard"
             itemClickable: refrigerator.foodItemsClickable
             itemType:      "cheese"
@@ -301,7 +286,6 @@ Rectangle {
             parent:        refrigerator
             x:             156 * refrigerator.refrigeratorScale
             y:             180 * refrigerator.refrigeratorScale
-            z:             refrigerator.z + 1
             visible:       refrigerator.refrigeratorType === "hard"
             itemClickable: refrigerator.foodItemsClickable
             itemType:      "tomato"
@@ -319,7 +303,6 @@ Rectangle {
             parent:        refrigerator
             x:             20  * refrigerator.refrigeratorScale
             y:             260 * refrigerator.refrigeratorScale
-            z:             refrigerator.z + 1
             visible:       refrigerator.refrigeratorType === "hard"
             itemClickable: refrigerator.foodItemsClickable
             itemType:      "ketchup"
@@ -337,7 +320,6 @@ Rectangle {
             parent:        refrigerator
             x:             156 * refrigerator.refrigeratorScale
             y:             260 * refrigerator.refrigeratorScale
-            z:             refrigerator.z + 1
             visible:       refrigerator.refrigeratorType === "hard"
             itemClickable: refrigerator.foodItemsClickable
             itemType:      "mayonnaise"

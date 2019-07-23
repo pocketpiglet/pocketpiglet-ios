@@ -661,7 +661,7 @@ Item {
             id:           currencyButtonsColumn
             anchors.left: parent.left
             anchors.top:  parent.top
-            z:            10
+            z:            1
             spacing:      16
             topPadding:   16
 
@@ -684,7 +684,7 @@ Item {
             id:             gameButtonsColumn
             anchors.left:   parent.left
             anchors.bottom: parent.bottom
-            z:              10
+            z:              1
             spacing:        16
             bottomPadding:  16
 
@@ -805,7 +805,7 @@ Item {
             id:             actionButtonsColumn
             anchors.right:  parent.right
             anchors.bottom: parent.bottom
-            z:              10
+            z:              1
             spacing:        16
             bottomPadding:  16
 
@@ -855,7 +855,7 @@ Item {
 
     PurchaseDialog {
         id: purchaseDialog
-        z:  20
+        z:  1
 
         onWatchVideo: {
             AdMobHelper.showRewardBasedVideoAd();
@@ -872,7 +872,7 @@ Item {
 
     NewDiamondsDialog {
         id: newDiamondsDialog
-        z:  20
+        z:  1
 
         onOk: {
             StoreHelper.requestReview();
@@ -881,7 +881,7 @@ Item {
 
     ParentalGateDialog {
         id: parentalGateDialog
-        z:  20
+        z:  1
 
         onPass: {
             purchaseDialog.open(AdMobHelper.rewardBasedVideoAdReady && pigletPage.diamondsAmount < pigletPage.diamondsMaxAmount);

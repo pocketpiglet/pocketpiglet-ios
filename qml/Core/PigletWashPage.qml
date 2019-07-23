@@ -327,7 +327,7 @@ Item {
 
     NotificationDialog {
         id:   gameStartNotificationDialog
-        z:    20
+        z:    1
         text: qsTr("Your piglet wants to take a bath and play with soap bubbles! Help him to catch and pop as many bubbles as you can.")
 
         onOpened: {
@@ -351,7 +351,7 @@ Item {
 
     QueryDialog {
         id:   highScoreQueryDialog
-        z:    20
+        z:    1
         text: qsTr("Congratulations, you have a new highscore! Do you want to play again?")
 
         onOpened: {
@@ -371,7 +371,7 @@ Item {
 
     QueryDialog {
         id:   gameOverQueryDialog
-        z:    20
+        z:    1
         text: qsTr("Game over. Do you want to play again?")
 
         onOpened: {
