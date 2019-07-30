@@ -48,7 +48,7 @@ const QString AdMobHelper::ADMOB_TEST_DEVICE_ID            ("");
     GADRequest *request = [GADRequest request];
 
     if (AdMobHelper::ADMOB_TEST_DEVICE_ID != "") {
-        request.testDevices = @[ AdMobHelper::ADMOB_TEST_DEVICE_ID.toNSString() ];
+        request.testDevices = @[AdMobHelper::ADMOB_TEST_DEVICE_ID.toNSString()];
     }
 
     [[GADRewardBasedVideoAd sharedInstance] loadRequest:request
