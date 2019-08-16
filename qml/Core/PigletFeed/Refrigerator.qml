@@ -4,10 +4,12 @@ import "Refrigerator.js" as RefrigeratorScript
 
 Rectangle {
     id:     refrigerator
-    width:  calculateWidth (refrigeratorImage.sourceSize.width, refrigeratorImage.sourceSize.height,
-                            parent.width,                       parent.height)
-    height: calculateHeight(refrigeratorImage.sourceSize.width, refrigeratorImage.sourceSize.height,
-                            parent.width,                       parent.height)
+    width:  refrigeratorWidth(refrigeratorImage.sourceSize.width,
+                              refrigeratorImage.sourceSize.height,
+                              parent.width, parent.height)
+    height: refrigeratorHeight(refrigeratorImage.sourceSize.width,
+                               refrigeratorImage.sourceSize.height,
+                               parent.width, parent.height)
     color:  "transparent"
 
     readonly property real refrigeratorScale: refrigeratorImage.paintedWidth / refrigeratorImage.sourceSize.width
@@ -337,17 +339,7 @@ Rectangle {
     signal validFoodItemSelected(string item_type, bool last_item)
     signal invalidFoodItemSelected()
 
-    onRefrigeratorTypeChanged: {
-        if (refrigeratorType === "easy") {
-            refrigeratorImage.source = "qrc:/resources/images/piglet_feed/refrigerator_easy.png";
-        } else if (refrigeratorType === "medium") {
-            refrigeratorImage.source = "qrc:/resources/images/piglet_feed/refrigerator_medium.png";
-        } else if (refrigeratorType === "hard") {
-            refrigeratorImage.source = "qrc:/resources/images/piglet_feed/refrigerator_hard.png";
-        }
-    }
-
-    function calculateWidth(src_width, src_height, dst_width, dst_height) {
+    function refrigeratorWidth(src_width, src_height, dst_width, dst_height) {
         if (src_width > 0 && src_height > 0 && dst_width > 0 && dst_height > 0) {
             if (dst_width / dst_height > src_width / src_height) {
                 return src_width * dst_height / src_height;
@@ -359,7 +351,7 @@ Rectangle {
         }
     }
 
-    function calculateHeight(src_width, src_height, dst_width, dst_height) {
+    function refrigeratorHeight(src_width, src_height, dst_width, dst_height) {
         if (src_width > 0 && src_height > 0 && dst_width > 0 && dst_height > 0) {
             if (dst_width / dst_height > src_width / src_height) {
                 return dst_height;
@@ -475,7 +467,20 @@ Rectangle {
     Image {
         id:           refrigeratorImage
         anchors.fill: parent
+        source:       imageSource(refrigerator.refrigeratorType)
         fillMode:     Image.PreserveAspectFit
+
+        function imageSource(refrigerator_type) {
+            if (refrigerator_type === "easy") {
+                return "qrc:/resources/images/piglet_feed/refrigerator_easy.png";
+            } else if (refrigerator_type === "medium") {
+                return "qrc:/resources/images/piglet_feed/refrigerator_medium.png";
+            } else if (refrigerator_type === "hard") {
+                return "qrc:/resources/images/piglet_feed/refrigerator_hard.png";
+            } else {
+                return "";
+            }
+        }
     }
 
     Timer {

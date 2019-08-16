@@ -3,49 +3,32 @@ import QtQuick 2.12
 MultiPointTouchArea {
     id:               notificationDialog
     anchors.centerIn: parent
+    width:            dialogWidth(rotation, parent.width, parent.height)
+    height:           dialogHeight(rotation, parent.width, parent.height)
     visible:          false
 
-    readonly property int parentWidth:  parent.width
-    readonly property int parentHeight: parent.height
-
-    property string text:               ""
+    property string text: ""
 
     signal opened()
     signal closed()
 
-    onParentWidthChanged: {
-        if (parent) {
-            if (rotation === 0 || rotation === 180) {
-                width  = parent.width;
-                height = parent.height;
-            } else if (rotation === 90 || rotation === 270) {
-                width  = parent.height;
-                height = parent.width;
-            }
+    function dialogWidth(rotation, parent_width, parent_height) {
+        if (rotation === 0 || rotation === 180) {
+            return parent_width;
+        } else if (rotation === 90 || rotation === 270) {
+            return parent_height;
+        } else {
+            return parent_width;
         }
     }
 
-    onParentHeightChanged: {
-        if (parent) {
-            if (rotation === 0 || rotation === 180) {
-                width  = parent.width;
-                height = parent.height;
-            } else if (rotation === 90 || rotation === 270) {
-                width  = parent.height;
-                height = parent.width;
-            }
-        }
-    }
-
-    onRotationChanged: {
-        if (parent) {
-            if (rotation === 0 || rotation === 180) {
-                width  = parent.width;
-                height = parent.height;
-            } else if (rotation === 90 || rotation === 270) {
-                width  = parent.height;
-                height = parent.width;
-            }
+    function dialogHeight(rotation, parent_width, parent_height) {
+        if (rotation === 0 || rotation === 180) {
+            return parent_height;
+        } else if (rotation === 90 || rotation === 270) {
+            return parent_width;
+        } else {
+            return parent_height;
         }
     }
 

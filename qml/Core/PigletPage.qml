@@ -299,7 +299,7 @@ Item {
                 anchors.centerIn: parent
                 width:            pigletIdleImage.width
                 height:           pigletIdleImage.height
-                z:                pigletIdleImage.z - 1
+                z:                running ? pigletIdleImage.z + 1 : pigletIdleImage.z - 1
                 running:          false
 
                 readonly property int animationFrameWidth:          360
@@ -313,14 +313,10 @@ Item {
 
                 onRunningChanged: {
                     if (running) {
-                        z = pigletIdleImage.z + 1;
-
                         if (audioSource !== "") {
                             audio.playAudio(audioSource);
                         }
                     } else {
-                        z = pigletIdleImage.z - 1;
-
                         if (audioSource === audio.audioSource) {
                             audio.stop();
                         }
@@ -509,7 +505,7 @@ Item {
                 anchors.centerIn: parent
                 width:            pigletListenImage.width
                 height:           pigletListenImage.height
-                z:                pigletIdleImage.z - 1
+                z:                running ? pigletIdleImage.z + 1 : pigletIdleImage.z - 1
                 running:          false
                 source:           "qrc:/resources/animations/piglet/piglet_voice_found.jpg"
                 frameCount:       5
@@ -520,11 +516,8 @@ Item {
                 loops:            1
 
                 onRunningChanged: {
-                    if (running) {
-                        z                   = pigletIdleImage.z + 1;
-                    } else {
+                    if (!running) {
                         pigletListenImage.z = pigletIdleImage.z + 1;
-                        z                   = pigletIdleImage.z - 1;
                     }
                 }
 
@@ -545,7 +538,7 @@ Item {
                 anchors.centerIn: parent
                 width:            pigletListenImage.width
                 height:           pigletListenImage.height
-                z:                pigletIdleImage.z - 1
+                z:                running ? pigletIdleImage.z + 1 : pigletIdleImage.z - 1
                 running:          false
                 source:           "qrc:/resources/animations/piglet/piglet_voice_ended.jpg"
                 frameCount:       5
@@ -559,11 +552,8 @@ Item {
 
                 onRunningChanged: {
                     if (running) {
-                        z                   = pigletIdleImage.z + 1;
                         pigletListenImage.z = pigletIdleImage.z - 1;
                     } else {
-                        z                   = pigletIdleImage.z - 1;
-
                         if (voiceRecorded) {
                             pigletSpeechAnimatedSprite.playAnimation();
                         } else {
@@ -592,7 +582,7 @@ Item {
                 anchors.centerIn: parent
                 width:            pigletIdleImage.width
                 height:           pigletIdleImage.height
-                z:                pigletIdleImage.z - 1
+                z:                running ? pigletIdleImage.z + 1 : pigletIdleImage.z - 1
                 running:          false
                 source:           "qrc:/resources/animations/piglet/piglet_speech.jpg"
                 frameCount:       4
@@ -604,12 +594,8 @@ Item {
 
                 onRunningChanged: {
                     if (running) {
-                        z = pigletIdleImage.z + 1;
-
                         speechAudio.playAudio(speechRecorder.voiceFileURL);
                     } else {
-                        z = pigletIdleImage.z - 1;
-
                         pigletPage.animationEnabled = true;
 
                         pigletPage.restartAnimation();

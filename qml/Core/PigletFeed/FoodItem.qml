@@ -13,28 +13,8 @@ Rectangle {
     signal itemClicked()
     signal hideAnimationDone()
 
-    onItemTypeChanged: {
-        if (itemType === "cheese") {
-            foodItemImage.source = "qrc:/resources/images/piglet_feed/food_cheese.png"
-        } else if (itemType === "cucumber") {
-            foodItemImage.source = "qrc:/resources/images/piglet_feed/food_cucumber.png"
-        } else if (itemType === "fish") {
-            foodItemImage.source = "qrc:/resources/images/piglet_feed/food_fish.png"
-        } else if (itemType === "ketchup") {
-            foodItemImage.source = "qrc:/resources/images/piglet_feed/food_ketchup.png"
-        } else if (itemType === "mayonnaise") {
-            foodItemImage.source = "qrc:/resources/images/piglet_feed/food_mayonnaise.png"
-        } else if (itemType === "olives") {
-            foodItemImage.source = "qrc:/resources/images/piglet_feed/food_olives.png"
-        } else if (itemType === "salad") {
-            foodItemImage.source = "qrc:/resources/images/piglet_feed/food_salad.png"
-        } else if (itemType === "tomato") {
-            foodItemImage.source = "qrc:/resources/images/piglet_feed/food_tomato.png"
-        }
-    }
-
     function hideItem() {
-        foodItemHideAnimationItem.start();
+        foodItemHideAnimation.start();
     }
 
     MouseArea {
@@ -43,7 +23,7 @@ Rectangle {
         enabled:      foodItem.itemClickable
 
         onClicked: {
-            foodItemSelectAnimationItem.start();
+            foodItemSelectAnimation.start();
 
             foodItem.itemClicked();
         }
@@ -51,98 +31,77 @@ Rectangle {
         Image {
             id:           foodItemImage
             anchors.fill: parent
+            source:       imageSource(foodItem.itemType)
             fillMode:     Image.PreserveAspectFit
+
+            function imageSource(item_type) {
+                if (item_type === "cheese") {
+                    return "qrc:/resources/images/piglet_feed/food_cheese.png";
+                } else if (item_type === "cucumber") {
+                    return "qrc:/resources/images/piglet_feed/food_cucumber.png";
+                } else if (item_type === "fish") {
+                    return "qrc:/resources/images/piglet_feed/food_fish.png";
+                } else if (item_type === "ketchup") {
+                    return "qrc:/resources/images/piglet_feed/food_ketchup.png";
+                } else if (item_type === "mayonnaise") {
+                    return "qrc:/resources/images/piglet_feed/food_mayonnaise.png";
+                } else if (item_type === "olives") {
+                    return "qrc:/resources/images/piglet_feed/food_olives.png";
+                } else if (item_type === "salad") {
+                    return "qrc:/resources/images/piglet_feed/food_salad.png";
+                } else if (item_type === "tomato") {
+                    return "qrc:/resources/images/piglet_feed/food_tomato.png";
+                } else {
+                    return "";
+                }
+            }
         }
     }
 
-    Item {
-        id: foodItemSelectAnimationItem
-
-        property bool animationRunning: false
-
-        function start() {
-            if (!animationRunning) {
-                animationRunning = true;
-
-                foodItemSelectDecOpacityPropertyAnimation.start();
-            }
-        }
+    SequentialAnimation {
+        id: foodItemSelectAnimation
 
         PropertyAnimation {
-            id:       foodItemSelectDecOpacityPropertyAnimation
             target:   foodItemImage
             property: "opacity"
             from:     1.0
             to:       0.25
             duration: 200
-
-            onRunningChanged: {
-                if (foodItemSelectAnimationItem.animationRunning && !running) {
-                    foodItemSelectIncOpacityPropertyAnimation.start();
-                }
-            }
         }
 
         PropertyAnimation {
-            id:       foodItemSelectIncOpacityPropertyAnimation
             target:   foodItemImage
             property: "opacity"
             from:     0.25
             to:       1.0
             duration: 200
-
-            onRunningChanged: {
-                if (foodItemSelectAnimationItem.animationRunning && !running) {
-                    foodItemSelectAnimationItem.animationRunning = false;
-                }
-            }
         }
     }
 
-    Item {
-        id: foodItemHideAnimationItem
-
-        property bool animationRunning: false
-
-        function start() {
-            if (!animationRunning) {
-                animationRunning = true;
-
-                foodItemHideDecOpacityPropertyAnimation.start();
-            }
-        }
+    SequentialAnimation {
+        id: foodItemHideAnimation
 
         PropertyAnimation {
-            id:          foodItemHideDecOpacityPropertyAnimation
             target:      foodItemImage
             property:    "opacity"
             from:        1.0
             to:          0.25
             duration:    500
             easing.type: Easing.OutExpo
-
-            onRunningChanged: {
-                if (foodItemHideAnimationItem.animationRunning && !running) {
-                    foodItemHideIncOpacityPropertyAnimation.start();
-                }
-            }
         }
 
         PropertyAnimation {
-            id:          foodItemHideIncOpacityPropertyAnimation
             target:      foodItemImage
             property:    "opacity"
             from:        0.25
             to:          1.0
             duration:    500
             easing.type: Easing.InExpo
+        }
 
-            onRunningChanged: {
-                if (foodItemHideAnimationItem.animationRunning && !running) {
-                    foodItemHideAnimationItem.animationRunning = false;
-
-                    foodItem.hideAnimationDone();
-                }
+        ScriptAction {
+            script: {
+                foodItem.hideAnimationDone();
             }
         }
     }

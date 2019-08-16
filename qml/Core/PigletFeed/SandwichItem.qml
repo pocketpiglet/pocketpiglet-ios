@@ -17,11 +17,11 @@ Rectangle {
     function dropItem() {
         sandwichItemImage.visible = true;
 
-        sandwichItemFallPropertyAnimation.start();
+        sandwichItemFallAnimation.start();
     }
 
     function eatItem() {
-        sandwichItemEatPropertyAnimation.start();
+        sandwichItemEatAnimation.start();
     }
 
     function clearItem() {
@@ -29,62 +29,71 @@ Rectangle {
         sandwichItemImage.opacity = 1.0;
     }
 
-    onItemTypeChanged: {
-        if (itemType === "bread_bottom") {
-            sandwichItemImage.source = "qrc:/resources/images/piglet_feed/sandwich_bread_bottom.png"
-        } else if (itemType === "bread_top") {
-            sandwichItemImage.source = "qrc:/resources/images/piglet_feed/sandwich_bread_top.png"
-        } else if (itemType === "cheese") {
-            sandwichItemImage.source = "qrc:/resources/images/piglet_feed/sandwich_cheese.png"
-        } else if (itemType === "cucumber") {
-            sandwichItemImage.source = "qrc:/resources/images/piglet_feed/sandwich_cucumber.png"
-        } else if (itemType === "fish") {
-            sandwichItemImage.source = "qrc:/resources/images/piglet_feed/sandwich_fish.png"
-        } else if (itemType === "ketchup") {
-            sandwichItemImage.source = "qrc:/resources/images/piglet_feed/sandwich_ketchup.png"
-        } else if (itemType === "mayonnaise") {
-            sandwichItemImage.source = "qrc:/resources/images/piglet_feed/sandwich_mayonnaise.png"
-        } else if (itemType === "olives") {
-            sandwichItemImage.source = "qrc:/resources/images/piglet_feed/sandwich_olives.png"
-        } else if (itemType === "salad") {
-            sandwichItemImage.source = "qrc:/resources/images/piglet_feed/sandwich_salad.png"
-        } else if (itemType === "tomato") {
-            sandwichItemImage.source = "qrc:/resources/images/piglet_feed/sandwich_tomato.png"
-        }
-    }
-
     Image {
         id:           sandwichItemImage
         anchors.fill: parent
         visible:      false
+        source:       imageSource(sandwichItem.itemType)
         fillMode:     Image.PreserveAspectFit
+
+        function imageSource(item_type) {
+            if (item_type === "bread_bottom") {
+                return "qrc:/resources/images/piglet_feed/sandwich_bread_bottom.png";
+            } else if (item_type === "bread_top") {
+                return "qrc:/resources/images/piglet_feed/sandwich_bread_top.png";
+            } else if (item_type === "cheese") {
+                return "qrc:/resources/images/piglet_feed/sandwich_cheese.png";
+            } else if (item_type === "cucumber") {
+                return "qrc:/resources/images/piglet_feed/sandwich_cucumber.png";
+            } else if (item_type === "fish") {
+                return "qrc:/resources/images/piglet_feed/sandwich_fish.png";
+            } else if (item_type === "ketchup") {
+                return "qrc:/resources/images/piglet_feed/sandwich_ketchup.png";
+            } else if (item_type === "mayonnaise") {
+                return "qrc:/resources/images/piglet_feed/sandwich_mayonnaise.png";
+            } else if (item_type === "olives") {
+                return "qrc:/resources/images/piglet_feed/sandwich_olives.png";
+            } else if (item_type === "salad") {
+                return "qrc:/resources/images/piglet_feed/sandwich_salad.png";
+            } else if (item_type === "tomato") {
+                return "qrc:/resources/images/piglet_feed/sandwich_tomato.png";
+            } else {
+                return "";
+            }
+        }
     }
 
-    PropertyAnimation {
-        id:       sandwichItemFallPropertyAnimation
-        target:   sandwichItem
-        property: "y"
-        from:     sandwichItem.initialY
-        to:       sandwichItem.finalY
-        duration: 500
+    SequentialAnimation {
+        id: sandwichItemFallAnimation
 
-        onRunningChanged: {
-            if (!running) {
+        PropertyAnimation {
+            target:   sandwichItem
+            property: "y"
+            from:     sandwichItem.initialY
+            to:       sandwichItem.finalY
+            duration: 500
+        }
+
+        ScriptAction {
+            script: {
                 sandwichItem.fallAnimationDone();
             }
         }
     }
 
-    PropertyAnimation {
-        id:       sandwichItemEatPropertyAnimation
-        target:   sandwichItemImage
-        property: "opacity"
-        from:     1.0
-        to:       0.0
-        duration: 1000
+    SequentialAnimation {
+        id: sandwichItemEatAnimation
 
-        onRunningChanged: {
-            if (!running) {
+        PropertyAnimation {
+            target:   sandwichItemImage
+            property: "opacity"
+            from:     1.0
+            to:       0.0
+            duration: 1000
+        }
+
+        ScriptAction {
+            script: {
                 sandwichItem.eatAnimationDone();
             }
         }

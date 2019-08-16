@@ -602,7 +602,7 @@ Item {
                 function blink() {
                     visible = true;
 
-                    originalImageIncOpacityPropertyAnimation.start();
+                    originalImageBlinkAnimation.start();
                 }
 
                 MultiPointTouchArea {
@@ -610,33 +610,29 @@ Item {
                     anchors.fill: parent
                 }
 
-                PropertyAnimation {
-                    id:          originalImageIncOpacityPropertyAnimation
-                    target:      originalImage
-                    property:    "opacity"
-                    from:        0.0
-                    to:          1.0
-                    duration:    500
-                    easing.type: Easing.InExpo
+                SequentialAnimation {
+                    id: originalImageBlinkAnimation
 
-                    onRunningChanged: {
-                        if (!running) {
-                            originalImageDecOpacityPropertyAnimation.start();
-                        }
+                    PropertyAnimation {
+                        target:      originalImage
+                        property:    "opacity"
+                        from:        0.0
+                        to:          1.0
+                        duration:    500
+                        easing.type: Easing.InExpo
                     }
-                }
 
-                PropertyAnimation {
-                    id:          originalImageDecOpacityPropertyAnimation
-                    target:      originalImage
-                    property:    "opacity"
-                    from:        1.0
-                    to:          0.0
-                    duration:    500
-                    easing.type: Easing.OutExpo
+                    PropertyAnimation {
+                        target:      originalImage
+                        property:    "opacity"
+                        from:        1.0
+                        to:          0.0
+                        duration:    500
+                        easing.type: Easing.OutExpo
+                    }
 
-                    onRunningChanged: {
-                        if (!running) {
+                    ScriptAction {
+                        script: {
                             originalImage.visible = false;
                         }
                     }

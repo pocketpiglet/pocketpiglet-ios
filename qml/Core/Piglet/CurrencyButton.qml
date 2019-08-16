@@ -16,13 +16,13 @@ Column {
         id:     currencyButtonImage
         width:  currencyButton.imageWidth
         height: currencyButton.imageHeight
-        source: imageToShow(currencyButton.amount)
+        source: imageSource(currencyButton.amount, currencyButton.sourceNormal, currencyButton.sourceHighlighted)
 
-        function imageToShow(amount) {
+        function imageSource(amount, source_normal, source_highlighted) {
             if (amount > 0) {
-                return currencyButton.sourceNormal;
+                return source_normal;
             } else {
-                return currencyButton.sourceHighlighted;
+                return source_highlighted;
             }
         }
 

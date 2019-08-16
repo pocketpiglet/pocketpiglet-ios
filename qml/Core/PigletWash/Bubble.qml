@@ -58,15 +58,18 @@ Rectangle {
         }
     }
 
-    PropertyAnimation {
-        id:       bubbleFlightPropertyAnimation
-        target:   bubble
-        property: "y"
-        to:       0 - bubble.height
-        duration: 5000
+    SequentialAnimation {
+        id: bubbleFlightAnimation
 
-        onRunningChanged: {
-            if (!running) {
+        PropertyAnimation {
+            target:   bubble
+            property: "y"
+            to:       0 - bubble.height
+            duration: 5000
+        }
+
+        ScriptAction {
+            script: {
                 if (bubble.valid) {
                     bubble.valid = false;
 
@@ -101,6 +104,6 @@ Rectangle {
         x = Math.random() * (parent.width - bubble.width);
         y = (parent.height / 2) + Math.random() * ((parent.height / 2) - bubble.height);
 
-        bubbleFlightPropertyAnimation.start();
+        bubbleFlightAnimation.start();
     }
 }

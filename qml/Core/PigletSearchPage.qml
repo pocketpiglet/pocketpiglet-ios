@@ -63,30 +63,10 @@ Item {
         }
     }
 
-    onHighScoreChanged: {
-        var score = highScore + "";
-
-        while (score.length < 6) {
-            score = "0" + score;
-        }
-
-        highScoreText.text = score;
-    }
-
     onFoundPigletsCountChanged: {
         if (foundPigletsCount > 0) {
             audio.playAudio("qrc:/resources/sound/piglet_search/piglet_found.wav");
-        }
 
-        var score = foundPigletsCount + "";
-
-        while (score.length < 6) {
-            score = "0" + score;
-        }
-
-        scoreText.text = score;
-
-        if (foundPigletsCount > 0) {
             pigletCreationTimer.start();
         }
     }
@@ -94,27 +74,6 @@ Item {
     onMissedPigletsCountChanged: {
         if (missedPigletsCount > 0) {
             audio.playAudio("qrc:/resources/sound/piglet_search/piglet_missed.wav");
-        }
-
-        if (missedPigletsCount > 0) {
-            piglet1MissedImage.source = "qrc:/resources/images/piglet_search/missed_piglet.png";
-        } else {
-            piglet1MissedImage.source = "qrc:/resources/images/piglet_search/missed_piglet_grayed.png";
-        }
-        if (missedPigletsCount > 1) {
-            piglet2MissedImage.source = "qrc:/resources/images/piglet_search/missed_piglet.png";
-        } else {
-            piglet2MissedImage.source = "qrc:/resources/images/piglet_search/missed_piglet_grayed.png";
-        }
-        if (missedPigletsCount > 2) {
-            piglet3MissedImage.source = "qrc:/resources/images/piglet_search/missed_piglet.png";
-        } else {
-            piglet3MissedImage.source = "qrc:/resources/images/piglet_search/missed_piglet_grayed.png";
-        }
-        if (missedPigletsCount > 3) {
-            piglet4MissedImage.source = "qrc:/resources/images/piglet_search/missed_piglet.png";
-        } else {
-            piglet4MissedImage.source = "qrc:/resources/images/piglet_search/missed_piglet_grayed.png";
         }
 
         if (missedPigletsCount === 4) {
@@ -203,28 +162,32 @@ Item {
                     id:      piglet1MissedImage
                     width:   29
                     height:  29
-                    source:  "qrc:/resources/images/piglet_search/missed_piglet_grayed.png"
+                    source:  pigletSearchPage.missedPigletsCount > 0 ? "qrc:/resources/images/piglet_search/missed_piglet.png" :
+                                                                       "qrc:/resources/images/piglet_search/missed_piglet_grayed.png"
                 }
 
                 Image {
                     id:      piglet2MissedImage
                     width:   29
                     height:  29
-                    source:  "qrc:/resources/images/piglet_search/missed_piglet_grayed.png"
+                    source:  pigletSearchPage.missedPigletsCount > 1 ? "qrc:/resources/images/piglet_search/missed_piglet.png" :
+                                                                       "qrc:/resources/images/piglet_search/missed_piglet_grayed.png"
                 }
 
                 Image {
                     id:      piglet3MissedImage
                     width:   29
                     height:  29
-                    source:  "qrc:/resources/images/piglet_search/missed_piglet_grayed.png"
+                    source:  pigletSearchPage.missedPigletsCount > 2 ? "qrc:/resources/images/piglet_search/missed_piglet.png" :
+                                                                       "qrc:/resources/images/piglet_search/missed_piglet_grayed.png"
                 }
 
                 Image {
                     id:      piglet4MissedImage
                     width:   29
                     height:  29
-                    source:  "qrc:/resources/images/piglet_search/missed_piglet_grayed.png"
+                    source:  pigletSearchPage.missedPigletsCount > 3 ? "qrc:/resources/images/piglet_search/missed_piglet.png" :
+                                                                       "qrc:/resources/images/piglet_search/missed_piglet_grayed.png"
                 }
             }
         }
@@ -235,12 +198,22 @@ Item {
             anchors.right:       parent.right
             anchors.topMargin:   30
             z:                   1
-            text:                "000000"
+            text:                textText(pigletSearchPage.foundPigletsCount)
             color:               "yellow"
             font.pixelSize:      32
             font.family:         "Courier"
             horizontalAlignment: Text.AlignRight
             verticalAlignment:   Text.AlignVCenter
+
+            function textText(found_piglets) {
+                var score = found_piglets + "";
+
+                while (score.length < 6) {
+                    score = "0" + score;
+                }
+
+                return score;
+            }
         }
 
         Text {
@@ -248,12 +221,22 @@ Item {
             anchors.top:         scoreText.bottom
             anchors.right:       parent.right
             z:                   1
-            text:                "000000"
+            text:                textText(pigletSearchPage.highScore)
             color:               "red"
             font.pixelSize:      32
             font.family:         "Courier"
             horizontalAlignment: Text.AlignRight
             verticalAlignment:   Text.AlignVCenter
+
+            function textText(high_score) {
+                var score = high_score + "";
+
+                while (score.length < 6) {
+                    score = "0" + score;
+                }
+
+                return score;
+            }
         }
 
         Text {
@@ -262,13 +245,27 @@ Item {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottomMargin:     30
             z:                        1
-            visible:                  false
-            text:                     "00"
+            visible:                  countdownTimer.running
+            text:                     textText(countdownTimer.countdownTime)
             color:                    "yellow"
             font.pixelSize:           32
             font.family:              "Courier"
             horizontalAlignment:      Text.AlignHCenter
             verticalAlignment:        Text.AlignVCenter
+
+            function textText(countdown_time) {
+                if (countdown_time > 0) {
+                    var time = (countdown_time / 1000) + "";
+
+                    while (time.length < 2) {
+                        time = "0" + time;
+                    }
+
+                    return time;
+                } else {
+                    return "00";
+                }
+            }
         }
 
         Image {
@@ -598,45 +595,15 @@ Item {
         property int countdownTime: 0
 
         onRunningChanged: {
-            if (running) {
-                if (pigletSearchPage.currentPiglet !== null) {
-                    countdownTime = pigletSearchPage.currentPiglet.waitTime;
-                } else {
-                    countdownTime = 0;
-                }
-
-                if (countdownTime > 0) {
-                    var time = (countdownTime / 1000) + "";
-
-                    while (time.length < 2) {
-                        time = "0" + time;
-                    }
-
-                    timerText.text = time;
-                } else {
-                    timerText.text = "00";
-                }
-
-                timerText.visible = true;
+            if (running && pigletSearchPage.currentPiglet !== null) {
+                countdownTime = pigletSearchPage.currentPiglet.waitTime;
             } else {
-                timerText.visible = false;
+                countdownTime = 0;
             }
         }
 
         onTriggered: {
             countdownTime = countdownTime - interval;
-
-            if (countdownTime > 0) {
-                var time = (countdownTime / 1000) + "";
-
-                while (time.length < 2) {
-                    time = "0" + time;
-                }
-
-                timerText.text = time;
-            } else {
-                timerText.text = "00";
-            }
         }
     }
 }

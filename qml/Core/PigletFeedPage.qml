@@ -25,32 +25,20 @@ Item {
 
     onAppInForegroundChanged: {
         if (appInForeground && pageActive) {
-            backgroundAnimatedImage.playing    = true;
-            backgroundEatAnimatedImage.playing = true;
-
             if (allowLevelRestart) {
                 newLevelNotificationDialog.open();
             }
         } else {
-            backgroundAnimatedImage.playing    = false;
-            backgroundEatAnimatedImage.playing = false;
-
             refrigerator.cancelOrder();
         }
     }
 
     onPageActiveChanged: {
         if (appInForeground && pageActive) {
-            backgroundAnimatedImage.playing    = true;
-            backgroundEatAnimatedImage.playing = true;
-
             if (allowLevelRestart) {
                 newLevelNotificationDialog.open();
             }
         } else {
-            backgroundAnimatedImage.playing    = false;
-            backgroundEatAnimatedImage.playing = false;
-
             refrigerator.cancelOrder();
         }
     }
@@ -105,7 +93,7 @@ Item {
             anchors.fill: parent
             source:       "qrc:/resources/images/piglet_feed/background.gif"
             fillMode:     Image.PreserveAspectCrop
-            playing:      false
+            playing:      pigletFeedPage.appInForeground && pigletFeedPage.pageActive
         }
 
         AnimatedImage {
@@ -114,7 +102,7 @@ Item {
             z:            1
             source:       "qrc:/resources/images/piglet_feed/background_eat.gif"
             fillMode:     Image.PreserveAspectCrop
-            playing:      false
+            playing:      pigletFeedPage.appInForeground && pigletFeedPage.pageActive
             visible:      false
         }
 

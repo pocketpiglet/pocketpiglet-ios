@@ -28,11 +28,6 @@ Item {
 
     onAppInForegroundChanged: {
         if (appInForeground && pageActive) {
-            background0MissedAnimatedImage.playing = true;
-            background1MissedAnimatedImage.playing = true;
-            background2MissedAnimatedImage.playing = true;
-            background3MissedAnimatedImage.playing = true;
-
             if (!pageInitialized) {
                 pageInitialized = true;
 
@@ -41,11 +36,6 @@ Item {
                 bubbleCreationTimer.start();
             }
         } else {
-            background0MissedAnimatedImage.playing = false;
-            background1MissedAnimatedImage.playing = false;
-            background2MissedAnimatedImage.playing = false;
-            background3MissedAnimatedImage.playing = false;
-
             bubbleCreationTimer.stop();
 
             destroyBubbles();
@@ -54,11 +44,6 @@ Item {
 
     onPageActiveChanged: {
         if (appInForeground && pageActive) {
-            background0MissedAnimatedImage.playing = true;
-            background1MissedAnimatedImage.playing = true;
-            background2MissedAnimatedImage.playing = true;
-            background3MissedAnimatedImage.playing = true;
-
             if (!pageInitialized) {
                 pageInitialized = true;
 
@@ -67,84 +52,19 @@ Item {
                 bubbleCreationTimer.start();
             }
         } else {
-            background0MissedAnimatedImage.playing = false;
-            background1MissedAnimatedImage.playing = false;
-            background2MissedAnimatedImage.playing = false;
-            background3MissedAnimatedImage.playing = false;
-
             bubbleCreationTimer.stop();
 
             destroyBubbles();
         }
     }
 
-    onHighScoreChanged: {
-        var score = highScore + "";
-
-        while (score.length < 6) {
-            score = "0" + score;
-        }
-
-        highScoreText.text = score;
-    }
-
     onBurstedBubblesCountChanged: {
         if (burstedBubblesCount > 0) {
             audio.playAudio("qrc:/resources/sound/piglet_wash/bubble_burst.wav");
         }
-
-        var score = burstedBubblesCount + "";
-
-        while (score.length < 6) {
-            score = "0" + score;
-        }
-
-        scoreText.text = score;
     }
 
     onMissedBubblesCountChanged: {
-        if (missedBubblesCount > 0) {
-            bubble1MissedImage.source = "qrc:/resources/images/piglet_wash/missed_bubble.png";
-        } else {
-            bubble1MissedImage.source = "qrc:/resources/images/piglet_wash/missed_bubble_grayed.png";
-        }
-        if (missedBubblesCount > 1) {
-            bubble2MissedImage.source = "qrc:/resources/images/piglet_wash/missed_bubble.png";
-        } else {
-            bubble2MissedImage.source = "qrc:/resources/images/piglet_wash/missed_bubble_grayed.png";
-        }
-        if (missedBubblesCount > 2) {
-            bubble3MissedImage.source = "qrc:/resources/images/piglet_wash/missed_bubble.png";
-        } else {
-            bubble3MissedImage.source = "qrc:/resources/images/piglet_wash/missed_bubble_grayed.png";
-        }
-        if (missedBubblesCount > 3) {
-            bubble4MissedImage.source = "qrc:/resources/images/piglet_wash/missed_bubble.png";
-        } else {
-            bubble4MissedImage.source = "qrc:/resources/images/piglet_wash/missed_bubble_grayed.png";
-        }
-
-        if (missedBubblesCount === 0 || missedBubblesCount > 3) {
-            background0MissedAnimatedImage.visible = true;
-        } else {
-            background0MissedAnimatedImage.visible = false;
-        }
-        if (missedBubblesCount === 1) {
-            background1MissedAnimatedImage.visible = true;
-        } else {
-            background1MissedAnimatedImage.visible = false;
-        }
-        if (missedBubblesCount === 2) {
-            background2MissedAnimatedImage.visible = true;
-        } else {
-            background2MissedAnimatedImage.visible = false;
-        }
-        if (missedBubblesCount === 3) {
-            background3MissedAnimatedImage.visible = true;
-        } else {
-            background3MissedAnimatedImage.visible = false;
-        }
-
         if (missedBubblesCount === 4) {
             bubbleCreationTimer.stop();
 
@@ -193,7 +113,8 @@ Item {
             anchors.fill: parent
             source:       "qrc:/resources/images/piglet_wash/background_0_missed.gif"
             fillMode:     Image.PreserveAspectCrop
-            playing:      false
+            playing:      pigletWashPage.appInForeground && pigletWashPage.pageActive
+            visible:      pigletWashPage.missedBubblesCount === 0 || pigletWashPage.missedBubblesCount > 3
         }
 
         AnimatedImage {
@@ -202,8 +123,8 @@ Item {
             z:            1
             source:       "qrc:/resources/images/piglet_wash/background_1_missed.gif"
             fillMode:     Image.PreserveAspectCrop
-            playing:      false
-            visible:      false
+            playing:      pigletWashPage.appInForeground && pigletWashPage.pageActive
+            visible:      pigletWashPage.missedBubblesCount === 1
         }
 
         AnimatedImage {
@@ -212,8 +133,8 @@ Item {
             z:            2
             source:       "qrc:/resources/images/piglet_wash/background_2_missed.gif"
             fillMode:     Image.PreserveAspectCrop
-            playing:      false
-            visible:      false
+            playing:      pigletWashPage.appInForeground && pigletWashPage.pageActive
+            visible:      pigletWashPage.missedBubblesCount === 2
         }
 
         AnimatedImage {
@@ -222,8 +143,8 @@ Item {
             z:            3
             source:       "qrc:/resources/images/piglet_wash/background_3_missed.gif"
             fillMode:     Image.PreserveAspectCrop
-            playing:      false
-            visible:      false
+            playing:      pigletWashPage.appInForeground && pigletWashPage.pageActive
+            visible:      pigletWashPage.missedBubblesCount === 3
         }
 
         Image {
@@ -245,28 +166,32 @@ Item {
                     id:      bubble1MissedImage
                     width:   29
                     height:  29
-                    source:  "qrc:/resources/images/piglet_wash/missed_bubble_grayed.png"
+                    source:  pigletWashPage.missedBubblesCount > 0 ? "qrc:/resources/images/piglet_wash/missed_bubble.png" :
+                                                                     "qrc:/resources/images/piglet_wash/missed_bubble_grayed.png"
                 }
 
                 Image {
                     id:      bubble2MissedImage
                     width:   29
                     height:  29
-                    source:  "qrc:/resources/images/piglet_wash/missed_bubble_grayed.png"
+                    source:  pigletWashPage.missedBubblesCount > 1 ? "qrc:/resources/images/piglet_wash/missed_bubble.png" :
+                                                                     "qrc:/resources/images/piglet_wash/missed_bubble_grayed.png"
                 }
 
                 Image {
                     id:      bubble3MissedImage
                     width:   29
                     height:  29
-                    source:  "qrc:/resources/images/piglet_wash/missed_bubble_grayed.png"
+                    source:  pigletWashPage.missedBubblesCount > 2 ? "qrc:/resources/images/piglet_wash/missed_bubble.png" :
+                                                                     "qrc:/resources/images/piglet_wash/missed_bubble_grayed.png"
                 }
 
                 Image {
                     id:      bubble4MissedImage
                     width:   29
                     height:  29
-                    source:  "qrc:/resources/images/piglet_wash/missed_bubble_grayed.png"
+                    source:  pigletWashPage.missedBubblesCount > 3 ? "qrc:/resources/images/piglet_wash/missed_bubble.png" :
+                                                                     "qrc:/resources/images/piglet_wash/missed_bubble_grayed.png"
                 }
             }
         }
@@ -277,12 +202,22 @@ Item {
             anchors.right:       parent.right
             anchors.topMargin:   30
             z:                   4
-            text:                "000000"
+            text:                textText(pigletWashPage.burstedBubblesCount)
             color:               "yellow"
             font.pixelSize:      32
             font.family:         "Courier"
             horizontalAlignment: Text.AlignRight
             verticalAlignment:   Text.AlignVCenter
+
+            function textText(bursted_bubbles) {
+                var score = bursted_bubbles + "";
+
+                while (score.length < 6) {
+                    score = "0" + score;
+                }
+
+                return score;
+            }
         }
 
         Text {
@@ -290,12 +225,22 @@ Item {
             anchors.top:         scoreText.bottom
             anchors.right:       parent.right
             z:                   4
-            text:                "000000"
+            text:                textText(pigletWashPage.highScore)
             color:               "red"
             font.pixelSize:      32
             font.family:         "Courier"
             horizontalAlignment: Text.AlignRight
             verticalAlignment:   Text.AlignVCenter
+
+            function textText(high_score) {
+                var score = high_score + "";
+
+                while (score.length < 6) {
+                    score = "0" + score;
+                }
+
+                return score;
+            }
         }
 
         Image {
