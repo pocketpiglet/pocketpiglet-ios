@@ -6,7 +6,6 @@
 #include <QtQml/QQmlContext>
 #include <QtQuickControls2/QQuickStyle>
 
-#include "admobhelper.h"
 #include "storehelper.h"
 #include "speechrecorder.h"
 
@@ -23,7 +22,6 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
 
-    engine.rootContext()->setContextProperty(QStringLiteral("AdMobHelper"), &AdMobHelper::GetInstance());
     engine.rootContext()->setContextProperty(QStringLiteral("StoreHelper"), &StoreHelper::GetInstance());
 
     QQuickStyle::setStyle("Default");

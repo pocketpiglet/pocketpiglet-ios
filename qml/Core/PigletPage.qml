@@ -10,25 +10,25 @@ import "Piglet"
 Item {
     id: pigletPage
 
-    readonly property bool appInForeground:          Qt.application.state === Qt.ApplicationActive
-    readonly property bool pageActive:               StackView.status === StackView.Active
-    readonly property bool rewardBasedVideoAdActive: AdMobHelper.rewardBasedVideoAdActive
+    readonly property bool appInForeground:     Qt.application.state === Qt.ApplicationActive
+    readonly property bool pageActive:          StackView.status === StackView.Active
 
-    readonly property int diamondsMaxAmount:         10
+    readonly property int diamondsMaxAmount:    10
+    readonly property int diamondsIncAmount:    5
 
-    readonly property real accelShakeThreshold:      50.0
+    readonly property real accelShakeThreshold: 50.0
 
-    property bool animationEnabled:                  false
+    property bool animationEnabled:             false
 
-    property int diamondsAmount:                     0
+    property int diamondsAmount:                0
 
-    property double lastGameTime:                    (new Date()).getTime()
+    property double lastGameTime:               (new Date()).getTime()
 
-    property string nextAnimation:                   ""
-    property string wantedGame:                      ""
+    property string nextAnimation:              ""
+    property string wantedGame:                 ""
 
     onAppInForegroundChanged: {
-        if (appInForeground && pageActive && !rewardBasedVideoAdActive) {
+        if (appInForeground && pageActive) {
             if (!pigletSpeechAnimatedSprite.running) {
                 animationEnabled = true;
 
@@ -37,16 +37,12 @@ Item {
 
             pigletRandomAnimationTimer.restart();
         } else {
-            if (!appInForeground && rewardBasedVideoAdActive) {
-                Qt.quit();
-            } else {
-                animationEnabled = false;
-            }
+            animationEnabled = false;
         }
     }
 
     onPageActiveChanged: {
-        if (appInForeground && pageActive && !rewardBasedVideoAdActive) {
+        if (appInForeground && pageActive) {
             if (!pigletSpeechAnimatedSprite.running) {
                 animationEnabled = true;
 
@@ -55,29 +51,7 @@ Item {
 
             pigletRandomAnimationTimer.restart();
         } else {
-            if (!appInForeground && rewardBasedVideoAdActive) {
-                Qt.quit();
-            } else {
-                animationEnabled = false;
-            }
-        }
-    }
-
-    onRewardBasedVideoAdActiveChanged: {
-        if (appInForeground && pageActive && !rewardBasedVideoAdActive) {
-            if (!pigletSpeechAnimatedSprite.running) {
-                animationEnabled = true;
-
-                pigletAnimationTimer.restart();
-            }
-
-            pigletRandomAnimationTimer.restart();
-        } else {
-            if (!appInForeground && rewardBasedVideoAdActive) {
-                Qt.quit();
-            } else {
-                animationEnabled = false;
-            }
+            animationEnabled = false;
         }
     }
 
@@ -160,19 +134,11 @@ Item {
         }
     }
 
-    function videoAdDidReward(type, amount) {
-        var old_diamonds_amount = diamondsAmount;
-
-        diamondsAmount = Math.min(diamondsAmount + amount, diamondsMaxAmount);
-
-        newDiamondsDialog.open(diamondsAmount - old_diamonds_amount);
-    }
-
     Audio {
         id:     audio
         volume: 1.0
-        muted:  !pigletPage.appInForeground         || !pigletPage.pageActive ||
-                pigletPage.rewardBasedVideoAdActive || speechAudio.playbackState === Audio.PlayingState
+        muted:  !pigletPage.appInForeground || !pigletPage.pageActive ||
+                speechAudio.playbackState === Audio.PlayingState
 
         property string audioSource: ""
 
@@ -193,8 +159,8 @@ Item {
     Audio {
         id:     speechAudio
         volume: 1.0
-        muted:  !pigletPage.appInForeground         || !pigletPage.pageActive ||
-                pigletPage.rewardBasedVideoAdActive || audio.playbackState === Audio.PlayingState
+        muted:  !pigletPage.appInForeground || !pigletPage.pageActive ||
+                audio.playbackState === Audio.PlayingState
 
         property bool playbackWasStarted: false
 
@@ -228,9 +194,9 @@ Item {
         sampleRateMultiplier: 1.5
         minVoiceDuration:     500
         minSilenceDuration:   100
-        active:               pigletPage.appInForeground           && pigletPage.pageActive &&
-                              !pigletPage.rewardBasedVideoAdActive && audio.playbackState       !== Audio.PlayingState &&
-                                                                      speechAudio.playbackState !== Audio.PlayingState
+        active:               pigletPage.appInForeground && pigletPage.pageActive &&
+                              audio.playbackState       !== Audio.PlayingState &&
+                              speechAudio.playbackState !== Audio.PlayingState
 
         onError: {
             console.log(errorString);
@@ -857,8 +823,12 @@ Item {
         id: purchaseDialog
         z:  1
 
-        onWatchVideo: {
-            AdMobHelper.showRewardBasedVideoAd();
+        onGetDiamonds: {
+            var old_diamonds_amount = pigletPage.diamondsAmount;
+
+            pigletPage.diamondsAmount = Math.min(pigletPage.diamondsAmount + pigletPage.diamondsIncAmount, pigletPage.diamondsMaxAmount);
+
+            newDiamondsDialog.open(pigletPage.diamondsAmount - old_diamonds_amount);
         }
 
         onPurchaseFullVersion: {
@@ -884,14 +854,14 @@ Item {
         z:  1
 
         onPass: {
-            purchaseDialog.open(AdMobHelper.rewardBasedVideoAdReady && pigletPage.diamondsAmount < pigletPage.diamondsMaxAmount);
+            purchaseDialog.open(pigletPage.diamondsAmount < pigletPage.diamondsMaxAmount);
         }
     }
 
     Accelerometer {
         id:       accelerometer
         dataRate: 10
-        active:   pigletPage.appInForeground && pigletPage.pageActive && !pigletPage.rewardBasedVideoAdActive
+        active:   pigletPage.appInForeground && pigletPage.pageActive
 
         property real lastReadingX: 0.0
         property real lastReadingY: 0.0
@@ -973,8 +943,6 @@ Item {
     }
 
     Component.onCompleted: {
-        AdMobHelper.rewardBasedVideoAdDidReward.connect(videoAdDidReward);
-
         diamondsAmount = parseInt(mainWindow.getSetting("PigletDiamondsAmount", diamondsMaxAmount.toString(10)), 10);
 
         animationSpriteSequence.cacheAnimation("qrc:/resources/animations/piglet/piglet_eats_candy.jpg",

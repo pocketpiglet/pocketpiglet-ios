@@ -5,15 +5,15 @@ MultiPointTouchArea {
     anchors.centerIn: parent
     visible:          false
 
-    readonly property int parentWidth:    parent.width
-    readonly property int parentHeight:   parent.height
+    readonly property int parentWidth:     parent.width
+    readonly property int parentHeight:    parent.height
 
-    property bool enableWatchVideoButton: true
+    property bool enableGetDiamondsButton: true
 
     signal opened()
     signal closed()
 
-    signal watchVideo()
+    signal getDiamonds()
     signal purchaseFullVersion()
     signal restorePurchases()
     signal cancel()
@@ -54,9 +54,9 @@ MultiPointTouchArea {
         }
     }
 
-    function open(enable_watch_video_button) {
-        visible                = true;
-        enableWatchVideoButton = enable_watch_video_button;
+    function open(enable_get_diamonds_button) {
+        visible                 = true;
+        enableGetDiamondsButton = enable_get_diamonds_button;
 
         opened();
     }
@@ -78,18 +78,18 @@ MultiPointTouchArea {
             spacing:          8
 
             Image {
-                id:     watchVideoButtonImage
-                source: purchaseDialog.enableWatchVideoButton ? "qrc:/resources/images/dialog/purchase_dialog_button.png" :
-                                                                "qrc:/resources/images/dialog/purchase_dialog_button_disabled.png"
+                id:     getDiamondsButtonImage
+                source: purchaseDialog.enableGetDiamondsButton ? "qrc:/resources/images/dialog/purchase_dialog_button.png" :
+                                                                 "qrc:/resources/images/dialog/purchase_dialog_button_disabled.png"
 
                 MouseArea {
                     anchors.fill: parent
-                    enabled:      purchaseDialog.enableWatchVideoButton
+                    enabled:      purchaseDialog.enableGetDiamondsButton
 
                     onClicked: {
                         purchaseDialog.visible = false;
 
-                        purchaseDialog.watchVideo();
+                        purchaseDialog.getDiamonds();
                         purchaseDialog.closed();
                     }
                 }
@@ -101,21 +101,21 @@ MultiPointTouchArea {
                     spacing:      4
 
                     Image {
-                        id:                     watchVideoImage
+                        id:                     getDiamondsImage
                         anchors.verticalCenter: parent.verticalCenter
                         width:                  sourceSize.width * (height / sourceSize.height)
                         height:                 parent.height - 8
-                        source:                 purchaseDialog.enableWatchVideoButton ? "qrc:/resources/images/dialog/purchase_dialog_watch.png" :
-                                                                                        "qrc:/resources/images/dialog/purchase_dialog_watch_disabled.png"
+                        source:                 purchaseDialog.enableGetDiamondsButton ? "qrc:/resources/images/dialog/purchase_dialog_get_diamonds.png" :
+                                                                                         "qrc:/resources/images/dialog/purchase_dialog_get_diamonds_disabled.png"
                         fillMode:               Image.PreserveAspectFit
                     }
 
                     Text {
                         anchors.verticalCenter: parent.verticalCenter
-                        width:                  parent.width - watchVideoImage.width - parent.spacing -
+                        width:                  parent.width - getDiamondsImage.width - parent.spacing -
                                                 parent.leftPadding - parent.rightPadding
                         height:                 parent.height - 8
-                        text:                   qsTr("Watch video ad")
+                        text:                   qsTr("Get diamonds")
                         color:                  "black"
                         font.pointSize:         16
                         font.family:            "Helvetica"
