@@ -12,18 +12,19 @@ Column {
 
     signal addCurrency()
 
-    onAmountChanged: {
-        if (amount > 0) {
-            currencyButtonImage.source = sourceNormal;
-        } else {
-            currencyButtonImage.source = sourceHighlighted;
-        }
-    }
-
     Image {
         id:     currencyButtonImage
         width:  currencyButton.imageWidth
         height: currencyButton.imageHeight
+        source: imageToShow(currencyButton.amount)
+
+        function imageToShow(amount) {
+            if (amount > 0) {
+                return currencyButton.sourceNormal;
+            } else {
+                return currencyButton.sourceHighlighted;
+            }
+        }
 
         MouseArea {
             anchors.fill: parent
@@ -52,14 +53,6 @@ Column {
             verticalAlignment:   Text.AlignVCenter
             fontSizeMode:        Text.Fit
             minimumPixelSize:    8
-        }
-    }
-
-    Component.onCompleted: {
-        if (amount > 0) {
-            currencyButtonImage.source = sourceNormal;
-        } else {
-            currencyButtonImage.source = sourceHighlighted;
         }
     }
 }

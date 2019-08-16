@@ -1,7 +1,8 @@
 import QtQuick 2.12
 
 Image {
-    id: gameButton
+    id:     gameButton
+    source: sourceNormal
 
     property url sourceNormal:      ""
     property url sourceHighlighted: ""
@@ -9,11 +10,11 @@ Image {
     signal startGame()
 
     function highlightButton() {
-        source = sourceHighlighted;
+        source = Qt.binding(function() { return gameButton.sourceHighlighted; });
     }
 
     function unhighlightButton() {
-        source = sourceNormal;
+        source = Qt.binding(function() { return gameButton.sourceNormal; });
     }
 
     MouseArea {
@@ -23,9 +24,5 @@ Image {
         onClicked: {
             gameButton.startGame();
         }
-    }
-
-    Component.onCompleted: {
-        source = sourceNormal;
     }
 }
