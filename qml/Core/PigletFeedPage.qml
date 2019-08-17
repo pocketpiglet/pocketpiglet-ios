@@ -57,7 +57,7 @@ Item {
         }
     }
 
-    function beginGame() {
+    function startGame() {
         currentLevel = 1;
 
         refrigerator.prepareOrder(maximumLevel + 2);
@@ -139,7 +139,7 @@ Item {
                 backgroundAnimatedImage.visible       = false;
                 backgroundEatingAnimatedImage.visible = true;
 
-                eatSandwichTimer.start();
+                sandwich.eatSandwich();
             }
 
             onAllItemsEaten: {
@@ -227,7 +227,7 @@ Item {
                                     refrigerator.refrigeratorType        = "easy";
                                     complexitySelectionRectangle.visible = false;
 
-                                    pigletFeedPage.beginGame();
+                                    pigletFeedPage.startGame();
 
                                     newLevelNotificationDialog.open();
                                 }
@@ -249,7 +249,7 @@ Item {
                                     refrigerator.refrigeratorType        = "medium";
                                     complexitySelectionRectangle.visible = false;
 
-                                    pigletFeedPage.beginGame();
+                                    pigletFeedPage.startGame();
 
                                     newLevelNotificationDialog.open();
                                 }
@@ -271,7 +271,7 @@ Item {
                                     refrigerator.refrigeratorType        = "hard";
                                     complexitySelectionRectangle.visible = false;
 
-                                    pigletFeedPage.beginGame();
+                                    pigletFeedPage.startGame();
 
                                     newLevelNotificationDialog.open();
                                 }
@@ -314,16 +314,16 @@ Item {
         onOpened: {
             audio.playAudio("qrc:/resources/sound/piglet_feed/new_level.wav");
 
-            newLevelBeginTimer.start();
+            newLevelStartTimer.start();
         }
 
         onClosed: {
-            newLevelBeginTimer.stop();
+            newLevelStartTimer.stop();
 
             pigletFeedPage.allowLevelRestart = true;
 
             sandwich.newSandwich(currentLevel + 2);
-            refrigerator.beginOrder(currentLevel + 2);
+            refrigerator.startOrder(currentLevel + 2);
         }
     }
 
@@ -370,16 +370,7 @@ Item {
     }
 
     Timer {
-        id:       eatSandwichTimer
-        interval: 100
-
-        onTriggered: {
-            sandwich.eatSandwich();
-        }
-    }
-
-    Timer {
-        id:       newLevelBeginTimer
+        id:       newLevelStartTimer
         interval: 3000
 
         onTriggered: {

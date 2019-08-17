@@ -30,11 +30,9 @@ Item {
 
                 gameStartedNotificationDialog.open();
             } else if (allowGameRestart) {
-                pigletCreationTimer.start();
+                createPiglet();
             }
         } else {
-            pigletCreationTimer.stop();
-
             if (currentPiglet !== null) {
                 currentPiglet.destroy();
 
@@ -50,11 +48,9 @@ Item {
 
                 gameStartedNotificationDialog.open();
             } else if (allowGameRestart) {
-                pigletCreationTimer.start();
+                createPiglet();
             }
         } else {
-            pigletCreationTimer.stop();
-
             if (currentPiglet !== null) {
                 currentPiglet.destroy();
 
@@ -67,7 +63,7 @@ Item {
         if (foundPigletsCount > 0) {
             audio.playAudio("qrc:/resources/sound/piglet_search/piglet_found.wav");
 
-            pigletCreationTimer.start();
+            createPiglet();
         }
     }
 
@@ -87,7 +83,7 @@ Item {
                 gameOverQueryDialog.open();
             }
         } else if (missedPigletsCount > 0) {
-            pigletCreationTimer.start();
+            createPiglet();
         }
     }
 
@@ -95,14 +91,37 @@ Item {
         destroy();
     }
 
+    function createPiglet() {
+        var mseconds = 30000 - (foundPigletsCount + missedPigletsCount) * 2000;
+
+        if (mseconds < 3000) {
+            mseconds = 3000;
+        }
+
+        currentPiglet = Qt.createComponent("PigletSearch/Piglet.qml").createObject(backgroundRectangle, {"z": 5});
+
+        currentPiglet.azimuth  = Math.random() * 180;
+        currentPiglet.zenith   = Math.random() * 45 + 45;
+        currentPiglet.waitTime = mseconds;
+
+        currentPiglet.pigletFound.connect(handlePigletFinding);
+        currentPiglet.pigletMissed.connect(handlePigletMiss);
+
+        currentPiglet.updatePosition(compass.lastAzimuth, rotationSensor.lastZenith);
+
+        countdownTimer.restart();
+    }
+
     function handlePigletFinding() {
+        currentPiglet = null;
+
         foundPigletsCount = foundPigletsCount + 1;
-        currentPiglet     = null;
     }
 
     function handlePigletMiss() {
+        currentPiglet = null;
+
         missedPigletsCount = missedPigletsCount + 1;
-        currentPiglet      = null;
     }
 
     Audio {
@@ -417,8 +436,6 @@ Item {
                 anchors.fill: parent
 
                 onClicked: {
-                    pigletCreationTimer.stop();
-
                     if (pigletSearchPage.currentPiglet !== null) {
                         pigletSearchPage.currentPiglet.destroy();
 
@@ -508,7 +525,7 @@ Item {
             pigletSearchPage.foundPigletsCount  = 0;
             pigletSearchPage.missedPigletsCount = 0;
 
-            pigletCreationTimer.start();
+            pigletSearchPage.createPiglet();
         }
     }
 
@@ -558,32 +575,6 @@ Item {
 
         onTriggered: {
            gameStartedNotificationDialog.close();
-        }
-    }
-
-    Timer {
-        id:       pigletCreationTimer
-        interval: 100
-
-        onTriggered: {
-            var mseconds = 30000 - (pigletSearchPage.foundPigletsCount + pigletSearchPage.missedPigletsCount) * 2000;
-
-            if (mseconds < 3000) {
-                mseconds = 3000;
-            }
-
-            pigletSearchPage.currentPiglet = Qt.createComponent("PigletSearch/Piglet.qml").createObject(backgroundRectangle, {"z": 5});
-
-            pigletSearchPage.currentPiglet.azimuth  = Math.random() * 180;
-            pigletSearchPage.currentPiglet.zenith   = Math.random() * 45 + 45;
-            pigletSearchPage.currentPiglet.waitTime = mseconds;
-
-            pigletSearchPage.currentPiglet.pigletFound.connect(pigletSearchPage.handlePigletFinding);
-            pigletSearchPage.currentPiglet.pigletMissed.connect(pigletSearchPage.handlePigletMiss);
-
-            pigletSearchPage.currentPiglet.updatePosition(compass.lastAzimuth, rotationSensor.lastZenith);
-
-            countdownTimer.restart();
         }
     }
 

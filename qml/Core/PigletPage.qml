@@ -32,7 +32,7 @@ Item {
             if (!pigletSaysAnimatedSprite.running) {
                 animationEnabled = true;
 
-                pigletAnimationTimer.restart();
+                performAnimation();
             }
 
             pigletRandomAnimationTimer.restart();
@@ -46,7 +46,7 @@ Item {
             if (!pigletSaysAnimatedSprite.running) {
                 animationEnabled = true;
 
-                pigletAnimationTimer.restart();
+                performAnimation();
             }
 
             pigletRandomAnimationTimer.restart();
@@ -78,42 +78,44 @@ Item {
     }
 
     function performAnimation() {
-        if (nextAnimation === "piglet_looks_around") {
-            animationSpriteSequence.playAnimation("qrc:/resources/animations/piglet/piglet_looks_around.jpg",
-                                                  "", nextAnimation, 55, 15);
-        } else if (nextAnimation === "piglet_laughs") {
-            animationSpriteSequence.playAnimation("qrc:/resources/animations/piglet/piglet_laughs.jpg",
-                                                  "qrc:/resources/sound/piglet/piglet_laughs.wav", nextAnimation, 55, 15);
-        } else if (nextAnimation === "piglet_in_sorrow"){
-            animationSpriteSequence.playAnimation("qrc:/resources/animations/piglet/piglet_in_sorrow.jpg",
-                                                  "", nextAnimation, 105, 15);
-        } else if (nextAnimation === "piglet_eats_candy") {
-            animationSpriteSequence.playAnimation("qrc:/resources/animations/piglet/piglet_eats_candy.jpg",
-                                                  "qrc:/resources/sound/piglet/piglet_eats_candy.wav", nextAnimation, 75, 15);
-        } else if (nextAnimation === "piglet_eats_cake") {
-            animationSpriteSequence.playAnimation("qrc:/resources/animations/piglet/piglet_eats_cake.jpg",
-                                                  "qrc:/resources/sound/piglet/piglet_eats_cake.wav", nextAnimation, 115, 15);
-        } else if (nextAnimation === "piglet_falls") {
-            animationSpriteSequence.playAnimation("qrc:/resources/animations/piglet/piglet_falls.jpg",
-                                                  "qrc:/resources/sound/piglet/piglet_falls.wav", nextAnimation, 80, 15);
-        } else if (nextAnimation === "piglet_feed_game_finished") {
-            animationSpriteSequence.playAnimation("qrc:/resources/animations/piglet/piglet_feed_game_finished.jpg",
-                                                  "qrc:/resources/sound/piglet/piglet_feed_game_finished.wav", nextAnimation, 66, 15);
-        } else if (nextAnimation === "piglet_wash_game_finished") {
-            animationSpriteSequence.playAnimation("qrc:/resources/animations/piglet/piglet_wash_game_finished.jpg",
-                                                  "qrc:/resources/sound/piglet/piglet_wash_game_finished.wav", nextAnimation, 56, 15);
-        } else {
-            animationSpriteSequence.playAnimation("qrc:/resources/animations/piglet/piglet_blinks.jpg",
-                                                  "", "piglet_blinks", 40, 15);
-        }
+        if (animationEnabled) {
+            if (nextAnimation === "piglet_looks_around") {
+                animationSpriteSequence.playAnimation("qrc:/resources/animations/piglet/piglet_looks_around.jpg",
+                                                      "", nextAnimation, 55, 15);
+            } else if (nextAnimation === "piglet_laughs") {
+                animationSpriteSequence.playAnimation("qrc:/resources/animations/piglet/piglet_laughs.jpg",
+                                                      "qrc:/resources/sound/piglet/piglet_laughs.wav", nextAnimation, 55, 15);
+            } else if (nextAnimation === "piglet_in_sorrow"){
+                animationSpriteSequence.playAnimation("qrc:/resources/animations/piglet/piglet_in_sorrow.jpg",
+                                                      "", nextAnimation, 105, 15);
+            } else if (nextAnimation === "piglet_eats_candy") {
+                animationSpriteSequence.playAnimation("qrc:/resources/animations/piglet/piglet_eats_candy.jpg",
+                                                      "qrc:/resources/sound/piglet/piglet_eats_candy.wav", nextAnimation, 75, 15);
+            } else if (nextAnimation === "piglet_eats_cake") {
+                animationSpriteSequence.playAnimation("qrc:/resources/animations/piglet/piglet_eats_cake.jpg",
+                                                      "qrc:/resources/sound/piglet/piglet_eats_cake.wav", nextAnimation, 115, 15);
+            } else if (nextAnimation === "piglet_falls") {
+                animationSpriteSequence.playAnimation("qrc:/resources/animations/piglet/piglet_falls.jpg",
+                                                      "qrc:/resources/sound/piglet/piglet_falls.wav", nextAnimation, 80, 15);
+            } else if (nextAnimation === "piglet_feed_game_finished") {
+                animationSpriteSequence.playAnimation("qrc:/resources/animations/piglet/piglet_feed_game_finished.jpg",
+                                                      "qrc:/resources/sound/piglet/piglet_feed_game_finished.wav", nextAnimation, 66, 15);
+            } else if (nextAnimation === "piglet_wash_game_finished") {
+                animationSpriteSequence.playAnimation("qrc:/resources/animations/piglet/piglet_wash_game_finished.jpg",
+                                                      "qrc:/resources/sound/piglet/piglet_wash_game_finished.wav", nextAnimation, 56, 15);
+            } else {
+                animationSpriteSequence.playAnimation("qrc:/resources/animations/piglet/piglet_blinks.jpg",
+                                                      "", "piglet_blinks", 40, 15);
+            }
 
-        nextAnimation = "";
+            nextAnimation = "";
+        }
     }
 
     function restartAnimation() {
         animationSpriteSequence.running = false;
 
-        pigletAnimationTimer.restart();
+        performAnimation();
     }
 
     function stopAnimation() {
@@ -327,7 +329,7 @@ Item {
                     if (running && currentSprite === "animationFinishSprite") {
                         running = false;
 
-                        pigletAnimationTimer.start();
+                        pigletPage.performAnimation();
                     }
                 }
 
@@ -870,17 +872,6 @@ Item {
             lastReadingX = reading.x;
             lastReadingY = reading.y;
             lastReadingZ = reading.z;
-        }
-    }
-
-    Timer {
-        id:       pigletAnimationTimer
-        interval: 100
-
-        onTriggered: {
-            if (pigletPage.animationEnabled) {
-                pigletPage.performAnimation();
-            }
         }
     }
 

@@ -37,7 +37,7 @@ Item {
         }
     }
 
-    function beginGame() {
+    function startGame() {
         puzzleSolved = false;
 
         PigletPuzzlePageScript.createMap(pigletPuzzlePage.puzzleComplexity);
@@ -832,7 +832,7 @@ Item {
                                     pigletPuzzlePage.puzzleType      = "heart_balloon";
                                     puzzleSelectionRectangle.visible = false;
 
-                                    beginGame();
+                                    pigletPuzzlePage.startGame();
                                 }
                             }
                         }
@@ -851,7 +851,7 @@ Item {
                                     pigletPuzzlePage.puzzleType      = "piglet_on_potty";
                                     puzzleSelectionRectangle.visible = false;
 
-                                    beginGame();
+                                    pigletPuzzlePage.startGame();
                                 }
                             }
                         }
@@ -870,7 +870,7 @@ Item {
                                     pigletPuzzlePage.puzzleType      = "watering_flowers";
                                     puzzleSelectionRectangle.visible = false;
 
-                                    beginGame();
+                                    pigletPuzzlePage.startGame();
                                 }
                             }
                         }

@@ -385,7 +385,7 @@ Rectangle {
         }
     }
 
-    function beginOrder(items_to_order) {
+    function startOrder(items_to_order) {
         foodItemsClickable    = false;
         orderedFoodItemsCount = items_to_order;
         currentFoodItemNum    = 0;
