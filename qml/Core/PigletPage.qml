@@ -34,8 +34,6 @@ Item {
 
                 performAnimation();
             }
-
-            pigletRandomAnimationTimer.restart();
         } else {
             animationEnabled = false;
         }
@@ -48,8 +46,6 @@ Item {
 
                 performAnimation();
             }
-
-            pigletRandomAnimationTimer.restart();
         } else {
             animationEnabled = false;
         }
@@ -871,6 +867,7 @@ Item {
 
     Timer {
         id:       pigletRandomAnimationTimer
+        running:  pigletPage.appInForeground && pigletPage.pageActive
         interval: 10000 + 5000 * Math.random()
         repeat:   true
 
