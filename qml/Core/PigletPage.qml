@@ -265,9 +265,9 @@ Item {
             Image {
                 id:               pigletIdleImage
                 anchors.centerIn: parent
+                z:                5
                 width:            parent.width
                 height:           parent.height
-                z:                5
                 source:           "qrc:/resources/images/piglet/piglet_idle.jpg"
                 fillMode:         Image.PreserveAspectCrop
 
@@ -297,9 +297,9 @@ Item {
             SpriteSequence {
                 id:               animationSpriteSequence
                 anchors.centerIn: parent
+                z:                running ? pigletIdleImage.z + 1 : pigletIdleImage.z - 1
                 width:            pigletIdleImage.width
                 height:           pigletIdleImage.height
-                z:                running ? pigletIdleImage.z + 1 : pigletIdleImage.z - 1
                 running:          false
 
                 readonly property int animationFrameWidth:          360
@@ -471,9 +471,9 @@ Item {
             Image {
                 id:               pigletListenImage
                 anchors.centerIn: parent
+                z:                pigletIdleImage.z - 1
                 width:            parent.width
                 height:           parent.height
-                z:                pigletIdleImage.z - 1
                 source:           "qrc:/resources/images/piglet/piglet_listen.jpg"
                 fillMode:         Image.PreserveAspectCrop
 
@@ -503,9 +503,9 @@ Item {
             AnimatedSprite {
                 id:               pigletVoiceFoundAnimatedSprite
                 anchors.centerIn: parent
+                z:                running ? pigletIdleImage.z + 1 : pigletIdleImage.z - 1
                 width:            pigletListenImage.width
                 height:           pigletListenImage.height
-                z:                running ? pigletIdleImage.z + 1 : pigletIdleImage.z - 1
                 running:          false
                 source:           "qrc:/resources/animations/piglet/piglet_voice_found.jpg"
                 frameCount:       5
@@ -536,9 +536,9 @@ Item {
             AnimatedSprite {
                 id:               pigletVoiceEndedAnimatedSprite
                 anchors.centerIn: parent
+                z:                running ? pigletIdleImage.z + 1 : pigletIdleImage.z - 1
                 width:            pigletListenImage.width
                 height:           pigletListenImage.height
-                z:                running ? pigletIdleImage.z + 1 : pigletIdleImage.z - 1
                 running:          false
                 source:           "qrc:/resources/animations/piglet/piglet_voice_ended.jpg"
                 frameCount:       5
@@ -580,9 +580,9 @@ Item {
             AnimatedSprite {
                 id:               pigletSpeechAnimatedSprite
                 anchors.centerIn: parent
+                z:                running ? pigletIdleImage.z + 1 : pigletIdleImage.z - 1
                 width:            pigletIdleImage.width
                 height:           pigletIdleImage.height
-                z:                running ? pigletIdleImage.z + 1 : pigletIdleImage.z - 1
                 running:          false
                 source:           "qrc:/resources/animations/piglet/piglet_speech.jpg"
                 frameCount:       4

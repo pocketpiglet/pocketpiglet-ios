@@ -84,9 +84,9 @@ MultiPointTouchArea {
         id:                       okButtonImage
         anchors.horizontalCenter: dialogImage.horizontalCenter
         anchors.verticalCenter:   dialogImage.bottom
+        z:                        1
         width:                    64
         height:                   64
-        z:                        1
         source:                   "qrc:/resources/images/dialog/ok.png"
 
         MouseArea {

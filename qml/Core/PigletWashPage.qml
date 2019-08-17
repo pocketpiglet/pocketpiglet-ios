@@ -152,9 +152,9 @@ Item {
             anchors.top:       parent.top
             anchors.left:      parent.left
             anchors.topMargin: 30
+            z:                 4
             width:             133
             height:            38
-            z:                 4
             source:            "qrc:/resources/images/piglet_wash/missed_bubbles_background.png"
 
             Row {
@@ -248,9 +248,9 @@ Item {
             anchors.bottom:       parent.bottom
             anchors.right:        parent.right
             anchors.bottomMargin: 30
+            z:                    10
             width:                64
             height:               64
-            z:                    10
             source:               "qrc:/resources/images/back.png"
 
             MouseArea {

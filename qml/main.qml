@@ -16,7 +16,7 @@ ApplicationWindow {
 
     property bool fullVersion:               false
 
-    signal screenOrientationUpdated(int orientation)
+    signal screenOrientationUpdated(int screenOrientation)
 
     onFullVersionChanged: {
         setSetting("FullVersion", fullVersion ? "true" : "false");

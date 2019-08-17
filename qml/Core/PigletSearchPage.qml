@@ -148,9 +148,9 @@ Item {
             anchors.top:       parent.top
             anchors.left:      parent.left
             anchors.topMargin: 30
+            z:                 1
             width:             133
             height:            38
-            z:                 1
             source:            "qrc:/resources/images/piglet_search/missed_piglets_background.png"
 
             Row {
@@ -273,9 +273,9 @@ Item {
             anchors.top:              highScoreText.bottom
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.topMargin:        8
+            z:                        1
             width:                    128
             height:                   32
-            z:                        1
             visible:                  pigletSearchPage.currentPiglet !== null &&
                                       pigletSearchPage.currentPiglet.y < 0 - pigletSearchPage.currentPiglet.height
             source:                   "qrc:/resources/images/piglet_search/turn_up.png"
@@ -307,9 +307,9 @@ Item {
             anchors.bottom:           timerText.top
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottomMargin:     8
+            z:                        1
             width:                    128
             height:                   32
-            z:                        1
             visible:                  pigletSearchPage.currentPiglet !== null &&
                                       pigletSearchPage.currentPiglet.y > backgroundRectangle.height
             source:                   "qrc:/resources/images/piglet_search/turn_down.png"
@@ -340,9 +340,9 @@ Item {
             id:                     turnLeftImage
             anchors.verticalCenter: parent.verticalCenter
             anchors.left:           parent.left
+            z:                      1
             width:                  32
             height:                 128
-            z:                      1
             visible:                pigletSearchPage.currentPiglet !== null &&
                                     pigletSearchPage.currentPiglet.x < 0 - pigletSearchPage.currentPiglet.width
             source:                 "qrc:/resources/images/piglet_search/turn_left.png"
@@ -373,9 +373,9 @@ Item {
             id:                     turnRightImage
             anchors.verticalCenter: parent.verticalCenter
             anchors.right:          parent.right
+            z:                      1
             width:                  32
             height:                 128
-            z:                      1
             visible:                pigletSearchPage.currentPiglet !== null &&
                                     pigletSearchPage.currentPiglet.x > backgroundRectangle.width
             source:                 "qrc:/resources/images/piglet_search/turn_right.png"
@@ -407,9 +407,9 @@ Item {
             anchors.bottom:       parent.bottom
             anchors.right:        parent.right
             anchors.bottomMargin: 30
+            z:                    10
             width:                64
             height:               64
-            z:                    10
             source:               "qrc:/resources/images/back.png"
 
             MouseArea {
