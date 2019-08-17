@@ -107,8 +107,8 @@ ApplicationWindow {
             if (depth > 0) {
                 currentItem.forceActiveFocus();
 
-                if (typeof currentItem.screenOrientationUpdated === "function") {
-                    mainWindow.screenOrientationUpdated.connect(currentItem.screenOrientationUpdated);
+                if (typeof currentItem.handleScreenOrientationUpdate === "function") {
+                    mainWindow.screenOrientationUpdated.connect(currentItem.handleScreenOrientationUpdate);
 
                     mainWindow.screenOrientationUpdated(mainWindow.screenOrientation);
                 }

@@ -10,8 +10,8 @@ MultiPointTouchArea {
     signal opened()
     signal closed()
 
-    signal pass()
-    signal cancel()
+    signal passed()
+    signal cancelled()
 
     function dialogWidth(rotation, parent_width, parent_height) {
         if (rotation === 0 || rotation === 180) {
@@ -42,7 +42,7 @@ MultiPointTouchArea {
     function close() {
         visible = false;
 
-        cancel();
+        cancelled();
         closed();
     }
 
@@ -65,7 +65,7 @@ MultiPointTouchArea {
                     Math.sqrt(Math.pow(touchPoint2.x - touchPoint2.startX, 2) + Math.pow(touchPoint2.y - touchPoint2.startY, 2)) > Math.min(width, height) / 2) {
                     parentalGateDialog.visible = false;
 
-                    parentalGateDialog.pass();
+                    parentalGateDialog.passed();
                     parentalGateDialog.closed();
                 }
             }
@@ -102,7 +102,7 @@ MultiPointTouchArea {
             onClicked: {
                 parentalGateDialog.visible = false;
 
-                parentalGateDialog.cancel();
+                parentalGateDialog.cancelled();
                 parentalGateDialog.closed();
             }
         }

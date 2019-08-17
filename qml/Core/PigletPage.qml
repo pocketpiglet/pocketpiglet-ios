@@ -59,7 +59,7 @@ Item {
         mainWindow.setSetting("PigletDiamondsAmount", diamondsAmount.toString(10));
     }
 
-    function gameFinished(game) {
+    function handleGameFinish(game) {
         lastGameTime = (new Date()).getTime();
 
         if (game === wantedGame) {
@@ -626,7 +626,7 @@ Item {
                 amount:            pigletPage.diamondsAmount
                 visible:           !mainWindow.fullVersion
 
-                onAddCurrency: {
+                onClicked: {
                     parentalGateDialog.open();
                 }
             }
@@ -647,14 +647,14 @@ Item {
                 sourceNormal:      "qrc:/resources/images/piglet/game_piglet_feed.png"
                 sourceHighlighted: "qrc:/resources/images/piglet/game_piglet_feed_highlighted.png"
 
-                onStartGame: {
+                onClicked: {
                     if (mainWindow.fullVersion || pigletPage.diamondsAmount > 0) {
                         var component = Qt.createComponent("PigletFeedPage.qml");
 
                         if (component.status === Component.Ready) {
                             var object = component.createObject(null);
 
-                            object.gameFinished.connect(pigletPage.gameFinished);
+                            object.gameFinished.connect(pigletPage.handleGameFinish);
 
                             mainStackView.push(object);
                         } else {
@@ -675,14 +675,14 @@ Item {
                 sourceNormal:      "qrc:/resources/images/piglet/game_piglet_wash.png"
                 sourceHighlighted: "qrc:/resources/images/piglet/game_piglet_wash_highlighted.png"
 
-                onStartGame: {
+                onClicked: {
                     if (mainWindow.fullVersion || pigletPage.diamondsAmount > 0) {
                         var component = Qt.createComponent("PigletWashPage.qml");
 
                         if (component.status === Component.Ready) {
                             var object = component.createObject(null);
 
-                            object.gameFinished.connect(pigletPage.gameFinished);
+                            object.gameFinished.connect(pigletPage.handleGameFinish);
 
                             mainStackView.push(object);
                         } else {
@@ -703,14 +703,14 @@ Item {
                 sourceNormal:      "qrc:/resources/images/piglet/game_piglet_puzzle.png"
                 sourceHighlighted: "qrc:/resources/images/piglet/game_piglet_puzzle_highlighted.png"
 
-                onStartGame: {
+                onClicked: {
                     if (mainWindow.fullVersion || pigletPage.diamondsAmount > 0) {
                         var component = Qt.createComponent("PigletPuzzlePage.qml");
 
                         if (component.status === Component.Ready) {
                             var object = component.createObject(null);
 
-                            object.gameFinished.connect(pigletPage.gameFinished);
+                            object.gameFinished.connect(pigletPage.handleGameFinish);
 
                             mainStackView.push(object);
                         } else {
@@ -731,14 +731,14 @@ Item {
                 sourceNormal:      "qrc:/resources/images/piglet/game_piglet_search.png"
                 sourceHighlighted: "qrc:/resources/images/piglet/game_piglet_search_highlighted.png"
 
-                onStartGame: {
+                onClicked: {
                     if (mainWindow.fullVersion || pigletPage.diamondsAmount > 0) {
                         var component = Qt.createComponent("PigletSearchPage.qml");
 
                         if (component.status === Component.Ready) {
                             var object = component.createObject(null);
 
-                            object.gameFinished.connect(pigletPage.gameFinished);
+                            object.gameFinished.connect(pigletPage.handleGameFinish);
 
                             mainStackView.push(object);
                         } else {
@@ -767,7 +767,7 @@ Item {
                 height: 64
                 source: "qrc:/resources/images/piglet/action_cake.png"
 
-                onStartAction: {
+                onClicked: {
                     if (mainWindow.fullVersion || pigletPage.diamondsAmount > 0) {
                         if (!pigletPage.isAnimationActive("piglet_eats_cake") && pigletPage.nextAnimation !== "piglet_eats_cake") {
                             pigletPage.nextAnimation = "piglet_eats_cake";
@@ -788,7 +788,7 @@ Item {
                 height: 64
                 source: "qrc:/resources/images/piglet/action_candy.png"
 
-                onStartAction: {
+                onClicked: {
                     if (mainWindow.fullVersion || pigletPage.diamondsAmount > 0) {
                         if (!pigletPage.isAnimationActive("piglet_eats_candy") && pigletPage.nextAnimation !== "piglet_eats_candy") {
                             pigletPage.nextAnimation = "piglet_eats_candy";
@@ -809,7 +809,7 @@ Item {
         id: purchaseDialog
         z:  1
 
-        onGetDiamonds: {
+        onGetDiamondsSelected: {
             var old_diamonds_amount = pigletPage.diamondsAmount;
 
             pigletPage.diamondsAmount = Math.min(pigletPage.diamondsAmount + pigletPage.diamondsIncAmount, pigletPage.diamondsMaxAmount);
@@ -817,11 +817,11 @@ Item {
             newDiamondsDialog.open(pigletPage.diamondsAmount - old_diamonds_amount);
         }
 
-        onPurchaseFullVersion: {
+        onPurchaseFullVersionSelected: {
             mainWindow.purchaseFullVersion();
         }
 
-        onRestorePurchases: {
+        onRestorePurchasesSelected: {
             mainWindow.restorePurchases();
         }
     }
@@ -839,7 +839,7 @@ Item {
         id: parentalGateDialog
         z:  1
 
-        onPass: {
+        onPassed: {
             purchaseDialog.open(pigletPage.diamondsAmount < pigletPage.diamondsMaxAmount);
         }
     }

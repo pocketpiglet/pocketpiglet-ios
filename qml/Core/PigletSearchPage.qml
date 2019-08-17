@@ -95,12 +95,12 @@ Item {
         destroy();
     }
 
-    function pigletFound() {
+    function handlePigletFinding() {
         foundPigletsCount = foundPigletsCount + 1;
         currentPiglet     = null;
     }
 
-    function pigletMissed() {
+    function handlePigletMiss() {
         missedPigletsCount = missedPigletsCount + 1;
         currentPiglet      = null;
     }
@@ -578,8 +578,8 @@ Item {
             pigletSearchPage.currentPiglet.zenith   = Math.random() * 45 + 45;
             pigletSearchPage.currentPiglet.waitTime = mseconds;
 
-            pigletSearchPage.currentPiglet.pigletFound.connect(pigletSearchPage.pigletFound);
-            pigletSearchPage.currentPiglet.pigletMissed.connect(pigletSearchPage.pigletMissed);
+            pigletSearchPage.currentPiglet.pigletFound.connect(pigletSearchPage.handlePigletFinding);
+            pigletSearchPage.currentPiglet.pigletMissed.connect(pigletSearchPage.handlePigletMiss);
 
             pigletSearchPage.currentPiglet.updatePosition(compass.lastAzimuth, rotationSensor.lastZenith);
 

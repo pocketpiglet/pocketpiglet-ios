@@ -4,26 +4,26 @@ function createBubbles(count) {
     for (var i = 0; i < count; i++) {
         var bubble = component.createObject(backgroundRectangle, {"z": 5});
 
-        bubble.bubbleBursted.connect(bubbleBursted);
-        bubble.bubbleMissed.connect(bubbleMissed);
-        bubble.bubbleDestroyed.connect(bubbleDestroyed);
+        bubble.bubbleBursted.connect(handleBubbleBurst);
+        bubble.bubbleMissed.connect(handleBubbleMiss);
+        bubble.bubbleDestroyed.connect(handleBubbleDestruction);
 
-        pigletWashPage.destroyBubbles.connect(bubble.destroyBubble);
+        pigletWashPage.bubbleCleanupRequested.connect(bubble.destroyBubble);
 
         pigletWashPage.visibleBubblesCount = pigletWashPage.visibleBubblesCount + 1;
     }
 }
 
-function bubbleBursted() {
+function handleBubbleBurst() {
     pigletWashPage.visibleBubblesCount = pigletWashPage.visibleBubblesCount - 1;
     pigletWashPage.burstedBubblesCount = pigletWashPage.burstedBubblesCount + 1;
 }
 
-function bubbleMissed() {
+function handleBubbleMiss() {
     pigletWashPage.visibleBubblesCount = pigletWashPage.visibleBubblesCount - 1;
     pigletWashPage.missedBubblesCount  = pigletWashPage.missedBubblesCount  + 1;
 }
 
-function bubbleDestroyed() {
+function handleBubbleDestruction() {
     pigletWashPage.visibleBubblesCount = pigletWashPage.visibleBubblesCount - 1;
 }

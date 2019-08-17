@@ -47,7 +47,7 @@ Item {
         destroy();
     }
 
-    function screenOrientationUpdated(screen_orientation) {
+    function handleScreenOrientationUpdate(screen_orientation) {
         if (pigletFeedPage) {
             if (screen_orientation === Qt.LandscapeOrientation) {
                 screenRotation = 90;

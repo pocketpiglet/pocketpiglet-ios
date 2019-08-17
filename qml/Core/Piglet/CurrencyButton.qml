@@ -10,7 +10,7 @@ Column {
     property url sourceNormal:      ""
     property url sourceHighlighted: ""
 
-    signal addCurrency()
+    signal clicked()
 
     Image {
         id:     currencyButtonImage
@@ -30,7 +30,7 @@ Column {
             anchors.fill: parent
 
             onClicked: {
-                currencyButton.addCurrency();
+                currencyButton.clicked();
             }
         }
     }

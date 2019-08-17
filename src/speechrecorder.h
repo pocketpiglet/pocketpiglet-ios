@@ -55,7 +55,7 @@ public:
     QString voiceFileURL() const;
 
 private slots:
-    void audioInputDeviceReadyRead();
+    void handleAudioInputDeviceReadyRead();
 
 signals:
     void activeChanged(bool active);

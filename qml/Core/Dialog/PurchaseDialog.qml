@@ -12,10 +12,10 @@ MultiPointTouchArea {
     signal opened()
     signal closed()
 
-    signal getDiamonds()
-    signal purchaseFullVersion()
-    signal restorePurchases()
-    signal cancel()
+    signal getDiamondsSelected()
+    signal purchaseFullVersionSelected()
+    signal restorePurchasesSelected()
+    signal cancelled()
 
     function dialogWidth(rotation, parent_width, parent_height) {
         if (rotation === 0 || rotation === 180) {
@@ -47,7 +47,7 @@ MultiPointTouchArea {
     function close() {
         visible = false;
 
-        cancel();
+        cancelled();
         closed();
     }
 
@@ -72,7 +72,7 @@ MultiPointTouchArea {
                     onClicked: {
                         purchaseDialog.visible = false;
 
-                        purchaseDialog.getDiamonds();
+                        purchaseDialog.getDiamondsSelected();
                         purchaseDialog.closed();
                     }
                 }
@@ -121,7 +121,7 @@ MultiPointTouchArea {
                     onClicked: {
                         purchaseDialog.visible = false;
 
-                        purchaseDialog.purchaseFullVersion();
+                        purchaseDialog.purchaseFullVersionSelected();
                         purchaseDialog.closed();
                     }
                 }
@@ -169,7 +169,7 @@ MultiPointTouchArea {
                     onClicked: {
                         purchaseDialog.visible = false;
 
-                        purchaseDialog.restorePurchases();
+                        purchaseDialog.restorePurchasesSelected();
                         purchaseDialog.closed();
                     }
                 }
@@ -224,7 +224,7 @@ MultiPointTouchArea {
             onClicked: {
                 purchaseDialog.visible = false;
 
-                purchaseDialog.cancel();
+                purchaseDialog.cancelled();
                 purchaseDialog.closed();
             }
         }

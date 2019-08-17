@@ -7,7 +7,7 @@ Image {
     property url sourceNormal:      ""
     property url sourceHighlighted: ""
 
-    signal startGame()
+    signal clicked()
 
     function highlightButton() {
         source = Qt.binding(function() { return gameButton.sourceHighlighted; });
@@ -22,7 +22,7 @@ Image {
         anchors.fill: parent
 
         onClicked: {
-            gameButton.startGame();
+            gameButton.clicked();
         }
     }
 }

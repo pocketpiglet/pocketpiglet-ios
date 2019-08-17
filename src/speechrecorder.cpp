@@ -138,7 +138,7 @@ QString SpeechRecorder::voiceFileURL() const
     return QUrl::fromLocalFile(VoiceFilePath).toString();
 }
 
-void SpeechRecorder::audioInputDeviceReadyRead()
+void SpeechRecorder::handleAudioInputDeviceReadyRead()
 {
     if (SampleRate != 0 && VadInstance != nullptr) {
         int frame_length = (SampleRate / 1000) * 30;
@@ -231,7 +231,7 @@ void SpeechRecorder::CreateAudioInput()
 
     AudioInputDevice = AudioInput->start();
 
-    connect(AudioInputDevice, &QIODevice::readyRead, this, &SpeechRecorder::audioInputDeviceReadyRead);
+    connect(AudioInputDevice, &QIODevice::readyRead, this, &SpeechRecorder::handleAudioInputDeviceReadyRead);
 }
 
 void SpeechRecorder::DeleteAudioInput()

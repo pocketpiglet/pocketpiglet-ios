@@ -24,7 +24,7 @@ Item {
     property double gameStartTime:          (new Date()).getTime()
 
     signal gameFinished(string game)
-    signal destroyBubbles()
+    signal bubbleCleanupRequested()
 
     onAppInForegroundChanged: {
         if (appInForeground && pageActive) {
@@ -38,7 +38,7 @@ Item {
         } else {
             bubbleCreationTimer.stop();
 
-            destroyBubbles();
+            bubbleCleanupRequested();
         }
     }
 
@@ -54,7 +54,7 @@ Item {
         } else {
             bubbleCreationTimer.stop();
 
-            destroyBubbles();
+            bubbleCleanupRequested();
         }
     }
 
@@ -68,7 +68,7 @@ Item {
         if (missedBubblesCount === 4) {
             bubbleCreationTimer.stop();
 
-            destroyBubbles();
+            bubbleCleanupRequested();
 
             pigletWashPage.allowGameRestart = false;
 
@@ -260,7 +260,7 @@ Item {
                 onClicked: {
                     bubbleCreationTimer.stop();
 
-                    pigletWashPage.destroyBubbles();
+                    pigletWashPage.bubbleCleanupRequested();
 
                     pigletWashPage.gameFinished("piglet_wash");
 
