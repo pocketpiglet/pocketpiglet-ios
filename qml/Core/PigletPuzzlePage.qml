@@ -42,7 +42,7 @@ Item {
 
         PigletPuzzlePageScript.createMap(pigletPuzzlePage.puzzleComplexity);
 
-        audio.playAudio("qrc:/resources/sound/piglet_puzzle/game_start.wav");
+        audio.playAudio("qrc:/resources/sound/piglet_puzzle/game_started.wav");
     }
 
     function elementClicked(element) {
@@ -51,7 +51,7 @@ Item {
 
             originalImage.blink();
 
-            audio.playAudio("qrc:/resources/sound/piglet_puzzle/game_complete.wav");
+            audio.playAudio("qrc:/resources/sound/piglet_puzzle/game_completed.wav");
         }
     }
 

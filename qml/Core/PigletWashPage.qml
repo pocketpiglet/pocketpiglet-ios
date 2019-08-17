@@ -31,7 +31,7 @@ Item {
             if (!pageInitialized) {
                 pageInitialized = true;
 
-                gameStartNotificationDialog.open();
+                gameStartedNotificationDialog.open();
             } else if (allowGameRestart) {
                 bubbleCreationTimer.start();
             }
@@ -47,7 +47,7 @@ Item {
             if (!pageInitialized) {
                 pageInitialized = true;
 
-                gameStartNotificationDialog.open();
+                gameStartedNotificationDialog.open();
             } else if (allowGameRestart) {
                 bubbleCreationTimer.start();
             }
@@ -60,7 +60,7 @@ Item {
 
     onBurstedBubblesCountChanged: {
         if (burstedBubblesCount > 0) {
-            audio.playAudio("qrc:/resources/sound/piglet_wash/bubble_burst.wav");
+            audio.playAudio("qrc:/resources/sound/piglet_wash/bubble_bursted.wav");
         }
     }
 
@@ -271,12 +271,12 @@ Item {
     }
 
     NotificationDialog {
-        id:   gameStartNotificationDialog
+        id:   gameStartedNotificationDialog
         z:    1
         text: qsTr("Your piglet wants to take a bath and play with soap bubbles! Help him to catch and pop as many bubbles as you can.")
 
         onOpened: {
-            audio.playAudio("qrc:/resources/sound/piglet_wash/game_start.wav");
+            audio.playAudio("qrc:/resources/sound/piglet_wash/game_started.wav");
 
             gameStartTimer.start();
         }
@@ -304,7 +304,7 @@ Item {
         }
 
         onYes: {
-            gameStartNotificationDialog.open();
+            gameStartedNotificationDialog.open();
         }
 
         onNo: {
@@ -324,7 +324,7 @@ Item {
         }
 
         onYes: {
-            gameStartNotificationDialog.open();
+            gameStartedNotificationDialog.open();
         }
 
         onNo: {
@@ -339,7 +339,7 @@ Item {
         interval: 3000
 
         onTriggered: {
-           gameStartNotificationDialog.close();
+           gameStartedNotificationDialog.close();
         }
     }
 

@@ -29,7 +29,7 @@ Item {
 
     onAppInForegroundChanged: {
         if (appInForeground && pageActive) {
-            if (!pigletSpeechAnimatedSprite.running) {
+            if (!pigletSaysAnimatedSprite.running) {
                 animationEnabled = true;
 
                 pigletAnimationTimer.restart();
@@ -43,7 +43,7 @@ Item {
 
     onPageActiveChanged: {
         if (appInForeground && pageActive) {
-            if (!pigletSpeechAnimatedSprite.running) {
+            if (!pigletSaysAnimatedSprite.running) {
                 animationEnabled = true;
 
                 pigletAnimationTimer.restart();
@@ -78,8 +78,8 @@ Item {
     }
 
     function performAnimation() {
-        if (nextAnimation === "piglet_look_around") {
-            animationSpriteSequence.playAnimation("qrc:/resources/animations/piglet/piglet_look_around.jpg",
+        if (nextAnimation === "piglet_looks_around") {
+            animationSpriteSequence.playAnimation("qrc:/resources/animations/piglet/piglet_looks_around.jpg",
                                                   "", nextAnimation, 55, 15);
         } else if (nextAnimation === "piglet_laughs") {
             animationSpriteSequence.playAnimation("qrc:/resources/animations/piglet/piglet_laughs.jpg",
@@ -103,8 +103,8 @@ Item {
             animationSpriteSequence.playAnimation("qrc:/resources/animations/piglet/piglet_wash_game_finished.jpg",
                                                   "qrc:/resources/sound/piglet/piglet_wash_game_finished.wav", nextAnimation, 56, 15);
         } else {
-            animationSpriteSequence.playAnimation("qrc:/resources/animations/piglet/piglet_eyes_blink.jpg",
-                                                  "", "piglet_eyes_blink", 40, 15);
+            animationSpriteSequence.playAnimation("qrc:/resources/animations/piglet/piglet_blinks.jpg",
+                                                  "", "piglet_blinks", 40, 15);
         }
 
         nextAnimation = "";
@@ -172,7 +172,7 @@ Item {
             if (playbackWasStarted && playbackState !== Audio.PlayingState) {
                 playbackWasStarted = false;
 
-                pigletSpeechAnimatedSprite.running = false;
+                pigletSaysAnimatedSprite.running = false;
             }
         }
 
@@ -469,12 +469,12 @@ Item {
             }
 
             Image {
-                id:               pigletListenImage
+                id:               pigletListensImage
                 anchors.centerIn: parent
                 z:                pigletIdleImage.z - 1
                 width:            parent.width
                 height:           parent.height
-                source:           "qrc:/resources/images/piglet/piglet_listen.jpg"
+                source:           "qrc:/resources/images/piglet/piglet_listens.jpg"
                 fillMode:         Image.PreserveAspectCrop
 
                 property bool geometrySettled: false
@@ -504,8 +504,8 @@ Item {
                 id:               pigletVoiceFoundAnimatedSprite
                 anchors.centerIn: parent
                 z:                running ? pigletIdleImage.z + 1 : pigletIdleImage.z - 1
-                width:            pigletListenImage.width
-                height:           pigletListenImage.height
+                width:            pigletListensImage.width
+                height:           pigletListensImage.height
                 running:          false
                 source:           "qrc:/resources/animations/piglet/piglet_voice_found.jpg"
                 frameCount:       5
@@ -517,7 +517,7 @@ Item {
 
                 onRunningChanged: {
                     if (!running) {
-                        pigletListenImage.z = pigletIdleImage.z + 1;
+                        pigletListensImage.z = pigletIdleImage.z + 1;
                     }
                 }
 
@@ -537,8 +537,8 @@ Item {
                 id:               pigletVoiceEndedAnimatedSprite
                 anchors.centerIn: parent
                 z:                running ? pigletIdleImage.z + 1 : pigletIdleImage.z - 1
-                width:            pigletListenImage.width
-                height:           pigletListenImage.height
+                width:            pigletListensImage.width
+                height:           pigletListensImage.height
                 running:          false
                 source:           "qrc:/resources/animations/piglet/piglet_voice_ended.jpg"
                 frameCount:       5
@@ -552,10 +552,10 @@ Item {
 
                 onRunningChanged: {
                     if (running) {
-                        pigletListenImage.z = pigletIdleImage.z - 1;
+                        pigletListensImage.z = pigletIdleImage.z - 1;
                     } else {
                         if (voiceRecorded) {
-                            pigletSpeechAnimatedSprite.playAnimation();
+                            pigletSaysAnimatedSprite.playAnimation();
                         } else {
                             pigletPage.animationEnabled = true;
 
@@ -578,13 +578,13 @@ Item {
             }
 
             AnimatedSprite {
-                id:               pigletSpeechAnimatedSprite
+                id:               pigletSaysAnimatedSprite
                 anchors.centerIn: parent
                 z:                running ? pigletIdleImage.z + 1 : pigletIdleImage.z - 1
                 width:            pigletIdleImage.width
                 height:           pigletIdleImage.height
                 running:          false
-                source:           "qrc:/resources/animations/piglet/piglet_speech.jpg"
+                source:           "qrc:/resources/animations/piglet/piglet_says.jpg"
                 frameCount:       4
                 frameWidth:       360
                 frameHeight:      640
@@ -916,7 +916,7 @@ Item {
                 }
 
                 if (pigletPage.wantedGame === "") {
-                    pigletPage.nextAnimation = "piglet_look_around";
+                    pigletPage.nextAnimation = "piglet_looks_around";
                 } else {
                     pigletPage.nextAnimation = "piglet_in_sorrow";
                 }

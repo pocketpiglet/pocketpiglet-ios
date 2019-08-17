@@ -97,10 +97,10 @@ Item {
         }
 
         AnimatedImage {
-            id:           backgroundEatAnimatedImage
+            id:           backgroundEatingAnimatedImage
             anchors.fill: parent
             z:            1
-            source:       "qrc:/resources/images/piglet_feed/background_eat.gif"
+            source:       "qrc:/resources/images/piglet_feed/background_eating.gif"
             fillMode:     Image.PreserveAspectCrop
             playing:      pigletFeedPage.appInForeground && pigletFeedPage.pageActive
             visible:      false
@@ -134,17 +134,17 @@ Item {
             sandwichScaleY: backgroundAnimatedImage.paintedHeight / backgroundAnimatedImage.sourceSize.height
 
             onAllItemsInPlace: {
-                audio.playAudio("qrc:/resources/sound/piglet_feed/sandwich_eat.wav");
+                audio.playAudio("qrc:/resources/sound/piglet_feed/sandwich_eating.wav");
 
-                backgroundAnimatedImage.visible    = false;
-                backgroundEatAnimatedImage.visible = true;
+                backgroundAnimatedImage.visible       = false;
+                backgroundEatingAnimatedImage.visible = true;
 
                 eatSandwichTimer.start();
             }
 
             onAllItemsEaten: {
-                backgroundAnimatedImage.visible    = true;
-                backgroundEatAnimatedImage.visible = false;
+                backgroundAnimatedImage.visible       = true;
+                backgroundEatingAnimatedImage.visible = false;
 
                 pigletFeedPage.allowLevelRestart = false;
 
@@ -153,7 +153,7 @@ Item {
 
                     newLevelNotificationDialog.open();
                 } else {
-                    gameCompleteQueryDialog.open();
+                    gameCompletedQueryDialog.open();
                 }
             }
         }
@@ -328,13 +328,13 @@ Item {
     }
 
     QueryDialog {
-        id:       gameCompleteQueryDialog
+        id:       gameCompletedQueryDialog
         z:        2
         rotation: pigletFeedPage.screenRotation
         text:     qsTr("Congratulations, you have just won the game! Do you want to play again?")
 
         onOpened: {
-            audio.playAudio("qrc:/resources/sound/piglet_feed/game_complete.wav");
+            audio.playAudio("qrc:/resources/sound/piglet_feed/game_completed.wav");
         }
 
         onYes: {

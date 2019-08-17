@@ -28,7 +28,7 @@ Item {
             if (!pageInitialized) {
                 pageInitialized = true;
 
-                gameStartNotificationDialog.open();
+                gameStartedNotificationDialog.open();
             } else if (allowGameRestart) {
                 pigletCreationTimer.start();
             }
@@ -48,7 +48,7 @@ Item {
             if (!pageInitialized) {
                 pageInitialized = true;
 
-                gameStartNotificationDialog.open();
+                gameStartedNotificationDialog.open();
             } else if (allowGameRestart) {
                 pigletCreationTimer.start();
             }
@@ -490,12 +490,12 @@ Item {
     }
 
     NotificationDialog {
-        id:   gameStartNotificationDialog
+        id:   gameStartedNotificationDialog
         z:    1
         text: qsTr("Your piglet wants to play hide-and-seek! Try to find him in your room using your phone's camera as fast as you can.")
 
         onOpened: {
-            audio.playAudio("qrc:/resources/sound/piglet_search/game_start.wav");
+            audio.playAudio("qrc:/resources/sound/piglet_search/game_started.wav");
 
             gameStartTimer.start();
         }
@@ -522,7 +522,7 @@ Item {
         }
 
         onYes: {
-            gameStartNotificationDialog.open();
+            gameStartedNotificationDialog.open();
         }
 
         onNo: {
@@ -542,7 +542,7 @@ Item {
         }
 
         onYes: {
-            gameStartNotificationDialog.open();
+            gameStartedNotificationDialog.open();
         }
 
         onNo: {
@@ -557,7 +557,7 @@ Item {
         interval: 3000
 
         onTriggered: {
-           gameStartNotificationDialog.close();
+           gameStartedNotificationDialog.close();
         }
     }
 
