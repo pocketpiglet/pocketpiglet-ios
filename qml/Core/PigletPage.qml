@@ -112,12 +112,6 @@ Item {
         }
     }
 
-    function restartAnimation() {
-        animationSpriteSequence.running = false;
-
-        performAnimation();
-    }
-
     function stopAnimation() {
         animationSpriteSequence.running = false;
     }
@@ -254,7 +248,7 @@ Item {
                         if (!pigletPage.isAnimationActive("piglet_laughs") && pigletPage.nextAnimation !== "piglet_laughs") {
                             pigletPage.nextAnimation = "piglet_laughs";
 
-                            pigletPage.restartAnimation();
+                            pigletPage.performAnimation();
                         }
 
                         pressX    = -1;
@@ -561,7 +555,7 @@ Item {
                         } else {
                             pigletPage.animationEnabled = true;
 
-                            pigletPage.restartAnimation();
+                            pigletPage.performAnimation();
                         }
                     }
                 }
@@ -600,7 +594,7 @@ Item {
                     } else {
                         pigletPage.animationEnabled = true;
 
-                        pigletPage.restartAnimation();
+                        pigletPage.performAnimation();
                     }
                 }
 
@@ -774,7 +768,7 @@ Item {
                         if (!pigletPage.isAnimationActive("piglet_eats_cake") && pigletPage.nextAnimation !== "piglet_eats_cake") {
                             pigletPage.nextAnimation = "piglet_eats_cake";
 
-                            pigletPage.restartAnimation();
+                            pigletPage.performAnimation();
 
                             pigletPage.diamondsAmount = Math.max(pigletPage.diamondsAmount - 1, 0);
                         }
@@ -795,7 +789,7 @@ Item {
                         if (!pigletPage.isAnimationActive("piglet_eats_candy") && pigletPage.nextAnimation !== "piglet_eats_candy") {
                             pigletPage.nextAnimation = "piglet_eats_candy";
 
-                            pigletPage.restartAnimation();
+                            pigletPage.performAnimation();
 
                             pigletPage.diamondsAmount = Math.max(pigletPage.diamondsAmount - 1, 0);
                         }
@@ -864,7 +858,7 @@ Item {
                     if (!pigletPage.isAnimationActive("piglet_falls") && pigletPage.nextAnimation !== "piglet_falls") {
                         pigletPage.nextAnimation = "piglet_falls";
 
-                        pigletPage.restartAnimation();
+                        pigletPage.performAnimation();
                     }
                 }
             }
