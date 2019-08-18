@@ -16,9 +16,7 @@ MultiPointTouchArea {
     signal no()
 
     function dialogWidth(rotation, parent_width, parent_height) {
-        if (rotation === 0 || rotation === 180) {
-            return parent_width;
-        } else if (rotation === 90 || rotation === 270) {
+        if (rotation === 90 || rotation === 270) {
             return parent_height;
         } else {
             return parent_width;
@@ -26,9 +24,7 @@ MultiPointTouchArea {
     }
 
     function dialogHeight(rotation, parent_width, parent_height) {
-        if (rotation === 0 || rotation === 180) {
-            return parent_height;
-        } else if (rotation === 90 || rotation === 270) {
+        if (rotation === 90 || rotation === 270) {
             return parent_width;
         } else {
             return parent_height;
