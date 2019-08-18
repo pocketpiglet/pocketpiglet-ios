@@ -18,12 +18,12 @@ ApplicationWindow {
 
     signal screenOrientationUpdated(int screenOrientation)
 
-    onFullVersionChanged: {
-        setSetting("FullVersion", fullVersion ? "true" : "false");
-    }
-
     onScreenOrientationChanged: {
         screenOrientationUpdated(screenOrientation);
+    }
+
+    onFullVersionChanged: {
+        setSetting("FullVersion", fullVersion ? "true" : "false");
     }
 
     function setSetting(key, value) {
