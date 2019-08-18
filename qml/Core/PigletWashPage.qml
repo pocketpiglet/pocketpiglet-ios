@@ -349,7 +349,15 @@ Item {
         repeat:   true
 
         onTriggered: {
-            var seconds = ((new Date()).getTime() - pigletWashPage.gameStartTime) / 1000;
+            var elapsed = (new Date()).getTime() - pigletWashPage.gameStartTime;
+
+            if (elapsed < 0) {
+                pigletWashPage.gameStartTime = (new Date()).getTime();
+
+                elapsed = 0;
+            }
+
+            var seconds = elapsed / 1000;
             var count   = 0;
 
             if (seconds < 25) {

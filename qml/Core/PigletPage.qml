@@ -873,7 +873,9 @@ Item {
 
         onTriggered: {
             if (pigletPage.nextAnimation === "") {
-                if ((new Date()).getTime() - pigletPage.lastGameTime > 60000) {
+                var elapsed = (new Date()).getTime() - pigletPage.lastGameTime;
+
+                if (elapsed < 0 || elapsed > 60000) {
                     if (pigletPage.wantedGame === "") {
                         var rand = Math.random();
 
