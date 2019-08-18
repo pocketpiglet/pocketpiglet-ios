@@ -122,7 +122,7 @@ Item {
 
     function unhighlightGameButtons() {
         for (var i = 0; i < gameButtonsColumn.children.length; i++) {
-            gameButtonsColumn.children[i].unhighlightButton();
+            gameButtonsColumn.children[i].highlighted = false;
         }
     }
 
@@ -882,19 +882,19 @@ Item {
                         if (rand < 0.25) {
                             pigletPage.wantedGame = "piglet_feed";
 
-                            pigletFeedGameButton.highlightButton();
+                            pigletFeedGameButton.highlighted = true;
                         } else if (rand < 0.50) {
                             pigletPage.wantedGame = "piglet_wash";
 
-                            pigletWashGameButton.highlightButton();
+                            pigletWashGameButton.highlighted = true;
                         } else if (rand < 0.75) {
                             pigletPage.wantedGame = "piglet_puzzle";
 
-                            pigletPuzzleGameButton.highlightButton();
+                            pigletPuzzleGameButton.highlighted = true;
                         } else {
                             pigletPage.wantedGame = "piglet_search";
 
-                            pigletSearchGameButton.highlightButton();
+                            pigletSearchGameButton.highlighted = true;
                         }
                     }
                 }

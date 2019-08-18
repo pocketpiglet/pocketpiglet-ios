@@ -171,6 +171,7 @@ Item {
             width:             133
             height:            38
             source:            "qrc:/resources/images/piglet_search/missed_piglets_background.png"
+            fillMode:          Image.PreserveAspectFit
 
             Row {
                 id:               missedPigletsRow
@@ -178,35 +179,39 @@ Item {
                 spacing:          4
 
                 Image {
-                    id:      piglet1MissedImage
-                    width:   29
-                    height:  29
-                    source:  pigletSearchPage.missedPigletsCount > 0 ? "qrc:/resources/images/piglet_search/missed_piglet.png" :
-                                                                       "qrc:/resources/images/piglet_search/missed_piglet_grayed.png"
+                    id:       piglet1MissedImage
+                    width:    29
+                    height:   29
+                    source:   pigletSearchPage.missedPigletsCount > 0 ? "qrc:/resources/images/piglet_search/missed_piglet.png" :
+                                                                        "qrc:/resources/images/piglet_search/missed_piglet_grayed.png"
+                    fillMode: Image.PreserveAspectFit
                 }
 
                 Image {
-                    id:      piglet2MissedImage
-                    width:   29
-                    height:  29
-                    source:  pigletSearchPage.missedPigletsCount > 1 ? "qrc:/resources/images/piglet_search/missed_piglet.png" :
-                                                                       "qrc:/resources/images/piglet_search/missed_piglet_grayed.png"
+                    id:       piglet2MissedImage
+                    width:    29
+                    height:   29
+                    source:   pigletSearchPage.missedPigletsCount > 1 ? "qrc:/resources/images/piglet_search/missed_piglet.png" :
+                                                                        "qrc:/resources/images/piglet_search/missed_piglet_grayed.png"
+                    fillMode: Image.PreserveAspectFit
                 }
 
                 Image {
-                    id:      piglet3MissedImage
-                    width:   29
-                    height:  29
-                    source:  pigletSearchPage.missedPigletsCount > 2 ? "qrc:/resources/images/piglet_search/missed_piglet.png" :
-                                                                       "qrc:/resources/images/piglet_search/missed_piglet_grayed.png"
+                    id:       piglet3MissedImage
+                    width:    29
+                    height:   29
+                    source:   pigletSearchPage.missedPigletsCount > 2 ? "qrc:/resources/images/piglet_search/missed_piglet.png" :
+                                                                        "qrc:/resources/images/piglet_search/missed_piglet_grayed.png"
+                    fillMode: Image.PreserveAspectFit
                 }
 
                 Image {
-                    id:      piglet4MissedImage
-                    width:   29
-                    height:  29
-                    source:  pigletSearchPage.missedPigletsCount > 3 ? "qrc:/resources/images/piglet_search/missed_piglet.png" :
-                                                                       "qrc:/resources/images/piglet_search/missed_piglet_grayed.png"
+                    id:       piglet4MissedImage
+                    width:    29
+                    height:   29
+                    source:   pigletSearchPage.missedPigletsCount > 3 ? "qrc:/resources/images/piglet_search/missed_piglet.png" :
+                                                                        "qrc:/resources/images/piglet_search/missed_piglet_grayed.png"
+                    fillMode: Image.PreserveAspectFit
                 }
             }
         }
@@ -298,12 +303,13 @@ Item {
             visible:                  pigletSearchPage.currentPiglet !== null &&
                                       pigletSearchPage.currentPiglet.y < 0 - pigletSearchPage.currentPiglet.height
             source:                   "qrc:/resources/images/piglet_search/turn_up.png"
+            fillMode:                 Image.PreserveAspectFit
 
             SequentialAnimation {
                 loops:   Animation.Infinite
                 running: true
 
-                PropertyAnimation {
+                NumberAnimation {
                     target:   turnUpImage
                     property: "opacity"
                     from:     1.0
@@ -311,7 +317,7 @@ Item {
                     duration: 300
                 }
 
-                PropertyAnimation {
+                NumberAnimation {
                     target:   turnUpImage
                     property: "opacity"
                     from:     0.0
@@ -332,12 +338,13 @@ Item {
             visible:                  pigletSearchPage.currentPiglet !== null &&
                                       pigletSearchPage.currentPiglet.y > backgroundRectangle.height
             source:                   "qrc:/resources/images/piglet_search/turn_down.png"
+            fillMode:                 Image.PreserveAspectFit
 
             SequentialAnimation {
                 loops:   Animation.Infinite
                 running: true
 
-                PropertyAnimation {
+                NumberAnimation {
                     target:   turnDownImage
                     property: "opacity"
                     from:     1.0
@@ -345,7 +352,7 @@ Item {
                     duration: 300
                 }
 
-                PropertyAnimation {
+                NumberAnimation {
                     target:   turnDownImage
                     property: "opacity"
                     from:     0.0
@@ -365,12 +372,13 @@ Item {
             visible:                pigletSearchPage.currentPiglet !== null &&
                                     pigletSearchPage.currentPiglet.x < 0 - pigletSearchPage.currentPiglet.width
             source:                 "qrc:/resources/images/piglet_search/turn_left.png"
+            fillMode:               Image.PreserveAspectFit
 
             SequentialAnimation {
                 loops:   Animation.Infinite
                 running: true
 
-                PropertyAnimation {
+                NumberAnimation {
                     target:   turnLeftImage
                     property: "opacity"
                     from:     1.0
@@ -378,7 +386,7 @@ Item {
                     duration: 300
                 }
 
-                PropertyAnimation {
+                NumberAnimation {
                     target:   turnLeftImage
                     property: "opacity"
                     from:     0.0
@@ -398,12 +406,13 @@ Item {
             visible:                pigletSearchPage.currentPiglet !== null &&
                                     pigletSearchPage.currentPiglet.x > backgroundRectangle.width
             source:                 "qrc:/resources/images/piglet_search/turn_right.png"
+            fillMode:               Image.PreserveAspectFit
 
             SequentialAnimation {
                 loops:   Animation.Infinite
                 running: true
 
-                PropertyAnimation {
+                NumberAnimation {
                     target:   turnRightImage
                     property: "opacity"
                     from:     1.0
@@ -411,7 +420,7 @@ Item {
                     duration: 300
                 }
 
-                PropertyAnimation {
+                NumberAnimation {
                     target:   turnRightImage
                     property: "opacity"
                     from:     0.0
@@ -430,6 +439,7 @@ Item {
             width:                64
             height:               64
             source:               "qrc:/resources/images/back.png"
+            fillMode:             Image.PreserveAspectFit
 
             MouseArea {
                 id:           backButtonMouseArea

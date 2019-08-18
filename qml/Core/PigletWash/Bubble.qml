@@ -61,7 +61,7 @@ Rectangle {
     SequentialAnimation {
         id: bubbleFlightAnimation
 
-        PropertyAnimation {
+        NumberAnimation {
             target:   bubble
             property: "y"
             to:       0 - bubble.height

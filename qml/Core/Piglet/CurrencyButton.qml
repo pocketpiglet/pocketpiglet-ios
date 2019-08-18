@@ -13,10 +13,11 @@ Column {
     signal clicked()
 
     Image {
-        id:     currencyButtonImage
-        width:  currencyButton.imageWidth
-        height: currencyButton.imageHeight
-        source: imageSource(currencyButton.amount, currencyButton.sourceNormal, currencyButton.sourceHighlighted)
+        id:       currencyButtonImage
+        width:    currencyButton.imageWidth
+        height:   currencyButton.imageHeight
+        source:   imageSource(currencyButton.amount, currencyButton.sourceNormal, currencyButton.sourceHighlighted)
+        fillMode: Image.PreserveAspectFit
 
         function imageSource(amount, source_normal, source_highlighted) {
             if (amount > 0) {
@@ -36,9 +37,9 @@ Column {
     }
 
     Rectangle {
-        color:  "white"
         width:  currencyButton.imageWidth
         height: 24
+        color:  "white"
         radius: 16
 
         Text {

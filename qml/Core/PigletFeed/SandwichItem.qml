@@ -66,7 +66,7 @@ Rectangle {
     SequentialAnimation {
         id: sandwichItemFallAnimation
 
-        PropertyAnimation {
+        NumberAnimation {
             target:   sandwichItem
             property: "y"
             from:     sandwichItem.initialY
@@ -84,7 +84,7 @@ Rectangle {
     SequentialAnimation {
         id: sandwichItemEatAnimation
 
-        PropertyAnimation {
+        NumberAnimation {
             target:   sandwichItemImage
             property: "opacity"
             from:     1.0

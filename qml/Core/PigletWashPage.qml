@@ -156,6 +156,7 @@ Item {
             width:             133
             height:            38
             source:            "qrc:/resources/images/piglet_wash/missed_bubbles_background.png"
+            fillMode:          Image.PreserveAspectFit
 
             Row {
                 id:               missedBubblesRow
@@ -163,35 +164,39 @@ Item {
                 spacing:          4
 
                 Image {
-                    id:      bubble1MissedImage
-                    width:   29
-                    height:  29
-                    source:  pigletWashPage.missedBubblesCount > 0 ? "qrc:/resources/images/piglet_wash/missed_bubble.png" :
-                                                                     "qrc:/resources/images/piglet_wash/missed_bubble_grayed.png"
+                    id:       bubble1MissedImage
+                    width:    29
+                    height:   29
+                    source:   pigletWashPage.missedBubblesCount > 0 ? "qrc:/resources/images/piglet_wash/missed_bubble.png" :
+                                                                      "qrc:/resources/images/piglet_wash/missed_bubble_grayed.png"
+                    fillMode: Image.PreserveAspectFit
                 }
 
                 Image {
-                    id:      bubble2MissedImage
-                    width:   29
-                    height:  29
-                    source:  pigletWashPage.missedBubblesCount > 1 ? "qrc:/resources/images/piglet_wash/missed_bubble.png" :
-                                                                     "qrc:/resources/images/piglet_wash/missed_bubble_grayed.png"
+                    id:       bubble2MissedImage
+                    width:    29
+                    height:   29
+                    source:   pigletWashPage.missedBubblesCount > 1 ? "qrc:/resources/images/piglet_wash/missed_bubble.png" :
+                                                                      "qrc:/resources/images/piglet_wash/missed_bubble_grayed.png"
+                    fillMode: Image.PreserveAspectFit
                 }
 
                 Image {
-                    id:      bubble3MissedImage
-                    width:   29
-                    height:  29
-                    source:  pigletWashPage.missedBubblesCount > 2 ? "qrc:/resources/images/piglet_wash/missed_bubble.png" :
-                                                                     "qrc:/resources/images/piglet_wash/missed_bubble_grayed.png"
+                    id:       bubble3MissedImage
+                    width:    29
+                    height:   29
+                    source:   pigletWashPage.missedBubblesCount > 2 ? "qrc:/resources/images/piglet_wash/missed_bubble.png" :
+                                                                      "qrc:/resources/images/piglet_wash/missed_bubble_grayed.png"
+                    fillMode: Image.PreserveAspectFit
                 }
 
                 Image {
-                    id:      bubble4MissedImage
-                    width:   29
-                    height:  29
-                    source:  pigletWashPage.missedBubblesCount > 3 ? "qrc:/resources/images/piglet_wash/missed_bubble.png" :
-                                                                     "qrc:/resources/images/piglet_wash/missed_bubble_grayed.png"
+                    id:       bubble4MissedImage
+                    width:    29
+                    height:   29
+                    source:   pigletWashPage.missedBubblesCount > 3 ? "qrc:/resources/images/piglet_wash/missed_bubble.png" :
+                                                                      "qrc:/resources/images/piglet_wash/missed_bubble_grayed.png"
+                    fillMode: Image.PreserveAspectFit
                 }
             }
         }
@@ -252,6 +257,7 @@ Item {
             width:                64
             height:               64
             source:               "qrc:/resources/images/back.png"
+            fillMode:             Image.PreserveAspectFit
 
             MouseArea {
                 id:           backButtonMouseArea

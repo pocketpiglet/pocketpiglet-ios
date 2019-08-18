@@ -613,7 +613,7 @@ Item {
                 SequentialAnimation {
                     id: originalImageBlinkAnimation
 
-                    PropertyAnimation {
+                    NumberAnimation {
                         target:      originalImage
                         property:    "opacity"
                         from:        0.0
@@ -622,7 +622,7 @@ Item {
                         easing.type: Easing.InExpo
                     }
 
-                    PropertyAnimation {
+                    NumberAnimation {
                         target:      originalImage
                         property:    "opacity"
                         from:        1.0
@@ -649,6 +649,7 @@ Item {
             width:               64
             height:              64
             source:              "qrc:/resources/images/back.png"
+            fillMode:            Image.PreserveAspectFit
 
             MouseArea {
                 id:           backButtonMouseArea
@@ -717,6 +718,7 @@ Item {
                     width:            434
                     height:           160
                     source:           "qrc:/resources/images/piglet_puzzle/complexity_selection_background.png"
+                    fillMode:         Image.PreserveAspectFit
 
                     Row {
                         id:               complexitySelectionRow
@@ -724,10 +726,11 @@ Item {
                         spacing:          10
 
                         Image {
-                            id:     mediumComplexityButtonImage
-                            width:  120
-                            height: 120
-                            source: "qrc:/resources/images/piglet_puzzle/complexity_medium.png"
+                            id:       mediumComplexityButtonImage
+                            width:    120
+                            height:   120
+                            source:   "qrc:/resources/images/piglet_puzzle/complexity_medium.png"
+                            fillMode: Image.PreserveAspectFit
 
                             MouseArea {
                                 id:           mediumComplexityButtonMouseArea
@@ -742,10 +745,11 @@ Item {
                         }
 
                         Image {
-                            id:     hardComplexityButtonImage
-                            width:  120
-                            height: 120
-                            source: "qrc:/resources/images/piglet_puzzle/complexity_hard.png"
+                            id:       hardComplexityButtonImage
+                            width:    120
+                            height:   120
+                            source:   "qrc:/resources/images/piglet_puzzle/complexity_hard.png"
+                            fillMode: Image.PreserveAspectFit
 
                             MouseArea {
                                 id:           hardComplexityButtonMouseArea
@@ -770,6 +774,7 @@ Item {
                     width:               64
                     height:              64
                     source:              "qrc:/resources/images/back.png"
+                    fillMode:            Image.PreserveAspectFit
 
                     MouseArea {
                         id:           complexitySelectionBackButtonMouseArea
@@ -812,6 +817,7 @@ Item {
                     width:            434
                     height:           160
                     source:           "qrc:/resources/images/piglet_puzzle/puzzle_selection_background.png"
+                    fillMode:         Image.PreserveAspectFit
 
                     Row {
                         id:               puzzleSelectionRow
@@ -819,10 +825,11 @@ Item {
                         spacing:          10
 
                         Image {
-                            id:     heartBalloonPuzzleButtonImage
-                            width:  120
-                            height: 120
-                            source: "qrc:/resources/images/piglet_puzzle/heart_balloon/original_thumbnail.png"
+                            id:       heartBalloonPuzzleButtonImage
+                            width:    120
+                            height:   120
+                            source:   "qrc:/resources/images/piglet_puzzle/heart_balloon/original_thumbnail.png"
+                            fillMode: Image.PreserveAspectFit
 
                             MouseArea {
                                 id:           heartBalloonImageButtonMouseArea
@@ -838,10 +845,11 @@ Item {
                         }
 
                         Image {
-                            id:     pigletOnPottyPuzzleButtonImage
-                            width:  120
-                            height: 120
-                            source: "qrc:/resources/images/piglet_puzzle/piglet_on_potty/original_thumbnail.png"
+                            id:       pigletOnPottyPuzzleButtonImage
+                            width:    120
+                            height:   120
+                            source:   "qrc:/resources/images/piglet_puzzle/piglet_on_potty/original_thumbnail.png"
+                            fillMode: Image.PreserveAspectFit
 
                             MouseArea {
                                 id:           pigletOnPottyPuzzleButtonMouseArea
@@ -857,10 +865,11 @@ Item {
                         }
 
                         Image {
-                            id:     wateringFlowersPuzzleButtonImage
-                            width:  120
-                            height: 120
-                            source: "qrc:/resources/images/piglet_puzzle/watering_flowers/original_thumbnail.png"
+                            id:       wateringFlowersPuzzleButtonImage
+                            width:    120
+                            height:   120
+                            source:   "qrc:/resources/images/piglet_puzzle/watering_flowers/original_thumbnail.png"
+                            fillMode: Image.PreserveAspectFit
 
                             MouseArea {
                                 id:           wateringFlowersPuzzleButtonMouseArea
@@ -886,6 +895,7 @@ Item {
                     width:               64
                     height:              64
                     source:              "qrc:/resources/images/back.png"
+                    fillMode:            Image.PreserveAspectFit
 
                     MouseArea {
                         id:           puzzleSelectionBackButtonMouseArea

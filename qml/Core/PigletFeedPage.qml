@@ -167,6 +167,7 @@ Item {
             width:               64
             height:              64
             source:              "qrc:/resources/images/back.png"
+            fillMode:            Image.PreserveAspectFit
 
             MouseArea {
                 id:           backButtonMouseArea
@@ -206,6 +207,7 @@ Item {
                     width:            434
                     height:           160
                     source:           "qrc:/resources/images/piglet_feed/complexity_selection_background.png"
+                    fillMode:         Image.PreserveAspectFit
 
                     Row {
                         id:               complexitySelectionRow
@@ -213,10 +215,11 @@ Item {
                         spacing:          10
 
                         Image {
-                            id:     easyComplexityButtonImage
-                            width:  120
-                            height: 120
-                            source: "qrc:/resources/images/piglet_feed/complexity_easy.png"
+                            id:       easyComplexityButtonImage
+                            width:    120
+                            height:   120
+                            source:   "qrc:/resources/images/piglet_feed/complexity_easy.png"
+                            fillMode: Image.PreserveAspectFit
 
                             MouseArea {
                                 id:           easyComplexityButtonMouseArea
@@ -235,10 +238,11 @@ Item {
                         }
 
                         Image {
-                            id:     mediumComplexityButtonImage
-                            width:  120
-                            height: 120
-                            source: "qrc:/resources/images/piglet_feed/complexity_medium.png"
+                            id:       mediumComplexityButtonImage
+                            width:    120
+                            height:   120
+                            source:   "qrc:/resources/images/piglet_feed/complexity_medium.png"
+                            fillMode: Image.PreserveAspectFit
 
                             MouseArea {
                                 id:           mediumComplexityButtonMouseArea
@@ -257,10 +261,11 @@ Item {
                         }
 
                         Image {
-                            id:     hardComplexityButtonImage
-                            width:  120
-                            height: 120
-                            source: "qrc:/resources/images/piglet_feed/complexity_hard.png"
+                            id:       hardComplexityButtonImage
+                            width:    120
+                            height:   120
+                            source:   "qrc:/resources/images/piglet_feed/complexity_hard.png"
+                            fillMode: Image.PreserveAspectFit
 
                             MouseArea {
                                 id:           hardComplexityButtonMouseArea
@@ -289,6 +294,7 @@ Item {
                     width:               64
                     height:              64
                     source:              "qrc:/resources/images/back.png"
+                    fillMode:            Image.PreserveAspectFit
 
                     MouseArea {
                         id:           complexitySelectionBackButtonMouseArea

@@ -217,6 +217,7 @@ MultiPointTouchArea {
         width:                    64
         height:                   64
         source:                   "qrc:/resources/images/dialog/cancel.png"
+        fillMode:                 Image.PreserveAspectFit
 
         MouseArea {
             anchors.fill: parent

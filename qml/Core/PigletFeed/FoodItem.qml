@@ -61,7 +61,7 @@ Rectangle {
     SequentialAnimation {
         id: foodItemSelectAnimation
 
-        PropertyAnimation {
+        NumberAnimation {
             target:   foodItemImage
             property: "opacity"
             from:     1.0
@@ -69,7 +69,7 @@ Rectangle {
             duration: 200
         }
 
-        PropertyAnimation {
+        NumberAnimation {
             target:   foodItemImage
             property: "opacity"
             from:     0.25
@@ -81,7 +81,7 @@ Rectangle {
     SequentialAnimation {
         id: foodItemHideAnimation
 
-        PropertyAnimation {
+        NumberAnimation {
             target:      foodItemImage
             property:    "opacity"
             from:        1.0
@@ -90,7 +90,7 @@ Rectangle {
             easing.type: Easing.OutExpo
         }
 
-        PropertyAnimation {
+        NumberAnimation {
             target:      foodItemImage
             property:    "opacity"
             from:        0.25

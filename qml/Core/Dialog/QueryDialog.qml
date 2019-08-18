@@ -76,10 +76,11 @@ MultiPointTouchArea {
         spacing:                  dialogImage.width - yesButtonImage.width * 1.5 - noButtonImage.width * 1.5
 
         Image {
-            id:     yesButtonImage
-            width:  64
-            height: 64
-            source: "qrc:/resources/images/dialog/yes.png"
+            id:       yesButtonImage
+            width:    64
+            height:   64
+            source:   "qrc:/resources/images/dialog/yes.png"
+            fillMode: Image.PreserveAspectFit
 
             MouseArea {
                 anchors.fill: parent
@@ -94,10 +95,11 @@ MultiPointTouchArea {
         }
 
         Image {
-            id:     noButtonImage
-            width:  64
-            height: 64
-            source: "qrc:/resources/images/dialog/no.png"
+            id:       noButtonImage
+            width:    64
+            height:   64
+            source:   "qrc:/resources/images/dialog/no.png"
+            fillMode: Image.PreserveAspectFit
 
             MouseArea {
                 anchors.fill: parent

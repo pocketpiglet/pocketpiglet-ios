@@ -1,7 +1,8 @@
 import QtQuick 2.12
 
 Image {
-    id: actionButton
+    id:       actionButton
+    fillMode: Image.PreserveAspectFit
 
     signal clicked()
 
