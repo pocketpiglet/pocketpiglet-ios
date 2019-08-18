@@ -905,8 +905,6 @@ Item {
             }
 
             interval = 10000 + 5000 * Math.random();
-
-            restart();
         }
     }
 
