@@ -14,7 +14,6 @@ Item {
     readonly property bool pageActive:          StackView.status === StackView.Active
 
     readonly property int diamondsMaxAmount:    10
-    readonly property int diamondsIncAmount:    5
 
     readonly property real accelShakeThreshold: 50.0
 
@@ -804,7 +803,7 @@ Item {
         onGetDiamondsSelected: {
             var old_diamonds_amount = pigletPage.diamondsAmount;
 
-            pigletPage.diamondsAmount = Math.min(pigletPage.diamondsAmount + pigletPage.diamondsIncAmount, pigletPage.diamondsMaxAmount);
+            pigletPage.diamondsAmount = Math.min(pigletPage.diamondsAmount + deliveredAmount, pigletPage.diamondsMaxAmount);
 
             newDiamondsDialog.open(pigletPage.diamondsAmount - old_diamonds_amount);
         }
@@ -867,7 +866,7 @@ Item {
 
     Timer {
         id:       pigletRandomAnimationTimer
-        running:  pigletPage.appInForeground && pigletPage.pageActive
+        running:  true
         interval: 10000 + 5000 * Math.random()
         repeat:   true
 

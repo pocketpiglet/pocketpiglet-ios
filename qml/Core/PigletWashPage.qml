@@ -219,7 +219,7 @@ Item {
             verticalAlignment:   Text.AlignVCenter
 
             function textText(bursted_bubbles) {
-                var score = bursted_bubbles + "";
+                var score = bursted_bubbles.toString(10);
 
                 while (score.length < 6) {
                     score = "0" + score;
@@ -242,7 +242,7 @@ Item {
             verticalAlignment:   Text.AlignVCenter
 
             function textText(high_score) {
-                var score = high_score + "";
+                var score = high_score.toString(10);
 
                 while (score.length < 6) {
                     score = "0" + score;

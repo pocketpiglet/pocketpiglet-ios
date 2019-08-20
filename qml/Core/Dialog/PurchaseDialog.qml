@@ -7,15 +7,24 @@ MultiPointTouchArea {
     height:           dialogHeight(rotation, parent.width, parent.height)
     visible:          false
 
-    property bool enableGetDiamondsButton: true
+    readonly property int diamondsDeliveryInterval: 300
+    readonly property int diamondsForDelivery:      5
+
+    property bool enableGetDiamondsButton:          true
+
+    property double nextDiamondsDeliveryTime:       0.0
 
     signal opened()
     signal closed()
 
-    signal getDiamondsSelected()
+    signal getDiamondsSelected(int deliveredAmount)
     signal purchaseFullVersionSelected()
     signal restorePurchasesSelected()
     signal cancelled()
+
+    onNextDiamondsDeliveryTimeChanged: {
+        mainWindow.setSetting("PurchaseNextDiamondsDeliveryTime", nextDiamondsDeliveryTime.toString(10));
+    }
 
     function dialogWidth(rotation, parent_width, parent_height) {
         if (rotation === 90 || rotation === 270) {
@@ -58,17 +67,20 @@ MultiPointTouchArea {
 
             Image {
                 id:     getDiamondsButtonImage
-                source: purchaseDialog.enableGetDiamondsButton ? "qrc:/resources/images/dialog/purchase_dialog_button.png" :
-                                                                 "qrc:/resources/images/dialog/purchase_dialog_button_disabled.png"
+                source: getDiamondsMouseArea.enabled ? "qrc:/resources/images/dialog/purchase_dialog_button.png" :
+                                                       "qrc:/resources/images/dialog/purchase_dialog_button_disabled.png"
 
                 MouseArea {
+                    id:           getDiamondsMouseArea
                     anchors.fill: parent
-                    enabled:      purchaseDialog.enableGetDiamondsButton
+                    enabled:      purchaseDialog.enableGetDiamondsButton && countdownTimer.countdownTime <= 0
 
                     onClicked: {
+                        purchaseDialog.nextDiamondsDeliveryTime = (new Date()).getTime() + purchaseDialog.diamondsDeliveryInterval * 1000;
+
                         purchaseDialog.visible = false;
 
-                        purchaseDialog.getDiamondsSelected();
+                        purchaseDialog.getDiamondsSelected(purchaseDialog.diamondsForDelivery);
                         purchaseDialog.closed();
                     }
                 }
@@ -84,8 +96,8 @@ MultiPointTouchArea {
                         anchors.verticalCenter: parent.verticalCenter
                         width:                  sourceSize.width * (height / sourceSize.height)
                         height:                 parent.height - 8
-                        source:                 purchaseDialog.enableGetDiamondsButton ? "qrc:/resources/images/dialog/purchase_dialog_get_diamonds.png" :
-                                                                                         "qrc:/resources/images/dialog/purchase_dialog_get_diamonds_disabled.png"
+                        source:                 getDiamondsMouseArea.enabled ? "qrc:/resources/images/dialog/purchase_dialog_get_diamonds.png" :
+                                                                               "qrc:/resources/images/dialog/purchase_dialog_get_diamonds_disabled.png"
                         fillMode:               Image.PreserveAspectFit
                     }
 
@@ -94,7 +106,7 @@ MultiPointTouchArea {
                         width:                  parent.width - getDiamondsImage.width - parent.spacing -
                                                 parent.leftPadding - parent.rightPadding
                         height:                 parent.height - 8
-                        text:                   qsTr("Get diamonds")
+                        text:                   textText(countdownTimer.countdownTime)
                         color:                  "black"
                         font.pointSize:         16
                         font.family:            "Helvetica"
@@ -103,6 +115,32 @@ MultiPointTouchArea {
                         wrapMode:               Text.Wrap
                         fontSizeMode:           Text.Fit
                         minimumPointSize:       8
+
+                        function textText(countdown_time) {
+                            if (countdown_time > 0) {
+                                var hrs = Math.floor(countdown_time / 1000 / 3600).toString(10);
+                                var mns = Math.floor((countdown_time / 1000 - hrs * 3600) / 60).toString(10);
+                                var scs = Math.floor(countdown_time / 1000 - hrs * 3600 - mns * 60).toString(10);
+
+                                if (hrs.length < 2) {
+                                    hrs = "0" + hrs;
+                                }
+                                if (mns.length < 2) {
+                                    mns = "0" + mns;
+                                }
+                                if (scs.length < 2) {
+                                    scs = "0" + scs;
+                                }
+
+                                if (hrs === "00") {
+                                    return "%1:%2".arg(mns).arg(scs);
+                                } else {
+                                    return "%1:%2:%3".arg(hrs).arg(mns).arg(scs);
+                                }
+                            } else {
+                                return qsTr("Get diamonds");
+                            }
+                        }
                     }
                 }
             }
@@ -225,5 +263,32 @@ MultiPointTouchArea {
                 purchaseDialog.closed();
             }
         }
+    }
+
+    Timer {
+        id:       countdownTimer
+        running:  true
+        interval: 1000
+        repeat:   true
+
+        property double countdownTime: timerCountdownTime(purchaseDialog.nextDiamondsDeliveryTime)
+
+        onTriggered: {
+            countdownTime = timerCountdownTime(purchaseDialog.nextDiamondsDeliveryTime);
+        }
+
+        function timerCountdownTime(next_diamonds_delivery_time) {
+            var current_time = (new Date()).getTime();
+
+            if (next_diamonds_delivery_time >= current_time) {
+                return next_diamonds_delivery_time - current_time;
+            } else {
+                return 0;
+            }
+        }
+    }
+
+    Component.onCompleted: {
+        nextDiamondsDeliveryTime = parseFloat(mainWindow.getSetting("PurchaseNextDiamondsDeliveryTime", "0"));
     }
 }

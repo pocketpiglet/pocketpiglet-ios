@@ -7,7 +7,7 @@ MultiPointTouchArea {
     height:           dialogHeight(rotation, parent.width, parent.height)
     visible:          false
 
-    property int newDiamondsCount: 0
+    property int newDiamondsAmount: 0
 
     signal opened()
     signal closed()
@@ -30,9 +30,9 @@ MultiPointTouchArea {
         }
     }
 
-    function open(new_diamonds_count) {
-        visible          = true;
-        newDiamondsCount = new_diamonds_count;
+    function open(new_diamonds_amount) {
+        visible           = true;
+        newDiamondsAmount = new_diamonds_amount;
 
         opened();
     }
@@ -64,7 +64,7 @@ MultiPointTouchArea {
             Text {
                 width:                diamondImage.width
                 height:               48
-                text:                 "+ %1".arg(newDiamondsDialog.newDiamondsCount)
+                text:                 "+ %1".arg(newDiamondsDialog.newDiamondsAmount)
                 color:                "black"
                 font.pixelSize:       32
                 font.family:          "Helvetica"

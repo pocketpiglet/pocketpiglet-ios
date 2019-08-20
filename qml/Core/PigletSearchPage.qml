@@ -234,7 +234,7 @@ Item {
             verticalAlignment:   Text.AlignVCenter
 
             function textText(found_piglets) {
-                var score = found_piglets + "";
+                var score = found_piglets.toString(10);
 
                 while (score.length < 6) {
                     score = "0" + score;
@@ -257,7 +257,7 @@ Item {
             verticalAlignment:   Text.AlignVCenter
 
             function textText(high_score) {
-                var score = high_score + "";
+                var score = high_score.toString(10);
 
                 while (score.length < 6) {
                     score = "0" + score;
@@ -282,17 +282,13 @@ Item {
             verticalAlignment:        Text.AlignVCenter
 
             function textText(countdown_time) {
-                if (countdown_time > 0) {
-                    var time = (countdown_time / 1000) + "";
+                var time = (countdown_time / 1000).toString(10);
 
-                    while (time.length < 2) {
-                        time = "0" + time;
-                    }
-
-                    return time;
-                } else {
-                    return "00";
+                while (time.length < 2) {
+                    time = "0" + time;
                 }
+
+                return time;
             }
         }
 
@@ -596,7 +592,7 @@ Item {
         interval: 1000
         repeat:   true
 
-        property int countdownTime: 0
+        property double countdownTime: 0
 
         onRunningChanged: {
             if (running && pigletSearchPage.currentPiglet !== null) {
@@ -607,7 +603,11 @@ Item {
         }
 
         onTriggered: {
-            countdownTime = countdownTime - interval;
+            if (countdownTime >= interval) {
+                countdownTime = countdownTime - interval;
+            } else {
+                countdownTime = 0;
+            }
         }
     }
 
