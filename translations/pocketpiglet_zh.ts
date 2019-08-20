@@ -57,7 +57,7 @@
     <name>PurchaseDialog</name>
     <message>
         <source>Get free diamonds</source>
-        <translation type="unfinished"></translation>
+        <translation>获得免费钻石</translation>
     </message>
     <message>
         <source>Purchase full version</source>
