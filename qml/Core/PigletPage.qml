@@ -800,7 +800,7 @@ Item {
         id: purchaseDialog
         z:  1
 
-        onGetDiamondsSelected: {
+        onGetFreeDiamondsSelected: {
             var old_diamonds_amount = pigletPage.diamondsAmount;
 
             pigletPage.diamondsAmount = Math.min(pigletPage.diamondsAmount + deliveredAmount, pigletPage.diamondsMaxAmount);

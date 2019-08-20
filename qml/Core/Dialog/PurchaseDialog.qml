@@ -10,14 +10,14 @@ MultiPointTouchArea {
     readonly property int diamondsDeliveryInterval: 300
     readonly property int diamondsForDelivery:      5
 
-    property bool enableGetDiamondsButton:          true
+    property bool enableGetFreeDiamondsButton:      true
 
     property double nextDiamondsDeliveryTime:       0.0
 
     signal opened()
     signal closed()
 
-    signal getDiamondsSelected(int deliveredAmount)
+    signal getFreeDiamondsSelected(int deliveredAmount)
     signal purchaseFullVersionSelected()
     signal restorePurchasesSelected()
     signal cancelled()
@@ -42,9 +42,9 @@ MultiPointTouchArea {
         }
     }
 
-    function open(enable_get_diamonds_button) {
-        visible                 = true;
-        enableGetDiamondsButton = enable_get_diamonds_button;
+    function open(enable_get_free_diamonds_button) {
+        visible                     = true;
+        enableGetFreeDiamondsButton = enable_get_free_diamonds_button;
 
         opened();
     }
@@ -66,21 +66,21 @@ MultiPointTouchArea {
             spacing:          8
 
             Image {
-                id:     getDiamondsButtonImage
-                source: getDiamondsMouseArea.enabled ? "qrc:/resources/images/dialog/purchase_dialog_button.png" :
-                                                       "qrc:/resources/images/dialog/purchase_dialog_button_disabled.png"
+                id:     getFreeDiamondsButtonImage
+                source: getFreeDiamondsMouseArea.enabled ? "qrc:/resources/images/dialog/purchase_dialog_button.png" :
+                                                           "qrc:/resources/images/dialog/purchase_dialog_button_disabled.png"
 
                 MouseArea {
-                    id:           getDiamondsMouseArea
+                    id:           getFreeDiamondsMouseArea
                     anchors.fill: parent
-                    enabled:      purchaseDialog.enableGetDiamondsButton && countdownTimer.countdownTime <= 0
+                    enabled:      purchaseDialog.enableGetFreeDiamondsButton && countdownTimer.countdownTime <= 0
 
                     onClicked: {
                         purchaseDialog.nextDiamondsDeliveryTime = (new Date()).getTime() + purchaseDialog.diamondsDeliveryInterval * 1000;
 
                         purchaseDialog.visible = false;
 
-                        purchaseDialog.getDiamondsSelected(purchaseDialog.diamondsForDelivery);
+                        purchaseDialog.getFreeDiamondsSelected(purchaseDialog.diamondsForDelivery);
                         purchaseDialog.closed();
                     }
                 }
@@ -92,18 +92,18 @@ MultiPointTouchArea {
                     spacing:      4
 
                     Image {
-                        id:                     getDiamondsImage
+                        id:                     getFreeDiamondsImage
                         anchors.verticalCenter: parent.verticalCenter
                         width:                  sourceSize.width * (height / sourceSize.height)
                         height:                 parent.height - 8
-                        source:                 getDiamondsMouseArea.enabled ? "qrc:/resources/images/dialog/purchase_dialog_get_diamonds.png" :
-                                                                               "qrc:/resources/images/dialog/purchase_dialog_get_diamonds_disabled.png"
+                        source:                 getFreeDiamondsMouseArea.enabled ? "qrc:/resources/images/dialog/purchase_dialog_get_free_diamonds.png" :
+                                                                                   "qrc:/resources/images/dialog/purchase_dialog_get_free_diamonds_disabled.png"
                         fillMode:               Image.PreserveAspectFit
                     }
 
                     Text {
                         anchors.verticalCenter: parent.verticalCenter
-                        width:                  parent.width - getDiamondsImage.width - parent.spacing -
+                        width:                  parent.width - getFreeDiamondsImage.width - parent.spacing -
                                                 parent.leftPadding - parent.rightPadding
                         height:                 parent.height - 8
                         text:                   textText(countdownTimer.countdownTime)
@@ -138,7 +138,7 @@ MultiPointTouchArea {
                                     return "%1:%2:%3".arg(hrs).arg(mns).arg(scs);
                                 }
                             } else {
-                                return qsTr("Get diamonds");
+                                return qsTr("Get free diamonds");
                             }
                         }
                     }

@@ -22,8 +22,8 @@
         <file>resources/images/dialog/purchase_dialog.png</file>
         <file>resources/images/dialog/purchase_dialog_button.png</file>
         <file>resources/images/dialog/purchase_dialog_button_disabled.png</file>
-        <file>resources/images/dialog/purchase_dialog_get_diamonds.png</file>
-        <file>resources/images/dialog/purchase_dialog_get_diamonds_disabled.png</file>
+        <file>resources/images/dialog/purchase_dialog_get_free_diamonds.png</file>
+        <file>resources/images/dialog/purchase_dialog_get_free_diamonds_disabled.png</file>
         <file>resources/images/dialog/purchase_dialog_purchase.png</file>
         <file>resources/images/dialog/purchase_dialog_restore.png</file>
         <file>resources/images/dialog/yes.png</file>
