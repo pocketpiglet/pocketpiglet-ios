@@ -64,8 +64,8 @@
         <translation>Восстановить покупки</translation>
     </message>
     <message>
-        <source>Watch video ad</source>
-        <translation>Посмотреть рекламное видео</translation>
+        <source>Get diamonds</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

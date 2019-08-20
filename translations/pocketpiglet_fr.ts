@@ -56,8 +56,8 @@
 <context>
     <name>PurchaseDialog</name>
     <message>
-        <source>Watch video ad</source>
-        <translation>Regarder une annonce vidéo</translation>
+        <source>Get diamonds</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Purchase full version</source>
