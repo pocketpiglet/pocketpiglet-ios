@@ -65,7 +65,7 @@
     </message>
     <message>
         <source>Get free diamonds</source>
-        <translation type="unfinished"></translation>
+        <translation>Получить бесплатные бриллианты</translation>
     </message>
 </context>
 <context>

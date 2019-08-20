@@ -68,7 +68,7 @@
     <message>
         <location filename="../qml/Core/Dialog/PurchaseDialog.qml" line="141"/>
         <source>Get free diamonds</source>
-        <translation type="unfinished"></translation>
+        <translation>Holen Sie sich kostenlose Diamanten</translation>
     </message>
     <message>
         <location filename="../qml/Core/Dialog/PurchaseDialog.qml" line="183"/>
