@@ -59,6 +59,10 @@ Item {
         }
     }
 
+    onHighScoreChanged: {
+        mainWindow.setSetting("PigletSearchHighScore", highScore.toString(10));
+    }
+
     onFoundPigletsCountChanged: {
         if (foundPigletsCount > 0) {
             audio.playAudio("qrc:/resources/sound/piglet_search/piglet_found.wav");
@@ -76,7 +80,7 @@ Item {
             pigletSearchPage.allowGameRestart = false;
 
             if (foundPigletsCount > highScore) {
-                mainWindow.setSetting("PigletSearchHighScore", foundPigletsCount.toString(10));
+                highScore = foundPigletsCount;
 
                 highScoreQueryDialog.open();
             } else {
@@ -531,7 +535,6 @@ Item {
             gameStartTimer.stop();
 
             pigletSearchPage.allowGameRestart   = true;
-            pigletSearchPage.highScore          = parseInt(mainWindow.getSetting("PigletSearchHighScore", "0"), 10);
             pigletSearchPage.foundPigletsCount  = 0;
             pigletSearchPage.missedPigletsCount = 0;
 
@@ -606,5 +609,9 @@ Item {
         onTriggered: {
             countdownTime = countdownTime - interval;
         }
+    }
+
+    Component.onCompleted: {
+        highScore = parseInt(mainWindow.getSetting("PigletSearchHighScore", "0"), 10);
     }
 }

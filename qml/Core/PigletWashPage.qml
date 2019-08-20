@@ -58,6 +58,10 @@ Item {
         }
     }
 
+    onHighScoreChanged: {
+        mainWindow.setSetting("PigletWashHighScore", highScore.toString(10));
+    }
+
     onBurstedBubblesCountChanged: {
         if (burstedBubblesCount > 0) {
             audio.playAudio("qrc:/resources/sound/piglet_wash/bubble_bursted.wav");
@@ -73,7 +77,7 @@ Item {
             pigletWashPage.allowGameRestart = false;
 
             if (burstedBubblesCount > highScore) {
-                mainWindow.setSetting("PigletWashHighScore", burstedBubblesCount.toString(10));
+                highScore = burstedBubblesCount;
 
                 highScoreQueryDialog.open();
             } else {
@@ -291,7 +295,6 @@ Item {
             gameStartTimer.stop();
 
             pigletWashPage.allowGameRestart    = true;
-            pigletWashPage.highScore           = parseInt(mainWindow.getSetting("PigletWashHighScore", "0"), 10);
             pigletWashPage.burstedBubblesCount = 0;
             pigletWashPage.missedBubblesCount  = 0;
             pigletWashPage.gameStartTime       = (new Date()).getTime();
@@ -378,5 +381,9 @@ Item {
 
             PigletWashPageScript.createBubbles(count - pigletWashPage.visibleBubblesCount);
         }
+    }
+
+    Component.onCompleted: {
+        highScore = parseInt(mainWindow.getSetting("PigletWashHighScore", "0"), 10);
     }
 }
