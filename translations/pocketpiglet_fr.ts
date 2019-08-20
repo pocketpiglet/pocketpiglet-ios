@@ -56,7 +56,7 @@
 <context>
     <name>PurchaseDialog</name>
     <message>
-        <source>Get diamonds</source>
+        <source>Get free diamonds</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
