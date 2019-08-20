@@ -94,7 +94,7 @@ Item {
             z:            1
             width:        120 * pigletPuzzlePage.screenScale
             height:       120 * pigletPuzzlePage.screenScale
-            source:       "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/original_thumbnail.png"
+            source:       "qrc:/resources/images/piglet_puzzle/%1/original_thumbnail.png".arg(pigletPuzzlePage.puzzleType)
             fillMode:     Image.PreserveAspectFit
 
             MouseArea {
@@ -123,8 +123,8 @@ Item {
                     width:    120 * pigletPuzzlePage.screenScale
                     height:   120 * pigletPuzzlePage.screenScale
                     visible:  pigletPuzzlePage.puzzleComplexity === "medium"
-                    source:   pigletPuzzlePage.puzzleSolved ? "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/medium/9.png"
-                                                            : "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/medium/0.png"
+                    source:   pigletPuzzlePage.puzzleSolved ? "qrc:/resources/images/piglet_puzzle/%1/medium/9.png".arg(pigletPuzzlePage.puzzleType)
+                                                            : "qrc:/resources/images/piglet_puzzle/%1/medium/0.png".arg(pigletPuzzlePage.puzzleType)
                     fillMode: Image.PreserveAspectFit
 
                     MouseArea {
@@ -139,7 +139,7 @@ Item {
                     width:    120 * pigletPuzzlePage.screenScale
                     height:   120 * pigletPuzzlePage.screenScale
                     visible:  pigletPuzzlePage.puzzleComplexity === "medium"
-                    source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/medium/1.png"
+                    source:   "qrc:/resources/images/piglet_puzzle/%1/medium/1.png".arg(pigletPuzzlePage.puzzleType)
                     fillMode: Image.PreserveAspectFit
 
                     MouseArea {
@@ -158,7 +158,7 @@ Item {
                     width:    120 * pigletPuzzlePage.screenScale
                     height:   120 * pigletPuzzlePage.screenScale
                     visible:  pigletPuzzlePage.puzzleComplexity === "medium"
-                    source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/medium/2.png"
+                    source:   "qrc:/resources/images/piglet_puzzle/%1/medium/2.png".arg(pigletPuzzlePage.puzzleType)
                     fillMode: Image.PreserveAspectFit
 
                     MouseArea {
@@ -177,7 +177,7 @@ Item {
                     width:    120 * pigletPuzzlePage.screenScale
                     height:   120 * pigletPuzzlePage.screenScale
                     visible:  pigletPuzzlePage.puzzleComplexity === "medium"
-                    source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/medium/3.png"
+                    source:   "qrc:/resources/images/piglet_puzzle/%1/medium/3.png".arg(pigletPuzzlePage.puzzleType)
                     fillMode: Image.PreserveAspectFit
 
                     MouseArea {
@@ -196,7 +196,7 @@ Item {
                     width:    120 * pigletPuzzlePage.screenScale
                     height:   120 * pigletPuzzlePage.screenScale
                     visible:  pigletPuzzlePage.puzzleComplexity === "medium"
-                    source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/medium/4.png"
+                    source:   "qrc:/resources/images/piglet_puzzle/%1/medium/4.png".arg(pigletPuzzlePage.puzzleType)
                     fillMode: Image.PreserveAspectFit
 
                     MouseArea {
@@ -215,7 +215,7 @@ Item {
                     width:    120 * pigletPuzzlePage.screenScale
                     height:   120 * pigletPuzzlePage.screenScale
                     visible:  pigletPuzzlePage.puzzleComplexity === "medium"
-                    source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/medium/5.png"
+                    source:   "qrc:/resources/images/piglet_puzzle/%1/medium/5.png".arg(pigletPuzzlePage.puzzleType)
                     fillMode: Image.PreserveAspectFit
 
                     MouseArea {
@@ -234,7 +234,7 @@ Item {
                     width:    120 * pigletPuzzlePage.screenScale
                     height:   120 * pigletPuzzlePage.screenScale
                     visible:  pigletPuzzlePage.puzzleComplexity === "medium"
-                    source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/medium/6.png"
+                    source:   "qrc:/resources/images/piglet_puzzle/%1/medium/6.png".arg(pigletPuzzlePage.puzzleType)
                     fillMode: Image.PreserveAspectFit
 
                     MouseArea {
@@ -253,7 +253,7 @@ Item {
                     width:    120 * pigletPuzzlePage.screenScale
                     height:   120 * pigletPuzzlePage.screenScale
                     visible:  pigletPuzzlePage.puzzleComplexity === "medium"
-                    source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/medium/7.png"
+                    source:   "qrc:/resources/images/piglet_puzzle/%1/medium/7.png".arg(pigletPuzzlePage.puzzleType)
                     fillMode: Image.PreserveAspectFit
 
                     MouseArea {
@@ -272,7 +272,7 @@ Item {
                     width:    120 * pigletPuzzlePage.screenScale
                     height:   120 * pigletPuzzlePage.screenScale
                     visible:  pigletPuzzlePage.puzzleComplexity === "medium"
-                    source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/medium/8.png"
+                    source:   "qrc:/resources/images/piglet_puzzle/%1/medium/8.png".arg(pigletPuzzlePage.puzzleType)
                     fillMode: Image.PreserveAspectFit
 
                     MouseArea {
@@ -294,8 +294,8 @@ Item {
                     width:    90 * pigletPuzzlePage.screenScale
                     height:   90 * pigletPuzzlePage.screenScale
                     visible:  pigletPuzzlePage.puzzleComplexity === "hard"
-                    source:   pigletPuzzlePage.puzzleSolved ? "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/16.png"
-                                                            : "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/0.png"
+                    source:   pigletPuzzlePage.puzzleSolved ? "qrc:/resources/images/piglet_puzzle/%1/hard/16.png".arg(pigletPuzzlePage.puzzleType)
+                                                            : "qrc:/resources/images/piglet_puzzle/%1/hard/0.png".arg(pigletPuzzlePage.puzzleType)
                     fillMode: Image.PreserveAspectFit
 
                     MouseArea {
@@ -310,7 +310,7 @@ Item {
                     width:    90 * pigletPuzzlePage.screenScale
                     height:   90 * pigletPuzzlePage.screenScale
                     visible:  pigletPuzzlePage.puzzleComplexity === "hard"
-                    source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/1.png"
+                    source:   "qrc:/resources/images/piglet_puzzle/%1/hard/1.png".arg(pigletPuzzlePage.puzzleType)
                     fillMode: Image.PreserveAspectFit
 
                     MouseArea {
@@ -329,7 +329,7 @@ Item {
                     width:    90  * pigletPuzzlePage.screenScale
                     height:   90  * pigletPuzzlePage.screenScale
                     visible:  pigletPuzzlePage.puzzleComplexity === "hard"
-                    source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/2.png"
+                    source:   "qrc:/resources/images/piglet_puzzle/%1/hard/2.png".arg(pigletPuzzlePage.puzzleType)
                     fillMode: Image.PreserveAspectFit
 
                     MouseArea {
@@ -348,7 +348,7 @@ Item {
                     width:    90  * pigletPuzzlePage.screenScale
                     height:   90  * pigletPuzzlePage.screenScale
                     visible:  pigletPuzzlePage.puzzleComplexity === "hard"
-                    source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/3.png"
+                    source:   "qrc:/resources/images/piglet_puzzle/%1/hard/3.png".arg(pigletPuzzlePage.puzzleType)
                     fillMode: Image.PreserveAspectFit
 
                     MouseArea {
@@ -367,7 +367,7 @@ Item {
                     width:    90 * pigletPuzzlePage.screenScale
                     height:   90 * pigletPuzzlePage.screenScale
                     visible:  pigletPuzzlePage.puzzleComplexity === "hard"
-                    source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/4.png"
+                    source:   "qrc:/resources/images/piglet_puzzle/%1/hard/4.png".arg(pigletPuzzlePage.puzzleType)
                     fillMode: Image.PreserveAspectFit
 
                     MouseArea {
@@ -386,7 +386,7 @@ Item {
                     width:    90 * pigletPuzzlePage.screenScale
                     height:   90 * pigletPuzzlePage.screenScale
                     visible:  pigletPuzzlePage.puzzleComplexity === "hard"
-                    source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/5.png"
+                    source:   "qrc:/resources/images/piglet_puzzle/%1/hard/5.png".arg(pigletPuzzlePage.puzzleType)
                     fillMode: Image.PreserveAspectFit
 
                     MouseArea {
@@ -405,7 +405,7 @@ Item {
                     width:    90  * pigletPuzzlePage.screenScale
                     height:   90  * pigletPuzzlePage.screenScale
                     visible:  pigletPuzzlePage.puzzleComplexity === "hard"
-                    source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/6.png"
+                    source:   "qrc:/resources/images/piglet_puzzle/%1/hard/6.png".arg(pigletPuzzlePage.puzzleType)
                     fillMode: Image.PreserveAspectFit
 
                     MouseArea {
@@ -424,7 +424,7 @@ Item {
                     width:    90  * pigletPuzzlePage.screenScale
                     height:   90  * pigletPuzzlePage.screenScale
                     visible:  pigletPuzzlePage.puzzleComplexity === "hard"
-                    source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/7.png"
+                    source:   "qrc:/resources/images/piglet_puzzle/%1/hard/7.png".arg(pigletPuzzlePage.puzzleType)
                     fillMode: Image.PreserveAspectFit
 
                     MouseArea {
@@ -443,7 +443,7 @@ Item {
                     width:    90  * pigletPuzzlePage.screenScale
                     height:   90  * pigletPuzzlePage.screenScale
                     visible:  pigletPuzzlePage.puzzleComplexity === "hard"
-                    source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/8.png"
+                    source:   "qrc:/resources/images/piglet_puzzle/%1/hard/8.png".arg(pigletPuzzlePage.puzzleType)
                     fillMode: Image.PreserveAspectFit
 
                     MouseArea {
@@ -462,7 +462,7 @@ Item {
                     width:    90  * pigletPuzzlePage.screenScale
                     height:   90  * pigletPuzzlePage.screenScale
                     visible:  pigletPuzzlePage.puzzleComplexity === "hard"
-                    source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/9.png"
+                    source:   "qrc:/resources/images/piglet_puzzle/%1/hard/9.png".arg(pigletPuzzlePage.puzzleType)
                     fillMode: Image.PreserveAspectFit
 
                     MouseArea {
@@ -481,7 +481,7 @@ Item {
                     width:    90  * pigletPuzzlePage.screenScale
                     height:   90  * pigletPuzzlePage.screenScale
                     visible:  pigletPuzzlePage.puzzleComplexity === "hard"
-                    source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/10.png"
+                    source:   "qrc:/resources/images/piglet_puzzle/%1/hard/10.png".arg(pigletPuzzlePage.puzzleType)
                     fillMode: Image.PreserveAspectFit
 
                     MouseArea {
@@ -500,7 +500,7 @@ Item {
                     width:    90  * pigletPuzzlePage.screenScale
                     height:   90  * pigletPuzzlePage.screenScale
                     visible:  pigletPuzzlePage.puzzleComplexity === "hard"
-                    source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/11.png"
+                    source:   "qrc:/resources/images/piglet_puzzle/%1/hard/11.png".arg(pigletPuzzlePage.puzzleType)
                     fillMode: Image.PreserveAspectFit
 
                     MouseArea {
@@ -519,7 +519,7 @@ Item {
                     width:    90  * pigletPuzzlePage.screenScale
                     height:   90  * pigletPuzzlePage.screenScale
                     visible:  pigletPuzzlePage.puzzleComplexity === "hard"
-                    source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/12.png"
+                    source:   "qrc:/resources/images/piglet_puzzle/%1/hard/12.png".arg(pigletPuzzlePage.puzzleType)
                     fillMode: Image.PreserveAspectFit
 
                     MouseArea {
@@ -538,7 +538,7 @@ Item {
                     width:    90  * pigletPuzzlePage.screenScale
                     height:   90  * pigletPuzzlePage.screenScale
                     visible:  pigletPuzzlePage.puzzleComplexity === "hard"
-                    source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/13.png"
+                    source:   "qrc:/resources/images/piglet_puzzle/%1/hard/13.png".arg(pigletPuzzlePage.puzzleType)
                     fillMode: Image.PreserveAspectFit
 
                     MouseArea {
@@ -557,7 +557,7 @@ Item {
                     width:    90  * pigletPuzzlePage.screenScale
                     height:   90  * pigletPuzzlePage.screenScale
                     visible:  pigletPuzzlePage.puzzleComplexity === "hard"
-                    source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/14.png"
+                    source:   "qrc:/resources/images/piglet_puzzle/%1/hard/14.png".arg(pigletPuzzlePage.puzzleType)
                     fillMode: Image.PreserveAspectFit
 
                     MouseArea {
@@ -576,7 +576,7 @@ Item {
                     width:    90  * pigletPuzzlePage.screenScale
                     height:   90  * pigletPuzzlePage.screenScale
                     visible:  pigletPuzzlePage.puzzleComplexity === "hard"
-                    source:   "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/hard/15.png"
+                    source:   "qrc:/resources/images/piglet_puzzle/%1/hard/15.png".arg(pigletPuzzlePage.puzzleType)
                     fillMode: Image.PreserveAspectFit
 
                     MouseArea {
@@ -595,7 +595,7 @@ Item {
                 anchors.fill: parent
                 z:            1
                 visible:      false
-                source:       "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/original.png"
+                source:       "qrc:/resources/images/piglet_puzzle/%1/original.png".arg(pigletPuzzlePage.puzzleType)
                 fillMode:     Image.PreserveAspectFit
                 opacity:      0.0
 
@@ -679,7 +679,7 @@ Item {
             anchors.centerIn: parent
             width:            360 * pigletPuzzlePage.screenScale
             height:           360 * pigletPuzzlePage.screenScale
-            source:           "qrc:/resources/images/piglet_puzzle/" + pigletPuzzlePage.puzzleType + "/original.png"
+            source:           "qrc:/resources/images/piglet_puzzle/%1/original.png".arg(pigletPuzzlePage.puzzleType)
             fillMode:         Image.PreserveAspectFit
         }
 
