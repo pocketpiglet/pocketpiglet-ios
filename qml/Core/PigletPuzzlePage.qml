@@ -77,8 +77,8 @@ Item {
         anchors.centerIn: parent
         width:            parent.height
         height:           parent.width
-        rotation:         pigletPuzzlePage.screenRotation
         color:            "black"
+        rotation:         pigletPuzzlePage.screenRotation
 
         Image {
             id:           backgroundImage
@@ -122,14 +122,14 @@ Item {
                     y:        0   * pigletPuzzlePage.screenScale
                     width:    120 * pigletPuzzlePage.screenScale
                     height:   120 * pigletPuzzlePage.screenScale
-                    visible:  pigletPuzzlePage.puzzleComplexity === "medium"
                     source:   pigletPuzzlePage.puzzleSolved ? "qrc:/resources/images/piglet_puzzle/%1/medium/9.png".arg(pigletPuzzlePage.puzzleType)
                                                             : "qrc:/resources/images/piglet_puzzle/%1/medium/0.png".arg(pigletPuzzlePage.puzzleType)
                     fillMode: Image.PreserveAspectFit
+                    visible:  pigletPuzzlePage.puzzleComplexity === "medium"
+                    enabled:  !pigletPuzzlePage.puzzleSolved
 
                     MouseArea {
                         anchors.fill: parent
-                        enabled:      pigletPuzzlePage.puzzleSolved ? false : true
                     }
                 },
                 Image {
@@ -138,13 +138,13 @@ Item {
                     y:        0   * pigletPuzzlePage.screenScale
                     width:    120 * pigletPuzzlePage.screenScale
                     height:   120 * pigletPuzzlePage.screenScale
-                    visible:  pigletPuzzlePage.puzzleComplexity === "medium"
                     source:   "qrc:/resources/images/piglet_puzzle/%1/medium/1.png".arg(pigletPuzzlePage.puzzleType)
                     fillMode: Image.PreserveAspectFit
+                    visible:  pigletPuzzlePage.puzzleComplexity === "medium"
+                    enabled:  !pigletPuzzlePage.puzzleSolved
 
                     MouseArea {
                         anchors.fill: parent
-                        enabled:      pigletPuzzlePage.puzzleSolved ? false : true
 
                         onClicked: {
                             pigletPuzzlePage.elementClicked(1);
@@ -157,13 +157,13 @@ Item {
                     y:        0   * pigletPuzzlePage.screenScale
                     width:    120 * pigletPuzzlePage.screenScale
                     height:   120 * pigletPuzzlePage.screenScale
-                    visible:  pigletPuzzlePage.puzzleComplexity === "medium"
                     source:   "qrc:/resources/images/piglet_puzzle/%1/medium/2.png".arg(pigletPuzzlePage.puzzleType)
                     fillMode: Image.PreserveAspectFit
+                    visible:  pigletPuzzlePage.puzzleComplexity === "medium"
+                    enabled:  !pigletPuzzlePage.puzzleSolved
 
                     MouseArea {
                         anchors.fill: parent
-                        enabled:      pigletPuzzlePage.puzzleSolved ? false : true
 
                         onClicked: {
                             pigletPuzzlePage.elementClicked(2);
@@ -176,13 +176,13 @@ Item {
                     y:        120 * pigletPuzzlePage.screenScale
                     width:    120 * pigletPuzzlePage.screenScale
                     height:   120 * pigletPuzzlePage.screenScale
-                    visible:  pigletPuzzlePage.puzzleComplexity === "medium"
                     source:   "qrc:/resources/images/piglet_puzzle/%1/medium/3.png".arg(pigletPuzzlePage.puzzleType)
                     fillMode: Image.PreserveAspectFit
+                    visible:  pigletPuzzlePage.puzzleComplexity === "medium"
+                    enabled:  !pigletPuzzlePage.puzzleSolved
 
                     MouseArea {
                         anchors.fill: parent
-                        enabled:      pigletPuzzlePage.puzzleSolved ? false : true
 
                         onClicked: {
                             pigletPuzzlePage.elementClicked(3);
@@ -195,13 +195,13 @@ Item {
                     y:        120 * pigletPuzzlePage.screenScale
                     width:    120 * pigletPuzzlePage.screenScale
                     height:   120 * pigletPuzzlePage.screenScale
-                    visible:  pigletPuzzlePage.puzzleComplexity === "medium"
                     source:   "qrc:/resources/images/piglet_puzzle/%1/medium/4.png".arg(pigletPuzzlePage.puzzleType)
                     fillMode: Image.PreserveAspectFit
+                    visible:  pigletPuzzlePage.puzzleComplexity === "medium"
+                    enabled:  !pigletPuzzlePage.puzzleSolved
 
                     MouseArea {
                         anchors.fill: parent
-                        enabled:      pigletPuzzlePage.puzzleSolved ? false : true
 
                         onClicked: {
                             pigletPuzzlePage.elementClicked(4);
@@ -214,13 +214,13 @@ Item {
                     y:        120 * pigletPuzzlePage.screenScale
                     width:    120 * pigletPuzzlePage.screenScale
                     height:   120 * pigletPuzzlePage.screenScale
-                    visible:  pigletPuzzlePage.puzzleComplexity === "medium"
                     source:   "qrc:/resources/images/piglet_puzzle/%1/medium/5.png".arg(pigletPuzzlePage.puzzleType)
                     fillMode: Image.PreserveAspectFit
+                    visible:  pigletPuzzlePage.puzzleComplexity === "medium"
+                    enabled:  !pigletPuzzlePage.puzzleSolved
 
                     MouseArea {
                         anchors.fill: parent
-                        enabled:      pigletPuzzlePage.puzzleSolved ? false : true
 
                         onClicked: {
                             pigletPuzzlePage.elementClicked(5);
@@ -233,13 +233,13 @@ Item {
                     y:        240 * pigletPuzzlePage.screenScale
                     width:    120 * pigletPuzzlePage.screenScale
                     height:   120 * pigletPuzzlePage.screenScale
-                    visible:  pigletPuzzlePage.puzzleComplexity === "medium"
                     source:   "qrc:/resources/images/piglet_puzzle/%1/medium/6.png".arg(pigletPuzzlePage.puzzleType)
                     fillMode: Image.PreserveAspectFit
+                    visible:  pigletPuzzlePage.puzzleComplexity === "medium"
+                    enabled:  !pigletPuzzlePage.puzzleSolved
 
                     MouseArea {
                         anchors.fill: parent
-                        enabled:      pigletPuzzlePage.puzzleSolved ? false : true
 
                         onClicked: {
                             pigletPuzzlePage.elementClicked(6);
@@ -252,13 +252,13 @@ Item {
                     y:        240 * pigletPuzzlePage.screenScale
                     width:    120 * pigletPuzzlePage.screenScale
                     height:   120 * pigletPuzzlePage.screenScale
-                    visible:  pigletPuzzlePage.puzzleComplexity === "medium"
                     source:   "qrc:/resources/images/piglet_puzzle/%1/medium/7.png".arg(pigletPuzzlePage.puzzleType)
                     fillMode: Image.PreserveAspectFit
+                    visible:  pigletPuzzlePage.puzzleComplexity === "medium"
+                    enabled:  !pigletPuzzlePage.puzzleSolved
 
                     MouseArea {
                         anchors.fill: parent
-                        enabled:      pigletPuzzlePage.puzzleSolved ? false : true
 
                         onClicked: {
                             pigletPuzzlePage.elementClicked(7);
@@ -271,13 +271,13 @@ Item {
                     y:        240 * pigletPuzzlePage.screenScale
                     width:    120 * pigletPuzzlePage.screenScale
                     height:   120 * pigletPuzzlePage.screenScale
-                    visible:  pigletPuzzlePage.puzzleComplexity === "medium"
                     source:   "qrc:/resources/images/piglet_puzzle/%1/medium/8.png".arg(pigletPuzzlePage.puzzleType)
                     fillMode: Image.PreserveAspectFit
+                    visible:  pigletPuzzlePage.puzzleComplexity === "medium"
+                    enabled:  !pigletPuzzlePage.puzzleSolved
 
                     MouseArea {
                         anchors.fill: parent
-                        enabled:      pigletPuzzlePage.puzzleSolved ? false : true
 
                         onClicked: {
                             pigletPuzzlePage.elementClicked(8);
@@ -293,14 +293,14 @@ Item {
                     y:        0  * pigletPuzzlePage.screenScale
                     width:    90 * pigletPuzzlePage.screenScale
                     height:   90 * pigletPuzzlePage.screenScale
-                    visible:  pigletPuzzlePage.puzzleComplexity === "hard"
                     source:   pigletPuzzlePage.puzzleSolved ? "qrc:/resources/images/piglet_puzzle/%1/hard/16.png".arg(pigletPuzzlePage.puzzleType)
                                                             : "qrc:/resources/images/piglet_puzzle/%1/hard/0.png".arg(pigletPuzzlePage.puzzleType)
                     fillMode: Image.PreserveAspectFit
+                    visible:  pigletPuzzlePage.puzzleComplexity === "hard"
+                    enabled:  !pigletPuzzlePage.puzzleSolved
 
                     MouseArea {
                         anchors.fill: parent
-                        enabled:      pigletPuzzlePage.puzzleSolved ? false : true
                     }
                 },
                 Image {
@@ -309,13 +309,13 @@ Item {
                     y:        0  * pigletPuzzlePage.screenScale
                     width:    90 * pigletPuzzlePage.screenScale
                     height:   90 * pigletPuzzlePage.screenScale
-                    visible:  pigletPuzzlePage.puzzleComplexity === "hard"
                     source:   "qrc:/resources/images/piglet_puzzle/%1/hard/1.png".arg(pigletPuzzlePage.puzzleType)
                     fillMode: Image.PreserveAspectFit
+                    visible:  pigletPuzzlePage.puzzleComplexity === "hard"
+                    enabled:  !pigletPuzzlePage.puzzleSolved
 
                     MouseArea {
                         anchors.fill: parent
-                        enabled:      pigletPuzzlePage.puzzleSolved ? false : true
 
                         onClicked: {
                             pigletPuzzlePage.elementClicked(1);
@@ -328,13 +328,13 @@ Item {
                     y:        0   * pigletPuzzlePage.screenScale
                     width:    90  * pigletPuzzlePage.screenScale
                     height:   90  * pigletPuzzlePage.screenScale
-                    visible:  pigletPuzzlePage.puzzleComplexity === "hard"
                     source:   "qrc:/resources/images/piglet_puzzle/%1/hard/2.png".arg(pigletPuzzlePage.puzzleType)
                     fillMode: Image.PreserveAspectFit
+                    visible:  pigletPuzzlePage.puzzleComplexity === "hard"
+                    enabled:  !pigletPuzzlePage.puzzleSolved
 
                     MouseArea {
                         anchors.fill: parent
-                        enabled:      pigletPuzzlePage.puzzleSolved ? false : true
 
                         onClicked: {
                             pigletPuzzlePage.elementClicked(2);
@@ -347,13 +347,13 @@ Item {
                     y:        0   * pigletPuzzlePage.screenScale
                     width:    90  * pigletPuzzlePage.screenScale
                     height:   90  * pigletPuzzlePage.screenScale
-                    visible:  pigletPuzzlePage.puzzleComplexity === "hard"
                     source:   "qrc:/resources/images/piglet_puzzle/%1/hard/3.png".arg(pigletPuzzlePage.puzzleType)
                     fillMode: Image.PreserveAspectFit
+                    visible:  pigletPuzzlePage.puzzleComplexity === "hard"
+                    enabled:  !pigletPuzzlePage.puzzleSolved
 
                     MouseArea {
                         anchors.fill: parent
-                        enabled:      pigletPuzzlePage.puzzleSolved ? false : true
 
                         onClicked: {
                             pigletPuzzlePage.elementClicked(3);
@@ -366,13 +366,13 @@ Item {
                     y:        90 * pigletPuzzlePage.screenScale
                     width:    90 * pigletPuzzlePage.screenScale
                     height:   90 * pigletPuzzlePage.screenScale
-                    visible:  pigletPuzzlePage.puzzleComplexity === "hard"
                     source:   "qrc:/resources/images/piglet_puzzle/%1/hard/4.png".arg(pigletPuzzlePage.puzzleType)
                     fillMode: Image.PreserveAspectFit
+                    visible:  pigletPuzzlePage.puzzleComplexity === "hard"
+                    enabled:  !pigletPuzzlePage.puzzleSolved
 
                     MouseArea {
                         anchors.fill: parent
-                        enabled:      pigletPuzzlePage.puzzleSolved ? false : true
 
                         onClicked: {
                             pigletPuzzlePage.elementClicked(4);
@@ -385,13 +385,13 @@ Item {
                     y:        90 * pigletPuzzlePage.screenScale
                     width:    90 * pigletPuzzlePage.screenScale
                     height:   90 * pigletPuzzlePage.screenScale
-                    visible:  pigletPuzzlePage.puzzleComplexity === "hard"
                     source:   "qrc:/resources/images/piglet_puzzle/%1/hard/5.png".arg(pigletPuzzlePage.puzzleType)
                     fillMode: Image.PreserveAspectFit
+                    visible:  pigletPuzzlePage.puzzleComplexity === "hard"
+                    enabled:  !pigletPuzzlePage.puzzleSolved
 
                     MouseArea {
                         anchors.fill: parent
-                        enabled:      pigletPuzzlePage.puzzleSolved ? false : true
 
                         onClicked: {
                             pigletPuzzlePage.elementClicked(5);
@@ -404,13 +404,13 @@ Item {
                     y:        90  * pigletPuzzlePage.screenScale
                     width:    90  * pigletPuzzlePage.screenScale
                     height:   90  * pigletPuzzlePage.screenScale
-                    visible:  pigletPuzzlePage.puzzleComplexity === "hard"
                     source:   "qrc:/resources/images/piglet_puzzle/%1/hard/6.png".arg(pigletPuzzlePage.puzzleType)
                     fillMode: Image.PreserveAspectFit
+                    visible:  pigletPuzzlePage.puzzleComplexity === "hard"
+                    enabled:  !pigletPuzzlePage.puzzleSolved
 
                     MouseArea {
                         anchors.fill: parent
-                        enabled:      pigletPuzzlePage.puzzleSolved ? false : true
 
                         onClicked: {
                             pigletPuzzlePage.elementClicked(6);
@@ -423,13 +423,13 @@ Item {
                     y:        90  * pigletPuzzlePage.screenScale
                     width:    90  * pigletPuzzlePage.screenScale
                     height:   90  * pigletPuzzlePage.screenScale
-                    visible:  pigletPuzzlePage.puzzleComplexity === "hard"
                     source:   "qrc:/resources/images/piglet_puzzle/%1/hard/7.png".arg(pigletPuzzlePage.puzzleType)
                     fillMode: Image.PreserveAspectFit
+                    visible:  pigletPuzzlePage.puzzleComplexity === "hard"
+                    enabled:  !pigletPuzzlePage.puzzleSolved
 
                     MouseArea {
                         anchors.fill: parent
-                        enabled:      pigletPuzzlePage.puzzleSolved ? false : true
 
                         onClicked: {
                             pigletPuzzlePage.elementClicked(7);
@@ -442,13 +442,13 @@ Item {
                     y:        180 * pigletPuzzlePage.screenScale
                     width:    90  * pigletPuzzlePage.screenScale
                     height:   90  * pigletPuzzlePage.screenScale
-                    visible:  pigletPuzzlePage.puzzleComplexity === "hard"
                     source:   "qrc:/resources/images/piglet_puzzle/%1/hard/8.png".arg(pigletPuzzlePage.puzzleType)
                     fillMode: Image.PreserveAspectFit
+                    visible:  pigletPuzzlePage.puzzleComplexity === "hard"
+                    enabled:  !pigletPuzzlePage.puzzleSolved
 
                     MouseArea {
                         anchors.fill: parent
-                        enabled:      pigletPuzzlePage.puzzleSolved ? false : true
 
                         onClicked: {
                             pigletPuzzlePage.elementClicked(8);
@@ -461,13 +461,13 @@ Item {
                     y:        180 * pigletPuzzlePage.screenScale
                     width:    90  * pigletPuzzlePage.screenScale
                     height:   90  * pigletPuzzlePage.screenScale
-                    visible:  pigletPuzzlePage.puzzleComplexity === "hard"
                     source:   "qrc:/resources/images/piglet_puzzle/%1/hard/9.png".arg(pigletPuzzlePage.puzzleType)
                     fillMode: Image.PreserveAspectFit
+                    visible:  pigletPuzzlePage.puzzleComplexity === "hard"
+                    enabled:  !pigletPuzzlePage.puzzleSolved
 
                     MouseArea {
                         anchors.fill: parent
-                        enabled:      pigletPuzzlePage.puzzleSolved ? false : true
 
                         onClicked: {
                             pigletPuzzlePage.elementClicked(9);
@@ -480,13 +480,13 @@ Item {
                     y:        180 * pigletPuzzlePage.screenScale
                     width:    90  * pigletPuzzlePage.screenScale
                     height:   90  * pigletPuzzlePage.screenScale
-                    visible:  pigletPuzzlePage.puzzleComplexity === "hard"
                     source:   "qrc:/resources/images/piglet_puzzle/%1/hard/10.png".arg(pigletPuzzlePage.puzzleType)
                     fillMode: Image.PreserveAspectFit
+                    visible:  pigletPuzzlePage.puzzleComplexity === "hard"
+                    enabled:  !pigletPuzzlePage.puzzleSolved
 
                     MouseArea {
                         anchors.fill: parent
-                        enabled:      pigletPuzzlePage.puzzleSolved ? false : true
 
                         onClicked: {
                             pigletPuzzlePage.elementClicked(10);
@@ -499,13 +499,13 @@ Item {
                     y:        180 * pigletPuzzlePage.screenScale
                     width:    90  * pigletPuzzlePage.screenScale
                     height:   90  * pigletPuzzlePage.screenScale
-                    visible:  pigletPuzzlePage.puzzleComplexity === "hard"
                     source:   "qrc:/resources/images/piglet_puzzle/%1/hard/11.png".arg(pigletPuzzlePage.puzzleType)
                     fillMode: Image.PreserveAspectFit
+                    visible:  pigletPuzzlePage.puzzleComplexity === "hard"
+                    enabled:  !pigletPuzzlePage.puzzleSolved
 
                     MouseArea {
                         anchors.fill: parent
-                        enabled:      pigletPuzzlePage.puzzleSolved ? false : true
 
                         onClicked: {
                             pigletPuzzlePage.elementClicked(11);
@@ -518,13 +518,13 @@ Item {
                     y:        270 * pigletPuzzlePage.screenScale
                     width:    90  * pigletPuzzlePage.screenScale
                     height:   90  * pigletPuzzlePage.screenScale
-                    visible:  pigletPuzzlePage.puzzleComplexity === "hard"
                     source:   "qrc:/resources/images/piglet_puzzle/%1/hard/12.png".arg(pigletPuzzlePage.puzzleType)
                     fillMode: Image.PreserveAspectFit
+                    visible:  pigletPuzzlePage.puzzleComplexity === "hard"
+                    enabled:  !pigletPuzzlePage.puzzleSolved
 
                     MouseArea {
                         anchors.fill: parent
-                        enabled:      pigletPuzzlePage.puzzleSolved ? false : true
 
                         onClicked: {
                             pigletPuzzlePage.elementClicked(12);
@@ -537,13 +537,13 @@ Item {
                     y:        270 * pigletPuzzlePage.screenScale
                     width:    90  * pigletPuzzlePage.screenScale
                     height:   90  * pigletPuzzlePage.screenScale
-                    visible:  pigletPuzzlePage.puzzleComplexity === "hard"
                     source:   "qrc:/resources/images/piglet_puzzle/%1/hard/13.png".arg(pigletPuzzlePage.puzzleType)
                     fillMode: Image.PreserveAspectFit
+                    visible:  pigletPuzzlePage.puzzleComplexity === "hard"
+                    enabled:  !pigletPuzzlePage.puzzleSolved
 
                     MouseArea {
                         anchors.fill: parent
-                        enabled:      pigletPuzzlePage.puzzleSolved ? false : true
 
                         onClicked: {
                             pigletPuzzlePage.elementClicked(13);
@@ -556,13 +556,13 @@ Item {
                     y:        270 * pigletPuzzlePage.screenScale
                     width:    90  * pigletPuzzlePage.screenScale
                     height:   90  * pigletPuzzlePage.screenScale
-                    visible:  pigletPuzzlePage.puzzleComplexity === "hard"
                     source:   "qrc:/resources/images/piglet_puzzle/%1/hard/14.png".arg(pigletPuzzlePage.puzzleType)
                     fillMode: Image.PreserveAspectFit
+                    visible:  pigletPuzzlePage.puzzleComplexity === "hard"
+                    enabled:  !pigletPuzzlePage.puzzleSolved
 
                     MouseArea {
                         anchors.fill: parent
-                        enabled:      pigletPuzzlePage.puzzleSolved ? false : true
 
                         onClicked: {
                             pigletPuzzlePage.elementClicked(14);
@@ -575,13 +575,13 @@ Item {
                     y:        270 * pigletPuzzlePage.screenScale
                     width:    90  * pigletPuzzlePage.screenScale
                     height:   90  * pigletPuzzlePage.screenScale
-                    visible:  pigletPuzzlePage.puzzleComplexity === "hard"
                     source:   "qrc:/resources/images/piglet_puzzle/%1/hard/15.png".arg(pigletPuzzlePage.puzzleType)
                     fillMode: Image.PreserveAspectFit
+                    visible:  pigletPuzzlePage.puzzleComplexity === "hard"
+                    enabled:  !pigletPuzzlePage.puzzleSolved
 
                     MouseArea {
                         anchors.fill: parent
-                        enabled:      pigletPuzzlePage.puzzleSolved ? false : true
 
                         onClicked: {
                             pigletPuzzlePage.elementClicked(15);
@@ -594,10 +594,10 @@ Item {
                 id:           originalImage
                 anchors.fill: parent
                 z:            1
-                visible:      false
                 source:       "qrc:/resources/images/piglet_puzzle/%1/original.png".arg(pigletPuzzlePage.puzzleType)
                 fillMode:     Image.PreserveAspectFit
                 opacity:      0.0
+                visible:      false
 
                 function blink() {
                     visible = true;
@@ -670,8 +670,8 @@ Item {
         z:                1
         width:            parent.height
         height:           parent.width
-        rotation:         pigletPuzzlePage.screenRotation
         color:            "transparent"
+        rotation:         pigletPuzzlePage.screenRotation
         visible:          false
 
         Image {
@@ -699,8 +699,8 @@ Item {
         z:                2
         width:            parent.height
         height:           parent.width
-        rotation:         pigletPuzzlePage.screenRotation
         color:            "black"
+        rotation:         pigletPuzzlePage.screenRotation
 
         MultiPointTouchArea {
             id:           complexitySelectionRectangleMultiPointTouchArea
@@ -797,8 +797,8 @@ Item {
         z:                2
         width:            parent.height
         height:           parent.width
-        rotation:         pigletPuzzlePage.screenRotation
         color:            "black"
+        rotation:         pigletPuzzlePage.screenRotation
         visible:          false
 
         MultiPointTouchArea {

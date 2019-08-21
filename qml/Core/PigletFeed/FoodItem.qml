@@ -6,9 +6,7 @@ Rectangle {
     height: foodItemImage.sourceSize.height * parent.refrigeratorScale
     color:  "transparent"
 
-    property bool itemClickable: false
-
-    property string itemType:    ""
+    property string itemType: ""
 
     signal itemClicked()
     signal hideAnimationDone()
@@ -20,7 +18,6 @@ Rectangle {
     MouseArea {
         id:           foodItemMouseArea
         anchors.fill: parent
-        enabled:      foodItem.itemClickable
 
         onClicked: {
             foodItemSelectAnimation.start();

@@ -32,9 +32,9 @@ Rectangle {
     Image {
         id:           sandwichItemImage
         anchors.fill: parent
-        visible:      false
         source:       imageSource(sandwichItem.itemType)
         fillMode:     Image.PreserveAspectFit
+        visible:      false
 
         function imageSource(item_type) {
             if (item_type === "bread_bottom") {

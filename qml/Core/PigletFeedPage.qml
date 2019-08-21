@@ -85,8 +85,8 @@ Item {
         anchors.centerIn: parent
         width:            parent.height
         height:           parent.width
-        rotation:         pigletFeedPage.screenRotation
         color:            "black"
+        rotation:         pigletFeedPage.screenRotation
 
         AnimatedImage {
             id:           backgroundAnimatedImage
@@ -188,8 +188,8 @@ Item {
         z:                1
         width:            parent.height
         height:           parent.width
-        rotation:         pigletFeedPage.screenRotation
         color:            "black"
+        rotation:         pigletFeedPage.screenRotation
 
         MultiPointTouchArea {
             id:           complexitySelectionRectangleMultiPointTouchArea
@@ -314,8 +314,8 @@ Item {
     NotificationDialog {
         id:       newLevelNotificationDialog
         z:        2
-        rotation: pigletFeedPage.screenRotation
         text:     qsTr("Level %1 of %2. Get ready to remember a sandwich recipe...").arg(pigletFeedPage.currentLevel).arg(pigletFeedPage.maximumLevel)
+        rotation: pigletFeedPage.screenRotation
 
         onOpened: {
             audio.playAudio("qrc:/resources/sound/piglet_feed/new_level.wav");
@@ -336,8 +336,8 @@ Item {
     QueryDialog {
         id:       gameCompletedQueryDialog
         z:        2
-        rotation: pigletFeedPage.screenRotation
         text:     qsTr("Congratulations, you have just won the game! Do you want to play again?")
+        rotation: pigletFeedPage.screenRotation
 
         onOpened: {
             audio.playAudio("qrc:/resources/sound/piglet_feed/game_completed.wav");
@@ -357,8 +357,8 @@ Item {
     QueryDialog {
         id:       gameOverQueryDialog
         z:        2
-        rotation: pigletFeedPage.screenRotation
         text:     qsTr("Game over. Do you want to play again?")
+        rotation: pigletFeedPage.screenRotation
 
         onOpened: {
             audio.playAudio("qrc:/resources/sound/piglet_feed/game_over.wav");

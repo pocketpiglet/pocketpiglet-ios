@@ -7,8 +7,8 @@ import QtPurchasing 1.0
 ApplicationWindow {
     id:                           mainWindow
     title:                        qsTr("Piglet")
-    visible:                      true
     visibility:                   Window.FullScreen
+    visible:                      true
     Screen.orientationUpdateMask: Qt.PortraitOrientation         | Qt.LandscapeOrientation |
                                   Qt.InvertedPortraitOrientation | Qt.InvertedLandscapeOrientation
 

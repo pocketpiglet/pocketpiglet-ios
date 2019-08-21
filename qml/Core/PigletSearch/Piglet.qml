@@ -35,7 +35,8 @@ Rectangle {
         anchors.fill: parent
 
         onClicked: {
-            pigletMouseArea.enabled  = false;
+            enabled = false;
+
             pigletImage.visible      = false;
             pigletFoundImage.visible = true;
 

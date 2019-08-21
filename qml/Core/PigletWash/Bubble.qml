@@ -29,7 +29,8 @@ Rectangle {
         anchors.fill: parent
 
         onClicked: {
-            bubbleMouseArea.enabled    = false;
+            enabled = false;
+
             bubbleImage.visible        = false;
             bubbleBurstedImage.visible = true;
 

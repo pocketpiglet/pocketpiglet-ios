@@ -273,13 +273,13 @@ Item {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottomMargin:     30
             z:                        1
-            visible:                  countdownTimer.running
             text:                     textText(countdownTimer.countdownTime)
             color:                    "yellow"
             font.pixelSize:           32
             font.family:              "Courier"
             horizontalAlignment:      Text.AlignHCenter
             verticalAlignment:        Text.AlignVCenter
+            visible:                  countdownTimer.running
 
             function textText(countdown_time) {
                 var time = (countdown_time / 1000).toString(10);
@@ -300,10 +300,10 @@ Item {
             z:                        1
             width:                    128
             height:                   32
-            visible:                  pigletSearchPage.currentPiglet !== null &&
-                                      pigletSearchPage.currentPiglet.y < 0 - pigletSearchPage.currentPiglet.height
             source:                   "qrc:/resources/images/piglet_search/turn_up.png"
             fillMode:                 Image.PreserveAspectFit
+            visible:                  pigletSearchPage.currentPiglet !== null &&
+                                      pigletSearchPage.currentPiglet.y < 0 - pigletSearchPage.currentPiglet.height
 
             SequentialAnimation {
                 loops:   Animation.Infinite
@@ -335,10 +335,10 @@ Item {
             z:                        1
             width:                    128
             height:                   32
-            visible:                  pigletSearchPage.currentPiglet !== null &&
-                                      pigletSearchPage.currentPiglet.y > backgroundRectangle.height
             source:                   "qrc:/resources/images/piglet_search/turn_down.png"
             fillMode:                 Image.PreserveAspectFit
+            visible:                  pigletSearchPage.currentPiglet !== null &&
+                                      pigletSearchPage.currentPiglet.y > backgroundRectangle.height
 
             SequentialAnimation {
                 loops:   Animation.Infinite
@@ -369,10 +369,10 @@ Item {
             z:                      1
             width:                  32
             height:                 128
-            visible:                pigletSearchPage.currentPiglet !== null &&
-                                    pigletSearchPage.currentPiglet.x < 0 - pigletSearchPage.currentPiglet.width
             source:                 "qrc:/resources/images/piglet_search/turn_left.png"
             fillMode:               Image.PreserveAspectFit
+            visible:                pigletSearchPage.currentPiglet !== null &&
+                                    pigletSearchPage.currentPiglet.x < 0 - pigletSearchPage.currentPiglet.width
 
             SequentialAnimation {
                 loops:   Animation.Infinite
@@ -403,10 +403,10 @@ Item {
             z:                      1
             width:                  32
             height:                 128
-            visible:                pigletSearchPage.currentPiglet !== null &&
-                                    pigletSearchPage.currentPiglet.x > backgroundRectangle.width
             source:                 "qrc:/resources/images/piglet_search/turn_right.png"
             fillMode:               Image.PreserveAspectFit
+            visible:                pigletSearchPage.currentPiglet !== null &&
+                                    pigletSearchPage.currentPiglet.x > backgroundRectangle.width
 
             SequentialAnimation {
                 loops:   Animation.Infinite

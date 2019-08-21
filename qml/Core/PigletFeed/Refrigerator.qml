@@ -14,7 +14,7 @@ Rectangle {
 
     readonly property real refrigeratorScale: refrigeratorImage.paintedWidth / refrigeratorImage.sourceSize.width
 
-    property bool foodItemsClickable:         false
+    property bool foodItemsEnabled:           false
 
     property int currentFoodItemNum:          0
     property int orderedFoodItemsCount:       0
@@ -23,13 +23,13 @@ Rectangle {
 
     property list<FoodItem> foodItemsEasy: [
         FoodItem {
-            id:            saladFoodItemEasy
-            parent:        refrigerator
-            x:             20  * refrigerator.refrigeratorScale
-            y:             100 * refrigerator.refrigeratorScale
-            visible:       refrigerator.refrigeratorType === "easy"
-            itemClickable: refrigerator.foodItemsClickable
-            itemType:      "salad"
+            id:       saladFoodItemEasy
+            parent:   refrigerator
+            x:        20  * refrigerator.refrigeratorScale
+            y:        100 * refrigerator.refrigeratorScale
+            visible:  refrigerator.refrigeratorType === "easy"
+            enabled:  refrigerator.foodItemsEnabled
+            itemType: "salad"
 
             onItemClicked: {
                 refrigerator.validateSelectedFoodItem(itemType);
@@ -40,13 +40,13 @@ Rectangle {
             }
         },
         FoodItem {
-            id:            tomatoFoodItemEasy
-            parent:        refrigerator
-            x:             156 * refrigerator.refrigeratorScale
-            y:             100 * refrigerator.refrigeratorScale
-            visible:       refrigerator.refrigeratorType === "easy"
-            itemClickable: refrigerator.foodItemsClickable
-            itemType:      "tomato"
+            id:       tomatoFoodItemEasy
+            parent:   refrigerator
+            x:        156 * refrigerator.refrigeratorScale
+            y:        100 * refrigerator.refrigeratorScale
+            visible:  refrigerator.refrigeratorType === "easy"
+            enabled:  refrigerator.foodItemsEnabled
+            itemType: "tomato"
 
             onItemClicked: {
                 refrigerator.validateSelectedFoodItem(itemType);
@@ -57,13 +57,13 @@ Rectangle {
             }
         },
         FoodItem {
-            id:            fishFoodItemEasy
-            parent:        refrigerator
-            x:             20  * refrigerator.refrigeratorScale
-            y:             260 * refrigerator.refrigeratorScale
-            visible:       refrigerator.refrigeratorType === "easy"
-            itemClickable: refrigerator.foodItemsClickable
-            itemType:      "fish"
+            id:       fishFoodItemEasy
+            parent:   refrigerator
+            x:        20  * refrigerator.refrigeratorScale
+            y:        260 * refrigerator.refrigeratorScale
+            visible:  refrigerator.refrigeratorType === "easy"
+            enabled:  refrigerator.foodItemsEnabled
+            itemType: "fish"
 
             onItemClicked: {
                 refrigerator.validateSelectedFoodItem(itemType);
@@ -74,13 +74,13 @@ Rectangle {
             }
         },
         FoodItem {
-            id:            cheeseFoodItemEasy
-            parent:        refrigerator
-            x:             156 * refrigerator.refrigeratorScale
-            y:             260 * refrigerator.refrigeratorScale
-            visible:       refrigerator.refrigeratorType === "easy"
-            itemClickable: refrigerator.foodItemsClickable
-            itemType:      "cheese"
+            id:       cheeseFoodItemEasy
+            parent:   refrigerator
+            x:        156 * refrigerator.refrigeratorScale
+            y:        260 * refrigerator.refrigeratorScale
+            visible:  refrigerator.refrigeratorType === "easy"
+            enabled:  refrigerator.foodItemsEnabled
+            itemType: "cheese"
 
             onItemClicked: {
                 refrigerator.validateSelectedFoodItem(itemType);
@@ -94,13 +94,13 @@ Rectangle {
 
     property list<FoodItem> foodItemsMedium: [
         FoodItem {
-            id:            saladFoodItemMedium
-            parent:        refrigerator
-            x:             20 * refrigerator.refrigeratorScale
-            y:             50 * refrigerator.refrigeratorScale
-            visible:       refrigerator.refrigeratorType === "medium"
-            itemClickable: refrigerator.foodItemsClickable
-            itemType:      "salad"
+            id:       saladFoodItemMedium
+            parent:   refrigerator
+            x:        20 * refrigerator.refrigeratorScale
+            y:        50 * refrigerator.refrigeratorScale
+            visible:  refrigerator.refrigeratorType === "medium"
+            enabled:  refrigerator.foodItemsEnabled
+            itemType: "salad"
 
             onItemClicked: {
                 refrigerator.validateSelectedFoodItem(itemType);
@@ -111,13 +111,13 @@ Rectangle {
             }
         },
         FoodItem {
-            id:            tomatoFoodItemMedium
-            parent:        refrigerator
-            x:             156 * refrigerator.refrigeratorScale
-            y:             50  * refrigerator.refrigeratorScale
-            visible:       refrigerator.refrigeratorType === "medium"
-            itemClickable: refrigerator.foodItemsClickable
-            itemType:      "tomato"
+            id:       tomatoFoodItemMedium
+            parent:   refrigerator
+            x:        156 * refrigerator.refrigeratorScale
+            y:        50  * refrigerator.refrigeratorScale
+            visible:  refrigerator.refrigeratorType === "medium"
+            enabled:  refrigerator.foodItemsEnabled
+            itemType: "tomato"
 
             onItemClicked: {
                 refrigerator.validateSelectedFoodItem(itemType);
@@ -128,13 +128,13 @@ Rectangle {
             }
         },
         FoodItem {
-            id:            fishFoodItemMedium
-            parent:        refrigerator
-            x:             20  * refrigerator.refrigeratorScale
-            y:             160 * refrigerator.refrigeratorScale
-            visible:       refrigerator.refrigeratorType === "medium"
-            itemClickable: refrigerator.foodItemsClickable
-            itemType:      "fish"
+            id:       fishFoodItemMedium
+            parent:   refrigerator
+            x:        20  * refrigerator.refrigeratorScale
+            y:        160 * refrigerator.refrigeratorScale
+            visible:  refrigerator.refrigeratorType === "medium"
+            enabled:  refrigerator.foodItemsEnabled
+            itemType: "fish"
 
             onItemClicked: {
                 refrigerator.validateSelectedFoodItem(itemType);
@@ -145,13 +145,13 @@ Rectangle {
             }
         },
         FoodItem {
-            id:            cheeseFoodItemMedium
-            parent:        refrigerator
-            x:             156 * refrigerator.refrigeratorScale
-            y:             160 * refrigerator.refrigeratorScale
-            visible:       refrigerator.refrigeratorType === "medium"
-            itemClickable: refrigerator.foodItemsClickable
-            itemType:      "cheese"
+            id:       cheeseFoodItemMedium
+            parent:   refrigerator
+            x:        156 * refrigerator.refrigeratorScale
+            y:        160 * refrigerator.refrigeratorScale
+            visible:  refrigerator.refrigeratorType === "medium"
+            enabled:  refrigerator.foodItemsEnabled
+            itemType: "cheese"
 
             onItemClicked: {
                 refrigerator.validateSelectedFoodItem(itemType);
@@ -162,13 +162,13 @@ Rectangle {
             }
         },
         FoodItem {
-            id:            cucumberFoodItemMedium
-            parent:        refrigerator
-            x:             20  * refrigerator.refrigeratorScale
-            y:             260 * refrigerator.refrigeratorScale
-            visible:       refrigerator.refrigeratorType === "medium"
-            itemClickable: refrigerator.foodItemsClickable
-            itemType:      "cucumber"
+            id:       cucumberFoodItemMedium
+            parent:   refrigerator
+            x:        20  * refrigerator.refrigeratorScale
+            y:        260 * refrigerator.refrigeratorScale
+            visible:  refrigerator.refrigeratorType === "medium"
+            enabled:  refrigerator.foodItemsEnabled
+            itemType: "cucumber"
 
             onItemClicked: {
                 refrigerator.validateSelectedFoodItem(itemType);
@@ -179,13 +179,13 @@ Rectangle {
             }
         },
         FoodItem {
-            id:            olivesFoodItemMedium
-            parent:        refrigerator
-            x:             156 * refrigerator.refrigeratorScale
-            y:             260 * refrigerator.refrigeratorScale
-            visible:       refrigerator.refrigeratorType === "medium"
-            itemClickable: refrigerator.foodItemsClickable
-            itemType:      "olives"
+            id:       olivesFoodItemMedium
+            parent:   refrigerator
+            x:        156 * refrigerator.refrigeratorScale
+            y:        260 * refrigerator.refrigeratorScale
+            visible:  refrigerator.refrigeratorType === "medium"
+            enabled:  refrigerator.foodItemsEnabled
+            itemType: "olives"
 
             onItemClicked: {
                 refrigerator.validateSelectedFoodItem(itemType);
@@ -199,13 +199,13 @@ Rectangle {
 
     property list<FoodItem> foodItemsHard: [
         FoodItem {
-            id:            saladFoodItemHard
-            parent:        refrigerator
-            x:             20 * refrigerator.refrigeratorScale
-            y:             20 * refrigerator.refrigeratorScale
-            visible:       refrigerator.refrigeratorType === "hard"
-            itemClickable: refrigerator.foodItemsClickable
-            itemType:      "salad"
+            id:       saladFoodItemHard
+            parent:   refrigerator
+            x:        20 * refrigerator.refrigeratorScale
+            y:        20 * refrigerator.refrigeratorScale
+            visible:  refrigerator.refrigeratorType === "hard"
+            enabled:  refrigerator.foodItemsEnabled
+            itemType: "salad"
 
             onItemClicked: {
                 refrigerator.validateSelectedFoodItem(itemType);
@@ -216,13 +216,13 @@ Rectangle {
             }
         },
         FoodItem {
-            id:            fishFoodItemHard
-            parent:        refrigerator
-            x:             156 * refrigerator.refrigeratorScale
-            y:             20  * refrigerator.refrigeratorScale
-            visible:       refrigerator.refrigeratorType === "hard"
-            itemClickable: refrigerator.foodItemsClickable
-            itemType:      "fish"
+            id:       fishFoodItemHard
+            parent:   refrigerator
+            x:        156 * refrigerator.refrigeratorScale
+            y:        20  * refrigerator.refrigeratorScale
+            visible:  refrigerator.refrigeratorType === "hard"
+            enabled:  refrigerator.foodItemsEnabled
+            itemType: "fish"
 
             onItemClicked: {
                 refrigerator.validateSelectedFoodItem(itemType);
@@ -233,13 +233,13 @@ Rectangle {
             }
         },
         FoodItem {
-            id:            cucumberFoodItemHard
-            parent:        refrigerator
-            x:             20  * refrigerator.refrigeratorScale
-            y:             100 * refrigerator.refrigeratorScale
-            visible:       refrigerator.refrigeratorType === "hard"
-            itemClickable: refrigerator.foodItemsClickable
-            itemType:      "cucumber"
+            id:       cucumberFoodItemHard
+            parent:   refrigerator
+            x:        20  * refrigerator.refrigeratorScale
+            y:        100 * refrigerator.refrigeratorScale
+            visible:  refrigerator.refrigeratorType === "hard"
+            enabled:  refrigerator.foodItemsEnabled
+            itemType: "cucumber"
 
             onItemClicked: {
                 refrigerator.validateSelectedFoodItem(itemType);
@@ -250,13 +250,13 @@ Rectangle {
             }
         },
         FoodItem {
-            id:            olivesFoodItemHard
-            parent:        refrigerator
-            x:             156 * refrigerator.refrigeratorScale
-            y:             100 * refrigerator.refrigeratorScale
-            visible:       refrigerator.refrigeratorType === "hard"
-            itemClickable: refrigerator.foodItemsClickable
-            itemType:      "olives"
+            id:       olivesFoodItemHard
+            parent:   refrigerator
+            x:        156 * refrigerator.refrigeratorScale
+            y:        100 * refrigerator.refrigeratorScale
+            visible:  refrigerator.refrigeratorType === "hard"
+            enabled:  refrigerator.foodItemsEnabled
+            itemType: "olives"
 
             onItemClicked: {
                 refrigerator.validateSelectedFoodItem(itemType);
@@ -267,13 +267,13 @@ Rectangle {
             }
         },
         FoodItem {
-            id:            cheeseFoodItemHard
-            parent:        refrigerator
-            x:             20  * refrigerator.refrigeratorScale
-            y:             180 * refrigerator.refrigeratorScale
-            visible:       refrigerator.refrigeratorType === "hard"
-            itemClickable: refrigerator.foodItemsClickable
-            itemType:      "cheese"
+            id:       cheeseFoodItemHard
+            parent:   refrigerator
+            x:        20  * refrigerator.refrigeratorScale
+            y:        180 * refrigerator.refrigeratorScale
+            visible:  refrigerator.refrigeratorType === "hard"
+            enabled:  refrigerator.foodItemsEnabled
+            itemType: "cheese"
 
             onItemClicked: {
                 refrigerator.validateSelectedFoodItem(itemType);
@@ -284,13 +284,13 @@ Rectangle {
             }
         },
         FoodItem {
-            id:            tomatoFoodItemHard
-            parent:        refrigerator
-            x:             156 * refrigerator.refrigeratorScale
-            y:             180 * refrigerator.refrigeratorScale
-            visible:       refrigerator.refrigeratorType === "hard"
-            itemClickable: refrigerator.foodItemsClickable
-            itemType:      "tomato"
+            id:       tomatoFoodItemHard
+            parent:   refrigerator
+            x:        156 * refrigerator.refrigeratorScale
+            y:        180 * refrigerator.refrigeratorScale
+            visible:  refrigerator.refrigeratorType === "hard"
+            enabled:  refrigerator.foodItemsEnabled
+            itemType: "tomato"
 
             onItemClicked: {
                 refrigerator.validateSelectedFoodItem(itemType);
@@ -301,13 +301,13 @@ Rectangle {
             }
         },
         FoodItem {
-            id:            ketchupFoodItemHard
-            parent:        refrigerator
-            x:             20  * refrigerator.refrigeratorScale
-            y:             260 * refrigerator.refrigeratorScale
-            visible:       refrigerator.refrigeratorType === "hard"
-            itemClickable: refrigerator.foodItemsClickable
-            itemType:      "ketchup"
+            id:       ketchupFoodItemHard
+            parent:   refrigerator
+            x:        20  * refrigerator.refrigeratorScale
+            y:        260 * refrigerator.refrigeratorScale
+            visible:  refrigerator.refrigeratorType === "hard"
+            enabled:  refrigerator.foodItemsEnabled
+            itemType: "ketchup"
 
             onItemClicked: {
                 refrigerator.validateSelectedFoodItem(itemType);
@@ -318,13 +318,13 @@ Rectangle {
             }
         },
         FoodItem {
-            id:            mayonnaiseFoodItemHard
-            parent:        refrigerator
-            x:             156 * refrigerator.refrigeratorScale
-            y:             260 * refrigerator.refrigeratorScale
-            visible:       refrigerator.refrigeratorType === "hard"
-            itemClickable: refrigerator.foodItemsClickable
-            itemType:      "mayonnaise"
+            id:       mayonnaiseFoodItemHard
+            parent:   refrigerator
+            x:        156 * refrigerator.refrigeratorScale
+            y:        260 * refrigerator.refrigeratorScale
+            visible:  refrigerator.refrigeratorType === "hard"
+            enabled:  refrigerator.foodItemsEnabled
+            itemType: "mayonnaise"
 
             onItemClicked: {
                 refrigerator.validateSelectedFoodItem(itemType);
@@ -386,7 +386,7 @@ Rectangle {
     }
 
     function startOrder(items_to_order) {
-        foodItemsClickable    = false;
+        foodItemsEnabled      = false;
         orderedFoodItemsCount = items_to_order;
         currentFoodItemNum    = 0;
 
@@ -405,13 +405,13 @@ Rectangle {
 
             currentFoodItemNum = currentFoodItemNum + 1;
         } else {
-            foodItemsClickable = true;
+            foodItemsEnabled   = true;
             currentFoodItemNum = 0;
         }
     }
 
     function cancelOrder() {
-        foodItemsClickable    = false;
+        foodItemsEnabled      = false;
         orderedFoodItemsCount = 0;
         currentFoodItemNum    = 0;
 
@@ -459,7 +459,7 @@ Rectangle {
             }
 
             if (currentFoodItemNum >= orderedFoodItemsCount) {
-                foodItemsClickable = false;
+                foodItemsEnabled = false;
             }
         }
     }

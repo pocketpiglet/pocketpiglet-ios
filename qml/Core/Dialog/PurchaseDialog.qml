@@ -66,14 +66,13 @@ MultiPointTouchArea {
             spacing:          8
 
             Image {
-                id:     getFreeDiamondsButtonImage
-                source: getFreeDiamondsMouseArea.enabled ? "qrc:/resources/images/dialog/purchase_dialog_button.png" :
-                                                           "qrc:/resources/images/dialog/purchase_dialog_button_disabled.png"
+                id:      getFreeDiamondsButtonImage
+                source:  enabled ? "qrc:/resources/images/dialog/purchase_dialog_button.png" :
+                                   "qrc:/resources/images/dialog/purchase_dialog_button_disabled.png"
+                enabled: purchaseDialog.enableGetFreeDiamondsButton && countdownTimer.countdownTime <= 0
 
                 MouseArea {
-                    id:           getFreeDiamondsMouseArea
                     anchors.fill: parent
-                    enabled:      purchaseDialog.enableGetFreeDiamondsButton && countdownTimer.countdownTime <= 0
 
                     onClicked: {
                         purchaseDialog.nextDiamondsDeliveryTime = (new Date()).getTime() + purchaseDialog.diamondsDeliveryInterval * 1000;
@@ -96,8 +95,8 @@ MultiPointTouchArea {
                         anchors.verticalCenter: parent.verticalCenter
                         width:                  sourceSize.width * (height / sourceSize.height)
                         height:                 parent.height - 8
-                        source:                 getFreeDiamondsMouseArea.enabled ? "qrc:/resources/images/dialog/purchase_dialog_get_free_diamonds.png" :
-                                                                                   "qrc:/resources/images/dialog/purchase_dialog_get_free_diamonds_disabled.png"
+                        source:                 getFreeDiamondsButtonImage.enabled ? "qrc:/resources/images/dialog/purchase_dialog_get_free_diamonds.png" :
+                                                                                     "qrc:/resources/images/dialog/purchase_dialog_get_free_diamonds_disabled.png"
                         fillMode:               Image.PreserveAspectFit
                     }
 
