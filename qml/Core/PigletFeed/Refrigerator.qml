@@ -27,9 +27,9 @@ Rectangle {
             parent:   refrigerator
             x:        20  * refrigerator.refrigeratorScale
             y:        100 * refrigerator.refrigeratorScale
+            itemType: "salad"
             visible:  refrigerator.refrigeratorType === "easy"
             enabled:  refrigerator.foodItemsEnabled
-            itemType: "salad"
 
             onItemClicked: {
                 refrigerator.validateSelectedFoodItem(itemType);
@@ -44,9 +44,9 @@ Rectangle {
             parent:   refrigerator
             x:        156 * refrigerator.refrigeratorScale
             y:        100 * refrigerator.refrigeratorScale
+            itemType: "tomato"
             visible:  refrigerator.refrigeratorType === "easy"
             enabled:  refrigerator.foodItemsEnabled
-            itemType: "tomato"
 
             onItemClicked: {
                 refrigerator.validateSelectedFoodItem(itemType);
@@ -61,9 +61,9 @@ Rectangle {
             parent:   refrigerator
             x:        20  * refrigerator.refrigeratorScale
             y:        260 * refrigerator.refrigeratorScale
+            itemType: "fish"
             visible:  refrigerator.refrigeratorType === "easy"
             enabled:  refrigerator.foodItemsEnabled
-            itemType: "fish"
 
             onItemClicked: {
                 refrigerator.validateSelectedFoodItem(itemType);
@@ -78,9 +78,9 @@ Rectangle {
             parent:   refrigerator
             x:        156 * refrigerator.refrigeratorScale
             y:        260 * refrigerator.refrigeratorScale
+            itemType: "cheese"
             visible:  refrigerator.refrigeratorType === "easy"
             enabled:  refrigerator.foodItemsEnabled
-            itemType: "cheese"
 
             onItemClicked: {
                 refrigerator.validateSelectedFoodItem(itemType);
@@ -98,9 +98,9 @@ Rectangle {
             parent:   refrigerator
             x:        20 * refrigerator.refrigeratorScale
             y:        50 * refrigerator.refrigeratorScale
+            itemType: "salad"
             visible:  refrigerator.refrigeratorType === "medium"
             enabled:  refrigerator.foodItemsEnabled
-            itemType: "salad"
 
             onItemClicked: {
                 refrigerator.validateSelectedFoodItem(itemType);
@@ -115,9 +115,9 @@ Rectangle {
             parent:   refrigerator
             x:        156 * refrigerator.refrigeratorScale
             y:        50  * refrigerator.refrigeratorScale
+            itemType: "tomato"
             visible:  refrigerator.refrigeratorType === "medium"
             enabled:  refrigerator.foodItemsEnabled
-            itemType: "tomato"
 
             onItemClicked: {
                 refrigerator.validateSelectedFoodItem(itemType);
@@ -132,9 +132,9 @@ Rectangle {
             parent:   refrigerator
             x:        20  * refrigerator.refrigeratorScale
             y:        160 * refrigerator.refrigeratorScale
+            itemType: "fish"
             visible:  refrigerator.refrigeratorType === "medium"
             enabled:  refrigerator.foodItemsEnabled
-            itemType: "fish"
 
             onItemClicked: {
                 refrigerator.validateSelectedFoodItem(itemType);
@@ -149,9 +149,9 @@ Rectangle {
             parent:   refrigerator
             x:        156 * refrigerator.refrigeratorScale
             y:        160 * refrigerator.refrigeratorScale
+            itemType: "cheese"
             visible:  refrigerator.refrigeratorType === "medium"
             enabled:  refrigerator.foodItemsEnabled
-            itemType: "cheese"
 
             onItemClicked: {
                 refrigerator.validateSelectedFoodItem(itemType);
@@ -166,9 +166,9 @@ Rectangle {
             parent:   refrigerator
             x:        20  * refrigerator.refrigeratorScale
             y:        260 * refrigerator.refrigeratorScale
+            itemType: "cucumber"
             visible:  refrigerator.refrigeratorType === "medium"
             enabled:  refrigerator.foodItemsEnabled
-            itemType: "cucumber"
 
             onItemClicked: {
                 refrigerator.validateSelectedFoodItem(itemType);
@@ -183,9 +183,9 @@ Rectangle {
             parent:   refrigerator
             x:        156 * refrigerator.refrigeratorScale
             y:        260 * refrigerator.refrigeratorScale
+            itemType: "olives"
             visible:  refrigerator.refrigeratorType === "medium"
             enabled:  refrigerator.foodItemsEnabled
-            itemType: "olives"
 
             onItemClicked: {
                 refrigerator.validateSelectedFoodItem(itemType);
@@ -203,9 +203,9 @@ Rectangle {
             parent:   refrigerator
             x:        20 * refrigerator.refrigeratorScale
             y:        20 * refrigerator.refrigeratorScale
+            itemType: "salad"
             visible:  refrigerator.refrigeratorType === "hard"
             enabled:  refrigerator.foodItemsEnabled
-            itemType: "salad"
 
             onItemClicked: {
                 refrigerator.validateSelectedFoodItem(itemType);
@@ -220,9 +220,9 @@ Rectangle {
             parent:   refrigerator
             x:        156 * refrigerator.refrigeratorScale
             y:        20  * refrigerator.refrigeratorScale
+            itemType: "fish"
             visible:  refrigerator.refrigeratorType === "hard"
             enabled:  refrigerator.foodItemsEnabled
-            itemType: "fish"
 
             onItemClicked: {
                 refrigerator.validateSelectedFoodItem(itemType);
@@ -237,9 +237,9 @@ Rectangle {
             parent:   refrigerator
             x:        20  * refrigerator.refrigeratorScale
             y:        100 * refrigerator.refrigeratorScale
+            itemType: "cucumber"
             visible:  refrigerator.refrigeratorType === "hard"
             enabled:  refrigerator.foodItemsEnabled
-            itemType: "cucumber"
 
             onItemClicked: {
                 refrigerator.validateSelectedFoodItem(itemType);
@@ -254,9 +254,9 @@ Rectangle {
             parent:   refrigerator
             x:        156 * refrigerator.refrigeratorScale
             y:        100 * refrigerator.refrigeratorScale
+            itemType: "olives"
             visible:  refrigerator.refrigeratorType === "hard"
             enabled:  refrigerator.foodItemsEnabled
-            itemType: "olives"
 
             onItemClicked: {
                 refrigerator.validateSelectedFoodItem(itemType);
@@ -271,9 +271,9 @@ Rectangle {
             parent:   refrigerator
             x:        20  * refrigerator.refrigeratorScale
             y:        180 * refrigerator.refrigeratorScale
+            itemType: "cheese"
             visible:  refrigerator.refrigeratorType === "hard"
             enabled:  refrigerator.foodItemsEnabled
-            itemType: "cheese"
 
             onItemClicked: {
                 refrigerator.validateSelectedFoodItem(itemType);
@@ -288,9 +288,9 @@ Rectangle {
             parent:   refrigerator
             x:        156 * refrigerator.refrigeratorScale
             y:        180 * refrigerator.refrigeratorScale
+            itemType: "tomato"
             visible:  refrigerator.refrigeratorType === "hard"
             enabled:  refrigerator.foodItemsEnabled
-            itemType: "tomato"
 
             onItemClicked: {
                 refrigerator.validateSelectedFoodItem(itemType);
@@ -305,9 +305,9 @@ Rectangle {
             parent:   refrigerator
             x:        20  * refrigerator.refrigeratorScale
             y:        260 * refrigerator.refrigeratorScale
+            itemType: "ketchup"
             visible:  refrigerator.refrigeratorType === "hard"
             enabled:  refrigerator.foodItemsEnabled
-            itemType: "ketchup"
 
             onItemClicked: {
                 refrigerator.validateSelectedFoodItem(itemType);
@@ -322,9 +322,9 @@ Rectangle {
             parent:   refrigerator
             x:        156 * refrigerator.refrigeratorScale
             y:        260 * refrigerator.refrigeratorScale
+            itemType: "mayonnaise"
             visible:  refrigerator.refrigeratorType === "hard"
             enabled:  refrigerator.foodItemsEnabled
-            itemType: "mayonnaise"
 
             onItemClicked: {
                 refrigerator.validateSelectedFoodItem(itemType);
