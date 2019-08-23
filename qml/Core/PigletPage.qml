@@ -809,11 +809,11 @@ Item {
         }
 
         onPurchaseFullVersionSelected: {
-            mainWindow.purchaseFullVersion();
+            fullVersionProduct.purchase();
         }
 
         onRestorePurchasesSelected: {
-            mainWindow.restorePurchases();
+            store.restorePurchases();
         }
     }
 
