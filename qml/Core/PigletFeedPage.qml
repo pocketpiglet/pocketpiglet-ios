@@ -5,6 +5,8 @@ import QtMultimedia 5.12
 import "Dialog"
 import "PigletFeed"
 
+import "../Util.js" as UtilScript
+
 Item {
     id: pigletFeedPage
 
@@ -162,10 +164,10 @@ Item {
             id:                  backButtonImage
             anchors.bottom:      parent.bottom
             anchors.right:       parent.right
-            anchors.rightMargin: 30
+            anchors.rightMargin: UtilScript.pt(30)
             z:                   5
-            width:               64
-            height:              64
+            width:               UtilScript.pt(64)
+            height:              UtilScript.pt(64)
             source:              "qrc:/resources/images/back.png"
             fillMode:            Image.PreserveAspectFit
 
@@ -204,20 +206,20 @@ Item {
                 Image {
                     id:               complexitySelectionRowBackgroundImage
                     anchors.centerIn: parent
-                    width:            434
-                    height:           160
+                    width:            UtilScript.pt(434)
+                    height:           UtilScript.pt(160)
                     source:           "qrc:/resources/images/piglet_feed/complexity_selection_background.png"
                     fillMode:         Image.PreserveAspectFit
 
                     Row {
                         id:               complexitySelectionRow
                         anchors.centerIn: parent
-                        spacing:          10
+                        spacing:          UtilScript.pt(10)
 
                         Image {
                             id:       easyComplexityButtonImage
-                            width:    120
-                            height:   120
+                            width:    UtilScript.pt(120)
+                            height:   UtilScript.pt(120)
                             source:   "qrc:/resources/images/piglet_feed/complexity_easy.png"
                             fillMode: Image.PreserveAspectFit
 
@@ -239,8 +241,8 @@ Item {
 
                         Image {
                             id:       mediumComplexityButtonImage
-                            width:    120
-                            height:   120
+                            width:    UtilScript.pt(120)
+                            height:   UtilScript.pt(120)
                             source:   "qrc:/resources/images/piglet_feed/complexity_medium.png"
                             fillMode: Image.PreserveAspectFit
 
@@ -262,8 +264,8 @@ Item {
 
                         Image {
                             id:       hardComplexityButtonImage
-                            width:    120
-                            height:   120
+                            width:    UtilScript.pt(120)
+                            height:   UtilScript.pt(120)
                             source:   "qrc:/resources/images/piglet_feed/complexity_hard.png"
                             fillMode: Image.PreserveAspectFit
 
@@ -289,10 +291,10 @@ Item {
                     id:                  complexitySelectionBackButtonImage
                     anchors.bottom:      parent.bottom
                     anchors.right:       parent.right
-                    anchors.rightMargin: 30
+                    anchors.rightMargin: UtilScript.pt(30)
                     z:                   1
-                    width:               64
-                    height:              64
+                    width:               UtilScript.pt(64)
+                    height:              UtilScript.pt(64)
                     source:              "qrc:/resources/images/back.png"
                     fillMode:            Image.PreserveAspectFit
 

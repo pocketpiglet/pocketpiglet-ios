@@ -1,5 +1,7 @@
 import QtQuick 2.12
 
+import "../../Util.js" as UtilScript
+
 MultiPointTouchArea {
     id:               notificationDialog
     anchors.centerIn: parent
@@ -42,11 +44,14 @@ MultiPointTouchArea {
 
     Image {
         anchors.centerIn: parent
+        width:            UtilScript.pt(sourceSize.width)
+        height:           UtilScript.pt(sourceSize.height)
         source:           "qrc:/resources/images/dialog/dialog.png"
+        fillMode:         Image.PreserveAspectFit
 
         Text {
             anchors.fill:        parent
-            anchors.margins:     16
+            anchors.margins:     UtilScript.pt(16)
             text:                notificationDialog.text
             color:               "black"
             font.pointSize:      24

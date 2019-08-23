@@ -1,5 +1,7 @@
 import QtQuick 2.12
 
+import "../../Util.js" as UtilScript
+
 MultiPointTouchArea {
     id:               newDiamondsDialog
     anchors.centerIn: parent
@@ -47,31 +49,34 @@ MultiPointTouchArea {
     Image {
         id:               dialogImage
         anchors.centerIn: parent
+        width:            UtilScript.pt(sourceSize.width)
+        height:           UtilScript.pt(sourceSize.height)
         source:           "qrc:/resources/images/dialog/new_diamonds_dialog.png"
+        fillMode:         Image.PreserveAspectFit
 
         Column {
             anchors.centerIn: parent
-            spacing:          4
+            spacing:          UtilScript.pt(4)
 
             Image {
                 id:       diamondImage
-                width:    dialogImage.width  - 80
-                height:   dialogImage.height - 120
+                width:    dialogImage.width  - UtilScript.pt(80)
+                height:   dialogImage.height - UtilScript.pt(120)
                 source:   "qrc:/resources/images/dialog/new_diamonds_dialog_diamond.png"
                 fillMode: Image.PreserveAspectFit
             }
 
             Text {
                 width:                diamondImage.width
-                height:               48
+                height:               UtilScript.pt(48)
                 text:                 "+ %1".arg(newDiamondsDialog.newDiamondsAmount)
                 color:                "black"
-                font.pixelSize:       32
+                font.pointSize:       32
                 font.family:          "Helvetica"
                 horizontalAlignment:  Text.AlignHCenter
                 verticalAlignment:    Text.AlignVCenter
                 fontSizeMode:         Text.Fit
-                minimumPixelSize:     8
+                minimumPointSize:     8
             }
         }
     }
@@ -81,8 +86,8 @@ MultiPointTouchArea {
         anchors.horizontalCenter: dialogImage.horizontalCenter
         anchors.verticalCenter:   dialogImage.bottom
         z:                        1
-        width:                    64
-        height:                   64
+        width:                    UtilScript.pt(64)
+        height:                   UtilScript.pt(64)
         source:                   "qrc:/resources/images/dialog/ok.png"
         fillMode:                 Image.PreserveAspectFit
 

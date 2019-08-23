@@ -5,6 +5,7 @@ import QtMultimedia 5.12
 import "Dialog"
 import "PigletWash"
 
+import "../Util.js"        as UtilScript
 import "PigletWashPage.js" as PigletWashPageScript
 
 Item {
@@ -155,22 +156,22 @@ Item {
             id:                missedBubblesBackgroundImage
             anchors.top:       parent.top
             anchors.left:      parent.left
-            anchors.topMargin: 30
+            anchors.topMargin: UtilScript.pt(30)
             z:                 4
-            width:             133
-            height:            38
+            width:             UtilScript.pt(133)
+            height:            UtilScript.pt(38)
             source:            "qrc:/resources/images/piglet_wash/missed_bubbles_background.png"
             fillMode:          Image.PreserveAspectFit
 
             Row {
                 id:               missedBubblesRow
                 anchors.centerIn: parent
-                spacing:          4
+                spacing:          UtilScript.pt(4)
 
                 Image {
                     id:       bubble1MissedImage
-                    width:    29
-                    height:   29
+                    width:    UtilScript.pt(29)
+                    height:   UtilScript.pt(29)
                     source:   pigletWashPage.missedBubblesCount > 0 ? "qrc:/resources/images/piglet_wash/missed_bubble.png" :
                                                                       "qrc:/resources/images/piglet_wash/missed_bubble_grayed.png"
                     fillMode: Image.PreserveAspectFit
@@ -178,8 +179,8 @@ Item {
 
                 Image {
                     id:       bubble2MissedImage
-                    width:    29
-                    height:   29
+                    width:    UtilScript.pt(29)
+                    height:   UtilScript.pt(29)
                     source:   pigletWashPage.missedBubblesCount > 1 ? "qrc:/resources/images/piglet_wash/missed_bubble.png" :
                                                                       "qrc:/resources/images/piglet_wash/missed_bubble_grayed.png"
                     fillMode: Image.PreserveAspectFit
@@ -187,8 +188,8 @@ Item {
 
                 Image {
                     id:       bubble3MissedImage
-                    width:    29
-                    height:   29
+                    width:    UtilScript.pt(29)
+                    height:   UtilScript.pt(29)
                     source:   pigletWashPage.missedBubblesCount > 2 ? "qrc:/resources/images/piglet_wash/missed_bubble.png" :
                                                                       "qrc:/resources/images/piglet_wash/missed_bubble_grayed.png"
                     fillMode: Image.PreserveAspectFit
@@ -196,8 +197,8 @@ Item {
 
                 Image {
                     id:       bubble4MissedImage
-                    width:    29
-                    height:   29
+                    width:    UtilScript.pt(29)
+                    height:   UtilScript.pt(29)
                     source:   pigletWashPage.missedBubblesCount > 3 ? "qrc:/resources/images/piglet_wash/missed_bubble.png" :
                                                                       "qrc:/resources/images/piglet_wash/missed_bubble_grayed.png"
                     fillMode: Image.PreserveAspectFit
@@ -209,11 +210,11 @@ Item {
             id:                  scoreText
             anchors.top:         parent.top
             anchors.right:       parent.right
-            anchors.topMargin:   30
+            anchors.topMargin:   UtilScript.pt(30)
             z:                   4
             text:                textText(pigletWashPage.burstedBubblesCount)
             color:               "yellow"
-            font.pixelSize:      32
+            font.pointSize:      32
             font.family:         "Courier"
             horizontalAlignment: Text.AlignRight
             verticalAlignment:   Text.AlignVCenter
@@ -236,7 +237,7 @@ Item {
             z:                   4
             text:                textText(pigletWashPage.highScore)
             color:               "red"
-            font.pixelSize:      32
+            font.pointSize:      32
             font.family:         "Courier"
             horizontalAlignment: Text.AlignRight
             verticalAlignment:   Text.AlignVCenter
@@ -256,10 +257,10 @@ Item {
             id:                   backButtonImage
             anchors.bottom:       parent.bottom
             anchors.right:        parent.right
-            anchors.bottomMargin: 30
+            anchors.bottomMargin: UtilScript.pt(30)
             z:                    10
-            width:                64
-            height:               64
+            width:                UtilScript.pt(64)
+            height:               UtilScript.pt(64)
             source:               "qrc:/resources/images/back.png"
             fillMode:             Image.PreserveAspectFit
 

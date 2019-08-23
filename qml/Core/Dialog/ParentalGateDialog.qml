@@ -1,5 +1,7 @@
 import QtQuick 2.12
 
+import "../../Util.js" as UtilScript
+
 MultiPointTouchArea {
     id:               parentalGateDialog
     anchors.centerIn: parent
@@ -45,7 +47,10 @@ MultiPointTouchArea {
     Image {
         id:               dialogImage
         anchors.centerIn: parent
+        width:            UtilScript.pt(sourceSize.width)
+        height:           UtilScript.pt(sourceSize.height)
         source:           "qrc:/resources/images/dialog/parental_gate_dialog.png"
+        fillMode:         Image.PreserveAspectFit
 
         MultiPointTouchArea {
             anchors.fill:       parent
@@ -68,8 +73,8 @@ MultiPointTouchArea {
 
             Text {
                 anchors.fill:         parent
-                anchors.margins:      16
-                anchors.bottomMargin: 40
+                anchors.margins:      UtilScript.pt(16)
+                anchors.bottomMargin: UtilScript.pt(40)
                 text:                 qsTr("Slide with two fingers over this dialog to continue")
                 color:                "black"
                 font.pointSize:       24
@@ -88,8 +93,8 @@ MultiPointTouchArea {
         anchors.horizontalCenter: dialogImage.horizontalCenter
         anchors.verticalCenter:   dialogImage.bottom
         z:                        1
-        width:                    64
-        height:                   64
+        width:                    UtilScript.pt(64)
+        height:                   UtilScript.pt(64)
         source:                   "qrc:/resources/images/dialog/cancel.png"
         fillMode:                 Image.PreserveAspectFit
 

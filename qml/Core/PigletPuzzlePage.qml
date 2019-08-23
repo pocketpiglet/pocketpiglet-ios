@@ -2,6 +2,7 @@ import QtQuick 2.12
 import QtQuick.Controls 2.5
 import QtMultimedia 5.12
 
+import "../Util.js"          as UtilScript
 import "PigletPuzzlePage.js" as PigletPuzzlePageScript
 
 Item {
@@ -644,10 +645,10 @@ Item {
             id:                  backButtonImage
             anchors.bottom:      parent.bottom
             anchors.right:       parent.right
-            anchors.rightMargin: 30
+            anchors.rightMargin: UtilScript.pt(30)
             z:                   5
-            width:               64
-            height:              64
+            width:               UtilScript.pt(64)
+            height:              UtilScript.pt(64)
             source:              "qrc:/resources/images/back.png"
             fillMode:            Image.PreserveAspectFit
 
@@ -715,20 +716,20 @@ Item {
                 Image {
                     id:               complexitySelectionRowBackgroundImage
                     anchors.centerIn: parent
-                    width:            434
-                    height:           160
+                    width:            UtilScript.pt(434)
+                    height:           UtilScript.pt(160)
                     source:           "qrc:/resources/images/piglet_puzzle/complexity_selection_background.png"
                     fillMode:         Image.PreserveAspectFit
 
                     Row {
                         id:               complexitySelectionRow
                         anchors.centerIn: parent
-                        spacing:          10
+                        spacing:          UtilScript.pt(10)
 
                         Image {
                             id:       mediumComplexityButtonImage
-                            width:    120
-                            height:   120
+                            width:    UtilScript.pt(120)
+                            height:   UtilScript.pt(120)
                             source:   "qrc:/resources/images/piglet_puzzle/complexity_medium.png"
                             fillMode: Image.PreserveAspectFit
 
@@ -746,8 +747,8 @@ Item {
 
                         Image {
                             id:       hardComplexityButtonImage
-                            width:    120
-                            height:   120
+                            width:    UtilScript.pt(120)
+                            height:   UtilScript.pt(120)
                             source:   "qrc:/resources/images/piglet_puzzle/complexity_hard.png"
                             fillMode: Image.PreserveAspectFit
 
@@ -769,10 +770,10 @@ Item {
                     id:                  complexitySelectionBackButtonImage
                     anchors.bottom:      parent.bottom
                     anchors.right:       parent.right
-                    anchors.rightMargin: 30
+                    anchors.rightMargin: UtilScript.pt(30)
                     z:                   1
-                    width:               64
-                    height:              64
+                    width:               UtilScript.pt(64)
+                    height:              UtilScript.pt(64)
                     source:              "qrc:/resources/images/back.png"
                     fillMode:            Image.PreserveAspectFit
 
@@ -814,20 +815,20 @@ Item {
                 Image {
                     id:               puzzleSelectionRowBackgroundImage
                     anchors.centerIn: parent
-                    width:            434
-                    height:           160
+                    width:            UtilScript.pt(434)
+                    height:           UtilScript.pt(160)
                     source:           "qrc:/resources/images/piglet_puzzle/puzzle_selection_background.png"
                     fillMode:         Image.PreserveAspectFit
 
                     Row {
                         id:               puzzleSelectionRow
                         anchors.centerIn: parent
-                        spacing:          10
+                        spacing:          UtilScript.pt(10)
 
                         Image {
                             id:       heartBalloonPuzzleButtonImage
-                            width:    120
-                            height:   120
+                            width:    UtilScript.pt(120)
+                            height:   UtilScript.pt(120)
                             source:   "qrc:/resources/images/piglet_puzzle/heart_balloon/original_thumbnail.png"
                             fillMode: Image.PreserveAspectFit
 
@@ -846,8 +847,8 @@ Item {
 
                         Image {
                             id:       pigletOnPottyPuzzleButtonImage
-                            width:    120
-                            height:   120
+                            width:    UtilScript.pt(120)
+                            height:   UtilScript.pt(120)
                             source:   "qrc:/resources/images/piglet_puzzle/piglet_on_potty/original_thumbnail.png"
                             fillMode: Image.PreserveAspectFit
 
@@ -866,8 +867,8 @@ Item {
 
                         Image {
                             id:       wateringFlowersPuzzleButtonImage
-                            width:    120
-                            height:   120
+                            width:    UtilScript.pt(120)
+                            height:   UtilScript.pt(120)
                             source:   "qrc:/resources/images/piglet_puzzle/watering_flowers/original_thumbnail.png"
                             fillMode: Image.PreserveAspectFit
 
@@ -890,10 +891,10 @@ Item {
                     id:                  puzzleSelectionBackButtonImage
                     anchors.bottom:      parent.bottom
                     anchors.right:       parent.right
-                    anchors.rightMargin: 30
+                    anchors.rightMargin: UtilScript.pt(30)
                     z:                   1
-                    width:               64
-                    height:              64
+                    width:               UtilScript.pt(64)
+                    height:              UtilScript.pt(64)
                     source:              "qrc:/resources/images/back.png"
                     fillMode:            Image.PreserveAspectFit
 

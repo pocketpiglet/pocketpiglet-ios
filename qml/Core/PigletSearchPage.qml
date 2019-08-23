@@ -6,6 +6,8 @@ import QtSensors 5.12
 import "Dialog"
 import "PigletSearch"
 
+import "../Util.js" as UtilScript
+
 Item {
     id: pigletSearchPage
 
@@ -170,22 +172,22 @@ Item {
             id:                missedPigletsBackgroundImage
             anchors.top:       parent.top
             anchors.left:      parent.left
-            anchors.topMargin: 30
+            anchors.topMargin: UtilScript.pt(30)
             z:                 1
-            width:             133
-            height:            38
+            width:             UtilScript.pt(133)
+            height:            UtilScript.pt(38)
             source:            "qrc:/resources/images/piglet_search/missed_piglets_background.png"
             fillMode:          Image.PreserveAspectFit
 
             Row {
                 id:               missedPigletsRow
                 anchors.centerIn: parent
-                spacing:          4
+                spacing:          UtilScript.pt(4)
 
                 Image {
                     id:       piglet1MissedImage
-                    width:    29
-                    height:   29
+                    width:    UtilScript.pt(29)
+                    height:   UtilScript.pt(29)
                     source:   pigletSearchPage.missedPigletsCount > 0 ? "qrc:/resources/images/piglet_search/missed_piglet.png" :
                                                                         "qrc:/resources/images/piglet_search/missed_piglet_grayed.png"
                     fillMode: Image.PreserveAspectFit
@@ -193,8 +195,8 @@ Item {
 
                 Image {
                     id:       piglet2MissedImage
-                    width:    29
-                    height:   29
+                    width:    UtilScript.pt(29)
+                    height:   UtilScript.pt(29)
                     source:   pigletSearchPage.missedPigletsCount > 1 ? "qrc:/resources/images/piglet_search/missed_piglet.png" :
                                                                         "qrc:/resources/images/piglet_search/missed_piglet_grayed.png"
                     fillMode: Image.PreserveAspectFit
@@ -202,8 +204,8 @@ Item {
 
                 Image {
                     id:       piglet3MissedImage
-                    width:    29
-                    height:   29
+                    width:    UtilScript.pt(29)
+                    height:   UtilScript.pt(29)
                     source:   pigletSearchPage.missedPigletsCount > 2 ? "qrc:/resources/images/piglet_search/missed_piglet.png" :
                                                                         "qrc:/resources/images/piglet_search/missed_piglet_grayed.png"
                     fillMode: Image.PreserveAspectFit
@@ -211,8 +213,8 @@ Item {
 
                 Image {
                     id:       piglet4MissedImage
-                    width:    29
-                    height:   29
+                    width:    UtilScript.pt(29)
+                    height:   UtilScript.pt(29)
                     source:   pigletSearchPage.missedPigletsCount > 3 ? "qrc:/resources/images/piglet_search/missed_piglet.png" :
                                                                         "qrc:/resources/images/piglet_search/missed_piglet_grayed.png"
                     fillMode: Image.PreserveAspectFit
@@ -224,11 +226,11 @@ Item {
             id:                  scoreText
             anchors.top:         parent.top
             anchors.right:       parent.right
-            anchors.topMargin:   30
+            anchors.topMargin:   UtilScript.pt(30)
             z:                   1
             text:                textText(pigletSearchPage.foundPigletsCount)
             color:               "yellow"
-            font.pixelSize:      32
+            font.pointSize:      32
             font.family:         "Courier"
             horizontalAlignment: Text.AlignRight
             verticalAlignment:   Text.AlignVCenter
@@ -251,7 +253,7 @@ Item {
             z:                   1
             text:                textText(pigletSearchPage.highScore)
             color:               "red"
-            font.pixelSize:      32
+            font.pointSize:      32
             font.family:         "Courier"
             horizontalAlignment: Text.AlignRight
             verticalAlignment:   Text.AlignVCenter
@@ -271,11 +273,11 @@ Item {
             id:                       timerText
             anchors.bottom:           parent.bottom
             anchors.horizontalCenter: parent.horizontalCenter
-            anchors.bottomMargin:     30
+            anchors.bottomMargin:     UtilScript.pt(30)
             z:                        1
             text:                     textText(countdownTimer.countdownTime)
             color:                    "yellow"
-            font.pixelSize:           32
+            font.pointSize:           32
             font.family:              "Courier"
             horizontalAlignment:      Text.AlignHCenter
             verticalAlignment:        Text.AlignVCenter
@@ -296,10 +298,10 @@ Item {
             id:                       turnUpImage
             anchors.top:              highScoreText.bottom
             anchors.horizontalCenter: parent.horizontalCenter
-            anchors.topMargin:        8
+            anchors.topMargin:        UtilScript.pt(8)
             z:                        1
-            width:                    128
-            height:                   32
+            width:                    UtilScript.pt(128)
+            height:                   UtilScript.pt(32)
             source:                   "qrc:/resources/images/piglet_search/turn_up.png"
             fillMode:                 Image.PreserveAspectFit
             visible:                  pigletSearchPage.currentPiglet !== null &&
@@ -331,10 +333,10 @@ Item {
             id:                       turnDownImage
             anchors.bottom:           timerText.top
             anchors.horizontalCenter: parent.horizontalCenter
-            anchors.bottomMargin:     8
+            anchors.bottomMargin:     UtilScript.pt(8)
             z:                        1
-            width:                    128
-            height:                   32
+            width:                    UtilScript.pt(128)
+            height:                   UtilScript.pt(32)
             source:                   "qrc:/resources/images/piglet_search/turn_down.png"
             fillMode:                 Image.PreserveAspectFit
             visible:                  pigletSearchPage.currentPiglet !== null &&
@@ -367,8 +369,8 @@ Item {
             anchors.verticalCenter: parent.verticalCenter
             anchors.left:           parent.left
             z:                      1
-            width:                  32
-            height:                 128
+            width:                  UtilScript.pt(32)
+            height:                 UtilScript.pt(128)
             source:                 "qrc:/resources/images/piglet_search/turn_left.png"
             fillMode:               Image.PreserveAspectFit
             visible:                pigletSearchPage.currentPiglet !== null &&
@@ -401,8 +403,8 @@ Item {
             anchors.verticalCenter: parent.verticalCenter
             anchors.right:          parent.right
             z:                      1
-            width:                  32
-            height:                 128
+            width:                  UtilScript.pt(32)
+            height:                 UtilScript.pt(128)
             source:                 "qrc:/resources/images/piglet_search/turn_right.png"
             fillMode:               Image.PreserveAspectFit
             visible:                pigletSearchPage.currentPiglet !== null &&
@@ -434,10 +436,10 @@ Item {
             id:                   backButtonImage
             anchors.bottom:       parent.bottom
             anchors.right:        parent.right
-            anchors.bottomMargin: 30
+            anchors.bottomMargin: UtilScript.pt(30)
             z:                    10
-            width:                64
-            height:               64
+            width:                UtilScript.pt(64)
+            height:               UtilScript.pt(64)
             source:               "qrc:/resources/images/back.png"
             fillMode:             Image.PreserveAspectFit
 

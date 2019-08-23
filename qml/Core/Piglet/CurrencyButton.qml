@@ -1,5 +1,7 @@
 import QtQuick 2.12
 
+import "../../Util.js" as UtilScript
+
 Column {
     id: currencyButton
 
@@ -38,22 +40,22 @@ Column {
 
     Rectangle {
         width:  currencyButton.imageWidth
-        height: 24
+        height: UtilScript.pt(24)
         color:  "white"
-        radius: 16
+        radius: UtilScript.pt(16)
 
         Text {
             id:                  currencyButtonAmountText
             anchors.fill:        parent
-            anchors.margins:     4
+            anchors.margins:     UtilScript.pt(4)
             text:                currencyButton.amount
             color:               "black"
-            font.pixelSize:      16
+            font.pointSize:      16
             font.family:         "Helvetica"
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment:   Text.AlignVCenter
             fontSizeMode:        Text.Fit
-            minimumPixelSize:    8
+            minimumPointSize:    8
         }
     }
 }

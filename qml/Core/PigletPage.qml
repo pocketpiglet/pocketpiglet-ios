@@ -7,6 +7,8 @@ import SpeechRecorder 1.0
 import "Dialog"
 import "Piglet"
 
+import "../Util.js" as UtilScript
+
 Item {
     id: pigletPage
 
@@ -223,9 +225,11 @@ Item {
             id:           pigletMouseArea
             anchors.fill: parent
 
-            property int pressX:   -1
-            property int pressY:   -1
-            property int totalPath: 0
+            readonly property int strokePath: UtilScript.pt(200)
+
+            property int pressX:              -1
+            property int pressY:              -1
+            property int totalPath:           0
 
             onPressed: {
                 pressX    = mouse.x;
@@ -239,7 +243,7 @@ Item {
                     pressX    = mouse.x;
                     pressY    = mouse.y;
 
-                    if (totalPath > 200) {
+                    if (totalPath > strokePath) {
                         if (!pigletPage.isAnimationActive("piglet_laughs") && pigletPage.nextAnimation !== "piglet_laughs") {
                             pigletPage.nextAnimation = "piglet_laughs";
 
@@ -605,13 +609,13 @@ Item {
             anchors.left: parent.left
             anchors.top:  parent.top
             z:            1
-            spacing:      16
-            topPadding:   16
+            spacing:      UtilScript.pt(16)
+            topPadding:   UtilScript.pt(16)
 
             CurrencyButton {
                 id:                diamondCurrencyButton
-                imageWidth:        64
-                imageHeight:       64
+                imageWidth:        UtilScript.pt(64)
+                imageHeight:       UtilScript.pt(64)
                 sourceNormal:      "qrc:/resources/images/piglet/currency_diamond.png"
                 sourceHighlighted: "qrc:/resources/images/piglet/currency_diamond_highlighted.png"
                 amount:            pigletPage.diamondsAmount
@@ -628,13 +632,13 @@ Item {
             anchors.left:   parent.left
             anchors.bottom: parent.bottom
             z:              1
-            spacing:        16
-            bottomPadding:  16
+            spacing:        UtilScript.pt(16)
+            bottomPadding:  UtilScript.pt(16)
 
             GameButton {
                 id:                pigletFeedGameButton
-                width:             64
-                height:            64
+                width:             UtilScript.pt(64)
+                height:            UtilScript.pt(64)
                 sourceNormal:      "qrc:/resources/images/piglet/game_piglet_feed.png"
                 sourceHighlighted: "qrc:/resources/images/piglet/game_piglet_feed_highlighted.png"
 
@@ -661,8 +665,8 @@ Item {
 
             GameButton {
                 id:                pigletWashGameButton
-                width:             64
-                height:            64
+                width:             UtilScript.pt(64)
+                height:            UtilScript.pt(64)
                 sourceNormal:      "qrc:/resources/images/piglet/game_piglet_wash.png"
                 sourceHighlighted: "qrc:/resources/images/piglet/game_piglet_wash_highlighted.png"
 
@@ -689,8 +693,8 @@ Item {
 
             GameButton {
                 id:                pigletPuzzleGameButton
-                width:             64
-                height:            64
+                width:             UtilScript.pt(64)
+                height:            UtilScript.pt(64)
                 sourceNormal:      "qrc:/resources/images/piglet/game_piglet_puzzle.png"
                 sourceHighlighted: "qrc:/resources/images/piglet/game_piglet_puzzle_highlighted.png"
 
@@ -717,8 +721,8 @@ Item {
 
             GameButton {
                 id:                pigletSearchGameButton
-                width:             64
-                height:            64
+                width:             UtilScript.pt(64)
+                height:            UtilScript.pt(64)
                 sourceNormal:      "qrc:/resources/images/piglet/game_piglet_search.png"
                 sourceHighlighted: "qrc:/resources/images/piglet/game_piglet_search_highlighted.png"
 
@@ -749,13 +753,13 @@ Item {
             anchors.right:  parent.right
             anchors.bottom: parent.bottom
             z:              1
-            spacing:        16
-            bottomPadding:  16
+            spacing:        UtilScript.pt(16)
+            bottomPadding:  UtilScript.pt(16)
 
             ActionButton {
                 id:     cakeActionButton
-                width:  64
-                height: 64
+                width:  UtilScript.pt(64)
+                height: UtilScript.pt(64)
                 source: "qrc:/resources/images/piglet/action_cake.png"
 
                 onClicked: {
@@ -775,8 +779,8 @@ Item {
 
             ActionButton {
                 id:     candyActionButton
-                width:  64
-                height: 64
+                width:  UtilScript.pt(64)
+                height: UtilScript.pt(64)
                 source: "qrc:/resources/images/piglet/action_candy.png"
 
                 onClicked: {

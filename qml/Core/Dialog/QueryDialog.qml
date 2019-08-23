@@ -1,5 +1,7 @@
 import QtQuick 2.12
 
+import "../../Util.js" as UtilScript
+
 MultiPointTouchArea {
     id:               queryDialog
     anchors.centerIn: parent
@@ -47,12 +49,15 @@ MultiPointTouchArea {
     Image {
         id:               dialogImage
         anchors.centerIn: parent
+        width:            UtilScript.pt(sourceSize.width)
+        height:           UtilScript.pt(sourceSize.height)
         source:           "qrc:/resources/images/dialog/dialog.png"
+        fillMode:         Image.PreserveAspectFit
 
         Text {
             anchors.fill:         parent
-            anchors.margins:      16
-            anchors.bottomMargin: 40
+            anchors.margins:      UtilScript.pt(16)
+            anchors.bottomMargin: UtilScript.pt(40)
             text:                 queryDialog.text
             color:                "black"
             font.pointSize:       24
@@ -73,8 +78,8 @@ MultiPointTouchArea {
 
         Image {
             id:       yesButtonImage
-            width:    64
-            height:   64
+            width:    UtilScript.pt(64)
+            height:   UtilScript.pt(64)
             source:   "qrc:/resources/images/dialog/yes.png"
             fillMode: Image.PreserveAspectFit
 
@@ -92,8 +97,8 @@ MultiPointTouchArea {
 
         Image {
             id:       noButtonImage
-            width:    64
-            height:   64
+            width:    UtilScript.pt(64)
+            height:   UtilScript.pt(64)
             source:   "qrc:/resources/images/dialog/no.png"
             fillMode: Image.PreserveAspectFit
 
