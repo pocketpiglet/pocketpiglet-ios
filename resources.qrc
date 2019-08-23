@@ -12,6 +12,8 @@
         <file>resources/animations/piglet/piglet_voice_ended.jpg</file>
         <file>resources/animations/piglet/piglet_voice_found.jpg</file>
         <file>resources/animations/piglet/piglet_wash_game_finished.jpg</file>
+        <file>resources/images/back.png</file>
+        <file>resources/images/background.png</file>
         <file>resources/images/dialog/cancel.png</file>
         <file>resources/images/dialog/dialog.png</file>
         <file>resources/images/dialog/new_diamonds_dialog.png</file>
@@ -68,6 +70,10 @@
         <file>resources/images/piglet_feed/sandwich_olives.png</file>
         <file>resources/images/piglet_feed/sandwich_salad.png</file>
         <file>resources/images/piglet_feed/sandwich_tomato.png</file>
+        <file>resources/images/piglet_puzzle/complexity_hard.png</file>
+        <file>resources/images/piglet_puzzle/complexity_medium.png</file>
+        <file>resources/images/piglet_puzzle/complexity_selection_background.png</file>
+        <file>resources/images/piglet_puzzle/puzzle_selection_background.png</file>
         <file>resources/images/piglet_puzzle/heart_balloon/hard/0.png</file>
         <file>resources/images/piglet_puzzle/heart_balloon/hard/1.png</file>
         <file>resources/images/piglet_puzzle/heart_balloon/hard/2.png</file>
@@ -155,10 +161,6 @@
         <file>resources/images/piglet_puzzle/watering_flowers/medium/9.png</file>
         <file>resources/images/piglet_puzzle/watering_flowers/original.png</file>
         <file>resources/images/piglet_puzzle/watering_flowers/original_thumbnail.png</file>
-        <file>resources/images/piglet_puzzle/complexity_hard.png</file>
-        <file>resources/images/piglet_puzzle/complexity_medium.png</file>
-        <file>resources/images/piglet_puzzle/complexity_selection_background.png</file>
-        <file>resources/images/piglet_puzzle/puzzle_selection_background.png</file>
         <file>resources/images/piglet_search/piglet_1.png</file>
         <file>resources/images/piglet_search/piglet_2.png</file>
         <file>resources/images/piglet_search/piglet_3.png</file>
@@ -181,8 +183,6 @@
         <file>resources/images/piglet_wash/missed_bubble.png</file>
         <file>resources/images/piglet_wash/missed_bubble_grayed.png</file>
         <file>resources/images/piglet_wash/missed_bubbles_background.png</file>
-        <file>resources/images/back.png</file>
-        <file>resources/images/background.png</file>
         <file>resources/sound/piglet/piglet_eats_cake.wav</file>
         <file>resources/sound/piglet/piglet_eats_candy.wav</file>
         <file>resources/sound/piglet/piglet_falls.wav</file>
