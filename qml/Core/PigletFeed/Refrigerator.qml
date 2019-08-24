@@ -336,7 +336,7 @@ Rectangle {
         }
     ]
 
-    signal validFoodItemSelected(string item_type, bool last_item)
+    signal validFoodItemSelected(string itemType, bool lastItem)
     signal invalidFoodItemSelected()
 
     function refrigeratorWidth(src_width, src_height, dst_width, dst_height) {

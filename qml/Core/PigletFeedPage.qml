@@ -115,7 +115,7 @@ Item {
             z:            2
 
             onValidFoodItemSelected: {
-                sandwich.addItem(item_type);
+                sandwich.addItem(itemType);
             }
 
             onInvalidFoodItemSelected: {
