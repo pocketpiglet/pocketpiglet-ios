@@ -10,7 +10,7 @@ MultiPointTouchArea {
     visible:          false
 
     readonly property int diamondsDeliveryInterval: 300
-    readonly property int diamondsForDelivery:      5
+    readonly property int diamondsForDelivery:      3
 
     property bool enableGetFreeDiamondsButton:      true
 
