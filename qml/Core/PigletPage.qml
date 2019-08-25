@@ -805,11 +805,11 @@ Item {
         z:  1
 
         onGetFreeDiamondsSelected: {
-            var old_diamonds_amount = pigletPage.diamondsAmount;
+            var diamonds_amount = pigletPage.diamondsAmount;
 
-            pigletPage.diamondsAmount = Math.min(pigletPage.diamondsAmount + deliveredAmount, pigletPage.diamondsMaxAmount);
+            pigletPage.diamondsAmount = Math.min(diamonds_amount + deliveredAmount, pigletPage.diamondsMaxAmount);
 
-            newDiamondsDialog.open(pigletPage.diamondsAmount - old_diamonds_amount);
+            newDiamondsDialog.open(pigletPage.diamondsAmount - diamonds_amount);
         }
 
         onPurchaseFullVersionSelected: {
