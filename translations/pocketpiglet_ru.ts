@@ -56,16 +56,16 @@
 <context>
     <name>PurchaseDialog</name>
     <message>
+        <source>Get free diamonds</source>
+        <translation>Получить бесплатные бриллианты</translation>
+    </message>
+    <message>
         <source>Purchase full version</source>
         <translation>Купить полную версию</translation>
     </message>
     <message>
         <source>Restore purchases</source>
         <translation>Восстановить покупки</translation>
-    </message>
-    <message>
-        <source>Get free diamonds</source>
-        <translation>Получить бесплатные бриллианты</translation>
     </message>
 </context>
 <context>
