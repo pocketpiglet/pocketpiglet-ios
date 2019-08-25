@@ -67,6 +67,12 @@ QML_DESIGNER_IMPORT_PATH =
 ios {
     CONFIG += qtquickcompiler
 
+    INCLUDEPATH += $$PWD/ios/frameworks
+    DEPENDPATH += $$PWD/ios/frameworks
+
+    LIBS += -F $$PWD/ios/frameworks \
+            -framework StoreKit
+
     QMAKE_APPLE_DEVICE_ARCHS = arm64
     QMAKE_INFO_PLIST = ios/Info.plist
 }
