@@ -849,16 +849,14 @@ Item {
         property real lastReadingZ: 0.0
 
         onReadingChanged: {
-            if (lastReadingX !== 0.0 || lastReadingY !== 0.0 || lastReadingZ !== 0.0) {
-                if (Math.abs(reading.x - lastReadingX) > pigletPage.accelShakeThreshold ||
-                    Math.abs(reading.y - lastReadingY) > pigletPage.accelShakeThreshold ||
-                    Math.abs(reading.z - lastReadingZ) > pigletPage.accelShakeThreshold) {
+            if ((lastReadingX !== 0.0 || lastReadingY !== 0.0 || lastReadingZ !== 0.0) &&
+                (Math.abs(reading.x - lastReadingX) > pigletPage.accelShakeThreshold ||
+                 Math.abs(reading.y - lastReadingY) > pigletPage.accelShakeThreshold ||
+                 Math.abs(reading.z - lastReadingZ) > pigletPage.accelShakeThreshold)) {
+                if (!pigletPage.isAnimationActive("piglet_falls") && pigletPage.nextAnimation !== "piglet_falls") {
+                    pigletPage.nextAnimation = "piglet_falls";
 
-                    if (!pigletPage.isAnimationActive("piglet_falls") && pigletPage.nextAnimation !== "piglet_falls") {
-                        pigletPage.nextAnimation = "piglet_falls";
-
-                        pigletPage.performAnimation();
-                    }
+                    pigletPage.performAnimation();
                 }
             }
 
@@ -878,27 +876,25 @@ Item {
             if (pigletPage.nextAnimation === "") {
                 var elapsed = (new Date()).getTime() - pigletPage.lastGameTime;
 
-                if (elapsed < 0 || elapsed > 60000) {
-                    if (pigletPage.wantedGame === "") {
-                        var rand = Math.random();
+                if ((elapsed < 0 || elapsed > 60000) && pigletPage.wantedGame === "") {
+                    var rand = Math.random();
 
-                        if (rand < 0.25) {
-                            pigletPage.wantedGame = "piglet_feed";
+                    if (rand < 0.25) {
+                        pigletPage.wantedGame = "piglet_feed";
 
-                            pigletFeedGameButton.highlighted = true;
-                        } else if (rand < 0.50) {
-                            pigletPage.wantedGame = "piglet_wash";
+                        pigletFeedGameButton.highlighted = true;
+                    } else if (rand < 0.50) {
+                        pigletPage.wantedGame = "piglet_wash";
 
-                            pigletWashGameButton.highlighted = true;
-                        } else if (rand < 0.75) {
-                            pigletPage.wantedGame = "piglet_puzzle";
+                        pigletWashGameButton.highlighted = true;
+                    } else if (rand < 0.75) {
+                        pigletPage.wantedGame = "piglet_puzzle";
 
-                            pigletPuzzleGameButton.highlighted = true;
-                        } else {
-                            pigletPage.wantedGame = "piglet_search";
+                        pigletPuzzleGameButton.highlighted = true;
+                    } else {
+                        pigletPage.wantedGame = "piglet_search";
 
-                            pigletSearchGameButton.highlighted = true;
-                        }
+                        pigletSearchGameButton.highlighted = true;
                     }
                 }
 
