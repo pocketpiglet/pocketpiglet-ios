@@ -1,11 +1,12 @@
 #ifndef SPEECHRECORDER_H
 #define SPEECHRECORDER_H
 
+#include <memory>
+
 #include <QtCore/QtGlobal>
 #include <QtCore/QObject>
 #include <QtCore/QString>
 #include <QtCore/QByteArray>
-#include <QtCore/QIODevice>
 #include <QtMultimedia/QAudioInput>
 
 #include "webrtc/common_audio/vad/include/webrtc_vad.h"
@@ -47,7 +48,7 @@ public:
     void setMinSilenceDuration(int duration);
 
     qreal volume() const;
-    void setVolume(qreal vol);
+    void setVolume(qreal volume);
 
     qreal sampleRateMultiplier() const;
     void setSampleRateMultiplier(qreal multiplier);
@@ -70,6 +71,8 @@ signals:
     void voiceReset();
 
 private:
+    void Cleanup();
+
     void CreateAudioInput();
     void DeleteAudioInput();
 
@@ -78,14 +81,14 @@ private:
 
     void SaveVoice();
 
-    bool         Active, VoiceDetected;
-    int          SampleRate, MinVoiceDuration, MinSilenceDuration, SilenceSize;
-    qreal        Volume, SampleRateMultiplier;
-    QString      VoiceFilePath;
-    QByteArray   AudioBuffer, VoiceBuffer;
-    VadInst     *VadInstance;
-    QAudioInput *AudioInput;
-    QIODevice   *AudioInputDevice;
+    bool                         Active, VoiceDetected;
+    int                          SampleRate, MinVoiceDuration,
+                                 MinSilenceDuration, SilenceSize;
+    qreal                        Volume, SampleRateMultiplier;
+    QString                      VoiceFilePath;
+    QByteArray                   AudioBuffer, VoiceBuffer;
+    VadInst                     *VadInstance;
+    std::unique_ptr<QAudioInput> AudioInput;
 };
 
 #endif // SPEECHRECORDER_H

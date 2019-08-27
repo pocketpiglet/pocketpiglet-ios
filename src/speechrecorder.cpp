@@ -1,6 +1,7 @@
 #include <QtCore/QtMath>
 #include <QtCore/QtEndian>
 #include <QtCore/QVarLengthArray>
+#include <QtCore/QIODevice>
 #include <QtCore/QDataStream>
 #include <QtCore/QFile>
 #include <QtCore/QDir>
@@ -22,8 +23,6 @@ SpeechRecorder::SpeechRecorder(QObject *parent) : QObject(parent)
     Volume               = 1.0;
     SampleRateMultiplier = 1.0;
     VadInstance          = nullptr;
-    AudioInput           = nullptr;
-    AudioInputDevice     = nullptr;
 
     QString tmp_dir = QStandardPaths::writableLocation(QStandardPaths::TempLocation);
 
@@ -50,6 +49,10 @@ void SpeechRecorder::setActive(bool active)
 {
     Active = active;
 
+    emit activeChanged(Active);
+
+    Cleanup();
+
     if (Active && SampleRate != 0) {
         CreateVAD();
         CreateAudioInput();
@@ -57,8 +60,6 @@ void SpeechRecorder::setActive(bool active)
         DeleteAudioInput();
         DeleteVAD();
     }
-
-    emit activeChanged(Active);
 }
 
 int SpeechRecorder::sampleRate() const
@@ -70,6 +71,10 @@ void SpeechRecorder::setSampleRate(int sample_rate)
 {
     SampleRate = sample_rate;
 
+    emit sampleRateChanged(SampleRate);
+
+    Cleanup();
+
     if (Active && SampleRate != 0) {
         CreateVAD();
         CreateAudioInput();
@@ -77,8 +82,6 @@ void SpeechRecorder::setSampleRate(int sample_rate)
         DeleteAudioInput();
         DeleteVAD();
     }
-
-    emit sampleRateChanged(SampleRate);
 }
 
 int SpeechRecorder::minVoiceDuration() const
@@ -110,15 +113,15 @@ qreal SpeechRecorder::volume() const
     return Volume;
 }
 
-void SpeechRecorder::setVolume(qreal vol)
+void SpeechRecorder::setVolume(qreal volume)
 {
-    Volume = vol;
-
-    if (AudioInput != nullptr) {
-        AudioInput->setVolume(Volume);
-    }
+    Volume = volume;
 
     emit volumeChanged(Volume);
+
+    if (AudioInput) {
+        AudioInput->setVolume(Volume);
+    }
 }
 
 qreal SpeechRecorder::sampleRateMultiplier() const
@@ -140,10 +143,12 @@ QString SpeechRecorder::voiceFileURL() const
 
 void SpeechRecorder::handleAudioInputDeviceReadyRead()
 {
-    if (SampleRate != 0 && VadInstance != nullptr) {
+    auto audio_input_device = qobject_cast<QIODevice *>(QObject::sender());
+
+    if (audio_input_device != nullptr && SampleRate != 0 && VadInstance != nullptr) {
         int frame_length = (SampleRate / 1000) * 30;
 
-        AudioBuffer.append(AudioInputDevice->readAll());
+        AudioBuffer.append(audio_input_device->readAll());
 
         if (AudioBuffer.size() >= frame_length) {
             int p = 0;
@@ -201,13 +206,21 @@ void SpeechRecorder::handleAudioInputDeviceReadyRead()
     }
 }
 
-void SpeechRecorder::CreateAudioInput()
+void SpeechRecorder::Cleanup()
 {
-    if (AudioInput != nullptr) {
-        AudioInput->stop();
-        AudioInput->deleteLater();
+    if (VoiceDetected) {
+        emit voiceReset();
     }
 
+    VoiceDetected = false;
+    SilenceSize   = 0;
+
+    AudioBuffer.clear();
+    VoiceBuffer.clear();
+}
+
+void SpeechRecorder::CreateAudioInput()
+{
     QAudioFormat format;
 
     format.setSampleRate(SampleRate);
@@ -225,21 +238,16 @@ void SpeechRecorder::CreateAudioInput()
         format = info.nearestFormat(format);
     }
 
-    AudioInput = new QAudioInput(format, this);
+    AudioInput = std::make_unique<QAudioInput>(format, nullptr);
 
     AudioInput->setVolume(Volume);
 
-    AudioInputDevice = AudioInput->start();
-
-    connect(AudioInputDevice, &QIODevice::readyRead, this, &SpeechRecorder::handleAudioInputDeviceReadyRead);
+    connect(AudioInput->start(), &QIODevice::readyRead, this, &SpeechRecorder::handleAudioInputDeviceReadyRead);
 }
 
 void SpeechRecorder::DeleteAudioInput()
 {
-    if (AudioInput != nullptr) {
-        AudioInput->stop();
-        AudioInput->deleteLater();
-    }
+    AudioInput.reset();
 
     //
     // Workaround for Qt for IOS bug with low playback volume when
@@ -250,33 +258,22 @@ void SpeechRecorder::DeleteAudioInput()
     if (info.isNull()) {
         emit error("QAudioDeviceInfo::defaultOutputDevice() returned null");
     }
-    //
     // -------------------------------------------------------------
-    //
-
-    if (VoiceDetected) {
-        emit voiceReset();
-    }
-
-    VoiceDetected = false;
-    SilenceSize   = 0;
-
-    AudioBuffer.clear();
-    VoiceBuffer.clear();
-
-    AudioInput       = nullptr;
-    AudioInputDevice = nullptr;
 }
 
 void SpeechRecorder::CreateVAD()
 {
+    if (VadInstance != nullptr) {
+        WebRtcVad_Free(VadInstance);
+
+        VadInstance = nullptr;
+    }
+
     if (WebRtcVad_Create(&VadInstance)) {
         emit error("Cannot create WebRtcVad instance");
-    }
-    if (WebRtcVad_Init(VadInstance)) {
+    } else if (WebRtcVad_Init(VadInstance)) {
         emit error("Cannot initialize WebRtcVad instance");
-    }
-    if (WebRtcVad_set_mode(VadInstance, 3)) {
+    } else if (WebRtcVad_set_mode(VadInstance, 3)) {
         emit error("Cannot set mode for WebRtcVad instance");
     }
 }
@@ -285,19 +282,9 @@ void SpeechRecorder::DeleteVAD()
 {
     if (VadInstance != nullptr) {
         WebRtcVad_Free(VadInstance);
+
+        VadInstance = nullptr;
     }
-
-    if (VoiceDetected) {
-        emit voiceReset();
-    }
-
-    VoiceDetected = false;
-    SilenceSize   = 0;
-
-    AudioBuffer.clear();
-    VoiceBuffer.clear();
-
-    VadInstance = nullptr;
 }
 
 void SpeechRecorder::SaveVoice()

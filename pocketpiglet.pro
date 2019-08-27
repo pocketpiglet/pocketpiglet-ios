@@ -2,7 +2,7 @@ TEMPLATE = app
 TARGET = pocketpiglet
 
 QT += quick quickcontrols2 sql multimedia sensors purchasing
-CONFIG += c++11
+CONFIG += c++14
 
 DEFINES += QT_DEPRECATED_WARNINGS WEBRTC_POSIX
 
