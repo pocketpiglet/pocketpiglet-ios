@@ -164,8 +164,9 @@ Item {
             id:           videoOutput
             anchors.fill: parent
             source:       camera
-            focus:        false
+            fillMode:     VideoOutput.PreserveAspectCrop
             orientation:  270
+            focus:        false
         }
 
         Image {
