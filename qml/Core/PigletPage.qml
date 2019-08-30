@@ -227,21 +227,21 @@ Item {
 
             readonly property int strokePath: UtilScript.pt(200)
 
-            property int pressX:              -1
-            property int pressY:              -1
+            property int pressingX:           -1
+            property int pressingY:           -1
             property int totalPath:           0
 
             onPressed: {
-                pressX    = mouse.x;
-                pressY    = mouse.y;
+                pressingX = mouse.x;
+                pressingY = mouse.y;
                 totalPath = 0;
             }
 
             onPositionChanged: {
-                if (pressX !== -1 && pressY !== -1) {
-                    totalPath = totalPath + Math.sqrt(Math.pow(mouse.x - pressX, 2) + Math.pow(mouse.y - pressY, 2));
-                    pressX    = mouse.x;
-                    pressY    = mouse.y;
+                if (pressingX !== -1 && pressingY !== -1) {
+                    totalPath = totalPath + Math.sqrt(Math.pow(mouse.x - pressingX, 2) + Math.pow(mouse.y - pressingY, 2));
+                    pressingX = mouse.x;
+                    pressingY = mouse.y;
 
                     if (totalPath > strokePath) {
                         if (!pigletPage.isAnimationActive("piglet_laughs") && pigletPage.nextAnimation !== "piglet_laughs") {
@@ -250,8 +250,8 @@ Item {
                             pigletPage.performAnimation();
                         }
 
-                        pressX    = -1;
-                        pressY    = -1;
+                        pressingX = -1;
+                        pressingY = -1;
                         totalPath =  0;
                     }
                 }
