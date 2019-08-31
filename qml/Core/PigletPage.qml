@@ -225,34 +225,34 @@ Item {
             id:           pigletMouseArea
             anchors.fill: parent
 
-            readonly property int strokePath: UtilScript.pt(200)
+            readonly property int minStrokingDistance: UtilScript.pt(200)
 
-            property int pressingX:           -1
-            property int pressingY:           -1
-            property int totalPath:           0
+            property int totalDistance:                0
+            property int lastEventX:                  -1
+            property int lastEventY:                  -1
 
             onPressed: {
-                pressingX = mouse.x;
-                pressingY = mouse.y;
-                totalPath = 0;
+                totalDistance = 0;
+                lastEventX    = mouse.x;
+                lastEventY    = mouse.y;
             }
 
             onPositionChanged: {
-                if (pressingX !== -1 && pressingY !== -1) {
-                    totalPath = totalPath + Math.sqrt(Math.pow(mouse.x - pressingX, 2) + Math.pow(mouse.y - pressingY, 2));
-                    pressingX = mouse.x;
-                    pressingY = mouse.y;
+                if (lastEventX !== -1 && lastEventY !== -1) {
+                    totalDistance = totalDistance + Math.sqrt(Math.pow(mouse.x - lastEventX, 2) + Math.pow(mouse.y - lastEventY, 2));
+                    lastEventX    = mouse.x;
+                    lastEventY    = mouse.y;
 
-                    if (totalPath > strokePath) {
+                    if (totalDistance > minStrokingDistance) {
                         if (!pigletPage.isAnimationActive("piglet_laughs") && pigletPage.nextAnimation !== "piglet_laughs") {
                             pigletPage.nextAnimation = "piglet_laughs";
 
                             pigletPage.performAnimation();
                         }
 
-                        pressingX = -1;
-                        pressingY = -1;
-                        totalPath =  0;
+                        totalDistance =  0;
+                        lastEventX    = -1;
+                        lastEventY    = -1;
                     }
                 }
             }
