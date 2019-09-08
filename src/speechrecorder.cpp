@@ -238,7 +238,7 @@ void SpeechRecorder::CreateAudioInput()
         format = info.nearestFormat(format);
     }
 
-    AudioInput = std::make_unique<QAudioInput>(format, nullptr);
+    AudioInput = std::make_unique<QAudioInput>(format);
 
     AudioInput->setVolume(Volume);
 
