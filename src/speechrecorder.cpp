@@ -47,18 +47,20 @@ bool SpeechRecorder::active() const
 
 void SpeechRecorder::setActive(bool active)
 {
-    Active = active;
+    if (Active != active) {
+        Active = active;
 
-    emit activeChanged(Active);
+        emit activeChanged(Active);
 
-    Cleanup();
+        Cleanup();
 
-    if (Active && SampleRate != 0) {
-        CreateVAD();
-        CreateAudioInput();
-    } else {
-        DeleteAudioInput();
-        DeleteVAD();
+        if (Active && SampleRate != 0) {
+            CreateVAD();
+            CreateAudioInput();
+        } else {
+            DeleteAudioInput();
+            DeleteVAD();
+        }
     }
 }
 
@@ -69,18 +71,20 @@ int SpeechRecorder::sampleRate() const
 
 void SpeechRecorder::setSampleRate(int sample_rate)
 {
-    SampleRate = sample_rate;
+    if (SampleRate != sample_rate) {
+        SampleRate = sample_rate;
 
-    emit sampleRateChanged(SampleRate);
+        emit sampleRateChanged(SampleRate);
 
-    Cleanup();
+        Cleanup();
 
-    if (Active && SampleRate != 0) {
-        CreateVAD();
-        CreateAudioInput();
-    } else {
-        DeleteAudioInput();
-        DeleteVAD();
+        if (Active && SampleRate != 0) {
+            CreateVAD();
+            CreateAudioInput();
+        } else {
+            DeleteAudioInput();
+            DeleteVAD();
+        }
     }
 }
 
@@ -91,9 +95,11 @@ int SpeechRecorder::minVoiceDuration() const
 
 void SpeechRecorder::setMinVoiceDuration(int duration)
 {
-    MinVoiceDuration = duration;
+    if (MinVoiceDuration != duration) {
+        MinVoiceDuration = duration;
 
-    emit minVoiceDurationChanged(MinVoiceDuration);
+        emit minVoiceDurationChanged(MinVoiceDuration);
+    }
 }
 
 int SpeechRecorder::minSilenceDuration() const
@@ -103,9 +109,11 @@ int SpeechRecorder::minSilenceDuration() const
 
 void SpeechRecorder::setMinSilenceDuration(int duration)
 {
-    MinSilenceDuration = duration;
+    if (MinSilenceDuration != duration) {
+        MinSilenceDuration = duration;
 
-    emit minSilenceDurationChanged(MinSilenceDuration);
+        emit minSilenceDurationChanged(MinSilenceDuration);
+    }
 }
 
 qreal SpeechRecorder::volume() const
@@ -115,12 +123,14 @@ qreal SpeechRecorder::volume() const
 
 void SpeechRecorder::setVolume(qreal volume)
 {
-    Volume = volume;
+    if (Volume != volume) {
+        Volume = volume;
 
-    emit volumeChanged(Volume);
+        emit volumeChanged(Volume);
 
-    if (AudioInput) {
-        AudioInput->setVolume(Volume);
+        if (AudioInput) {
+            AudioInput->setVolume(Volume);
+        }
     }
 }
 
@@ -131,9 +141,11 @@ qreal SpeechRecorder::sampleRateMultiplier() const
 
 void SpeechRecorder::setSampleRateMultiplier(qreal multiplier)
 {
-    SampleRateMultiplier = multiplier;
+    if (SampleRateMultiplier != multiplier) {
+        SampleRateMultiplier = multiplier;
 
-    emit sampleRateMultiplierChanged(SampleRateMultiplier);
+        emit sampleRateMultiplierChanged(SampleRateMultiplier);
+    }
 }
 
 QString SpeechRecorder::voiceFileURL() const
