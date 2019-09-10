@@ -26,11 +26,11 @@ SpeechRecorder::SpeechRecorder(QObject *parent) : QObject(parent)
 
     QString tmp_dir = QStandardPaths::writableLocation(QStandardPaths::TempLocation);
 
-    if (tmp_dir != "") {
+    if (tmp_dir != QStringLiteral("")) {
         QDir().mkpath(tmp_dir);
     }
 
-    VoiceFilePath = QDir(tmp_dir).filePath("voice.wav");
+    VoiceFilePath = QDir(tmp_dir).filePath(QStringLiteral("voice.wav"));
 }
 
 SpeechRecorder::~SpeechRecorder() noexcept
@@ -238,14 +238,14 @@ void SpeechRecorder::CreateAudioInput()
     format.setSampleRate(SampleRate);
     format.setChannelCount(1);
     format.setSampleSize(8);
-    format.setCodec("audio/pcm");
+    format.setCodec(QStringLiteral("audio/pcm"));
     format.setByteOrder(QAudioFormat::LittleEndian);
     format.setSampleType(QAudioFormat::UnSignedInt);
 
     QAudioDeviceInfo info = QAudioDeviceInfo::defaultInputDevice();
 
     if (!info.isFormatSupported(format)) {
-        emit error("Default format not supported, trying to use the nearest");
+        emit error(QStringLiteral("Default format not supported, trying to use the nearest"));
 
         format = info.nearestFormat(format);
     }
@@ -268,7 +268,7 @@ void SpeechRecorder::DeleteAudioInput()
     QAudioDeviceInfo info = QAudioDeviceInfo::defaultOutputDevice();
 
     if (info.isNull()) {
-        emit error("QAudioDeviceInfo::defaultOutputDevice() returned null");
+        emit error(QStringLiteral("QAudioDeviceInfo::defaultOutputDevice() returned null"));
     }
     // -------------------------------------------------------------
 }
@@ -282,11 +282,11 @@ void SpeechRecorder::CreateVAD()
     }
 
     if (WebRtcVad_Create(&VadInstance)) {
-        emit error("Cannot create WebRtcVad instance");
+        emit error(QStringLiteral("Cannot create WebRtcVad instance"));
     } else if (WebRtcVad_Init(VadInstance)) {
-        emit error("Cannot initialize WebRtcVad instance");
+        emit error(QStringLiteral("Cannot initialize WebRtcVad instance"));
     } else if (WebRtcVad_set_mode(VadInstance, 3)) {
-        emit error("Cannot set mode for WebRtcVad instance");
+        emit error(QStringLiteral("Cannot set mode for WebRtcVad instance"));
     }
 }
 
@@ -361,6 +361,6 @@ void SpeechRecorder::SaveVoice()
 
         voice_file_stream.writeRawData(VoiceBuffer.data(), VoiceBuffer.size());
     } else {
-        emit error(QString("Cannot create voice file %1: %2").arg(VoiceFilePath).arg(voice_file.errorString()));
+        emit error(QStringLiteral("Cannot create voice file %1: %2").arg(VoiceFilePath).arg(voice_file.errorString()));
     }
 }

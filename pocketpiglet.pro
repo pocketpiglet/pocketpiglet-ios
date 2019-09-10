@@ -4,7 +4,7 @@ TARGET = pocketpiglet
 QT += quick quickcontrols2 sql multimedia sensors purchasing
 CONFIG += c++14
 
-DEFINES += QT_DEPRECATED_WARNINGS WEBRTC_POSIX
+DEFINES += QT_DEPRECATED_WARNINGS QT_NO_CAST_FROM_ASCII QT_NO_CAST_TO_ASCII WEBRTC_POSIX
 
 SOURCES += src/main.cpp \
     src/speechrecorder.cpp \
