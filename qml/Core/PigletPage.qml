@@ -225,7 +225,7 @@ Item {
             id:           pigletMouseArea
             anchors.fill: parent
 
-            readonly property int minStrokingDistance: UtilScript.pt(200)
+            readonly property int minStrokingDistance: UtilScript.dp(200)
 
             property int totalDistance:                0
             property int lastEventX:                  -1
@@ -609,13 +609,13 @@ Item {
             anchors.left: parent.left
             anchors.top:  parent.top
             z:            1
-            spacing:      UtilScript.pt(16)
-            topPadding:   UtilScript.pt(16)
+            spacing:      UtilScript.dp(16)
+            topPadding:   UtilScript.dp(16)
 
             CurrencyButton {
                 id:                diamondCurrencyButton
-                imageWidth:        UtilScript.pt(64)
-                imageHeight:       UtilScript.pt(64)
+                imageWidth:        UtilScript.dp(64)
+                imageHeight:       UtilScript.dp(64)
                 sourceNormal:      "qrc:/resources/images/piglet/currency_diamond.png"
                 sourceHighlighted: "qrc:/resources/images/piglet/currency_diamond_highlighted.png"
                 amount:            pigletPage.diamondsAmount
@@ -632,13 +632,13 @@ Item {
             anchors.left:   parent.left
             anchors.bottom: parent.bottom
             z:              1
-            spacing:        UtilScript.pt(16)
-            bottomPadding:  UtilScript.pt(16)
+            spacing:        UtilScript.dp(16)
+            bottomPadding:  UtilScript.dp(16)
 
             GameButton {
                 id:                pigletFeedGameButton
-                width:             UtilScript.pt(64)
-                height:            UtilScript.pt(64)
+                width:             UtilScript.dp(64)
+                height:            UtilScript.dp(64)
                 sourceNormal:      "qrc:/resources/images/piglet/game_piglet_feed.png"
                 sourceHighlighted: "qrc:/resources/images/piglet/game_piglet_feed_highlighted.png"
 
@@ -665,8 +665,8 @@ Item {
 
             GameButton {
                 id:                pigletWashGameButton
-                width:             UtilScript.pt(64)
-                height:            UtilScript.pt(64)
+                width:             UtilScript.dp(64)
+                height:            UtilScript.dp(64)
                 sourceNormal:      "qrc:/resources/images/piglet/game_piglet_wash.png"
                 sourceHighlighted: "qrc:/resources/images/piglet/game_piglet_wash_highlighted.png"
 
@@ -693,8 +693,8 @@ Item {
 
             GameButton {
                 id:                pigletPuzzleGameButton
-                width:             UtilScript.pt(64)
-                height:            UtilScript.pt(64)
+                width:             UtilScript.dp(64)
+                height:            UtilScript.dp(64)
                 sourceNormal:      "qrc:/resources/images/piglet/game_piglet_puzzle.png"
                 sourceHighlighted: "qrc:/resources/images/piglet/game_piglet_puzzle_highlighted.png"
 
@@ -721,8 +721,8 @@ Item {
 
             GameButton {
                 id:                pigletSearchGameButton
-                width:             UtilScript.pt(64)
-                height:            UtilScript.pt(64)
+                width:             UtilScript.dp(64)
+                height:            UtilScript.dp(64)
                 sourceNormal:      "qrc:/resources/images/piglet/game_piglet_search.png"
                 sourceHighlighted: "qrc:/resources/images/piglet/game_piglet_search_highlighted.png"
 
@@ -753,13 +753,13 @@ Item {
             anchors.right:  parent.right
             anchors.bottom: parent.bottom
             z:              1
-            spacing:        UtilScript.pt(16)
-            bottomPadding:  UtilScript.pt(16)
+            spacing:        UtilScript.dp(16)
+            bottomPadding:  UtilScript.dp(16)
 
             ActionButton {
                 id:     cakeActionButton
-                width:  UtilScript.pt(64)
-                height: UtilScript.pt(64)
+                width:  UtilScript.dp(64)
+                height: UtilScript.dp(64)
                 source: "qrc:/resources/images/piglet/action_cake.png"
 
                 onClicked: {
@@ -779,8 +779,8 @@ Item {
 
             ActionButton {
                 id:     candyActionButton
-                width:  UtilScript.pt(64)
-                height: UtilScript.pt(64)
+                width:  UtilScript.dp(64)
+                height: UtilScript.dp(64)
                 source: "qrc:/resources/images/piglet/action_candy.png"
 
                 onClicked: {

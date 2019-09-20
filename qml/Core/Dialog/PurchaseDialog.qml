@@ -61,19 +61,19 @@ MultiPointTouchArea {
     Image {
         id:               dialogImage
         anchors.centerIn: parent
-        width:            UtilScript.pt(sourceSize.width)
-        height:           UtilScript.pt(sourceSize.height)
+        width:            UtilScript.dp(sourceSize.width)
+        height:           UtilScript.dp(sourceSize.height)
         source:           "qrc:/resources/images/dialog/purchase_dialog.png"
         fillMode:         Image.PreserveAspectFit
 
         Column {
             anchors.centerIn: parent
-            spacing:          UtilScript.pt(8)
+            spacing:          UtilScript.dp(8)
 
             Image {
                 id:       getFreeDiamondsButtonImage
-                width:    UtilScript.pt(sourceSize.width)
-                height:   UtilScript.pt(sourceSize.height)
+                width:    UtilScript.dp(sourceSize.width)
+                height:   UtilScript.dp(sourceSize.height)
                 source:   enabled ? "qrc:/resources/images/dialog/purchase_dialog_button.png" :
                                     "qrc:/resources/images/dialog/purchase_dialog_button_disabled.png"
                 fillMode: Image.PreserveAspectFit
@@ -94,15 +94,15 @@ MultiPointTouchArea {
 
                 Row {
                     anchors.fill: parent
-                    leftPadding:  UtilScript.pt(4)
-                    rightPadding: UtilScript.pt(4)
-                    spacing:      UtilScript.pt(4)
+                    leftPadding:  UtilScript.dp(4)
+                    rightPadding: UtilScript.dp(4)
+                    spacing:      UtilScript.dp(4)
 
                     Image {
                         id:                     getFreeDiamondsImage
                         anchors.verticalCenter: parent.verticalCenter
                         width:                  sourceSize.width * (height / sourceSize.height)
-                        height:                 parent.height - UtilScript.pt(8)
+                        height:                 parent.height - UtilScript.dp(8)
                         source:                 getFreeDiamondsButtonImage.enabled ? "qrc:/resources/images/dialog/purchase_dialog_get_free_diamonds.png" :
                                                                                      "qrc:/resources/images/dialog/purchase_dialog_get_free_diamonds_disabled.png"
                         fillMode:               Image.PreserveAspectFit
@@ -112,7 +112,7 @@ MultiPointTouchArea {
                         anchors.verticalCenter: parent.verticalCenter
                         width:                  parent.width - getFreeDiamondsImage.width - parent.spacing -
                                                 parent.leftPadding - parent.rightPadding
-                        height:                 parent.height - UtilScript.pt(8)
+                        height:                 parent.height - UtilScript.dp(8)
                         text:                   textText(countdownTimer.countdownTime)
                         color:                  "black"
                         font.pointSize:         16
@@ -154,8 +154,8 @@ MultiPointTouchArea {
 
             Image {
                 id:       purchaseFullVersionButtonImage
-                width:    UtilScript.pt(sourceSize.width)
-                height:   UtilScript.pt(sourceSize.height)
+                width:    UtilScript.dp(sourceSize.width)
+                height:   UtilScript.dp(sourceSize.height)
                 source:   "qrc:/resources/images/dialog/purchase_dialog_button.png"
                 fillMode: Image.PreserveAspectFit
 
@@ -172,15 +172,15 @@ MultiPointTouchArea {
 
                 Row {
                     anchors.fill: parent
-                    leftPadding:  UtilScript.pt(4)
-                    rightPadding: UtilScript.pt(4)
-                    spacing:      UtilScript.pt(4)
+                    leftPadding:  UtilScript.dp(4)
+                    rightPadding: UtilScript.dp(4)
+                    spacing:      UtilScript.dp(4)
 
                     Image {
                         id:                     purchaseFullVersionImage
                         anchors.verticalCenter: parent.verticalCenter
                         width:                  sourceSize.width * (height / sourceSize.height)
-                        height:                 parent.height - UtilScript.pt(8)
+                        height:                 parent.height - UtilScript.dp(8)
                         source:                 "qrc:/resources/images/dialog/purchase_dialog_purchase.png"
                         fillMode:               Image.PreserveAspectFit
                     }
@@ -189,7 +189,7 @@ MultiPointTouchArea {
                         anchors.verticalCenter: parent.verticalCenter
                         width:                  parent.width - purchaseFullVersionImage.width - parent.spacing -
                                                 parent.leftPadding - parent.rightPadding
-                        height:                 parent.height - UtilScript.pt(8)
+                        height:                 parent.height - UtilScript.dp(8)
                         text:                   qsTr("Purchase full version")
                         color:                  "black"
                         font.pointSize:         16
@@ -205,8 +205,8 @@ MultiPointTouchArea {
 
             Image {
                 id:       restorePurchasesButtonImage
-                width:    UtilScript.pt(sourceSize.width)
-                height:   UtilScript.pt(sourceSize.height)
+                width:    UtilScript.dp(sourceSize.width)
+                height:   UtilScript.dp(sourceSize.height)
                 source:   "qrc:/resources/images/dialog/purchase_dialog_button.png"
                 fillMode: Image.PreserveAspectFit
 
@@ -223,15 +223,15 @@ MultiPointTouchArea {
 
                 Row {
                     anchors.fill: parent
-                    leftPadding:  UtilScript.pt(4)
-                    rightPadding: UtilScript.pt(4)
-                    spacing:      UtilScript.pt(4)
+                    leftPadding:  UtilScript.dp(4)
+                    rightPadding: UtilScript.dp(4)
+                    spacing:      UtilScript.dp(4)
 
                     Image {
                         id:                     restorePurchasesImage
                         anchors.verticalCenter: parent.verticalCenter
                         width:                  sourceSize.width * (height / sourceSize.height)
-                        height:                 parent.height - UtilScript.pt(8)
+                        height:                 parent.height - UtilScript.dp(8)
                         source:                 "qrc:/resources/images/dialog/purchase_dialog_restore.png"
                         fillMode:               Image.PreserveAspectFit
                     }
@@ -240,7 +240,7 @@ MultiPointTouchArea {
                         anchors.verticalCenter: parent.verticalCenter
                         width:                  parent.width - restorePurchasesImage.width - parent.spacing -
                                                 parent.leftPadding - parent.rightPadding
-                        height:                 parent.height - UtilScript.pt(8)
+                        height:                 parent.height - UtilScript.dp(8)
                         text:                   qsTr("Restore purchases")
                         color:                  "black"
                         font.pointSize:         16
@@ -261,8 +261,8 @@ MultiPointTouchArea {
         anchors.horizontalCenter: dialogImage.horizontalCenter
         anchors.verticalCenter:   dialogImage.bottom
         z:                        1
-        width:                    UtilScript.pt(64)
-        height:                   UtilScript.pt(64)
+        width:                    UtilScript.dp(64)
+        height:                   UtilScript.dp(64)
         source:                   "qrc:/resources/images/dialog/cancel.png"
         fillMode:                 Image.PreserveAspectFit
 

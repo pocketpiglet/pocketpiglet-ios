@@ -40,14 +40,14 @@ Column {
 
     Rectangle {
         width:  currencyButton.imageWidth
-        height: UtilScript.pt(24)
+        height: UtilScript.dp(24)
         color:  "white"
-        radius: UtilScript.pt(16)
+        radius: UtilScript.dp(16)
 
         Text {
             id:                  currencyButtonAmountText
             anchors.fill:        parent
-            anchors.margins:     UtilScript.pt(4)
+            anchors.margins:     UtilScript.dp(4)
             text:                currencyButton.amount
             color:               "black"
             font.pointSize:      16

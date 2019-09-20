@@ -49,15 +49,15 @@ MultiPointTouchArea {
     Image {
         id:               dialogImage
         anchors.centerIn: parent
-        width:            UtilScript.pt(sourceSize.width)
-        height:           UtilScript.pt(sourceSize.height)
+        width:            UtilScript.dp(sourceSize.width)
+        height:           UtilScript.dp(sourceSize.height)
         source:           "qrc:/resources/images/dialog/dialog.png"
         fillMode:         Image.PreserveAspectFit
 
         Text {
             anchors.fill:         parent
-            anchors.margins:      UtilScript.pt(16)
-            anchors.bottomMargin: UtilScript.pt(40)
+            anchors.margins:      UtilScript.dp(16)
+            anchors.bottomMargin: UtilScript.dp(40)
             text:                 queryDialog.text
             color:                "black"
             font.pointSize:       24
@@ -78,8 +78,8 @@ MultiPointTouchArea {
 
         Image {
             id:       yesButtonImage
-            width:    UtilScript.pt(64)
-            height:   UtilScript.pt(64)
+            width:    UtilScript.dp(64)
+            height:   UtilScript.dp(64)
             source:   "qrc:/resources/images/dialog/yes.png"
             fillMode: Image.PreserveAspectFit
 
@@ -97,8 +97,8 @@ MultiPointTouchArea {
 
         Image {
             id:       noButtonImage
-            width:    UtilScript.pt(64)
-            height:   UtilScript.pt(64)
+            width:    UtilScript.dp(64)
+            height:   UtilScript.dp(64)
             source:   "qrc:/resources/images/dialog/no.png"
             fillMode: Image.PreserveAspectFit
 

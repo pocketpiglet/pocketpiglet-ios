@@ -44,14 +44,14 @@ MultiPointTouchArea {
 
     Image {
         anchors.centerIn: parent
-        width:            UtilScript.pt(sourceSize.width)
-        height:           UtilScript.pt(sourceSize.height)
+        width:            UtilScript.dp(sourceSize.width)
+        height:           UtilScript.dp(sourceSize.height)
         source:           "qrc:/resources/images/dialog/dialog.png"
         fillMode:         Image.PreserveAspectFit
 
         Text {
             anchors.fill:        parent
-            anchors.margins:     UtilScript.pt(16)
+            anchors.margins:     UtilScript.dp(16)
             text:                notificationDialog.text
             color:               "black"
             font.pointSize:      24

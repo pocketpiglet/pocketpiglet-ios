@@ -49,26 +49,26 @@ MultiPointTouchArea {
     Image {
         id:               dialogImage
         anchors.centerIn: parent
-        width:            UtilScript.pt(sourceSize.width)
-        height:           UtilScript.pt(sourceSize.height)
+        width:            UtilScript.dp(sourceSize.width)
+        height:           UtilScript.dp(sourceSize.height)
         source:           "qrc:/resources/images/dialog/new_diamonds_dialog.png"
         fillMode:         Image.PreserveAspectFit
 
         Column {
             anchors.centerIn: parent
-            spacing:          UtilScript.pt(4)
+            spacing:          UtilScript.dp(4)
 
             Image {
                 id:       diamondImage
-                width:    dialogImage.width  - UtilScript.pt(80)
-                height:   dialogImage.height - UtilScript.pt(120)
+                width:    dialogImage.width  - UtilScript.dp(80)
+                height:   dialogImage.height - UtilScript.dp(120)
                 source:   "qrc:/resources/images/dialog/new_diamonds_dialog_diamond.png"
                 fillMode: Image.PreserveAspectFit
             }
 
             Text {
                 width:                diamondImage.width
-                height:               UtilScript.pt(48)
+                height:               UtilScript.dp(48)
                 text:                 "+ %1".arg(newDiamondsDialog.newDiamondsAmount)
                 color:                "black"
                 font.pointSize:       32
@@ -86,8 +86,8 @@ MultiPointTouchArea {
         anchors.horizontalCenter: dialogImage.horizontalCenter
         anchors.verticalCenter:   dialogImage.bottom
         z:                        1
-        width:                    UtilScript.pt(64)
-        height:                   UtilScript.pt(64)
+        width:                    UtilScript.dp(64)
+        height:                   UtilScript.dp(64)
         source:                   "qrc:/resources/images/dialog/ok.png"
         fillMode:                 Image.PreserveAspectFit
 
