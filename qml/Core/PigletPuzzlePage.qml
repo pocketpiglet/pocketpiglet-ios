@@ -62,7 +62,7 @@ Item {
         muted:  !pigletPuzzlePage.appInForeground || !pigletPuzzlePage.pageActive
 
         onError: {
-            console.log(errorString);
+            console.error(errorString);
         }
 
         function playAudio(src) {

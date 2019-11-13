@@ -136,7 +136,7 @@ Item {
         property string audioSource: ""
 
         onError: {
-            console.log(errorString);
+            console.error(errorString);
         }
 
         function playAudio(src) {
@@ -158,7 +158,7 @@ Item {
         property bool playbackWasStarted: false
 
         onError: {
-            console.log(errorString);
+            console.error(errorString);
         }
 
         onPlaybackStateChanged: {
@@ -192,7 +192,7 @@ Item {
                               speechAudio.playbackState !== Audio.PlayingState
 
         onError: {
-            console.log(errorString);
+            console.error(errorString);
         }
 
         onVoiceFound: {
@@ -653,7 +653,7 @@ Item {
 
                             mainStackView.push(object);
                         } else {
-                            console.log(component.errorString());
+                            console.error(component.errorString());
                         }
 
                         pigletPage.diamondsAmount = Math.max(pigletPage.diamondsAmount - 1, 0);
@@ -681,7 +681,7 @@ Item {
 
                             mainStackView.push(object);
                         } else {
-                            console.log(component.errorString());
+                            console.error(component.errorString());
                         }
 
                         pigletPage.diamondsAmount = Math.max(pigletPage.diamondsAmount - 1, 0);
@@ -709,7 +709,7 @@ Item {
 
                             mainStackView.push(object);
                         } else {
-                            console.log(component.errorString());
+                            console.error(component.errorString());
                         }
 
                         pigletPage.diamondsAmount = Math.max(pigletPage.diamondsAmount - 1, 0);
@@ -737,7 +737,7 @@ Item {
 
                             mainStackView.push(object);
                         } else {
-                            console.log(component.errorString());
+                            console.error(component.errorString());
                         }
 
                         pigletPage.diamondsAmount = Math.max(pigletPage.diamondsAmount - 1, 0);

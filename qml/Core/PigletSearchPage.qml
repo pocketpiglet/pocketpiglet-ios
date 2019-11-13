@@ -136,7 +136,7 @@ Item {
         muted:  !pigletSearchPage.appInForeground || !pigletSearchPage.pageActive
 
         onError: {
-            console.log(errorString);
+            console.error(errorString);
         }
 
         function playAudio(src) {
@@ -151,7 +151,7 @@ Item {
         id: camera
 
         onError: {
-            console.log(errorString);
+            console.error(errorString);
         }
     }
 

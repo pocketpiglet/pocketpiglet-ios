@@ -71,7 +71,7 @@ Item {
         muted:  !pigletFeedPage.appInForeground || !pigletFeedPage.pageActive
 
         onError: {
-            console.log(errorString);
+            console.error(errorString);
         }
 
         function playAudio(src) {
