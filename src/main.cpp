@@ -6,8 +6,8 @@
 #include <QtQml/QQmlContext>
 #include <QtQuickControls2/QQuickStyle>
 
-#include "storehelper.h"
 #include "speechrecorder.h"
+#include "storehelper.h"
 
 int main(int argc, char *argv[])
 {

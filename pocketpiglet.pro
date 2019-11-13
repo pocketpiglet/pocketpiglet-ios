@@ -6,7 +6,8 @@ CONFIG += c++14
 
 DEFINES += QT_DEPRECATED_WARNINGS QT_NO_CAST_FROM_ASCII QT_NO_CAST_TO_ASCII WEBRTC_POSIX
 
-SOURCES += src/main.cpp \
+SOURCES += \
+    src/main.cpp \
     src/speechrecorder.cpp \
     webrtc/common_audio/signal_processing/complex_bit_reverse.c \
     webrtc/common_audio/signal_processing/complex_fft.c \
@@ -32,20 +33,20 @@ OBJECTIVE_SOURCES += \
     src/storehelper.mm
 
 HEADERS += \
-    src/storehelper.h \
     src/speechrecorder.h \
+    src/storehelper.h \
+    webrtc/typedefs.h \
     webrtc/common_audio/signal_processing/complex_fft_tables.h \
+    webrtc/common_audio/signal_processing/resample_by_2_internal.h \
     webrtc/common_audio/signal_processing/include/real_fft.h \
     webrtc/common_audio/signal_processing/include/signal_processing_library.h \
     webrtc/common_audio/signal_processing/include/spl_inl.h \
-    webrtc/common_audio/signal_processing/resample_by_2_internal.h \
-    webrtc/common_audio/vad/include/webrtc_vad.h \
     webrtc/common_audio/vad/vad_core.h \
     webrtc/common_audio/vad/vad_filterbank.h \
     webrtc/common_audio/vad/vad_gmm.h \
     webrtc/common_audio/vad/vad_sp.h \
-    webrtc/system_wrappers/interface/cpu_features_wrapper.h \
-    webrtc/typedefs.h
+    webrtc/common_audio/vad/include/webrtc_vad.h \
+    webrtc/system_wrappers/interface/cpu_features_wrapper.h
 
 RESOURCES += \
     qml.qrc \
@@ -53,9 +54,9 @@ RESOURCES += \
     translations.qrc
 
 TRANSLATIONS += \
-    translations/pocketpiglet_ru.ts \
     translations/pocketpiglet_de.ts \
     translations/pocketpiglet_fr.ts \
+    translations/pocketpiglet_ru.ts \
     translations/pocketpiglet_zh.ts
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
