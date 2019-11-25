@@ -174,9 +174,9 @@ void SpeechRecorder::handleAudioInputDeviceReadyRead()
 
                     for (int i = 0; i < frame_length; i++) {
                         if (sample_type == QAudioFormat::UnSignedInt && sample_size == 8) {
-                            audio_data_16bit[i] = static_cast<int16_t>((static_cast<quint16>(AudioBuffer[p + i]) & ~0x80) << 8);
+                            audio_data_16bit[i] = (static_cast<quint8>(AudioBuffer[p + i]) - 128) * 256;
                         } else if (sample_type == QAudioFormat::SignedInt && sample_size == 16) {
-                            audio_data_16bit[i] = static_cast<int16_t>((static_cast<quint16>(AudioBuffer[p + i * 2 + 1]) << 8) | static_cast<quint16>(AudioBuffer[p + i * 2]));
+                            audio_data_16bit[i] = static_cast<int16_t>((static_cast<quint16>(AudioBuffer[p + i * 2 + 1]) * 256) + static_cast<quint8>(AudioBuffer[p + i * 2]));
                         } else {
                             audio_data_16bit[i] = 0;
                         }
