@@ -1,9 +1,11 @@
 import QtQuick 2.12
 
+import "../../Util.js" as UtilScript
+
 Rectangle {
     id:     bubble
-    width:  bubbleImage.sourceSize.width
-    height: bubbleImage.sourceSize.height
+    width:  UtilScript.dp(bubbleImage.sourceSize.width)
+    height: UtilScript.dp(bubbleImage.sourceSize.height)
     color:  "transparent"
 
     property bool valid: true

@@ -1,9 +1,11 @@
 import QtQuick 2.12
 
+import "../../Util.js" as UtilScript
+
 Rectangle {
     id:     piglet
-    width:  pigletImage.sourceSize.width
-    height: pigletImage.sourceSize.height
+    width:  UtilScript.dp(pigletImage.sourceSize.width)
+    height: UtilScript.dp(pigletImage.sourceSize.height)
     color:  "transparent"
 
     readonly property real distance:     500.0
