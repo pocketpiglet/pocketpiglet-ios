@@ -10,16 +10,15 @@
 #include <QtMultimedia/QAudioFormat>
 #include <QtMultimedia/QAudioDeviceInfo>
 
-#include "speechrecorder.h"
+#include "voicerecorder.h"
 
-SpeechRecorder::SpeechRecorder(QObject *parent) : QObject(parent)
+VoiceRecorder::VoiceRecorder(QObject *parent) : QObject(parent)
 {
     Active               = false;
     VoiceDetected        = false;
-    SampleRate           = 0;
     MinVoiceDuration     = 1000;
     MinSilenceDuration   = 1000;
-    SilenceSize          = 0;
+    SilenceLength        = 0;
     Volume               = 1.0;
     SampleRateMultiplier = 1.0;
     VadInstance          = nullptr;
@@ -33,19 +32,19 @@ SpeechRecorder::SpeechRecorder(QObject *parent) : QObject(parent)
     VoiceFilePath = QDir(tmp_dir).filePath(QStringLiteral("voice.wav"));
 }
 
-SpeechRecorder::~SpeechRecorder() noexcept
+VoiceRecorder::~VoiceRecorder() noexcept
 {
     if (VadInstance != nullptr) {
         WebRtcVad_Free(VadInstance);
     }
 }
 
-bool SpeechRecorder::active() const
+bool VoiceRecorder::active() const
 {
     return Active;
 }
 
-void SpeechRecorder::setActive(bool active)
+void VoiceRecorder::setActive(bool active)
 {
     if (Active != active) {
         Active = active;
@@ -54,7 +53,7 @@ void SpeechRecorder::setActive(bool active)
 
         Cleanup();
 
-        if (Active && SampleRate != 0) {
+        if (Active) {
             CreateVAD();
             CreateAudioInput();
         } else {
@@ -64,64 +63,44 @@ void SpeechRecorder::setActive(bool active)
     }
 }
 
-int SpeechRecorder::sampleRate() const
-{
-    return SampleRate;
-}
-
-void SpeechRecorder::setSampleRate(int sample_rate)
-{
-    if (SampleRate != sample_rate) {
-        SampleRate = sample_rate;
-
-        emit sampleRateChanged(SampleRate);
-
-        Cleanup();
-
-        if (Active && SampleRate != 0) {
-            CreateVAD();
-            CreateAudioInput();
-        } else {
-            DeleteAudioInput();
-            DeleteVAD();
-        }
-    }
-}
-
-int SpeechRecorder::minVoiceDuration() const
+int VoiceRecorder::minVoiceDuration() const
 {
     return MinVoiceDuration;
 }
 
-void SpeechRecorder::setMinVoiceDuration(int duration)
+void VoiceRecorder::setMinVoiceDuration(int duration)
 {
     if (MinVoiceDuration != duration) {
         MinVoiceDuration = duration;
 
         emit minVoiceDurationChanged(MinVoiceDuration);
+
+        Cleanup();
     }
 }
 
-int SpeechRecorder::minSilenceDuration() const
+int VoiceRecorder::minSilenceDuration() const
 {
     return MinSilenceDuration;
 }
 
-void SpeechRecorder::setMinSilenceDuration(int duration)
+void VoiceRecorder::setMinSilenceDuration(int duration)
 {
     if (MinSilenceDuration != duration) {
         MinSilenceDuration = duration;
 
         emit minSilenceDurationChanged(MinSilenceDuration);
+
+        Cleanup();
     }
 }
 
-qreal SpeechRecorder::volume() const
+qreal VoiceRecorder::volume() const
 {
     return Volume;
 }
 
-void SpeechRecorder::setVolume(qreal volume)
+void VoiceRecorder::setVolume(qreal volume)
 {
     if (Volume != volume) {
         Volume = volume;
@@ -134,12 +113,12 @@ void SpeechRecorder::setVolume(qreal volume)
     }
 }
 
-qreal SpeechRecorder::sampleRateMultiplier() const
+qreal VoiceRecorder::sampleRateMultiplier() const
 {
     return SampleRateMultiplier;
 }
 
-void SpeechRecorder::setSampleRateMultiplier(qreal multiplier)
+void VoiceRecorder::setSampleRateMultiplier(qreal multiplier)
 {
     if (SampleRateMultiplier != multiplier) {
         SampleRateMultiplier = multiplier;
@@ -148,103 +127,117 @@ void SpeechRecorder::setSampleRateMultiplier(qreal multiplier)
     }
 }
 
-QString SpeechRecorder::voiceFileURL() const
+QString VoiceRecorder::voiceFileURL() const
 {
     return QUrl::fromLocalFile(VoiceFilePath).toString();
 }
 
-void SpeechRecorder::handleAudioInputDeviceReadyRead()
+void VoiceRecorder::handleAudioInputDeviceReadyRead()
 {
     auto audio_input_device = qobject_cast<QIODevice *>(QObject::sender());
 
-    if (audio_input_device != nullptr && SampleRate != 0 && VadInstance != nullptr && AudioInput) {
-        QAudioFormat::SampleType sample_type  = AudioInput->format().sampleType();
-        int                      sample_size  = AudioInput->format().sampleSize();
-        int                      frame_length = (SampleRate / 1000) * 30;
-        int                      frame_bytes  = frame_length * (sample_size / 8);
-
+    if (audio_input_device != nullptr) {
         AudioBuffer.append(audio_input_device->readAll());
 
-        if (AudioBuffer.size() >= frame_bytes) {
-            int p = 0;
+        if (VadInstance != nullptr && AudioInput) {
+            int                      sample_rate  = AudioInput->format().sampleRate();
+            int                      sample_size  = AudioInput->format().sampleSize();
+            QAudioFormat::SampleType sample_type  = AudioInput->format().sampleType();
+            int                      frame_length = (sample_rate / 1000) * 30;
+            int                      frame_bytes  = frame_length * (sample_size / 8);
 
-            while (p < AudioBuffer.size()) {
-                if (p + frame_bytes <= AudioBuffer.size()) {
-                    QVarLengthArray<int16_t, 1024>audio_data_16bit(frame_length);
+            if (AudioBuffer.size() >= frame_bytes) {
+                int p = 0;
 
-                    for (int i = 0; i < frame_length; i++) {
-                        if (sample_type == QAudioFormat::UnSignedInt && sample_size == 8) {
-                            audio_data_16bit[i] = (static_cast<quint8>(AudioBuffer[p + i]) - 128) * 256;
-                        } else if (sample_type == QAudioFormat::SignedInt && sample_size == 16) {
-                            audio_data_16bit[i] = static_cast<int16_t>((static_cast<quint16>(AudioBuffer[p + i * 2 + 1]) * 256) + static_cast<quint8>(AudioBuffer[p + i * 2]));
-                        } else {
-                            audio_data_16bit[i] = 0;
-                        }
-                    }
+                while (p < AudioBuffer.size()) {
+                    if (p + frame_bytes <= AudioBuffer.size()) {
+                        QVarLengthArray<int16_t, 1024>audio_data_16bit(frame_length);
 
-                    if (WebRtcVad_Process(VadInstance, SampleRate, audio_data_16bit.data(), frame_length) > 0) {
-                        VoiceBuffer.append(AudioBuffer.mid(p, frame_bytes));
-
-                        SilenceSize = 0;
-
-                        if (VoiceBuffer.size() > (SampleRate / 1000) * MinVoiceDuration && !VoiceDetected) {
-                            VoiceDetected = true;
-
-                            emit voiceFound();
-                        }
-                    } else {
-                        SilenceSize = SilenceSize + frame_length;
-
-                        if (VoiceDetected) {
-                            VoiceBuffer.append(AudioBuffer.mid(p, frame_bytes));
-                        } else {
-                            VoiceBuffer.clear();
-                        }
-
-                        if (SilenceSize > (SampleRate / 1000) * MinSilenceDuration) {
-                            if (VoiceDetected) {
-                                VoiceDetected = false;
-
-                                SaveVoice();
-
-                                emit voiceRecorded();
+                        for (int i = 0; i < frame_length; i++) {
+                            if (sample_type == QAudioFormat::UnSignedInt && sample_size == 8) {
+                                audio_data_16bit[i] = (static_cast<quint8>(AudioBuffer[p + i]) - 128) * 256;
+                            } else if (sample_type == QAudioFormat::SignedInt && sample_size == 16) {
+                                audio_data_16bit[i] = static_cast<int16_t>((static_cast<quint16>(AudioBuffer[p + i * 2 + 1]) * 256) + static_cast<quint8>(AudioBuffer[p + i * 2]));
+                            } else {
+                                audio_data_16bit[i] = 0;
                             }
-
-                            SilenceSize = 0;
-
-                            VoiceBuffer.clear();
                         }
+
+                        if (WebRtcVad_Process(VadInstance, sample_rate, audio_data_16bit.data(), frame_length) > 0) {
+                            VoiceBuffer.append(AudioBuffer.mid(p, frame_bytes));
+
+                            SilenceLength = 0;
+
+                            if (VoiceBuffer.size() > (sample_rate / 1000) * MinVoiceDuration && !VoiceDetected) {
+                                VoiceDetected = true;
+
+                                emit voiceFound();
+                            }
+                        } else {
+                            if (VoiceDetected) {
+                                VoiceBuffer.append(AudioBuffer.mid(p, frame_bytes));
+
+                                SilenceLength = SilenceLength + frame_length;
+
+                                if (SilenceLength > (sample_rate / 1000) * MinSilenceDuration) {
+                                    VoiceDetected = false;
+                                    SilenceLength = 0;
+
+                                    SaveVoice();
+
+                                    emit voiceRecorded();
+
+                                    VoiceBuffer.clear();
+                                }
+                            } else {
+                                VoiceBuffer.clear();
+                            }
+                        }
+
+                        p = p + frame_bytes;
+                    } else {
+                        break;
                     }
-
-                    p = p + frame_bytes;
-                } else {
-                    break;
                 }
-            }
 
-            AudioBuffer = AudioBuffer.mid(p);
+                AudioBuffer = AudioBuffer.mid(p);
+            }
+        } else {
+            Cleanup();
         }
     }
 }
 
-void SpeechRecorder::Cleanup()
+void VoiceRecorder::Cleanup()
 {
     if (VoiceDetected) {
         emit voiceReset();
     }
 
     VoiceDetected = false;
-    SilenceSize   = 0;
+    SilenceLength = 0;
 
     AudioBuffer.clear();
     VoiceBuffer.clear();
 }
 
-void SpeechRecorder::CreateAudioInput()
+void VoiceRecorder::CreateAudioInput()
 {
+    //
+    // Workaround for Qt for Android - app should have permission
+    // to access microphone to get valid info about audio formats,
+    // so let's request required permission first.
+    //
+    {
+        QAudioInput input(QAudioDeviceInfo::defaultInputDevice().preferredFormat());
+
+        input.start();
+    }
+    // -------------------------------------------------------------
+
     QAudioFormat format, supported_format;
 
-    format.setSampleRate(SampleRate);
+    format.setSampleRate(16000);
     format.setChannelCount(1);
     format.setSampleSize(8);
     format.setCodec(QStringLiteral("audio/pcm"));
@@ -259,22 +252,24 @@ void SpeechRecorder::CreateAudioInput()
         supported_format = info.nearestFormat(format);
     }
 
-    if (supported_format.sampleRate()   == format.sampleRate() &&
-        supported_format.channelCount() == format.channelCount() &&
+    if (supported_format.channelCount() == format.channelCount() &&
         supported_format.codec()        == format.codec() &&
-        supported_format.byteOrder()    == format.byteOrder() && ((supported_format.sampleSize() == 8  && supported_format.sampleType() == QAudioFormat::UnSignedInt) ||
-                                                                  (supported_format.sampleSize() == 16 && supported_format.sampleType() == QAudioFormat::SignedInt))) {
+        supported_format.byteOrder()    == format.byteOrder() &&
+       (supported_format.sampleRate() == 8000  || supported_format.sampleRate() == 16000 ||
+        supported_format.sampleRate() == 32000 || supported_format.sampleRate() == 48000) &&
+      ((supported_format.sampleSize() == 8  && supported_format.sampleType() == QAudioFormat::UnSignedInt) ||
+       (supported_format.sampleSize() == 16 && supported_format.sampleType() == QAudioFormat::SignedInt))) {
         AudioInput = std::make_unique<QAudioInput>(supported_format);
 
         AudioInput->setVolume(Volume);
 
-        connect(AudioInput->start(), &QIODevice::readyRead, this, &SpeechRecorder::handleAudioInputDeviceReadyRead);
+        connect(AudioInput->start(), &QIODevice::readyRead, this, &VoiceRecorder::handleAudioInputDeviceReadyRead);
     } else {
         emit error(QStringLiteral("Format is not suitable for recording"));
     }
 }
 
-void SpeechRecorder::DeleteAudioInput()
+void VoiceRecorder::DeleteAudioInput()
 {
     AudioInput.reset();
 
@@ -290,7 +285,7 @@ void SpeechRecorder::DeleteAudioInput()
     // -------------------------------------------------------------
 }
 
-void SpeechRecorder::CreateVAD()
+void VoiceRecorder::CreateVAD()
 {
     if (VadInstance != nullptr) {
         WebRtcVad_Free(VadInstance);
@@ -307,7 +302,7 @@ void SpeechRecorder::CreateVAD()
     }
 }
 
-void SpeechRecorder::DeleteVAD()
+void VoiceRecorder::DeleteVAD()
 {
     if (VadInstance != nullptr) {
         WebRtcVad_Free(VadInstance);
@@ -316,10 +311,11 @@ void SpeechRecorder::DeleteVAD()
     }
 }
 
-void SpeechRecorder::SaveVoice()
+void VoiceRecorder::SaveVoice()
 {
     if (AudioInput) {
-        auto bits_per_sample = static_cast<quint16>(AudioInput->format().sampleSize());
+        int  sample_rate = AudioInput->format().sampleRate();
+        auto sample_size = static_cast<quint16>(AudioInput->format().sampleSize());
 
         struct {
             char    chunk_id[4];
@@ -342,7 +338,7 @@ void SpeechRecorder::SaveVoice()
         QFile voice_file(VoiceFilePath);
 
         if (voice_file.open(QIODevice::WriteOnly)) {
-            auto sample_rate_multiplied = static_cast<quint32>(qFloor(SampleRate * SampleRateMultiplier)); // To change voice pitch
+            auto sample_rate_multiplied = static_cast<quint32>(qFloor(sample_rate * SampleRateMultiplier)); // To change voice pitch
 
             memcpy(wav_header.chunk_id,       "RIFF", sizeof(wav_header.chunk_id));
             memcpy(wav_header.format,         "WAVE", sizeof(wav_header.format));
@@ -355,9 +351,9 @@ void SpeechRecorder::SaveVoice()
             wav_header.audio_format     = qToLittleEndian<quint16>(1); // PCM
             wav_header.num_channels     = qToLittleEndian<quint16>(1);
             wav_header.sample_rate      = qToLittleEndian<quint32>(sample_rate_multiplied);
-            wav_header.byte_rate        = qToLittleEndian<quint32>(sample_rate_multiplied * 1 * bits_per_sample / 8); // sample_rate * num_channels * bits_per_sample / 8
-            wav_header.block_align      = qToLittleEndian<quint16>(1 * bits_per_sample / 8); // num_channels * bits_per_sample / 8
-            wav_header.bits_per_sample  = qToLittleEndian<quint16>(bits_per_sample);
+            wav_header.byte_rate        = qToLittleEndian<quint32>(sample_rate_multiplied * 1 * sample_size / 8); // sample_rate * num_channels * bits_per_sample / 8
+            wav_header.block_align      = qToLittleEndian<quint16>(1 * sample_size / 8); // num_channels * bits_per_sample / 8
+            wav_header.bits_per_sample  = qToLittleEndian<quint16>(sample_size);
 
             wav_header.sub_chunk_2_size = qToLittleEndian<quint32>(static_cast<quint32>(VoiceBuffer.size()));
 

@@ -1,5 +1,5 @@
-#ifndef SPEECHRECORDER_H
-#define SPEECHRECORDER_H
+#ifndef VOICERECORDER_H
+#define VOICERECORDER_H
 
 #include <memory>
 
@@ -11,12 +11,11 @@
 
 #include "webrtc/common_audio/vad/include/webrtc_vad.h"
 
-class SpeechRecorder : public QObject
+class VoiceRecorder : public QObject
 {
     Q_OBJECT
 
     Q_PROPERTY(bool    active               READ active               WRITE setActive               NOTIFY activeChanged)
-    Q_PROPERTY(int     sampleRate           READ sampleRate           WRITE setSampleRate           NOTIFY sampleRateChanged)
     Q_PROPERTY(int     minVoiceDuration     READ minVoiceDuration     WRITE setMinVoiceDuration     NOTIFY minVoiceDurationChanged)
     Q_PROPERTY(int     minSilenceDuration   READ minSilenceDuration   WRITE setMinSilenceDuration   NOTIFY minSilenceDurationChanged)
     Q_PROPERTY(qreal   volume               READ volume               WRITE setVolume               NOTIFY volumeChanged)
@@ -25,21 +24,18 @@ class SpeechRecorder : public QObject
     Q_PROPERTY(QString voiceFileURL         READ voiceFileURL)
 
 public:
-    explicit SpeechRecorder(QObject *parent = nullptr);
+    explicit VoiceRecorder(QObject *parent = nullptr);
 
-    SpeechRecorder(const SpeechRecorder &) = delete;
-    SpeechRecorder(SpeechRecorder &&) noexcept = delete;
+    VoiceRecorder(const VoiceRecorder &) = delete;
+    VoiceRecorder(VoiceRecorder &&) noexcept = delete;
 
-    SpeechRecorder &operator=(const SpeechRecorder &) = delete;
-    SpeechRecorder &operator=(SpeechRecorder &&) noexcept = delete;
+    VoiceRecorder &operator=(const VoiceRecorder &) = delete;
+    VoiceRecorder &operator=(VoiceRecorder &&) noexcept = delete;
 
-    ~SpeechRecorder() noexcept override;
+    ~VoiceRecorder() noexcept override;
 
     bool active() const;
     void setActive(bool active);
-
-    int sampleRate() const;
-    void setSampleRate(int sample_rate);
 
     int minVoiceDuration() const;
     void setMinVoiceDuration(int duration);
@@ -60,7 +56,6 @@ private slots:
 
 signals:
     void activeChanged(bool active);
-    void sampleRateChanged(int sampleRate);
     void minVoiceDurationChanged(int minVoiceDuration);
     void minSilenceDurationChanged(int minSilenceDuration);
     void volumeChanged(qreal volume);
@@ -82,8 +77,8 @@ private:
     void SaveVoice();
 
     bool                         Active, VoiceDetected;
-    int                          SampleRate, MinVoiceDuration,
-                                 MinSilenceDuration, SilenceSize;
+    int                          MinVoiceDuration, MinSilenceDuration,
+                                 SilenceLength;
     qreal                        Volume, SampleRateMultiplier;
     QString                      VoiceFilePath;
     QByteArray                   AudioBuffer, VoiceBuffer;
@@ -91,4 +86,4 @@ private:
     std::unique_ptr<QAudioInput> AudioInput;
 };
 
-#endif // SPEECHRECORDER_H
+#endif // VOICERECORDER_H
