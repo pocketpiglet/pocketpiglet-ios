@@ -229,7 +229,7 @@ void VoiceRecorder::CreateAudioInput()
     // so let's request required permission first.
     //
     {
-        QAudioInput input(QAudioDeviceInfo::defaultInputDevice().preferredFormat());
+        QAudioInput input;
 
         input.start();
     }
