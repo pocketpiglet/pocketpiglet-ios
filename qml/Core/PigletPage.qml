@@ -87,7 +87,7 @@ Item {
                                                       "", nextAnimation, 105, 15);
             } else if (nextAnimation === "piglet_eats_candy") {
                 animationSpriteSequence.playAnimation("qrc:/resources/animations/piglet/piglet_eats_candy.jpg",
-                                                      "qrc:/resources/sound/piglet/piglet_eats_candy.wav", nextAnimation, 75, 15);
+                                                      "qrc:/resources/sound/piglet/piglet_eats_candy.wav", nextAnimation, 80, 15);
             } else if (nextAnimation === "piglet_eats_cake") {
                 animationSpriteSequence.playAnimation("qrc:/resources/animations/piglet/piglet_eats_cake.jpg",
                                                       "qrc:/resources/sound/piglet/piglet_eats_cake.wav", nextAnimation, 115, 15);
@@ -946,7 +946,7 @@ Item {
         diamondsAmount = parseInt(mainWindow.getSetting("PigletDiamondsAmount", diamondsMaxAmount.toString(10)), 10);
 
         animationSpriteSequence.cacheAnimation("qrc:/resources/animations/piglet/piglet_eats_candy.jpg",
-                                               "piglet_eats_candy", 75, 15);
+                                               "piglet_eats_candy", 80, 15);
         animationSpriteSequence.cacheAnimation("qrc:/resources/animations/piglet/piglet_eats_cake.jpg",
                                                "piglet_eats_cake", 115, 15);
     }
