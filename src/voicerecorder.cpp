@@ -153,12 +153,16 @@ void VoiceRecorder::handleAudioInputDeviceReadyRead()
                     if (p + frame_bytes <= AudioBuffer.size()) {
                         QVarLengthArray<int16_t, 1024>audio_data_16bit(frame_length);
 
-                        for (int i = 0; i < frame_length; i++) {
-                            if (sample_type == QAudioFormat::UnSignedInt && sample_size == 8) {
+                        if (sample_type == QAudioFormat::UnSignedInt && sample_size == 8) {
+                            for (int i = 0; i < frame_length; i++) {
                                 audio_data_16bit[i] = (static_cast<quint8>(AudioBuffer[p + i]) - 128) * 256;
-                            } else if (sample_type == QAudioFormat::SignedInt && sample_size == 16) {
+                            }
+                        } else if (sample_type == QAudioFormat::SignedInt && sample_size == 16) {
+                            for (int i = 0; i < frame_length; i++) {
                                 audio_data_16bit[i] = static_cast<int16_t>((static_cast<quint16>(AudioBuffer[p + i * 2 + 1]) * 256) + static_cast<quint8>(AudioBuffer[p + i * 2]));
-                            } else {
+                            }
+                        } else {
+                            for (int i = 0; i < frame_length; i++) {
                                 audio_data_16bit[i] = 0;
                             }
                         }
@@ -168,7 +172,7 @@ void VoiceRecorder::handleAudioInputDeviceReadyRead()
 
                             SilenceLength = 0;
 
-                            if (VoiceBuffer.size() > (sample_rate / 1000) * MinVoiceDuration && !VoiceDetected) {
+                            if (!VoiceDetected && VoiceBuffer.size() > (sample_rate / 1000) * MinVoiceDuration * (sample_size / 8)) {
                                 VoiceDetected = true;
 
                                 emit voiceFound();
