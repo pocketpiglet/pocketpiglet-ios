@@ -134,7 +134,7 @@ QString VoiceRecorder::voiceFileURL() const
 
 void VoiceRecorder::handleAudioInputDeviceReadyRead()
 {
-    auto audio_input_device = qobject_cast<QIODevice *>(QObject::sender());
+    auto audio_input_device = qobject_cast<QIODevice *>(sender());
 
     if (audio_input_device != nullptr) {
         AudioBuffer.append(audio_input_device->readAll());
