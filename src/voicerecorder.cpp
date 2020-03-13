@@ -12,17 +12,17 @@
 
 #include "voicerecorder.h"
 
-VoiceRecorder::VoiceRecorder(QObject *parent) : QObject(parent)
+VoiceRecorder::VoiceRecorder(QObject *parent) :
+    QObject             (parent),
+    Active              (false),
+    VoiceDetected       (false),
+    MinVoiceDuration    (1000),
+    MinSilenceDuration  (1000),
+    SilenceLength       (0),
+    Volume              (1.0),
+    SampleRateMultiplier(1.0),
+    VadInstance         (nullptr)
 {
-    Active               = false;
-    VoiceDetected        = false;
-    MinVoiceDuration     = 1000;
-    MinSilenceDuration   = 1000;
-    SilenceLength        = 0;
-    Volume               = 1.0;
-    SampleRateMultiplier = 1.0;
-    VadInstance          = nullptr;
-
     QString tmp_dir = QStandardPaths::writableLocation(QStandardPaths::TempLocation);
 
     if (tmp_dir != QStringLiteral("")) {
