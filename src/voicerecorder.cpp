@@ -151,7 +151,7 @@ void VoiceRecorder::handleAudioInputDeviceReadyRead()
 
                 while (p < AudioBuffer.size()) {
                     if (p + frame_bytes <= AudioBuffer.size()) {
-                        QVarLengthArray<int16_t, 1024>audio_data_16bit(frame_length);
+                        QVarLengthArray<int16_t, 1024> audio_data_16bit(frame_length);
 
                         if (sample_type == QAudioFormat::UnSignedInt && sample_size == 8) {
                             for (int i = 0; i < frame_length; i++) {
