@@ -2,8 +2,7 @@
   InfoPlist.strings
 */
 
-CFBundleDisplayName              = "Хрюша";
-NSCameraUsageDescription         = "Разреши доступ к камере, чтобы сыграть со мной в прятки";
-NSLocationAlwaysUsageDescription = "Разреши доступ к местоположению, чтобы сыграть со мной в прятки";
-NSMicrophoneUsageDescription     = "Разреши доступ к микрофону, чтобы я мог говорить с тобой";
-NSMotionUsageDescription         = "Разреши доступ к датчикам движения, чтобы я мог реагировать на движения телефона";
+CFBundleDisplayName          = "Хрюша";
+NSCameraUsageDescription     = "Разреши доступ к камере, чтобы сыграть со мной в прятки";
+NSMicrophoneUsageDescription = "Разреши доступ к микрофону, чтобы я мог говорить с тобой";
+NSMotionUsageDescription     = "Разреши доступ к датчикам движения, чтобы я мог реагировать на движения телефона";
