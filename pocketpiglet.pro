@@ -70,8 +70,8 @@ QML_DESIGNER_IMPORT_PATH =
 ios {
     CONFIG += qtquickcompiler
 
-    INCLUDEPATH += $$PWD/ios/frameworks
-    DEPENDPATH += $$PWD/ios/frameworks
+    INCLUDEPATH += ios/frameworks
+    DEPENDPATH += ios/frameworks
 
     LIBS += -F $$PWD/ios/frameworks \
             -framework StoreKit
