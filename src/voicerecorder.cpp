@@ -1,5 +1,6 @@
 #include <QtCore/QtMath>
 #include <QtCore/QtEndian>
+#include <QtCore/QLatin1String>
 #include <QtCore/QVarLengthArray>
 #include <QtCore/QIODevice>
 #include <QtCore/QDataStream>
@@ -25,7 +26,7 @@ VoiceRecorder::VoiceRecorder(QObject *parent) :
 {
     QString tmp_dir = QStandardPaths::writableLocation(QStandardPaths::TempLocation);
 
-    if (tmp_dir != QStringLiteral("")) {
+    if (tmp_dir != QLatin1String("")) {
         QDir().mkpath(tmp_dir);
     }
 
@@ -381,7 +382,7 @@ void VoiceRecorder::SaveVoice()
 
             voice_file_stream.writeRawData(VoiceBuffer.data(), VoiceBuffer.size());
         } else {
-            emit error(QStringLiteral("Cannot create voice file %1: %2").arg(VoiceFilePath).arg(voice_file.errorString()));
+            emit error(QStringLiteral("Cannot create voice file %1: %2").arg(VoiceFilePath, voice_file.errorString()));
         }
     } else {
         emit error(QStringLiteral("AudioInput is null"));
