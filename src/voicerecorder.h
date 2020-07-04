@@ -9,7 +9,7 @@
 #include <QtCore/QByteArray>
 #include <QtMultimedia/QAudioInput>
 
-#include <webrtc/common_audio/vad/include/webrtc_vad.h>
+#include <webrtc_vad.h>
 
 class VoiceRecorder : public QObject
 {

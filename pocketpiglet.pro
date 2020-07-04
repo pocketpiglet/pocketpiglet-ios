@@ -6,7 +6,8 @@ CONFIG += c++17 resources_big
 
 DEFINES += QT_DEPRECATED_WARNINGS QT_NO_CAST_FROM_ASCII QT_NO_CAST_TO_ASCII WEBRTC_POSIX
 
-INCLUDEPATH += 3rdparty
+INCLUDEPATH += \
+    3rdparty/webrtc/common_audio/vad/include
 
 SOURCES += \
     3rdparty/webrtc/common_audio/signal_processing/complex_bit_reverse.c \
