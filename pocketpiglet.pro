@@ -81,6 +81,8 @@ ios {
     LIBS += -F $$PWD/ios/frameworks \
             -framework StoreKit
 
+    QMAKE_OBJECTIVE_CFLAGS += $$(QMAKE_OBJECTIVE_CFLAGS_ENV)
+
     QMAKE_APPLE_DEVICE_ARCHS = arm64
     QMAKE_INFO_PLIST = ios/Info.plist
 }
