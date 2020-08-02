@@ -32,9 +32,6 @@ SOURCES += \
     src/main.cpp \
     src/voicerecorder.cpp
 
-OBJECTIVE_SOURCES += \
-    src/storehelper.mm
-
 HEADERS += \
     3rdparty/webrtc/typedefs.h \
     3rdparty/webrtc/common_audio/signal_processing/complex_fft_tables.h \
@@ -77,6 +74,9 @@ ios {
 
     INCLUDEPATH += ios/frameworks
     DEPENDPATH += ios/frameworks
+
+    OBJECTIVE_SOURCES += \
+        src/storehelper.mm
 
     LIBS += -F $$PWD/ios/frameworks \
             -framework StoreKit
