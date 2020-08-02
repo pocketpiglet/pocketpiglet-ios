@@ -30,17 +30,17 @@
 <context>
     <name>PigletSearchPage</name>
     <message>
-        <location filename="../qml/Core/PigletSearchPage.qml" line="524"/>
+        <location filename="../qml/Core/PigletSearchPage.qml" line="525"/>
         <source>Your piglet wants to play hide-and-seek! Try to find him in your room using your phone&apos;s camera as fast as you can.</source>
         <translation>Dein Ferkel will Verstecken spielen! Versuchen Sie ihn so schnell wie möglich mit der Kamera Ihres Telefons in Ihrem Zimmer zu finden.</translation>
     </message>
     <message>
-        <location filename="../qml/Core/PigletSearchPage.qml" line="546"/>
+        <location filename="../qml/Core/PigletSearchPage.qml" line="547"/>
         <source>Congratulations, you have a new highscore! Do you want to play again?</source>
         <translation>Ich gratuliere, du hast einen neuen Highscore! Möchten Sie nochmals probieren?</translation>
     </message>
     <message>
-        <location filename="../qml/Core/PigletSearchPage.qml" line="566"/>
+        <location filename="../qml/Core/PigletSearchPage.qml" line="567"/>
         <source>Game over. Do you want to play again?</source>
         <translation>Das Spiel ist aus. Möchten Sie nochmals probieren?</translation>
     </message>
