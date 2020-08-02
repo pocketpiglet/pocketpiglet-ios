@@ -1,5 +1,5 @@
 #!/bin/sh
 
-PATH="$PATH:$HOME/Qt/5.13.0/ios/bin"
+PATH="$PATH:$HOME/Qt/5.12.9/ios/bin"
 
 lrelease ../pocketpiglet.pro
