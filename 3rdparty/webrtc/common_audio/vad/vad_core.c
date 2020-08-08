@@ -149,17 +149,23 @@ static int16_t GmmProbability(VadInstT* self, int16_t* features,
   if (frame_length == 80) {
     overhead1 = self->over_hang_max_1[0];
     overhead2 = self->over_hang_max_2[0];
+#ifndef __clang_analyzer__
     individualTest = self->individual[0];
+#endif
     totalTest = self->total[0];
   } else if (frame_length == 160) {
     overhead1 = self->over_hang_max_1[1];
     overhead2 = self->over_hang_max_2[1];
+#ifndef __clang_analyzer__
     individualTest = self->individual[1];
+#endif
     totalTest = self->total[1];
   } else {
     overhead1 = self->over_hang_max_1[2];
     overhead2 = self->over_hang_max_2[2];
+#ifndef __clang_analyzer__
     individualTest = self->individual[2];
+#endif
     totalTest = self->total[2];
   }
 
