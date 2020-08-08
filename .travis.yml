@@ -6,7 +6,7 @@ osx_image: xcode12u
 
 addons:
   sonarcloud:
-    organization: "pocketpiglet-mobile-github"
+    organization: "pocketpiglet-github"
     token:
       secure: "mXf9bOpibkgJ0EPK+NwyLgPeMDAUKbd9IOaSy6pmHtaNU0JySTudU8A4ZRfeJr8TM7oT30p8Lq/oaue9zOoEW1UaGY2DkfaisDZ3roHcRzpGPL+nKJygbRVh50y7E+62aXOj3VG8J0/RTrfTAD6b09Dma+3puAjuX9LUJvuLfmDJIKvaVVPJwLTO1k+RsqcvFsOPracwF5/PFnHeRzCkiJ6YZgKBAt6HJwX59WWGu7dZkHHhLisuNRU1yVHf734RbiZMuLgmHg31Im0MWBe2s+UiYUDQQCGu1sl2LeblaJ6SIjJNk5+S6OOrK/Nkasu9qbt2gFCZizFRLI2B1wjIUpo2sd3Qomox6eFSJ4zdtDdOVQoHrdrWj6KMPY6ijyLqZVKUTFkv5R/KPJZbuYQy6dESnesQp4jqoaouGcgQQwUQAFqijibBr8T6+JjzbOUuu7A/aO38yRzqq/RI1Lmm29LHnYL5sIaNNqFmFDRbNb+pzOWhmbCiz7sBW8qN4Xk3bHOQaeis6Z+zQdmUoRHNV0sJHPnuvDPudtnr5HXemeD8dRaE0DgCSlJy3TJUX9rJ6brUGeojU2Yo2+lLeyeq/+TLQ1Q4JoBWoX17g5iUOWa7GjNaI1StlXLbNGLPbvSmmexmeL2oUB0EIUrYPTYVtFqVdS+Lxc9GETbIssQE9yA="
 
@@ -75,7 +75,7 @@ script:
         echo "-------------- SONAR SCANNER --------------" && \
         echo && \
         cd .. && \
-        sonar-scanner -Dsonar.projectKey=pocketpiglet-mobile_pocketpiglet-ios \
+        sonar-scanner -Dsonar.projectKey=pocketpiglet_pocketpiglet-ios \
                       -Dsonar.projectName="PocketPiglet iOS" \
                       -Dsonar.sources=. \
                       -Dsonar.sourceEncoding=UTF-8 \
