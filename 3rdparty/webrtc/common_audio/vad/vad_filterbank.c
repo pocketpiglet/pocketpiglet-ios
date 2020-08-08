@@ -95,7 +95,9 @@ static void AllPassFilter(const int16_t* data_in, int data_length,
   int32_t state32 = ((int32_t) (*filter_state) << 16);  // Q15
 
   for (i = 0; i < data_length; i++) {
+#ifndef __clang_analyzer__
     tmp32 = state32 + WEBRTC_SPL_MUL_16_16(filter_coefficient, *data_in);
+#endif
     tmp16 = (int16_t) (tmp32 >> 16);  // Q(-1)
     *data_out++ = tmp16;
     state32 = (((int32_t) (*data_in)) << 14); // Q14

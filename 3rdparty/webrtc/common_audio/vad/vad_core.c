@@ -231,9 +231,11 @@ static int16_t GmmProbability(VadInstT* self, int16_t* features,
           (int32_t) (log_likelihood_ratio * kSpectrumWeight[channel]);
 
       // Local VAD decision.
+#ifndef __clang_analyzer__
       if ((log_likelihood_ratio << 2) > individualTest) {
         vadflag = 1;
       }
+#endif
 
       // TODO(bjornv): The conditional probabilities below are applied on the
       // hard coded number of Gaussians set to two. Find a way to generalize.
