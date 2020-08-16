@@ -144,7 +144,7 @@ void VoiceRecorder::handleAudioInputDeviceReadyRead()
             int                      sample_rate  = AudioInput->format().sampleRate();
             int                      sample_size  = AudioInput->format().sampleSize();
             QAudioFormat::SampleType sample_type  = AudioInput->format().sampleType();
-            int                      frame_length = (sample_rate / 1000) * 30;
+            int                      frame_length = (sample_rate / 1000) * 10;
             int                      frame_bytes  = frame_length * (sample_size / 8);
 
             if (AudioBuffer.size() >= frame_bytes) {
@@ -156,7 +156,7 @@ void VoiceRecorder::handleAudioInputDeviceReadyRead()
 
                         if (sample_size == 16 && sample_type == QAudioFormat::SignedInt) {
                             for (int i = 0; i < frame_length; i++) {
-                                audio_data_16bit[i] = static_cast<int16_t>((static_cast<quint16>(AudioBuffer[p + i * 2 + 1]) * 256) + static_cast<quint8>(AudioBuffer[p + i * 2]));
+                                audio_data_16bit[i] = static_cast<qint8>(AudioBuffer[p + i * 2 + 1]) * static_cast<qint16>(256) + static_cast<quint8>(AudioBuffer[p + i * 2]);
                             }
                         } else {
                             for (int i = 0; i < frame_length; i++) {
@@ -164,7 +164,7 @@ void VoiceRecorder::handleAudioInputDeviceReadyRead()
                             }
                         }
 
-                        if (WebRtcVad_Process(VadInstance, sample_rate, audio_data_16bit.data(), frame_length) > 0) {
+                        if (WebRtcVad_Process(VadInstance, sample_rate, audio_data_16bit.data(), static_cast<size_t>(frame_length)) > 0) {
                             VoiceBuffer.append(AudioBuffer.mid(p, frame_bytes));
 
                             SilenceLength = 0;
@@ -302,7 +302,7 @@ void VoiceRecorder::CreateVAD()
         emit error(QStringLiteral("Cannot create WebRtcVad instance"));
     } else if (WebRtcVad_Init(VadInstance)) {
         emit error(QStringLiteral("Cannot initialize WebRtcVad instance"));
-    } else if (WebRtcVad_set_mode(VadInstance, 0)) {
+    } else if (WebRtcVad_set_mode(VadInstance, 3)) {
         emit error(QStringLiteral("Cannot set mode for WebRtcVad instance"));
     }
 }
