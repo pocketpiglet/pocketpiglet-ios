@@ -154,11 +154,7 @@ void VoiceRecorder::handleAudioInputDeviceReadyRead()
                     if (p + frame_bytes <= AudioBuffer.size()) {
                         QVarLengthArray<int16_t, 1024> audio_data_16bit(frame_length);
 
-                        if (sample_type == QAudioFormat::UnSignedInt && sample_size == 8) {
-                            for (int i = 0; i < frame_length; i++) {
-                                audio_data_16bit[i] = (static_cast<quint8>(AudioBuffer[p + i]) - 128) * 256;
-                            }
-                        } else if (sample_type == QAudioFormat::SignedInt && sample_size == 16) {
+                        if (sample_size == 16 && sample_type == QAudioFormat::SignedInt) {
                             for (int i = 0; i < frame_length; i++) {
                                 audio_data_16bit[i] = static_cast<int16_t>((static_cast<quint16>(AudioBuffer[p + i * 2 + 1]) * 256) + static_cast<quint8>(AudioBuffer[p + i * 2]));
                             }
@@ -244,10 +240,10 @@ void VoiceRecorder::CreateAudioInput()
 
     format.setSampleRate(16000);
     format.setChannelCount(1);
-    format.setSampleSize(8);
+    format.setSampleSize(16);
     format.setCodec(QStringLiteral("audio/pcm"));
     format.setByteOrder(QAudioFormat::LittleEndian);
-    format.setSampleType(QAudioFormat::UnSignedInt);
+    format.setSampleType(QAudioFormat::SignedInt);
 
     QAudioDeviceInfo info = QAudioDeviceInfo::defaultInputDevice();
 
@@ -258,12 +254,14 @@ void VoiceRecorder::CreateAudioInput()
     }
 
     if (supported_format.channelCount() == format.channelCount() &&
+        supported_format.sampleSize()   == format.sampleSize() &&
         supported_format.codec()        == format.codec() &&
         supported_format.byteOrder()    == format.byteOrder() &&
-       (supported_format.sampleRate() == 8000  || supported_format.sampleRate() == 16000 ||
-        supported_format.sampleRate() == 32000 || supported_format.sampleRate() == 48000) &&
-      ((supported_format.sampleSize() == 8  && supported_format.sampleType() == QAudioFormat::UnSignedInt) ||
-       (supported_format.sampleSize() == 16 && supported_format.sampleType() == QAudioFormat::SignedInt))) {
+        supported_format.sampleType()   == format.sampleType() &&
+       (supported_format.sampleRate()   == 8000  ||
+        supported_format.sampleRate()   == 16000 ||
+        supported_format.sampleRate()   == 32000 ||
+        supported_format.sampleRate()   == 48000)) {
         AudioInput = std::make_unique<QAudioInput>(supported_format);
 
         AudioInput->setVolume(Volume);
@@ -304,7 +302,7 @@ void VoiceRecorder::CreateVAD()
         emit error(QStringLiteral("Cannot create WebRtcVad instance"));
     } else if (WebRtcVad_Init(VadInstance)) {
         emit error(QStringLiteral("Cannot initialize WebRtcVad instance"));
-    } else if (WebRtcVad_set_mode(VadInstance, 3)) {
+    } else if (WebRtcVad_set_mode(VadInstance, 0)) {
         emit error(QStringLiteral("Cannot set mode for WebRtcVad instance"));
     }
 }
