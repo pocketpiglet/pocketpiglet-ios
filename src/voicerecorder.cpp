@@ -298,7 +298,9 @@ void VoiceRecorder::CreateVAD()
         VadInstance = nullptr;
     }
 
-    if (WebRtcVad_Create(&VadInstance)) {
+    VadInstance = WebRtcVad_Create();
+
+    if (VadInstance == nullptr) {
         emit error(QStringLiteral("Cannot create WebRtcVad instance"));
     } else if (WebRtcVad_Init(VadInstance)) {
         emit error(QStringLiteral("Cannot initialize WebRtcVad instance"));
