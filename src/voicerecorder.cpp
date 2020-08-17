@@ -266,7 +266,13 @@ void VoiceRecorder::CreateAudioInput()
 
         AudioInput->setVolume(Volume);
 
-        connect(AudioInput->start(), &QIODevice::readyRead, this, &VoiceRecorder::handleAudioInputDeviceReadyRead);
+        QIODevice *audio_device = AudioInput->start();
+
+        if (audio_device != nullptr) {
+            connect(audio_device, &QIODevice::readyRead, this, &VoiceRecorder::handleAudioInputDeviceReadyRead);
+        } else {
+            emit error(QStringLiteral("Cannot open audio input: %1").arg(AudioInput->error()));
+        }
     } else {
         emit error(QStringLiteral("Format is not suitable for recording"));
     }
