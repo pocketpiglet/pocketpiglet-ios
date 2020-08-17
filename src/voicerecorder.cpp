@@ -271,7 +271,7 @@ void VoiceRecorder::CreateAudioInput()
         if (audio_device != nullptr) {
             connect(audio_device, &QIODevice::readyRead, this, &VoiceRecorder::handleAudioInputDeviceReadyRead);
         } else {
-            emit error(QStringLiteral("Cannot open audio input: %1").arg(AudioInput->error()));
+            emit error(QStringLiteral("Cannot start audio recording: %1").arg(AudioInput->error()));
         }
     } else {
         emit error(QStringLiteral("Format is not suitable for recording"));
