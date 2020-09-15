@@ -12,7 +12,7 @@ additional information.
 
 ---
 
-[![Travis Build Status](https://travis-ci.org/pocketpiglet/pocketpiglet-ios.svg?branch=master)](https://travis-ci.org/pocketpiglet/pocketpiglet-ios)
+[![Travis Build Status](https://travis-ci.com/pocketpiglet/pocketpiglet-ios.svg?branch=master)](https://travis-ci.com/pocketpiglet/pocketpiglet-ios)
 [![SonarCloud Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=pocketpiglet_pocketpiglet-ios&metric=alert_status)](https://sonarcloud.io/dashboard?id=pocketpiglet_pocketpiglet-ios)
 
 [![SonarCloud Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=pocketpiglet_pocketpiglet-ios&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=pocketpiglet_pocketpiglet-ios)
