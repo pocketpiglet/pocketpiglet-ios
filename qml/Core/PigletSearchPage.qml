@@ -35,7 +35,7 @@ Item {
                 createPiglet();
             }
         } else {
-            if (currentPiglet !== null) {
+            if (currentPiglet) {
                 currentPiglet.destroy();
 
                 currentPiglet = null;
@@ -53,7 +53,7 @@ Item {
                 createPiglet();
             }
         } else {
-            if (currentPiglet !== null) {
+            if (currentPiglet) {
                 currentPiglet.destroy();
 
                 currentPiglet = null;
@@ -305,7 +305,7 @@ Item {
             height:                   UtilScript.dp(32)
             source:                   "qrc:/resources/images/piglet_search/turn_up.png"
             fillMode:                 Image.PreserveAspectFit
-            visible:                  pigletSearchPage.currentPiglet !== null &&
+            visible:                  pigletSearchPage.currentPiglet &&
                                       pigletSearchPage.currentPiglet.y < 0 - pigletSearchPage.currentPiglet.height
 
             SequentialAnimation {
@@ -340,7 +340,7 @@ Item {
             height:                   UtilScript.dp(32)
             source:                   "qrc:/resources/images/piglet_search/turn_down.png"
             fillMode:                 Image.PreserveAspectFit
-            visible:                  pigletSearchPage.currentPiglet !== null &&
+            visible:                  pigletSearchPage.currentPiglet &&
                                       pigletSearchPage.currentPiglet.y > backgroundRectangle.height
 
             SequentialAnimation {
@@ -374,7 +374,7 @@ Item {
             height:                 UtilScript.dp(128)
             source:                 "qrc:/resources/images/piglet_search/turn_left.png"
             fillMode:               Image.PreserveAspectFit
-            visible:                pigletSearchPage.currentPiglet !== null &&
+            visible:                pigletSearchPage.currentPiglet &&
                                     pigletSearchPage.currentPiglet.x < 0 - pigletSearchPage.currentPiglet.width
 
             SequentialAnimation {
@@ -408,7 +408,7 @@ Item {
             height:                 UtilScript.dp(128)
             source:                 "qrc:/resources/images/piglet_search/turn_right.png"
             fillMode:               Image.PreserveAspectFit
-            visible:                pigletSearchPage.currentPiglet !== null &&
+            visible:                pigletSearchPage.currentPiglet &&
                                     pigletSearchPage.currentPiglet.x > backgroundRectangle.width
 
             SequentialAnimation {
@@ -449,7 +449,7 @@ Item {
                 anchors.fill: parent
 
                 onClicked: {
-                    if (pigletSearchPage.currentPiglet !== null) {
+                    if (pigletSearchPage.currentPiglet) {
                         pigletSearchPage.currentPiglet.destroy();
 
                         pigletSearchPage.currentPiglet = null;
@@ -497,7 +497,7 @@ Item {
             // Low-pass filter
             lastZenith = lastZenith + 0.25 * (zenith - lastZenith);
 
-            if (pigletSearchPage.currentPiglet !== null) {
+            if (pigletSearchPage.currentPiglet) {
                 pigletSearchPage.currentPiglet.updatePosition(compass.lastAzimuth, lastZenith);
             }
         }
@@ -513,7 +513,7 @@ Item {
         onReadingChanged: {
             lastAzimuth = reading.azimuth;
 
-            if (pigletSearchPage.currentPiglet !== null) {
+            if (pigletSearchPage.currentPiglet) {
                 pigletSearchPage.currentPiglet.updatePosition(lastAzimuth, rotationSensor.lastZenith);
             }
         }
@@ -598,7 +598,7 @@ Item {
         property double countdownTime: 0
 
         onRunningChanged: {
-            if (running && pigletSearchPage.currentPiglet !== null) {
+            if (running && pigletSearchPage.currentPiglet) {
                 countdownTime = pigletSearchPage.currentPiglet.waitTime;
             } else {
                 countdownTime = 0;
