@@ -1,0 +1,15 @@
+.DS_Store
+/.qmake.stash
+/Makefile
+/moc_*.cpp
+/pocketpiglet.pro.user
+/pocketpiglet_plugin_import.cpp
+/pocketpiglet_qml_plugin_import.cpp
+/qml_*.cpp
+/qmlcache_loader.cpp
+/qrc_*.cpp
+/.xcode/
+/Debug-iphoneos/
+/Release-iphoneos/
+/pocketpiglet/Images.xcassets/
+/pocketpiglet.xcodeproj/
