@@ -12,7 +12,7 @@ additional information.
 
 ---
 
-[![Build Status](https://github.com/pocketpiglet/pocketpiglet-ios/workflows/Build/badge.svg)](https://github.com/pocketpiglet/pocketpiglet-ios/actions?query=workflow%3A%22Build%22)
+[![Build Status](https://github.com/pocketpiglet/pocketpiglet-ios/actions/workflows/build.yml/badge.svg?branch=master)](https://github.com/pocketpiglet/pocketpiglet-ios/actions/workflows/build.yml?query=branch%3Amaster)
 [![Xcode Analysis Status](https://github.com/pocketpiglet/pocketpiglet-ios/workflows/Xcode%20Analysis/badge.svg)](https://github.com/pocketpiglet/pocketpiglet-ios/actions?query=workflow%3A%22Xcode%20Analysis%22)
 [![SonarCloud Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=pocketpiglet_pocketpiglet-ios&metric=alert_status)](https://sonarcloud.io/dashboard?id=pocketpiglet_pocketpiglet-ios)
 
